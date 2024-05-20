@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
-        <body>
+        <body className='flex flex-col bg-green-300 w-full min-h-[100vh]'>
           <SignedOut>
             <SignInButton />
           </SignedOut>
