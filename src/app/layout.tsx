@@ -4,7 +4,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Theme } from "@radix-ui/themes";
 
-import '@radix-ui/themes/styles.css';
+import "@radix-ui/themes/styles.css";
 import Navbar from "./_components/Navbar";
 
 export const metadata = {
@@ -21,10 +21,13 @@ export default function RootLayout({
   return (
     <>
       <html lang="en" className={`${GeistSans.variable}`}>
-        <body className='flex flex-col bg-main-bg w-full min-h-[100vh]'>
+        <body className="flex min-h-[100vh] w-full flex-col bg-main-bg">
           <Theme>
             <ClerkProvider>
-              <TRPCReactProvider>{<Navbar />}{children}</TRPCReactProvider>
+              <TRPCReactProvider>
+                {<Navbar />}
+                {children}
+              </TRPCReactProvider>
             </ClerkProvider>
           </Theme>
         </body>

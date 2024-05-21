@@ -1,0 +1,12 @@
+{
+  "printWidth": 80,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "overrides": [
+    {
+      "files": ".env.example",
+      "options": {
+        "parser": "yaml"
+      }
+    }
+  ]
+}
