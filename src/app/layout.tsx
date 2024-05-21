@@ -27,7 +27,6 @@ export default function RootLayout({
             <ClerkProvider>
               <TRPCReactProvider>
                 {<Navbar />}
-                {<Tagline />}
                 {children}
               </TRPCReactProvider>
             </ClerkProvider>
