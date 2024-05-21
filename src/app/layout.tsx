@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { TRPCReactProvider } from "~/trpc/react";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata = {
   title: "Location App",
@@ -17,7 +18,9 @@ export default function RootLayout({
     <>
       <html lang="en" className={`${GeistSans.variable}`}>
         <body className='flex flex-col bg-main-bg w-full min-h-[100vh]'>
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <ClerkProvider>
+            <TRPCReactProvider>{children}</TRPCReactProvider>
+          </ClerkProvider>
         </body>
       </html>
     </>

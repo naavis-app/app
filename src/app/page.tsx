@@ -6,7 +6,6 @@ import Navbar from "./_components/Navbar";
 export default async function Home() {
   return (
     <> 
-      <Clerk />
       <Navbar />
       <h1>Hello World!</h1>
     </>
