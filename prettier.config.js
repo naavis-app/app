@@ -3,4 +3,8 @@ const config = {
   plugins: ["prettier-plugin-tailwindcss"],
 };
 
+module.exports = {
+  printWidth: 80
+};
+
 export default config;

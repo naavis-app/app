@@ -5,12 +5,14 @@ const config = {
     "project": true
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "prettier"
   ],
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked"
+    "plugin:@typescript-eslint/stylistic-type-checked",
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "@typescript-eslint/array-type": "off",
@@ -36,7 +38,9 @@ const config = {
           "attributes": false
         }
       }
-    ]
+    ],
+    "prettier/prettier": ["error"],
+    "max-len": ["warn", { code: 80 }]
   }
-}
+};
 module.exports = config;
