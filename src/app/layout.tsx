@@ -2,6 +2,9 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { TRPCReactProvider } from "~/trpc/react";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Theme } from "@radix-ui/themes";
+
+import '@radix-ui/themes/styles.css';
 
 export const metadata = {
   title: "Location App",
@@ -18,9 +21,11 @@ export default function RootLayout({
     <>
       <html lang="en" className={`${GeistSans.variable}`}>
         <body className='flex flex-col bg-main-bg w-full min-h-[100vh]'>
-          <ClerkProvider>
-            <TRPCReactProvider>{children}</TRPCReactProvider>
-          </ClerkProvider>
+          <Theme>
+            <ClerkProvider>
+              <TRPCReactProvider>{children}</TRPCReactProvider>
+            </ClerkProvider>
+          </Theme>
         </body>
       </html>
     </>

@@ -1,22 +1,22 @@
 import {
-    ClerkProvider,
     SignInButton,
     SignedIn,
     SignedOut,
     UserButton
 } from '@clerk/nextjs'
+import { Button, Link } from '@radix-ui/themes';
 
 // import Signup from './Signup';
 
 export default function Clerk() {
     return (
-        <ClerkProvider>
+        <>
             <SignedOut>
-            <SignInButton />
+                <Link href="/sign-in"><Button>Sign in</Button></Link>
             </SignedOut>
             <SignedIn>
-            <UserButton />
+                <UserButton />
             </SignedIn>
-      </ClerkProvider>
+        </>
     );
 }
