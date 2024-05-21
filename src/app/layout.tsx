@@ -2,7 +2,6 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { TRPCReactProvider } from "~/trpc/react";
 import { Theme } from "@radix-ui/themes";
-import Tagline from "./_components/Tagline";
 
 import "@radix-ui/themes/styles.css";
 import Navbar from "./_components/Navbar";
@@ -22,7 +21,7 @@ export default function RootLayout({
     <>
       <html lang="en" className={`${GeistSans.variable}`}>
         <body className="bg-main-bg flex min-h-[100vh] w-full flex-col">
-          <Theme>
+          <Theme hasBackground={false} className="flex flex-col"> 
               <TRPCReactProvider>
                 {<Navbar />}
                 {children}
