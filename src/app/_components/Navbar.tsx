@@ -1,5 +1,4 @@
 import { Text } from "@radix-ui/themes";
-import Clerk from "./Clerk";
 
 export default function Navbar() {
   return (
@@ -10,7 +9,7 @@ export default function Navbar() {
       >
         <Text className="text-2xl font-bold text-slate-900">Location App</Text>
         <div className="flex flex-row items-center justify-center gap-2">
-          <Clerk />
+          Account
         </div>
       </div>
     </>

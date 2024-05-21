@@ -1,5 +1,4 @@
 import { Text, Link, Button } from "@radix-ui/themes";
-import { SignedOut } from "@clerk/nextjs";
 
 export default function Tagline() {
   return (
@@ -12,11 +11,9 @@ export default function Tagline() {
           your wallets will <span className="text-span-col">thank you.</span>
         </Text>
       </div>
-      <SignedOut>
         <Link href="/sign-in">
           <Button className="">Get Started</Button>
         </Link>
-      </SignedOut>
     </div>
   ); // planning to have it dynamically switch between text. inspired by https://www.prisma.io/ if you wanna see what im talking about
 }
