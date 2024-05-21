@@ -8,10 +8,22 @@ datasource db {
 }
 
 model User {
-  id          String   @id
-  devices     Device[] @relation("UserDevices")
-  ownedGroups Group[]  @relation("GroupOwner")
-  groups      Group[]  @relation("GroupMembers")
+  id          String    @id
+  createdAt   DateTime  @default(now())
+  password    String
+  username    String    @unique
+  devices     Device[]  @relation("UserDevices")
+  ownedGroups Group[]   @relation("GroupOwner")
+  sessions    Session[] @relation("UserSessions")
+  groups      Group[]   @relation("GroupMembers")
+}
+
+model Session {
+  id        String   @id
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  userId    String
+  user      User     @relation("UserSessions", fields: [userId], references: [id])
 }
 
 model Device {
