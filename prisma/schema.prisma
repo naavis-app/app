@@ -7,11 +7,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model User {
+  id            String      @id
 
-  @@index([name])
+  devices       Device[]    @relation("UserDevices")
+  ownedGroups   Group[]     @relation("GroupOwner")
+  groups        Group[]     @relation("GroupMembers")
+}
+
+model Device {
+  id                      String      @id
+  name                    String
+
+  // Location data
+  latitude                Float      @default(0)
+  longitude               Float      @default(0)
+  speed                   Float      @default(0)
+  lastLocationUpdate      DateTime   @default(now())
+
+  user                    User        @relation("UserDevices", fields: [userId], references: [id])
+  userId                  String
+}
+
+model Group {
+  id                      String      @id @default(uuid())
+  name                    String
+
+  owner                   User        @relation("GroupOwner", fields: [ownerId], references: [id])
+  ownerId                 String
+
+  members                 User[]      @relation("GroupMembers")
+  places                  Place[]     @relation("GroupPlaces")
+}
+
+model Place {
+  id                      String      @id @default(uuid())
+  name                    String
+
+  // Location data
+  latitude                Float      @default(0)
+  longitude               Float      @default(0)
+  address                 String?
+
+  // Alert options
+  alertRadius             Float      @default(5) // In Miles
+  onEntry                 Boolean    @default(false)
+  onExit                  Boolean    @default(false)
+
+  groupId                 String
+  parentGroup             Group      @relation("GroupPlaces", fields: [groupId], references: [id])
 }

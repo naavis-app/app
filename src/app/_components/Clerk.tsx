@@ -16,7 +16,8 @@ export default function Clerk() {
                 </Link>
             </SignedOut>
             <SignedIn>
-                <UserButton />
+                <Link href='/dashboard'><Button>Dashboard</Button></Link>
+                <UserButton afterSignOutUrl='/'/>
             </SignedIn>
         </>
     );
