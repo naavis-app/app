@@ -9,7 +9,7 @@ export default {
         sans: ["var(--font-geist-sans)", ...fontFamily.sans],
       },
       colors: {
-        "main-bg": "#4a7ed8",
+        "span-col": "#0588f0",
       },
     },
   },
