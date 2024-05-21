@@ -9,7 +9,11 @@ export default function Clerk() {
     return (
         <>
             <SignedOut>
-                <Link href="/sign-in"><Button>Sign in</Button></Link>
+                <Link href="/sign-in">
+                    <Button>
+                        Sign in
+                    </Button>
+                </Link>
             </SignedOut>
             <SignedIn>
                 <UserButton />
