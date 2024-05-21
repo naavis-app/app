@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Theme } from "@radix-ui/themes";
 
 import '@radix-ui/themes/styles.css';
+import Navbar from "./_components/Navbar";
 
 export const metadata = {
   title: "Location App",
@@ -23,7 +24,7 @@ export default function RootLayout({
         <body className='flex flex-col bg-main-bg w-full min-h-[100vh]'>
           <Theme>
             <ClerkProvider>
-              <TRPCReactProvider>{children}</TRPCReactProvider>
+              <TRPCReactProvider>{<Navbar />}{children}</TRPCReactProvider>
             </ClerkProvider>
           </Theme>
         </body>
