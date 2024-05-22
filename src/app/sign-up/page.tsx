@@ -34,7 +34,8 @@ export default function Page() {
                         <input name="username" id="username" 
                         className="rounded-md bg-bg-col 
                         text-white border-2 border-blue-950
-                        focus:outline-none p-1"
+                        focus:outline-none focus:border-blue-900
+                        p-1"
                         />
                     </div>
                     <div 
@@ -51,7 +52,8 @@ export default function Page() {
                         id="password" className="border-2
                         border-blue-950 rounded-md 
                         bg-bg-col text-white
-                        focus:outline-none p-1"
+                        focus:outline-none focus:border-blue-900
+                        p-1"
                         />
                     </div>
                     <div className="flex justify-center pt-3">

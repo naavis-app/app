@@ -30,6 +30,7 @@ export default function Page() {
                         <input name="username" id="username" 
                         className="border-2 border-blue-950
                         rounded-md bg-bg-col text-white
+                        focus:border-blue-900
                         focus:outline-none p-1"
                         />
                     </div>
@@ -43,7 +44,8 @@ export default function Page() {
                         <input type="password" name="password" 
                         id="password" className="border-2 
                         border-blue-950 rounded-md bg-bg-col 
-                        text-white focus:outline-none p-1" 
+                        text-white focus:outline-none 
+                        focus:border-blue-900 p-1" 
                         />
                     </div>
                         <div className="flex justify-center pt-3">
