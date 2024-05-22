@@ -63,7 +63,7 @@ export default function Page() {
                                 </Button>
                             </Link>
                             <Button size={"2"} variant="solid">
-                                    Sign in
+                                Sign in
                             </Button>
                         </Flex>
                     </form>

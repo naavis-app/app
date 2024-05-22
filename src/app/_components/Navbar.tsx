@@ -8,7 +8,6 @@ export default function Navbar() {
                 className="flex flex-row items-center justify-between 
                         bg-bg-col p-4"
             >
-
                 <Link href="/" className="hover:no-underline">
                     <Text
                         className="text-2xl font-bold text-blue-500
@@ -17,7 +16,7 @@ export default function Navbar() {
                         Location App
                     </Text>
                 </Link>
-                
+
                 <div
                     className="flex flex-row items-center justify-center 
                 gap-2 text-white"
