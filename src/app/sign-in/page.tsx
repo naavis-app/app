@@ -50,7 +50,8 @@ export default function Page() {
                     </div>
                         <div className="flex justify-center pt-3">
                             <button className="rounded-md bg-blue-500
-                            p-2 text-white hover:bg-blue-700"
+                            py-2 px-4 text-white hover:bg-blue-700
+                            font-bold"
                             >
                                 Continue
                             </button>

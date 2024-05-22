@@ -23,7 +23,7 @@ export default function Page() {
                 <form action={signup}>
                     <div 
                     className="flex flex-col 
-                    items-center mb-8"
+                    items-center mb-5"
                     >
                         <label htmlFor="username"
                         className="text-center
@@ -40,7 +40,7 @@ export default function Page() {
                     </div>
                     <div 
                     className="flex flex-col 
-                    items-center mb-4"
+                    items-center mb-5"
                     >
                         <label htmlFor="password"
                         className="text-center
@@ -56,9 +56,61 @@ export default function Page() {
                         p-1"
                         />
                     </div>
+                    <div 
+                    className="flex flex-col 
+                    items-center mb-5"
+                    >
+                        <label htmlFor="firstname"
+                        className="text-center
+                        font-bold text-lg"
+                        >
+                            First Name
+                        </label>
+                        <input name="firstname" id="firstname" type="text"
+                        className="rounded-md bg-bg-col 
+                        text-white border-2 border-blue-950
+                        focus:outline-none focus:border-blue-900
+                        p-1"
+                        />
+                    </div>
+                    <div 
+                    className="flex flex-col 
+                    items-center mb-5"
+                    >
+                        <label htmlFor="lastname"
+                        className="text-center
+                        font-bold text-lg"
+                        >
+                            Last Name
+                        </label>
+                        <input name="lastname" id="lastname" type="text"
+                        className="rounded-md bg-bg-col 
+                        text-white border-2 border-blue-950
+                        focus:outline-none focus:border-blue-900
+                        p-1"
+                        />
+                    </div>
+                    <div 
+                    className="flex flex-col 
+                    items-center mb-5"
+                    >
+                        <label htmlFor="email"
+                        className="text-center
+                        font-bold text-lg"
+                        >
+                            Email
+                        </label>
+                        <input name="email" id="email" type="email"
+                        className="rounded-md bg-bg-col 
+                        text-white border-2 border-blue-950
+                        focus:outline-none focus:border-blue-900
+                        p-1"
+                        />
+                    </div>
                     <div className="flex justify-center pt-3">
                         <button className="rounded-md bg-blue-500 
-                        p-2 text-white hover:bg-blue-700"
+                        py-2 px-4 text-white hover:bg-blue-700
+                        font-bold"
                         >
                             Continue
                         </button>
@@ -95,6 +147,29 @@ async function signup(formData: FormData): Promise<ActionResult> {
         };
     }
 
+    const firstname = formData.get("firstname");
+    if (typeof firstname !== "string" || firstname.length > 255) {
+        return {
+            error: "Invalid first name"
+        };
+    }
+
+    const lastname = formData.get("lastname");
+    if (typeof lastname !== "string" || lastname.length > 255) {
+        return {
+            error: "Invalid last name"
+        };
+    }
+
+    const email = formData.get("email");
+    if ( typeof email !== "string" ||
+        email.length > 255
+    ) {
+        return {
+            error: "Invalid email"
+        }
+    }
+
     const userId = generateIdFromEntropySize(10);
     const passwordHash = await hash(password, {
         memoryCost: 19456,
@@ -120,6 +195,9 @@ async function signup(formData: FormData): Promise<ActionResult> {
             id: userId,
             username: username,
             password: passwordHash,
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
         },
     });
 

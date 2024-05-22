@@ -17,7 +17,7 @@ model User {
   github_id   String?
   firstname   String?
   lastname    String?
-  email       String?    @unique
+  email       String?   @unique
 
   devices     Device[]  @relation("UserDevices")
   ownedGroups Group[]   @relation("GroupOwner")
@@ -65,3 +65,7 @@ model Place {
   groupId     String
   parentGroup Group   @relation("GroupPlaces", fields: [groupId], references: [id])
 }
+
+// update with npx prisma migrate dev (if columns are added)
+// this is just so i remember lol
+// -must
