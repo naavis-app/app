@@ -14,6 +14,8 @@ import {
     TextField,
 } from "@radix-ui/themes";
 
+import NextLink from "next/link";
+
 export default function Page() {
     return (
         <div
@@ -59,11 +61,11 @@ export default function Page() {
                             />
                         </Box>
                         <Flex justify="end" gap={"3"} mt={"6"}>
-                            <Link href="/sign-up">
+                            <NextLink href="/sign-up">
                                 <Button size={"2"} variant="soft">
                                     Create an account
                                 </Button>
-                            </Link>
+                            </NextLink>
                             <Button size={"2"} variant="solid">
                                 Sign in
                             </Button>
