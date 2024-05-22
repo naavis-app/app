@@ -11,9 +11,9 @@ export default function Tagline() {
           your wallets will <span className="text-span-col">thank you.</span>
         </Text>
       </div>
-        <Link href="/sign-up">
-          <Button className="">Get Started</Button>
-        </Link>
+      <Link href="/sign-up">
+        <Button className="">Get Started</Button>
+      </Link>
     </div>
   ); // planning to have it dynamically switch between text. inspired by https://www.prisma.io/ if you wanna see what im talking about
 }

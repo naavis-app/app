@@ -6,9 +6,9 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const config = {
-    experimental: {
-        serverComponentsExternalPackages: ["@node-rs/argon2"]
-    }
+  experimental: {
+    serverComponentsExternalPackages: ["@node-rs/argon2"],
+  },
 };
 
 export default config;
