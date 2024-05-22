@@ -1,4 +1,5 @@
-import { Text, Link } from "@radix-ui/themes";
+import { Text } from "@radix-ui/themes";
+import Link from "next/link";
 
 export default function Tagline() {
     return (

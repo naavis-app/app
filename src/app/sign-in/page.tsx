@@ -52,15 +52,18 @@ export default function Page() {
                                 variant="surface"
                                 name="password"
                                 placeholder="Enter your password"
+                                type="password"
                                 spellCheck={false}
                             />
                         </Box>
                         <Flex justify="end" gap={"3"} mt={"6"}>
-                            <Button size={"2"} variant="soft">
-                                Create an account
-                            </Button>
+                            <Link href="/sign-up">
+                                <Button size={"2"} variant="soft">
+                                    Create an account
+                                </Button>
+                            </Link>
                             <Button size={"2"} variant="solid">
-                                Sign in
+                                    Sign in
                             </Button>
                         </Flex>
                     </form>

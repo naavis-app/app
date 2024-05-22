@@ -1,4 +1,5 @@
-import { Text, Link, Button } from "@radix-ui/themes";
+import { Text, Button } from "@radix-ui/themes";
+import Link from "next/link";
 
 export default function Navbar() {
     return (

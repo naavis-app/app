@@ -4,7 +4,8 @@ import { lucia } from "~/app/lib/auth";
 import { redirect } from "next/navigation";
 import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
-import { Text, Link } from "@radix-ui/themes";
+import { Text } from "@radix-ui/themes";
+import Link from "next/link";
 
 export default function Page() {
     return (
