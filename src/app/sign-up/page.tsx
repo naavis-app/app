@@ -11,6 +11,7 @@ import {
 } from "@radix-ui/themes";
 
 import NextLink from "next/link";
+import { signup } from "~/server/lib/auth";
 
 export default function Page() {
     return (
