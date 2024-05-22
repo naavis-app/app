@@ -1,4 +1,4 @@
-import { Text, Link, Button } from "@radix-ui/themes";
+import { Text, Link } from "@radix-ui/themes";
 
 export default function Tagline() {
     return (
@@ -13,7 +13,8 @@ export default function Tagline() {
 
             </div>
             <Link href="/sign-up">
-                <Button className="">Get Started</Button>
+                <button className="rounded-md bg-blue-500
+                p-2 text-white hover:bg-blue-700">Get Started</button>
             </Link>
         </div>
     ); // planning to have it dynamically switch between text. inspired by https://www.prisma.io/ if you wanna see what im talking about

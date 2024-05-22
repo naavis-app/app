@@ -16,13 +16,14 @@ export default function Page() {
                 <div>
                     <label htmlFor="username">Username</label>
                     <input name="username" id="username" 
-                    className="border-2" 
+                    className="border-2 text-black" 
                     />
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" 
-                    id="password" className="border-2"
+                    id="password" className="border-2
+                    text-black"
                     />
                 </div>
                 <div className="flex">
