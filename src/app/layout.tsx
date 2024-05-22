@@ -1,10 +1,10 @@
 import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { TRPCReactProvider } from "~/trpc/react";
-import { Theme } from "@radix-ui/themes";
 
 import "@radix-ui/themes/styles.css";
 import Navbar from "./_components/Navbar";
+import { Providers } from "./providers";
 
 export const metadata = {
     title: "Location App",
@@ -17,19 +17,20 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
+
     return (
         <>
             <html lang="en" className={`${GeistSans.variable}`}>
                 <body
                     className="flex min-h-[100vh] w-full 
-                flex-col bg-bg-col"
+                flex-col"
                 >
-                    <Theme hasBackground={false} className="flex flex-col">
+                    <Providers>
                         <TRPCReactProvider>
                             {<Navbar />}
                             {children}
                         </TRPCReactProvider>
-                    </Theme>
+                    </Providers>
                 </body>
             </html>
         </>

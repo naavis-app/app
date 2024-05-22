@@ -1,5 +1,6 @@
 import { Text, Button } from "@radix-ui/themes";
 import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
     return (
@@ -8,6 +9,7 @@ export default function Navbar() {
                 className="flex flex-row items-center justify-between 
                         bg-bg-col p-4"
             >
+
                 <Link href="/" className="hover:no-underline">
                     <Text
                         className="text-2xl font-bold text-blue-500
@@ -16,10 +18,13 @@ export default function Navbar() {
                         Location App
                     </Text>
                 </Link>
+                
                 <div
                     className="flex flex-row items-center justify-center 
                 gap-2 text-white"
                 >
+                    <ThemeToggle />
+
                     <Link href="/sign-in" className="hover:no-underline">
                         <Text
                             className="rounded-md border-2 border-blue-500 
