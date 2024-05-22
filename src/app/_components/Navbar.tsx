@@ -5,14 +5,18 @@ export default function Navbar() {
         <>
             <div
                 className="flex flex-row items-center justify-between 
-                        bg-slate-100 p-4"
+                        bg-bg-col p-4"
             >
                 <Link href="/">
-                    <Text className="text-2xl font-bold text-slate-900 hover:no-underline">
+                    <Text className="text-2xl font-bold text-blue-500
+                    hover:no-underline"
+                    >
                         Location App
                     </Text>
                 </Link>
-                <div className="flex flex-row items-center justify-center gap-2">
+                <div className="flex flex-row items-center justify-center 
+                text-white gap-2"
+                >
                     Account
                 </div>
             </div>

@@ -10,6 +10,7 @@ export default {
             },
             colors: {
                 "span-col": "#0588f0",
+                "bg-col": "#080e4b"
             },
         },
     },

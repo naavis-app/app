@@ -20,7 +20,8 @@ export default function RootLayout({
     return (
         <>
             <html lang="en" className={`${GeistSans.variable}`}>
-                <body className="bg-main-bg flex min-h-[100vh] w-full flex-col">
+                <body className="bg-bg-col flex min-h-[100vh] 
+                w-full flex-col">
                     <Theme hasBackground={false} className="flex flex-col">
                         <TRPCReactProvider>
                             {<Navbar />}

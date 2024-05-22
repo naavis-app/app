@@ -7,19 +7,28 @@ import { hash } from "@node-rs/argon2";
 
 export default function Page() {
     return (
-        <div className="flex h-full flex-1 flex-col items-center justify-center">
+        <div 
+        className="flex h-full flex-1 flex-col 
+        items-center justify-center text-white"
+        >
             <h1>Create an account</h1>
             <form action={signup}>
                 <div>
                     <label htmlFor="username">Username</label>
-                    <input name="username" id="username" />
+                    <input name="username" id="username" 
+                    className="border-2" 
+                    />
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" />
+                    <input type="password" name="password" 
+                    id="password" className="border-2"
+                    />
                 </div>
                 <div className="flex">
-                    <button className="rounded-md bg-blue-500 p-2 text-white hover:bg-blue-700">
+                    <button className="rounded-md bg-blue-500 
+                    p-2 text-white hover:bg-blue-700"
+                    >
                         Continue
                     </button>
                 </div>
@@ -89,7 +98,7 @@ async function signup(formData: FormData): Promise<ActionResult> {
         sessionCookie.value,
         sessionCookie.attributes,
     );
-    return redirect("/");
+    return redirect("/sign-in");
 }
 
 interface ActionResult {
