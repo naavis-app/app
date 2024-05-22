@@ -25,7 +25,9 @@ const handler = (req: NextRequest) =>
             env.NODE_ENV === "development"
                 ? ({ path, error }) => {
                       console.error(
-                          `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`,
+                          `❌ tRPC failed on ${path ?? "<no-path>"}: ${
+                              error.message
+                          }`,
                       );
                   }
                 : undefined,
@@ -34,5 +36,5 @@ const handler = (req: NextRequest) =>
 export { handler as GET, handler as POST };
 
 export async function generateStaticParams() {
-    return [{ trpc: 'test' }];
+    return [{ trpc: "test" }];
 }

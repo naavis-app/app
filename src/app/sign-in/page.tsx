@@ -7,55 +7,71 @@ import { Text } from "@radix-ui/themes";
 
 export default function Page() {
     return (
-        <div className="flex flex-col h-full w-full flex-1
+        <div
+            className="flex h-full w-full flex-1 flex-col
         items-center justify-center text-white"
         >
-            <div className="flex flex-col p-20
-            rounded-lg">
-                <Text className="text-center
-                font-bold text-2xl mb-5">
+            <div
+                className="flex flex-col rounded-lg
+            p-20"
+            >
+                <Text
+                    className="mb-5
+                text-center text-2xl font-bold"
+                >
                     Login
                 </Text>
                 <form action={login}>
                     <div
-                    className="flex flex-col 
-                    items-center mb-8">
-                        <label 
-                        htmlFor="username"
-                        className="text-center
-                        font-bold text-lg"
+                        className="mb-8 flex 
+                    flex-col items-center"
+                    >
+                        <label
+                            htmlFor="username"
+                            className="text-center
+                        text-lg font-bold"
                         >
                             Username
                         </label>
-                        <input name="username" id="username" 
-                        className="border-2 border-blue-950
-                        rounded-md bg-bg-col text-white
-                        focus:border-blue-900
-                        focus:outline-none p-1"
+                        <input
+                            name="username"
+                            id="username"
+                            className="rounded-md border-2
+                        border-blue-950 bg-bg-col p-1
+                        text-white
+                        focus:border-blue-900 focus:outline-none"
                         />
                     </div>
-                    <div className="flex flex-col items-center
-                    mb-5">
-                        <label htmlFor="password"
-                        className="text-center font-bold
-                        text-lg">
+                    <div
+                        className="mb-5 flex flex-col
+                    items-center"
+                    >
+                        <label
+                            htmlFor="password"
+                            className="text-center text-lg
+                        font-bold"
+                        >
                             Password
-                            </label>
-                        <input type="password" name="password" 
-                        id="password" className="border-2 
-                        border-blue-950 rounded-md bg-bg-col 
-                        text-white focus:outline-none 
-                        focus:border-blue-900 p-1" 
+                        </label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            className="rounded-md 
+                        border-2 border-blue-950 bg-bg-col 
+                        p-1 text-white 
+                        focus:border-blue-900 focus:outline-none"
                         />
                     </div>
-                        <div className="flex justify-center pt-3">
-                            <button className="rounded-md bg-blue-500
-                            py-2 px-4 text-white hover:bg-blue-700
-                            font-bold"
-                            >
-                                Continue
-                            </button>
-                        </div>
+                    <div className="flex justify-center pt-3">
+                        <button
+                            className="rounded-md bg-blue-500
+                            px-4 py-2 font-bold text-white
+                            hover:bg-blue-700"
+                        >
+                            Continue
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -73,27 +89,29 @@ async function login(formData: FormData): Promise<ActionResult> {
         !/^[a-z0-9_-]+$/.test(username)
     ) {
         return {
-            error: "Invalid username"
+            error: "Invalid username",
         };
     }
     const password = formData.get("password");
-    if (typeof password !== "string" ||
+    if (
+        typeof password !== "string" ||
         password.length < 6 ||
-        password.length > 255 ) {
-            return {
-                error: "Invalid password"
-            };
+        password.length > 255
+    ) {
+        return {
+            error: "Invalid password",
+        };
     }
 
     const existingUser = await db.user.findUnique({
         where: {
-            username: username
+            username: username,
         },
     });
 
-    if(!existingUser) {
+    if (!existingUser) {
         return {
-            error: "Taken username!"
+            error: "Taken username!",
         };
     }
 
@@ -101,18 +119,22 @@ async function login(formData: FormData): Promise<ActionResult> {
         memoryCost: 19456,
         timeCost: 2,
         outputLen: 32,
-        parallelism: 1
+        parallelism: 1,
     });
 
-    if(!validPassword) {
+    if (!validPassword) {
         return {
-            error: "Incorrect username or password"
+            error: "Incorrect username or password",
         };
     }
 
     const session = await lucia.createSession(existingUser.id, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
-    cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+    cookies().set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes,
+    );
     return redirect("/dashboard");
 }
 

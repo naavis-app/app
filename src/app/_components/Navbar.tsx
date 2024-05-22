@@ -8,30 +8,32 @@ export default function Navbar() {
                         bg-bg-col p-4"
             >
                 <Link href="/" className="hover:no-underline">
-                    <Text className="text-2xl font-bold text-blue-500
+                    <Text
+                        className="text-2xl font-bold text-blue-500
                     hover:no-underline"
                     >
                         Location App
                     </Text>
                 </Link>
-                <div className="flex flex-row items-center justify-center 
-                text-white gap-2"
+                <div
+                    className="flex flex-row items-center justify-center 
+                gap-2 text-white"
                 >
                     <Link href="/sign-in" className="hover:no-underline">
-                        <Text 
-                        className="text-blue-500 font-bold 
-                        bg-transparent border-2 border-blue-500 
-                        px-4 py-2 rounded-md hover:border-blue-600
+                        <Text
+                            className="rounded-md border-2 
+                        border-blue-500 bg-transparent px-4 
+                        py-2 font-bold text-blue-500 hover:border-blue-600
                         hover:text-blue-600"
                         >
                             Sign in
                         </Text>
                     </Link>
                     <Link href="/sign-up" className="hover:no-underline">
-                        <Text 
-                        className="text-white font-bold 
-                        bg-blue-500 border-2 border-blue-500
-                        px-4 py-2 rounded-md hover:border-blue-700
+                        <Text
+                            className="rounded-md border-2 
+                        border-blue-500 bg-blue-500 px-4
+                        py-2 font-bold text-white hover:border-blue-700
                         hover:bg-blue-700"
                         >
                             Get Started

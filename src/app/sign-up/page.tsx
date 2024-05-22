@@ -8,109 +8,131 @@ import { Text } from "@radix-ui/themes";
 
 export default function Page() {
     return (
-        <div 
-        className="flex h-full flex-1 flex-col 
+        <div
+            className="flex h-full flex-1 flex-col 
         items-center justify-center text-white"
         >
-            <div className="flex flex-col p-20
-            rounded-lg">
-                <Text 
-                className="text-center
-                font-bold text-2xl mb-5"
+            <div
+                className="flex flex-col rounded-lg
+            p-20"
+            >
+                <Text
+                    className="mb-5
+                text-center text-2xl font-bold"
                 >
                     Create an Account
                 </Text>
                 <form action={signup}>
-                    <div 
-                    className="flex flex-col 
-                    items-center mb-5"
+                    <div
+                        className="mb-5 flex 
+                    flex-col items-center"
                     >
-                        <label htmlFor="username"
-                        className="text-center
-                        font-bold text-lg"
+                        <label
+                            htmlFor="username"
+                            className="text-center
+                        text-lg font-bold"
                         >
                             Username
                         </label>
-                        <input name="username" id="username" 
-                        className="rounded-md bg-bg-col 
-                        text-white border-2 border-blue-950
-                        focus:outline-none focus:border-blue-900
-                        p-1"
+                        <input
+                            name="username"
+                            id="username"
+                            className="rounded-md border-2 
+                        border-blue-950 bg-bg-col p-1
+                        text-white focus:border-blue-900
+                        focus:outline-none"
                         />
                     </div>
-                    <div 
-                    className="flex flex-col 
-                    items-center mb-5"
+                    <div
+                        className="mb-5 flex 
+                    flex-col items-center"
                     >
-                        <label htmlFor="password"
-                        className="text-center
-                        font-bold text-lg"
+                        <label
+                            htmlFor="password"
+                            className="text-center
+                        text-lg font-bold"
                         >
                             Password
                         </label>
-                        <input type="password" name="password" 
-                        id="password" className="border-2
-                        border-blue-950 rounded-md 
-                        bg-bg-col text-white
-                        focus:outline-none focus:border-blue-900
-                        p-1"
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            className="rounded-md
+                        border-2 border-blue-950 
+                        bg-bg-col p-1
+                        text-white focus:border-blue-900
+                        focus:outline-none"
                         />
                     </div>
-                    <div 
-                    className="flex flex-col 
-                    items-center mb-5"
+                    <div
+                        className="mb-5 flex 
+                    flex-col items-center"
                     >
-                        <label htmlFor="firstname"
-                        className="text-center
-                        font-bold text-lg"
+                        <label
+                            htmlFor="firstname"
+                            className="text-center
+                        text-lg font-bold"
                         >
                             First Name
                         </label>
-                        <input name="firstname" id="firstname" type="text"
-                        className="rounded-md bg-bg-col 
-                        text-white border-2 border-blue-950
-                        focus:outline-none focus:border-blue-900
-                        p-1"
+                        <input
+                            name="firstname"
+                            id="firstname"
+                            type="text"
+                            className="rounded-md border-2 
+                        border-blue-950 bg-bg-col p-1
+                        text-white focus:border-blue-900
+                        focus:outline-none"
                         />
                     </div>
-                    <div 
-                    className="flex flex-col 
-                    items-center mb-5"
+                    <div
+                        className="mb-5 flex 
+                    flex-col items-center"
                     >
-                        <label htmlFor="lastname"
-                        className="text-center
-                        font-bold text-lg"
+                        <label
+                            htmlFor="lastname"
+                            className="text-center
+                        text-lg font-bold"
                         >
                             Last Name
                         </label>
-                        <input name="lastname" id="lastname" type="text"
-                        className="rounded-md bg-bg-col 
-                        text-white border-2 border-blue-950
-                        focus:outline-none focus:border-blue-900
-                        p-1"
+                        <input
+                            name="lastname"
+                            id="lastname"
+                            type="text"
+                            className="rounded-md border-2 
+                        border-blue-950 bg-bg-col p-1
+                        text-white focus:border-blue-900
+                        focus:outline-none"
                         />
                     </div>
-                    <div 
-                    className="flex flex-col 
-                    items-center mb-5"
+                    <div
+                        className="mb-5 flex 
+                    flex-col items-center"
                     >
-                        <label htmlFor="email"
-                        className="text-center
-                        font-bold text-lg"
+                        <label
+                            htmlFor="email"
+                            className="text-center
+                        text-lg font-bold"
                         >
                             Email
                         </label>
-                        <input name="email" id="email" type="email"
-                        className="rounded-md bg-bg-col 
-                        text-white border-2 border-blue-950
-                        focus:outline-none focus:border-blue-900
-                        p-1"
+                        <input
+                            name="email"
+                            id="email"
+                            type="email"
+                            className="rounded-md border-2 
+                        border-blue-950 bg-bg-col p-1
+                        text-white focus:border-blue-900
+                        focus:outline-none"
                         />
                     </div>
                     <div className="flex justify-center pt-3">
-                        <button className="rounded-md bg-blue-500 
-                        py-2 px-4 text-white hover:bg-blue-700
-                        font-bold"
+                        <button
+                            className="rounded-md bg-blue-500 
+                        px-4 py-2 font-bold text-white
+                        hover:bg-blue-700"
                         >
                             Continue
                         </button>
@@ -150,24 +172,22 @@ async function signup(formData: FormData): Promise<ActionResult> {
     const firstname = formData.get("firstname");
     if (typeof firstname !== "string" || firstname.length > 255) {
         return {
-            error: "Invalid first name"
+            error: "Invalid first name",
         };
     }
 
     const lastname = formData.get("lastname");
     if (typeof lastname !== "string" || lastname.length > 255) {
         return {
-            error: "Invalid last name"
+            error: "Invalid last name",
         };
     }
 
     const email = formData.get("email");
-    if ( typeof email !== "string" ||
-        email.length > 255
-    ) {
+    if (typeof email !== "string" || email.length > 255) {
         return {
-            error: "Invalid email"
-        }
+            error: "Invalid email",
+        };
     }
 
     const userId = generateIdFromEntropySize(10);
