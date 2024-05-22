@@ -95,3 +95,7 @@ async function signup(formData: FormData): Promise<ActionResult> {
 interface ActionResult {
     error: string;
 }
+
+export async function generateStaticParams() {
+    return [{ params: {} }];
+}
