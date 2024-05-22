@@ -1,10 +1,10 @@
 import { db } from "~/server/db";
 import { cookies } from "next/headers";
-import { lucia } from "~/auth";
+import { lucia } from "~/app/lib/auth";
 import { redirect } from "next/navigation";
 import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
-import { Text } from "@radix-ui/themes";
+import { Text, Link } from "@radix-ui/themes";
 
 export default function Page() {
     return (
@@ -15,7 +15,12 @@ export default function Page() {
             <div
                 className="flex flex-col rounded-lg
             p-20"
-            >
+            >   
+                <Link href="/sign-up/github">
+                    <Text className="text-white">
+                        Sign in with GitHub
+                    </Text>
+                </Link>
                 <Text
                     className="mb-5
                 text-center text-2xl font-bold"
@@ -42,7 +47,7 @@ export default function Page() {
                         border-blue-950 bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
-                        />
+                        required />
                     </div>
                     <div
                         className="mb-5 flex 
@@ -63,7 +68,7 @@ export default function Page() {
                         border-blue-950 bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
-                        />
+                        required />
                     </div>
                     <div
                         className="mb-5 flex 
@@ -84,7 +89,7 @@ export default function Page() {
                         border-blue-950 bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
-                        />
+                        required />
                     </div>
                     <div
                         className="mb-5 flex 
@@ -104,7 +109,7 @@ export default function Page() {
                         border-blue-950 bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
-                        />
+                        required />
                     </div>
                     <div
                         className="mb-5 flex 
@@ -126,7 +131,7 @@ export default function Page() {
                         bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
-                        />
+                        required />
                     </div>
                     <div className="flex justify-center pt-3">
                         <button

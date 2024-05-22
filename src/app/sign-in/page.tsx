@@ -1,7 +1,7 @@
 import { db } from "~/server/db";
 import { verify } from "@node-rs/argon2";
 import { cookies } from "next/headers";
-import { lucia } from "~/auth";
+import { lucia } from "~/app/lib/auth";
 import { redirect } from "next/navigation";
 import { Text } from "@radix-ui/themes";
 
@@ -39,7 +39,7 @@ export default function Page() {
                         border-blue-950 bg-bg-col p-1
                         text-white
                         focus:border-blue-900 focus:outline-none"
-                        />
+                        required />
                     </div>
                     <div
                         className="mb-5 flex flex-col
@@ -60,7 +60,7 @@ export default function Page() {
                         border-2 border-blue-950 bg-bg-col 
                         p-1 text-white 
                         focus:border-blue-900 focus:outline-none"
-                        />
+                        required />
                     </div>
                     <div className="flex justify-center pt-3">
                         <button
