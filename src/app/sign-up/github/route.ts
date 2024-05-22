@@ -1,5 +1,5 @@
 import { generateState } from "arctic";
-import { github } from "~/app/lib/githubauth";
+import { github } from "~/server/lib/githubauth";
 import { cookies } from "next/headers";
 
 export async function GET(): Promise<Response> {

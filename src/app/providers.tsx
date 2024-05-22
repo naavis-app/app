@@ -2,7 +2,7 @@
 
 import { Theme } from "@radix-ui/themes";
 import { useAtom } from "jotai";
-import { themeAtom } from "./lib/stores";
+import { themeAtom } from "../server/lib/stores";
 
 interface children {
     children: React.ReactNode;

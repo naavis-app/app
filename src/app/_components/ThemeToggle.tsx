@@ -2,7 +2,7 @@
 
 import { Button } from "@radix-ui/themes";
 import { useAtom } from "jotai";
-import { themeAtom } from "../lib/stores";
+import { themeAtom } from "../../server/lib/stores";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 
 export default function ThemeToggle() {
