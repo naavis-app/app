@@ -10,8 +10,15 @@ datasource db {
 model User {
   id          String    @id
   createdAt   DateTime  @default(now())
+
   password    String
   username    String    @unique
+
+  github_id   String?
+  firstname   String?
+  lastname    String?
+  email       String?    @unique
+
   devices     Device[]  @relation("UserDevices")
   ownedGroups Group[]   @relation("GroupOwner")
   sessions    Session[] @relation("UserSessions")
