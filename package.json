@@ -43,7 +43,8 @@
         "superagent": "^9.0.2",
         "superjson": "^2.2.1",
         "tunnel-agent": "^0.6.0",
-        "zod": "^3.23.3"
+        "zod": "^3.23.3",
+        "zustand": "^4.5.2"
     },
     "devDependencies": {
         "@types/bcryptjs": "^2.4.6",
