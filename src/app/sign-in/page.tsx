@@ -9,10 +9,10 @@ import {
     Card,
     Flex,
     Heading,
+    Link,
     Text,
     TextField,
 } from "@radix-ui/themes";
-import Link from "next/link";
 
 export default function Page() {
     return (
@@ -44,7 +44,9 @@ export default function Page() {
                                     Password
                                 </Text>
                                 <Link href="/forgot-password">
-                                    Forgot password?
+                                    <Text size={"2"} weight="light">
+                                        Forgot password?
+                                    </Text>
                                 </Link>
                             </Flex>
                             <TextField.Root
