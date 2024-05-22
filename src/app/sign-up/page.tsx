@@ -23,49 +23,7 @@ export default function Page() {
                     Create an Account
                 </Text>
                 <form action={signup}>
-                    <div
-                        className="mb-5 flex 
-                    flex-col items-center"
-                    >
-                        <label
-                            htmlFor="username"
-                            className="text-center
-                        text-lg font-bold"
-                        >
-                            Username
-                        </label>
-                        <input
-                            name="username"
-                            id="username"
-                            className="rounded-md border-2 
-                        border-blue-950 bg-bg-col p-1
-                        text-white focus:border-blue-900
-                        focus:outline-none"
-                        />
-                    </div>
-                    <div
-                        className="mb-5 flex 
-                    flex-col items-center"
-                    >
-                        <label
-                            htmlFor="password"
-                            className="text-center
-                        text-lg font-bold"
-                        >
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            className="rounded-md
-                        border-2 border-blue-950 
-                        bg-bg-col p-1
-                        text-white focus:border-blue-900
-                        focus:outline-none"
-                        />
-                    </div>
-                    <div
+                <div
                         className="mb-5 flex 
                     flex-col items-center"
                     >
@@ -124,6 +82,48 @@ export default function Page() {
                             type="email"
                             className="rounded-md border-2 
                         border-blue-950 bg-bg-col p-1
+                        text-white focus:border-blue-900
+                        focus:outline-none"
+                        />
+                    </div>
+                    <div
+                        className="mb-5 flex 
+                    flex-col items-center"
+                    >
+                        <label
+                            htmlFor="username"
+                            className="text-center
+                        text-lg font-bold"
+                        >
+                            Username
+                        </label>
+                        <input
+                            name="username"
+                            id="username"
+                            className="rounded-md border-2 
+                        border-blue-950 bg-bg-col p-1
+                        text-white focus:border-blue-900
+                        focus:outline-none"
+                        />
+                    </div>
+                    <div
+                        className="mb-5 flex 
+                    flex-col items-center"
+                    >
+                        <label
+                            htmlFor="password"
+                            className="text-center
+                        text-lg font-bold"
+                        >
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            className="rounded-md
+                        border-2 border-blue-950 
+                        bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
                         />

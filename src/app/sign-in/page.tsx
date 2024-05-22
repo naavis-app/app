@@ -12,8 +12,7 @@ export default function Page() {
         items-center justify-center text-white"
         >
             <div
-                className="flex flex-col rounded-lg
-            p-20"
+                className="flex flex-col rounded-lg p-20"
             >
                 <Text
                     className="mb-5
