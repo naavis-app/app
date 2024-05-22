@@ -4,6 +4,7 @@ import { lucia } from "~/auth";
 import { redirect } from "next/navigation";
 import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
+import { Text } from "@radix-ui/themes";
 
 export default function Page() {
     return (
@@ -11,29 +12,57 @@ export default function Page() {
         className="flex h-full flex-1 flex-col 
         items-center justify-center text-white"
         >
-            <h1>Create an account</h1>
-            <form action={signup}>
-                <div>
-                    <label htmlFor="username">Username</label>
-                    <input name="username" id="username" 
-                    className="border-2 text-black" 
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" 
-                    id="password" className="border-2
-                    text-black"
-                    />
-                </div>
-                <div className="flex justify-center pt-3">
-                    <button className="rounded-md bg-blue-500 
-                    p-2 text-white hover:bg-blue-700"
+            <div className="flex flex-col p-20
+            rounded-lg">
+                <Text 
+                className="text-center
+                font-bold text-2xl mb-5"
+                >
+                    Create an Account
+                </Text>
+                <form action={signup}>
+                    <div 
+                    className="flex flex-col 
+                    items-center mb-8"
                     >
-                        Continue
-                    </button>
-                </div>
-            </form>
+                        <label htmlFor="username"
+                        className="text-center
+                        font-bold text-lg"
+                        >
+                            Username
+                        </label>
+                        <input name="username" id="username" 
+                        className="rounded-md bg-bg-col 
+                        text-white border-2 border-blue-950
+                        focus:outline-none p-1"
+                        />
+                    </div>
+                    <div 
+                    className="flex flex-col 
+                    items-center mb-4"
+                    >
+                        <label htmlFor="password"
+                        className="text-center
+                        font-bold text-lg"
+                        >
+                            Password
+                        </label>
+                        <input type="password" name="password" 
+                        id="password" className="border-2
+                        border-blue-950 rounded-md 
+                        bg-bg-col text-white
+                        focus:outline-none p-1"
+                        />
+                    </div>
+                    <div className="flex justify-center pt-3">
+                        <button className="rounded-md bg-blue-500 
+                        p-2 text-white hover:bg-blue-700"
+                        >
+                            Continue
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
