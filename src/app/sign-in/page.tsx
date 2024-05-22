@@ -25,11 +25,13 @@ export default function Page() {
                     text-black" 
                     />
                     <br />
-                    <button className="rounded-md bg-blue-500
-                    p-2 text-white hover:bg-blue-700"
-                    >
-                        Continue
-                    </button>
+                    <div className="flex justify-center pt-3">
+                        <button className="rounded-md bg-blue-500
+                        p-2 text-white hover:bg-blue-700"
+                        >
+                            Continue
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>

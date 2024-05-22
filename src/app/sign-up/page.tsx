@@ -26,7 +26,7 @@ export default function Page() {
                     text-black"
                     />
                 </div>
-                <div className="flex">
+                <div className="flex justify-center pt-3">
                     <button className="rounded-md bg-blue-500 
                     p-2 text-white hover:bg-blue-700"
                     >
