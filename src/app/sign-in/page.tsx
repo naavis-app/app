@@ -19,7 +19,7 @@ export default function Page() {
                     className="mb-5
                 text-center text-2xl font-bold"
                 >
-                    Login
+                    Sign in
                 </Text>
                 <form action={login}>
                     <div
@@ -67,7 +67,7 @@ export default function Page() {
                         <button
                             className="rounded-md bg-blue-500
                             px-4 py-2 font-bold text-white
-                            hover:bg-blue-700"
+                            hover:bg-blue-700 transition-colors"
                         >
                             Continue
                         </button>

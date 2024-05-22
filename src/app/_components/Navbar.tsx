@@ -21,17 +21,17 @@ export default function Navbar() {
                 >
                     <Link href="/sign-in" className="hover:no-underline">
                         <Text
-                            className="rounded-md border-2 
+                            className="transition-all rounded-md border-2 
                         border-blue-500 bg-transparent px-4 
                         py-2 font-bold text-blue-500 hover:border-blue-600
-                        hover:text-blue-600"
+                        hover:bg-blue-600 hover:bg-opacity-50 hover:text-white"
                         >
                             Sign in
                         </Text>
                     </Link>
                     <Link href="/sign-up" className="hover:no-underline">
                         <Text
-                            className="rounded-md border-2 
+                            className="transition-colors rounded-md border-2 
                         border-blue-500 bg-blue-500 px-4
                         py-2 font-bold text-white hover:border-blue-700
                         hover:bg-blue-700"
