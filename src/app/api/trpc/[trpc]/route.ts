@@ -6,7 +6,7 @@ import { appRouter } from "~/server/api/root";
 import { createTRPCContext } from "~/server/api/trpc";
 
 export async function generateStaticParams() {
-  return [{ params: {} }];
+  return { params: {} };
 }
 
 /**
@@ -36,3 +36,4 @@ const handler = (req: NextRequest) =>
     });
 
 export { handler as GET, handler as POST };
+
