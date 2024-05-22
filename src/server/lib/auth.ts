@@ -10,7 +10,6 @@ import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
 import { Lucia } from "lucia";
 
-
 const client = new PrismaClient();
 const adapter = new PrismaAdapter(client.session, client.user);
 
@@ -41,7 +40,6 @@ interface DatabaseUserAttributes {
 }
 
 export async function login(formData: FormData): Promise<ActionResult> {
-
     const username = formData.get("username");
     if (
         typeof username !== "string" ||
@@ -100,7 +98,6 @@ export async function login(formData: FormData): Promise<ActionResult> {
 }
 
 export async function signup(formData: FormData): Promise<ActionResult> {
-
     let username = formData.get("username");
 
     if (
