@@ -19,7 +19,7 @@ export default function Tagline() {
                 <button
                     className="rounded-md bg-blue-500
                 px-4 py-3 font-bold text-white
-                hover:bg-blue-700 transition-colors"
+                transition-colors hover:bg-blue-700"
                 >
                     Get Started
                 </button>

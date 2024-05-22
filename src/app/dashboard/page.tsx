@@ -24,8 +24,10 @@ export default function Dashboard() {
 
     return (
         <>
-            <div className="relative flex items-center 
-            justify-center grow">
+            <div
+                className="relative flex grow 
+            items-center justify-center"
+            >
                 <div className="absolute h-1/2 w-1/2">
                     <APIProvider apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
                         <Map

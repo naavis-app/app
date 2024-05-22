@@ -3,75 +3,68 @@ import { verify } from "@node-rs/argon2";
 import { cookies } from "next/headers";
 import { lucia } from "~/app/lib/auth";
 import { redirect } from "next/navigation";
-import { Text } from "@radix-ui/themes";
+import {
+    Box,
+    Button,
+    Card,
+    Flex,
+    Heading,
+    Text,
+    TextField,
+} from "@radix-ui/themes";
+import Link from "next/link";
 
 export default function Page() {
     return (
         <div
             className="flex h-full w-full flex-1 flex-col
-        items-center justify-center text-white"
+        items-center justify-center"
         >
-            <div
-                className="flex flex-col rounded-lg p-20"
-            >
-                <Text
-                    className="mb-5
-                text-center text-2xl font-bold"
-                >
-                    Sign in
-                </Text>
-                <form action={login}>
-                    <div
-                        className="mb-8 flex 
-                    flex-col items-center"
-                    >
-                        <label
-                            htmlFor="username"
-                            className="text-center
-                        text-lg font-bold"
-                        >
-                            Username
-                        </label>
-                        <input
-                            name="username"
-                            id="username"
-                            className="rounded-md border-2
-                        border-blue-950 bg-bg-col p-1
-                        text-white
-                        focus:border-blue-900 focus:outline-none"
-                        required />
-                    </div>
-                    <div
-                        className="mb-5 flex flex-col
-                    items-center"
-                    >
-                        <label
-                            htmlFor="password"
-                            className="text-center text-lg
-                        font-bold"
-                        >
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            className="rounded-md 
-                        border-2 border-blue-950 bg-bg-col 
-                        p-1 text-white 
-                        focus:border-blue-900 focus:outline-none"
-                        required />
-                    </div>
-                    <div className="flex justify-center pt-3">
-                        <button
-                            className="rounded-md bg-blue-500
-                            px-4 py-2 font-bold text-white
-                            hover:bg-blue-700 transition-colors"
-                        >
-                            Continue
-                        </button>
-                    </div>
-                </form>
+            <div className="w-[400px]">
+                <Card size={"4"} variant="surface" style={{ width: "400px" }}>
+                    <Heading size={"6"} mb="6">
+                        Sign in
+                    </Heading>
+                    <form action={login}>
+                        <Box mb={"5"}>
+                            <Text size={"2"} weight="medium" mb={"1"}>
+                                Username
+                            </Text>
+                            <TextField.Root
+                                size={"2"}
+                                variant="surface"
+                                name="username"
+                                placeholder="Enter your username"
+                            />
+                        </Box>
+
+                        <Box mb={"5"} position="relative">
+                            <Flex justify={"between"} mb={"1"}>
+                                <Text size={"2"} weight="medium">
+                                    Password
+                                </Text>
+                                <Link href="/forgot-password">
+                                    Forgot password?
+                                </Link>
+                            </Flex>
+                            <TextField.Root
+                                size={"2"}
+                                variant="surface"
+                                name="password"
+                                placeholder="Enter your password"
+                                spellCheck={false}
+                            />
+                        </Box>
+                        <Flex justify="end" gap={"3"} mt={"6"}>
+                            <Button size={"2"} variant="soft">
+                                Create an account
+                            </Button>
+                            <Button size={"2"} variant="solid">
+                                Sign in
+                            </Button>
+                        </Flex>
+                    </form>
+                </Card>
             </div>
         </div>
     );

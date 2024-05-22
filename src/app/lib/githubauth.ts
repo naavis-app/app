@@ -5,7 +5,10 @@ import { GitHub } from "arctic";
 
 const client = new PrismaClient();
 const adapter = new PrismaAdapter(client.session, client.user);
-export const github = new GitHub(process.env.GITHUB_CLIENT_ID!, process.env.GITHUB_CLIENT_SECRET!);
+export const github = new GitHub(
+    process.env.GITHUB_CLIENT_ID!,
+    process.env.GITHUB_CLIENT_SECRET!,
+);
 
 export const lucia = new Lucia(adapter, {
     sessionCookie: {
@@ -30,6 +33,6 @@ declare module "lucia" {
 }
 
 interface DatabaseUserAttributes {
-    github_id?: number
+    github_id?: number;
     username: string;
 }

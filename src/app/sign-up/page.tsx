@@ -15,11 +15,9 @@ export default function Page() {
             <div
                 className="flex flex-col rounded-lg
             p-20"
-            >   
+            >
                 <Link href="/sign-up/github">
-                    <Text className="text-white">
-                        Sign in with GitHub
-                    </Text>
+                    <Text className="text-white">Sign in with GitHub</Text>
                 </Link>
                 <Text
                     className="mb-5
@@ -28,7 +26,7 @@ export default function Page() {
                     Create an Account
                 </Text>
                 <form action={signup}>
-                <div
+                    <div
                         className="mb-5 flex 
                     flex-col items-center"
                     >
@@ -47,7 +45,8 @@ export default function Page() {
                         border-blue-950 bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
-                        required />
+                            required
+                        />
                     </div>
                     <div
                         className="mb-5 flex 
@@ -68,7 +67,8 @@ export default function Page() {
                         border-blue-950 bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
-                        required />
+                            required
+                        />
                     </div>
                     <div
                         className="mb-5 flex 
@@ -89,7 +89,8 @@ export default function Page() {
                         border-blue-950 bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
-                        required />
+                            required
+                        />
                     </div>
                     <div
                         className="mb-5 flex 
@@ -109,7 +110,8 @@ export default function Page() {
                         border-blue-950 bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
-                        required />
+                            required
+                        />
                     </div>
                     <div
                         className="mb-5 flex 
@@ -131,13 +133,14 @@ export default function Page() {
                         bg-bg-col p-1
                         text-white focus:border-blue-900
                         focus:outline-none"
-                        required />
+                            required
+                        />
                     </div>
                     <div className="flex justify-center pt-3">
                         <button
                             className="rounded-md bg-blue-500 
                         px-4 py-2 font-bold text-white
-                        hover:bg-blue-700 transition-colors"
+                        transition-colors hover:bg-blue-700"
                         >
                             Continue
                         </button>
