@@ -9,8 +9,8 @@ import {
     Text,
     TextField,
 } from "@radix-ui/themes";
-import Link from "next/link";
-import { signup } from "../../server/lib/auth";
+
+import NextLink from "next/link";
 
 export default function Page() {
     return (
@@ -83,6 +83,11 @@ export default function Page() {
                             />
                         </Box>
                         <Flex justify="end" gap={"3"} mt={"6"}>
+                            <NextLink href="/sign-in">
+                                <Button size={"2"} variant="soft">
+                                    I already have an account
+                                </Button>
+                            </NextLink>
                             <Button size={"2"} variant="solid">
                                 Continue
                             </Button>
