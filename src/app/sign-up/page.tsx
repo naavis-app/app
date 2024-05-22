@@ -4,149 +4,41 @@ import { lucia } from "~/app/lib/auth";
 import { redirect } from "next/navigation";
 import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
-import { Text } from "@radix-ui/themes";
+import { Box, Button, Card, Flex, Heading, Text, TextField } from "@radix-ui/themes";
 import Link from "next/link";
 
 export default function Page() {
     return (
-        <div
-            className="flex h-full flex-1 flex-col 
-        items-center justify-center text-white"
-        >
-            <div
-                className="flex flex-col rounded-lg
-            p-20"
-            >
-                <Link href="/sign-up/github">
-                    <Text className="text-white">Sign in with GitHub</Text>
-                </Link>
-                <Text
-                    className="mb-5
-                text-center text-2xl font-bold"
-                >
-                    Create an Account
-                </Text>
-                <form action={signup}>
-                    <div
-                        className="mb-5 flex 
-                    flex-col items-center"
-                    >
-                        <label
-                            htmlFor="firstname"
-                            className="text-center
-                        text-lg font-bold"
-                        >
-                            First Name
-                        </label>
-                        <input
-                            name="firstname"
-                            id="firstname"
-                            type="text"
-                            className="rounded-md border-2 
-                        border-blue-950 bg-bg-col p-1
-                        text-white focus:border-blue-900
-                        focus:outline-none"
-                            required
-                        />
-                    </div>
-                    <div
-                        className="mb-5 flex 
-                    flex-col items-center"
-                    >
-                        <label
-                            htmlFor="lastname"
-                            className="text-center
-                        text-lg font-bold"
-                        >
-                            Last Name
-                        </label>
-                        <input
-                            name="lastname"
-                            id="lastname"
-                            type="text"
-                            className="rounded-md border-2 
-                        border-blue-950 bg-bg-col p-1
-                        text-white focus:border-blue-900
-                        focus:outline-none"
-                            required
-                        />
-                    </div>
-                    <div
-                        className="mb-5 flex 
-                    flex-col items-center"
-                    >
-                        <label
-                            htmlFor="email"
-                            className="text-center
-                        text-lg font-bold"
-                        >
-                            Email
-                        </label>
-                        <input
-                            name="email"
-                            id="email"
-                            type="email"
-                            className="rounded-md border-2 
-                        border-blue-950 bg-bg-col p-1
-                        text-white focus:border-blue-900
-                        focus:outline-none"
-                            required
-                        />
-                    </div>
-                    <div
-                        className="mb-5 flex 
-                    flex-col items-center"
-                    >
-                        <label
-                            htmlFor="username"
-                            className="text-center
-                        text-lg font-bold"
-                        >
-                            Username
-                        </label>
-                        <input
-                            name="username"
-                            id="username"
-                            className="rounded-md border-2 
-                        border-blue-950 bg-bg-col p-1
-                        text-white focus:border-blue-900
-                        focus:outline-none"
-                            required
-                        />
-                    </div>
-                    <div
-                        className="mb-5 flex 
-                    flex-col items-center"
-                    >
-                        <label
-                            htmlFor="password"
-                            className="text-center
-                        text-lg font-bold"
-                        >
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            className="rounded-md
-                        border-2 border-blue-950 
-                        bg-bg-col p-1
-                        text-white focus:border-blue-900
-                        focus:outline-none"
-                            required
-                        />
-                    </div>
-                    <div className="flex justify-center pt-3">
-                        <button
-                            className="rounded-md bg-blue-500 
-                        px-4 py-2 font-bold text-white
-                        transition-colors hover:bg-blue-700"
-                        >
-                            Continue
-                        </button>
-                    </div>
-                </form>
+        <div className="flex h-full w-full flex-1 flex-col items-center justify-center">
+            <div className="w-[400px]">
+                <Card size={"4"} variant="surface" style={{ width: "400px" }}>
+                    <Heading size={"6"} mb="6">Create an Account</Heading>
+                    <form action={signup}>
+                        <Box mb={"5"}>
+                            <Text size={"2"} weight="medium" mb={"1"}>First Name</Text>
+                            <TextField.Root size={"2"} variant="surface" name="firstname" placeholder="Enter your first name" required />
+                        </Box>
+                        <Box mb={"5"}>
+                            <Text size={"2"} weight="medium" mb={"1"}>Last Name</Text>
+                            <TextField.Root size={"2"} variant="surface" name="lastname" placeholder="Enter your last name" required />
+                        </Box>
+                        <Box mb={"5"}>
+                            <Text size={"2"} weight="medium" mb={"1"}>Email</Text>
+                            <TextField.Root size={"2"} variant="surface" name="email" placeholder="Enter your email" required />
+                        </Box>
+                        <Box mb={"5"}>
+                            <Text size={"2"} weight="medium" mb={"1"}>Username</Text>
+                            <TextField.Root size={"2"} variant="surface" name="username" placeholder="Enter your username" required />
+                        </Box>
+                        <Box mb={"5"} position="relative">
+                            <Text size={"2"} weight="medium" mb={"1"}>Password</Text>
+                            <TextField.Root size={"2"} variant="surface" name="password" placeholder="Enter your password" type="password" required />
+                        </Box>
+                        <Flex justify="end" gap={"3"} mt={"6"}>
+                            <Button size={"2"} variant="solid">Continue</Button>
+                        </Flex>
+                    </form>
+                </Card>
             </div>
         </div>
     );
