@@ -15,7 +15,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <Theme
             hasBackground={true}
             appearance={theme}
-            className="flex flex-col"
+            className="relative flex flex-col"
         >
             {children}
         </Theme>

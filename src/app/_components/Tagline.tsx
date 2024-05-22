@@ -3,7 +3,7 @@ import { Link, Text } from "@radix-ui/themes";
 export default function Tagline() {
     return (
         <div
-            className="flex h-[80vh] w-full flex-col 
+            className="flex h-full w-full flex-col 
         items-center justify-center"
         >
             <div
