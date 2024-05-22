@@ -1,12 +1,13 @@
 {
-  "printWidth": 80,
-  "plugins": ["prettier-plugin-tailwindcss"],
-  "overrides": [
-    {
-      "files": ".env.example",
-      "options": {
-        "parser": "yaml"
-      }
-    }
-  ]
+    "printWidth": 80,
+    "tabWidth": 4,
+    "plugins": ["prettier-plugin-tailwindcss"],
+    "overrides": [
+        {
+            "files": ".env.example",
+            "options": {
+                "parser": "yaml"
+            }
+        }
+    ]
 }

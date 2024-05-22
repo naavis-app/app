@@ -7,28 +7,28 @@ import "@radix-ui/themes/styles.css";
 import Navbar from "./_components/Navbar";
 
 export const metadata = {
-  title: "Location App",
-  description: "Location sharing, reimagined.",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+    title: "Location App",
+    description: "Location sharing, reimagined.",
+    icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-  return (
-    <>
-      <html lang="en" className={`${GeistSans.variable}`}>
-        <body className="bg-main-bg flex min-h-[100vh] w-full flex-col">
-          <Theme hasBackground={false} className="flex flex-col">
-            <TRPCReactProvider>
-              {<Navbar />}
-              {children}
-            </TRPCReactProvider>
-          </Theme>
-        </body>
-      </html>
-    </>
-  );
+    return (
+        <>
+            <html lang="en" className={`${GeistSans.variable}`}>
+                <body className="bg-main-bg flex min-h-[100vh] w-full flex-col">
+                    <Theme hasBackground={false} className="flex flex-col">
+                        <TRPCReactProvider>
+                            {<Navbar />}
+                            {children}
+                        </TRPCReactProvider>
+                    </Theme>
+                </body>
+            </html>
+        </>
+    );
 }
