@@ -1,10 +1,9 @@
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
-import { PrismaClient } from "@prisma/client";
 import { Lucia } from "lucia";
 import { GitHub } from "arctic";
+import { db } from "~/server/db";
 
-const client = new PrismaClient();
-const adapter = new PrismaAdapter(client.session, client.user);
+const adapter = new PrismaAdapter(db.session, db.user);
 export const github = new GitHub(
     process.env.GITHUB_CLIENT_ID!,
     process.env.GITHUB_CLIENT_SECRET!,
