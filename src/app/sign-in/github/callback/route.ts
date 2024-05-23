@@ -26,7 +26,7 @@ export async function GET(request: Request): Promise<Response> {
 
         const existingUser = await db.user.findFirst({
             where: {
-                github_id: githubUser.id,
+                github_id: Number(githubUser.id),
             },
         });
 
@@ -51,7 +51,7 @@ export async function GET(request: Request): Promise<Response> {
         await db.user.create({
             data: {
                 id: userId,
-                github_id: githubUser.id,
+                github_id: Number(githubUser.id),
                 username: githubUser.login,
             },
         });
