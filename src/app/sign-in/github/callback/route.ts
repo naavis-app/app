@@ -41,11 +41,20 @@ export async function GET(request: Request): Promise<Response> {
             return new Response(null, {
                 status: 302,
                 headers: {
-                    Location: "/dashboard",
+                    Location: "/sign-in/email",
                 },
             });
         }
 
+        const splitName = (name: string) => {
+            const [firstName, ...lastName] = name.split(" ").filter(Boolean);
+            return {
+                firstName: firstName || "",
+                lastName: lastName.join(" ") || "",
+            };
+        };
+
+        const { firstName, lastName } = splitName(githubUser.name || "");
         const userId = generateIdFromEntropySize(10);
 
         await db.user.create({
@@ -53,6 +62,8 @@ export async function GET(request: Request): Promise<Response> {
                 id: userId,
                 github_id: Number(githubUser.id),
                 username: githubUser.login,
+                firstname: firstName,
+                lastname: lastName,
             },
         });
 
@@ -66,7 +77,7 @@ export async function GET(request: Request): Promise<Response> {
         return new Response(null, {
             status: 302,
             headers: {
-                Location: "/dashboard",
+                Location: "/sign-in/email",
             },
         });
     } catch (e) {
@@ -84,6 +95,7 @@ export async function GET(request: Request): Promise<Response> {
 interface GitHubUser {
     id: string;
     login: string;
+    name: string,
 }
 
 // ! TODO: validate requests/signout

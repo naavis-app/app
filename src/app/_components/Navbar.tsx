@@ -8,7 +8,7 @@ export default async function Navbar() {
 
     return (
         <>
-            <div className="fixed z-50 flex w-full p-4">
+            <div className="fixed z-50 flex w-full p-4 select-none">
                 <Card className="w-full" variant={"classic"}>
                     <Flex justify={"between"}>
                         <Link href="/" className="hover:no-underline">

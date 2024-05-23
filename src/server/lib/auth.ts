@@ -245,3 +245,9 @@ export const validateRequest = cache(
         return result;
     },
 );
+
+interface DatabaseUserAttributes {
+    github_id?: number;
+    username: string;
+    name: string
+}

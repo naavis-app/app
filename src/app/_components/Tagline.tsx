@@ -8,7 +8,7 @@ export default function Tagline() {
         >
             <div
                 className="flex flex-col items-center justify-center p-0
-            pb-5 text-center"
+            pb-5 text-center select-none"
             >
                 <Text className="text-6xl font-bold text-white">
                     Location sharing,{" "}
