@@ -1,4 +1,4 @@
-import { Text, Link, Button, Switch } from "@radix-ui/themes";
+import { Text, Link } from "@radix-ui/themes";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {

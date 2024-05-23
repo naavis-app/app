@@ -3,6 +3,8 @@
 import { Theme } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { themeAtom } from "../server/lib/stores";
+import { useLayoutEffect } from "react";
+import { ThemeProvider } from 'next-themes';
 
 interface children {
     children: React.ReactNode;
@@ -12,12 +14,14 @@ export function Providers({ children }: { children: React.ReactNode }) {
     const [theme, setTheme] = useAtom(themeAtom);
 
     return (
-        <Theme
-            hasBackground={true}
-            appearance={theme}
-            className="flex flex-col"
-        >
-            {children}
-        </Theme>
+        <ThemeProvider attribute="class">
+            <Theme
+                hasBackground={true}
+                appearance={theme}
+                className="flex flex-col"
+            >
+                {children}
+            </Theme>
+        </ThemeProvider>
     );
 }

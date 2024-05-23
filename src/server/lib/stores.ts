@@ -1,3 +1,3 @@
 import { atom } from "jotai";
 
-export const themeAtom = atom<"light" | "dark" | "inherit">("inherit");
+export const themeAtom = atom<"light" | "dark" | "inherit" | undefined >(undefined);
