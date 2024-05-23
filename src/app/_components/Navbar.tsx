@@ -1,7 +1,11 @@
 import { Text, Link, Button, Switch, Card, Flex } from "@radix-ui/themes";
 import ThemeToggle from "./ThemeToggle";
+import { validateRequest } from "~/server/lib/auth";
+import AccountButton from "./AccountButton";
 
-export default function Navbar() {
+export default async function Navbar() {
+    const { user } = await validateRequest();
+
     return (
         <>
             <div className="fixed z-50 flex w-full p-4">
@@ -22,7 +26,8 @@ export default function Navbar() {
                         >
                             <ThemeToggle />
 
-                            <Link
+                            {
+                                !user?.id ? <Link
                                 href="/sign-in"
                                 className="hover:no-underline"
                             >
@@ -34,7 +39,10 @@ export default function Navbar() {
                                 >
                                     Sign in
                                 </Text>
-                            </Link>
+                            </Link> : <AccountButton user={user} />
+                            }
+
+                            
                             <Link
                                 href="/sign-up"
                                 className="hover:no-underline"
