@@ -184,6 +184,23 @@ export async function signup(formData: FormData): Promise<ActionResult> {
     return redirect("/sign-in");
 }
 
+export async function signOut(): Promise<ActionResult> {
+    const sessionId = cookies().get(lucia.sessionCookieName)?.value;
+    if (sessionId) {
+        await db.session.delete({
+            where: {
+                id: sessionId,
+            },
+        });
+    }
+    cookies().set(lucia.sessionCookieName, "", {
+        expires: new Date(0),
+        secure: process.env.NODE_ENV === "production",
+    });
+    
+    return redirect("/");
+}
+
 interface ActionResult {
     error: string;
 }
