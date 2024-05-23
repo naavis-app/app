@@ -10,17 +10,17 @@ import {
     TextField,
 } from "@radix-ui/themes";
 
-import {
-    BsGithub
-} from 'react-icons/bs';
+import { BsGithub } from "react-icons/bs";
 
 import NextLink from "next/link";
 import { signup } from "~/server/lib/auth";
 
 export default function Page() {
     return (
-        <div className="flex h-full w-full flex-1 flex-col items-center 
-        justify-center overflow-scroll">
+        <div
+            className="flex h-full w-full flex-1 flex-col items-center 
+        justify-center overflow-scroll"
+        >
             <div className="w-[400px]">
                 <Card size={"4"} variant="surface" style={{ width: "400px" }}>
                     <Heading size={"6"} mb="6">
@@ -101,14 +101,14 @@ export default function Page() {
                     </form>
                 </Card>
             </div>
-            <Text className="font-bold pt-2">
-                or sign-up with...
-            </Text>
+            <Text className="pt-2 font-bold">or sign-up with...</Text>
             <NextLink href="/sign-up/github">
-                <div className="p-2 
-						rounded-lg fill-current
-						hover:text-neutral-400 transition-colors 
-						duration-300 text-5xl">
+                <div
+                    className="rounded-lg 
+						fill-current p-2
+						text-5xl transition-colors 
+						duration-300 hover:text-neutral-400"
+                >
                     <BsGithub />
                 </div>
             </NextLink>

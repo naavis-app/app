@@ -10,15 +10,12 @@ datasource db {
 model User {
   id          String    @id
   createdAt   DateTime  @default(now())
-
   password    String?
   username    String    @unique
-
-  github_id   Int?      @unique
   firstname   String?
   lastname    String?
   email       String?   @unique
-
+  github_id   Int?      @unique
   devices     Device[]  @relation("UserDevices")
   ownedGroups Group[]   @relation("GroupOwner")
   sessions    Session[] @relation("UserSessions")
@@ -65,7 +62,3 @@ model Place {
   groupId     String
   parentGroup Group   @relation("GroupPlaces", fields: [groupId], references: [id])
 }
-
-// update with npx prisma migrate dev (if columns are added)
-// this is just so i remember lol
-// -must

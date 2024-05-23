@@ -11,9 +11,7 @@ import {
     TextField,
 } from "@radix-ui/themes";
 
-import {
-    BsGithub
-} from 'react-icons/bs';
+import { BsGithub } from "react-icons/bs";
 
 import NextLink from "next/link";
 import { login } from "~/server/lib/auth";
@@ -75,14 +73,14 @@ export default function Page() {
                     </form>
                 </Card>
             </div>
-            <Text className="font-bold pt-2">
-                or sign-in with...
-            </Text>
+            <Text className="pt-2 font-bold">or sign-in with...</Text>
             <NextLink href="/sign-up/github">
-                <div className="p-2 
-						rounded-lg fill-current text-white 
-						hover:text-neutral-400 transition-colors 
-						duration-300 text-5xl">
+                <div
+                    className="rounded-lg 
+						fill-current p-2 text-5xl 
+						text-white transition-colors 
+						duration-300 hover:text-neutral-400"
+                >
                     <BsGithub />
                 </div>
             </NextLink>
