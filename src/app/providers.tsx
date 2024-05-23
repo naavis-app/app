@@ -14,7 +14,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
     const [theme, setTheme] = useAtom(themeAtom);
 
     return (
-<<<<<<< HEAD
         <ThemeProvider attribute="class">
             <Theme
                 hasBackground={true}
@@ -24,14 +23,5 @@ export function Providers({ children }: { children: React.ReactNode }) {
                 {children}
             </Theme>
         </ThemeProvider>
-=======
-        <Theme
-            hasBackground={true}
-            appearance={theme}
-            className="relative flex flex-col"
-        >
-            {children}
-        </Theme>
->>>>>>> cc35ef367682163394d6e3d6afd0c6a1d8b7e9eb
     );
 }
