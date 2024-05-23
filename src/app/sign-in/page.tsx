@@ -11,6 +11,10 @@ import {
     TextField,
 } from "@radix-ui/themes";
 
+import {
+    BsGithub
+} from 'react-icons/bs';
+
 import NextLink from "next/link";
 import { login } from "~/server/lib/auth";
 
@@ -18,7 +22,7 @@ export default function Page() {
     return (
         <div
             className="flex h-full w-full flex-1 flex-col
-        items-center justify-center"
+        items-center justify-center overflow-scroll"
         >
             <div className="w-[400px]">
                 <Card size={"4"} variant="surface" style={{ width: "400px" }}>
@@ -71,6 +75,17 @@ export default function Page() {
                     </form>
                 </Card>
             </div>
+            <Text className="font-bold pt-2">
+                or sign-in with...
+            </Text>
+            <NextLink href="/sign-up/github">
+                <div className="p-2 
+						rounded-lg fill-current text-white 
+						hover:text-neutral-400 transition-colors 
+						duration-300 text-5xl">
+                    <BsGithub />
+                </div>
+            </NextLink>
         </div>
     );
 }

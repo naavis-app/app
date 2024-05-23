@@ -22,7 +22,7 @@ export default function RootLayout({
             <html lang="en" className={`${GeistSans.variable}`}>
                 <body
                     className="flex min-h-[100vh] w-full 
-                flex-col"
+                flex-col overflow-scroll"
                 >
                     <Providers>
                         <TRPCReactProvider>

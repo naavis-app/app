@@ -3,7 +3,6 @@
 import { Theme } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { themeAtom } from "../server/lib/stores";
-import { useLayoutEffect } from "react";
 import { ThemeProvider } from 'next-themes';
 
 interface children {

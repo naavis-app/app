@@ -11,10 +11,10 @@ model User {
   id          String    @id
   createdAt   DateTime  @default(now())
 
-  password    String
+  password    String?
   username    String    @unique
 
-  github_id   String?
+  github_id   Int?      @unique
   firstname   String?
   lastname    String?
   email       String?   @unique
