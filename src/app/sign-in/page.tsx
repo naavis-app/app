@@ -1,3 +1,9 @@
+/* this is our sign-in page, where users can enter their information,
+or sign-in through github and google (more to come!) 
+some components here are from radix-ui, and react-icons.
+check https://www.radix-ui.com/themes/docs/overview/getting-started 
+and https://react-icons.github.io/react-icons/ for more information */
+
 "use client";
 
 import {

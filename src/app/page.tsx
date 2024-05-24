@@ -1,3 +1,5 @@
+/* index file for next.js */
+
 "use client";
 
 import Tagline from "./_components/Tagline";

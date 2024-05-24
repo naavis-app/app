@@ -1,3 +1,8 @@
+/* route visited during github authentication, where
+a cookie is created with a oauth state and allows for 
+this information to be pulled by a callback route through a 
+cookie */
+
 import { generateState } from "arctic";
 import { github } from "~/server/lib/githubauth";
 import { cookies } from "next/headers";

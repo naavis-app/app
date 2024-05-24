@@ -1,3 +1,7 @@
+/* this file handles regular authentication with user entered
+username/password. please check https://lucia-auth.com/
+for more information. */
+
 "use server";
 
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";

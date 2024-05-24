@@ -1,3 +1,5 @@
+// our navbar component.
+
 import { Text, Link, Button, Switch, Card, Flex } from "@radix-ui/themes";
 import ThemeToggle from "./ThemeToggle";
 import { validateRequest } from "~/server/lib/auth";

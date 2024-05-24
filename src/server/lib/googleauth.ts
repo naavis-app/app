@@ -1,3 +1,10 @@
+/* this file exports necessary functions and constants
+for authentication with Google. we use lucia and arctic for 
+third-party authentication. 
+check https://developers.google.com/identity/protocols/oauth2
+and https://arctic.js.org/providers/google
+for more information. */
+
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { Lucia } from "lucia";
 import { Google } from "arctic";

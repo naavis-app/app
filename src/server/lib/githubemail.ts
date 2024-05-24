@@ -1,3 +1,8 @@
+/* this file sends an email address to the database when a user
+logs in through github. this is done because pulling an email address
+from a github account is a little annoying, (as many users don't have
+public emails) so i went with this option. */
+
 "use server";
 
 import { db } from "../db";

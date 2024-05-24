@@ -1,3 +1,5 @@
+// this button allows a user to toggle theme between light/dark
+
 "use client";
 
 import { Button } from "@radix-ui/themes";

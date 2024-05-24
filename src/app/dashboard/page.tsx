@@ -1,3 +1,6 @@
+/* dashboard page where we currently have our map set up. 
+will be updated heavily in the future */
+
 "use client";
 
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";

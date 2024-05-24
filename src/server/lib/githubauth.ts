@@ -1,3 +1,9 @@
+
+/* this file exports functions and constants for github authentication.
+we use lucia and arctic for third-parth authentication.
+check https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
+and https://arctic.js.org/providers/github for more information. */
+
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { Lucia } from "lucia";
 import { GitHub } from "arctic";

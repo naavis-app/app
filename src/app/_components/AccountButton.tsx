@@ -1,3 +1,5 @@
+// button that allows a user to see their account username/userid
+
 "use client";
 
 import {

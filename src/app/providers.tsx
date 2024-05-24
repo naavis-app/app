@@ -1,3 +1,5 @@
+/* this file allows for easy switching between light/dark mode */
+
 "use client";
 
 import { Theme } from "@radix-ui/themes";

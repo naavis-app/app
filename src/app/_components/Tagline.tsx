@@ -1,3 +1,5 @@
+// tagline for our website. you can see it on the homepage!
+
 import { Link, Text } from "@radix-ui/themes";
 
 export default function Tagline() {

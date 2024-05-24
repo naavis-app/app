@@ -1,3 +1,8 @@
+/* this route is for github authentication, where a user
+must enter their email after registering with github 
+(as getting emails from github accounts is tricky and 
+unreliable [and we need those emails!]) */
+
 "use client";
 
 import {

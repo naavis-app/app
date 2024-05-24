@@ -1,3 +1,8 @@
+/* this file deals with google's callback route during authentication,
+where the data is pulled from google's api and sent to our database. 
+check https://arctic.js.org/providers/google 
+and https://lucia-auth.com/ for more information */
+
 import { google, lucia } from "~/server/lib/googleauth";
 import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";

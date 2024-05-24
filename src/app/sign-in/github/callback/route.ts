@@ -1,3 +1,8 @@
+/* this file deals with github's callback route during authentication,
+where the data is pulled from github's api and sent to our database. 
+check https://arctic.js.org/providers/github 
+and https://lucia-auth.com/ for more information */
+
 import { github, lucia } from "~/server/lib/githubauth";
 import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";

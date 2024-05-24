@@ -1,3 +1,8 @@
+/* route visited during google authentication, where
+a cookie is created with a oauth state and codeverifier which allows for 
+this information to be pulled by a callback route through a 
+cookie */
+
 import { generateState, generateCodeVerifier } from "arctic";
 import { google } from "~/server/lib/googleauth";
 import { cookies } from "next/headers";
