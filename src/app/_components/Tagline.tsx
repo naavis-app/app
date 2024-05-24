@@ -23,7 +23,10 @@ export default function Tagline() {
                 >
                     Get Started
                 </button>
-            </Link>
+            </Link> 
         </div>
     ); // planning to have it dynamically switch between text. inspired by https://www.prisma.io/ if you wanna see what im talking about
 }
+
+// also planning for the "Get started" button to change to "Dashboard" when
+// logged in. not working bc of "use client"/"use server" issues
