@@ -6,6 +6,12 @@ export async function GET(): Promise<Response> {
     const state = generateState();
     const codeVerifier = generateCodeVerifier();
 
+    const url = await google.createAuthorizationURL(
+        state,
+        codeVerifier,
+        { scopes: ["profile", "email", "name"] }
+    );
+
     cookies().set("google_oauth_state", codeVerifier, {
         path: "/",
         httpOnly: true,
@@ -13,12 +19,6 @@ export async function GET(): Promise<Response> {
         maxAge: 60 * 10,
         sameSite: "lax"
     });
-
-    const url = await google.createAuthorizationURL(
-        state,
-        codeVerifier,
-        { scopes: ["profile", "email"] }
-    );
 
     return Response.redirect(url);
 }

@@ -38,6 +38,7 @@ export async function GET(request: Request): Promise<Response> {
                 sessionCookie.value,
                 sessionCookie.attributes,
             );
+            
             return new Response(null, {
                 status: 302,
                 headers: {
