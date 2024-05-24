@@ -9,7 +9,7 @@ export async function GET(): Promise<Response> {
     const url = await google.createAuthorizationURL(
         state,
         codeVerifier,
-        { scopes: ["profile", "email", "name"] }
+        { scopes: ["profile", "email"] }
     );
 
     cookies().set("google_oauth_state", codeVerifier, {

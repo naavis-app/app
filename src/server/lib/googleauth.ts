@@ -7,7 +7,7 @@ const adapter = new PrismaAdapter(db.session, db.user);
 export const google = new Google(
     process.env.GOOGLE_CLIENT_ID!,
     process.env.GOOGLE_CLIENT_SECRET!,
-    process.env.NEXT_PUBLIC_BASE_URL + "/sign-in/google/callback"
+    "http://localhost:3000/sign-in/google/callback"
 );
 
 export const lucia = new Lucia(adapter, {
@@ -19,7 +19,9 @@ export const lucia = new Lucia(adapter, {
     },
     getUserAttributes: (attributes: DatabaseUserAttributes) => {
         return {
-
+            email: attributes.email,
+            given_name: attributes.given_name,
+            family_name: attributes.family_name,
         };
     },
 });
@@ -27,14 +29,15 @@ export const lucia = new Lucia(adapter, {
 declare module "lucia" {
     interface Register {
         Lucia: typeof lucia;
-        DatabaseUserAttributes: RegisteredDatabaseUserAttributes;
+        DatabaseUserAttributes: DatabaseUserAttributes;
     }
 }
 
 interface DatabaseUserAttributes {
-    google_id?: string,
+    github_id?: number;
     username: string;
     name: string
+    email: string,
+    given_name?: string,
+    family_name?: string,
 }
-
-// ! TODO: FINISH THIS !

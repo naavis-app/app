@@ -6,11 +6,10 @@ import { db } from "~/server/db";
 
 export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url);
-    const code = url.searchParams.get("code")!;
+    const code = url.searchParams.get("code");
     const state = url.searchParams.get("state");
-    const codeVerifier = url.searchParams.get("codeVerifier")!;
-    const storedState = cookies().get("google_oauth_state")?.value ?? null;
-    if (!code || !state || !storedState || state !== storedState) {
+    const codeVerifier = cookies().get("google_oauth_state")?.value ?? null;
+    if (!code || !state || !codeVerifier) {
         return new Response(null, {
             status: 400
         });
