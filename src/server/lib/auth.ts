@@ -253,8 +253,8 @@ export const validateRequest = cache(
 interface DatabaseUserAttributes {
     github_id?: number;
     username: string;
-    name: string
-    email: string,
-    given_name?: string,
-    family_name?: string,
+    name: string;
+    email: string;
+    given_name?: string;
+    family_name?: string;
 }

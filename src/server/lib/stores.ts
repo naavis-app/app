@@ -7,4 +7,3 @@ check https://jotai.org/docs/introduction for more information. */
 import { atom } from "jotai";
 
 export const themeAtom = atom<"light" | "dark" | "inherit">("dark");
-

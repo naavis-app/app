@@ -43,7 +43,7 @@ export async function GET(request: Request): Promise<Response> {
                 sessionCookie.value,
                 sessionCookie.attributes,
             );
-            
+
             return new Response(null, {
                 status: 302,
                 headers: {
@@ -101,7 +101,7 @@ export async function GET(request: Request): Promise<Response> {
 interface GitHubUser {
     id: string;
     login: string;
-    name: string,
+    name: string;
 }
 
 // ! TODO: validate requests/signout

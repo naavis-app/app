@@ -9,8 +9,8 @@ export default function Tagline() {
         items-center justify-center"
         >
             <div
-                className="flex flex-col items-center justify-center p-0
-            pb-5 text-center select-none"
+                className="flex select-none flex-col items-center justify-center
+            p-0 pb-5 text-center"
             >
                 <Text className="text-6xl font-bold text-white">
                     Location sharing,{" "}
@@ -25,7 +25,7 @@ export default function Tagline() {
                 >
                     Get Started
                 </button>
-            </Link> 
+            </Link>
         </div>
     ); // planning to have it dynamically switch between text. inspired by https://www.prisma.io/ if you wanna see what im talking about
 }

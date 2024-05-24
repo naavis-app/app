@@ -17,10 +17,7 @@ import {
     TextField,
 } from "@radix-ui/themes";
 
-import { 
-    BsGithub,
-    BsGoogle
-} from "react-icons/bs";
+import { BsGithub, BsGoogle } from "react-icons/bs";
 
 import NextLink from "next/link";
 import { login } from "~/server/lib/auth";
@@ -105,7 +102,6 @@ export default function Page() {
                     </div>
                 </NextLink>
             </div>
-            
         </div>
     );
 }

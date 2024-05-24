@@ -1,6 +1,5 @@
-
 /* this file adds styling defaults and adds tailwind directives. 
-check https://v2.tailwindcss.com/docs for more information. */ 
+check https://v2.tailwindcss.com/docs for more information. */
 
 @tailwind base;
 @tailwind components;

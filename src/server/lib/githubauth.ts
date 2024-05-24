@@ -1,4 +1,3 @@
-
 /* this file exports functions and constants for github authentication.
 we use lucia and arctic for third-parth authentication.
 check https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
@@ -41,9 +40,8 @@ declare module "lucia" {
 interface DatabaseUserAttributes {
     github_id?: number;
     username: string;
-    name: string
-    email: string,
-    given_name?: string,
-    family_name?: string,
+    name: string;
+    email: string;
+    given_name?: string;
+    family_name?: string;
 }
-

@@ -16,10 +16,7 @@ import {
     TextField,
 } from "@radix-ui/themes";
 
-import { 
-    BsGithub,
-    BsGoogle
-} from "react-icons/bs";
+import { BsGithub, BsGoogle } from "react-icons/bs";
 
 import NextLink from "next/link";
 import { signup } from "~/server/lib/auth";

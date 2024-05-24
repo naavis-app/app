@@ -14,7 +14,7 @@ const adapter = new PrismaAdapter(db.session, db.user);
 export const google = new Google(
     process.env.GOOGLE_CLIENT_ID!,
     process.env.GOOGLE_CLIENT_SECRET!,
-    "http://localhost:3000/sign-in/google/callback"
+    "http://localhost:3000/sign-in/google/callback",
 );
 
 export const lucia = new Lucia(adapter, {
@@ -43,8 +43,8 @@ declare module "lucia" {
 interface DatabaseUserAttributes {
     github_id?: number;
     username: string;
-    name: string
-    email: string,
-    given_name?: string,
-    family_name?: string,
+    name: string;
+    email: string;
+    given_name?: string;
+    family_name?: string;
 }
