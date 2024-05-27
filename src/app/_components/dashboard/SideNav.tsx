@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import classNames from 'classnames';
-import { AvatarIcon, ButtonIcon, CardStackIcon, CaretDownIcon, ExitIcon, GearIcon, GlobeIcon, HomeIcon, SewingPinIcon } from '@radix-ui/react-icons';
+import { AvatarIcon, ButtonIcon, CardStackIcon, CaretDownIcon, CubeIcon, ExitIcon, GearIcon, GlobeIcon, HomeIcon, SewingPinIcon } from '@radix-ui/react-icons';
 
 import { clsx } from 'clsx';
 import { Avatar, Box, Button, Card, DropdownMenu, Flex, IconButton, Text } from '@radix-ui/themes';
@@ -46,6 +46,7 @@ export default function SideNav() {
 
 						<SideNavItem icon={<HomeIcon />} url={'/dashboard'} label={'Dashboard'} />
 						<SideNavItem icon={<GlobeIcon />} url={'/map'} label={'Map'} />
+						<SideNavItem icon={<CubeIcon />} url={'/devices'} label={'Devices'} />
 						<SideNavItem icon={<GearIcon />} url={'/settings'} label={'Settings'} />
 						<SideNavItem icon={<ExitIcon />} url={'/logout'} label={'Logout'} />
 					</div>
