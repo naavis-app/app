@@ -1,12 +1,23 @@
-// our navbar component.
+"use client";
 
 import { Text, Link, Button, Switch, Card, Flex } from "@radix-ui/themes";
 import ThemeToggle from "./ThemeToggle";
-import { validateRequest } from "~/server/lib/auth";
-import AccountButton from "./AccountButton";
 
-export default async function Navbar() {
-    const { user } = await validateRequest();
+import AccountButton from "./AccountButton";
+import { validateRequest } from "~/server/lib/auth";
+import { useEffect } from "react";
+import { useAtom } from "jotai";
+import { userAtom } from "~/server/lib/stores";
+
+export default function Navbar() {
+    const [user, setUser] = useAtom(userAtom);
+
+    async function fetchUser() {
+        const data = await validateRequest();
+        setUser(data.user);
+    }
+
+    useEffect(() => {fetchUser});
 
     return (
         <>
