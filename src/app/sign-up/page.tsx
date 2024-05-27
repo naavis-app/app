@@ -20,8 +20,16 @@ import { BsGithub, BsGoogle } from "react-icons/bs";
 
 import NextLink from "next/link";
 import { signup } from "~/server/lib/auth";
+import toast from "react-hot-toast";
 
 export default function Page() {
+    const handleSubmit = async (e: FormData) => {
+        const response = await signup(e);
+
+        if (response.error) {
+            toast.error(response.error);
+        }
+    }
     return (
         <div
             className="flex h-full w-full flex-1 flex-col items-center 
@@ -32,7 +40,7 @@ export default function Page() {
                     <Heading size={"6"} mb="6">
                         Create an Account
                     </Heading>
-                    <form action={signup}>
+                    <form action={handleSubmit}>
                         <Box mb={"5"}>
                             <Text size={"2"} weight="medium" mb={"1"}>
                                 First Name
