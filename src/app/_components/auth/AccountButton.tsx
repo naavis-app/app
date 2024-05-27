@@ -13,7 +13,6 @@ import {
 } from "@radix-ui/themes";
 import { DatabaseUser, User } from "lucia";
 import { signOut } from "~/server/lib/auth";
-
 interface AccountButtonProps {
     user: User;
 }
@@ -23,13 +22,15 @@ export default function AccountButton({ user }: AccountButtonProps) {
         <>
             <Popover.Root>
                 <Popover.Trigger>
-                    <Avatar
-                        size="3"
-                        src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
-                        radius="full"
-                        fallback={"A"}
-                        className="shadow-md hover:cursor-pointer border-2 p-[2px] dark:border-red-400 border-blue-400"
-                    />
+                    <div>
+                        <Avatar
+                            size="3"
+                            src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
+                            radius="full"
+                            fallback={"A"}
+                            className="shadow-md hover:cursor-pointer border-2 p-[2px] dark:border-red-400 border-blue-400"
+                        />
+                    </div>
                 </Popover.Trigger>
                 <Popover.Content sideOffset={5} alignOffset={5}>
                     <Flex gap={"4"} direction="column">

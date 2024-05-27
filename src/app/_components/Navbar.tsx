@@ -3,7 +3,7 @@
 import { Text, Link, Button, Switch, Card, Flex } from "@radix-ui/themes";
 import ThemeToggle from "./ThemeToggle";
 
-import AccountButton from "./AccountButton";
+import AccountButton from "./auth/AccountButton";
 import { validateRequest } from "~/server/lib/auth";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
@@ -13,11 +13,14 @@ export default function Navbar() {
     const [user, setUser] = useAtom(userAtom);
 
     async function fetchUser() {
+        console.log("fetching user");
         const data = await validateRequest();
+
+        console.log(data);
         setUser(data.user);
     }
 
-    useEffect(() => {fetchUser});
+    useEffect(() => {fetchUser()}, []);
 
     return (
         <>
