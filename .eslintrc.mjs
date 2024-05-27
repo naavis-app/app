@@ -2,8 +2,8 @@
 const config = {
     parser: "@typescript-eslint/parser",
     parserOptions: {
-        "sourceType": "module",
-        "ecmaVersion": 12,
+        sourceType: "module",
+        ecmaVersion: 12,
         project: true,
     },
     plugins: ["@typescript-eslint", "prettier"],

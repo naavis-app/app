@@ -29,16 +29,13 @@ export default function Dashboard() {
 
     return (
         <>
-            <div
-                className="relative flex grow pt-[6rem] pb-4 px-4 gap-4"
-            >
+            <div className="relative flex grow gap-4 px-4 pb-4 pt-[6rem]">
                 <SideNav />
                 <Box className="w-full rounded-md">
-                    <div className="bg-slate-300 rounded-md w-full h-full">
+                    <div className="h-full w-full rounded-md bg-slate-300">
                         test
-
                     </div>
-                {/* <APIProvider apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
+                    {/* <APIProvider apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
                         <Map
                             mapId={"7342a481321c1609"}
                             defaultCenter={position}

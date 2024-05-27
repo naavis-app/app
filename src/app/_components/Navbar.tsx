@@ -20,7 +20,9 @@ export default function Navbar() {
         setUser(data.user);
     }
 
-    useEffect(() => {fetchUser()}, []);
+    useEffect(() => {
+        fetchUser();
+    }, []);
 
     return (
         <>
