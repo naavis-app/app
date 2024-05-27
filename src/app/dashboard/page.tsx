@@ -6,6 +6,8 @@ will be updated heavily in the future */
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 import { env } from "~/env";
+import SideNav from "../_components/dashboard/SideNav";
+import { Box, Card } from "@radix-ui/themes";
 
 export default function Dashboard() {
     const [position, setPosition] = useState<google.maps.LatLngLiteral>({
@@ -28,11 +30,11 @@ export default function Dashboard() {
     return (
         <>
             <div
-                className="relative flex grow 
-            items-center justify-center"
+                className="relative flex grow pt-[6rem] pb-4 px-4"
             >
-                <div className="absolute h-1/2 w-1/2">
-                    <APIProvider apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
+                <SideNav />
+                <Box className="w-full rounded-md">
+                <APIProvider apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
                         <Map
                             mapId={"7342a481321c1609"}
                             defaultCenter={position}
@@ -46,7 +48,7 @@ export default function Dashboard() {
                             />
                         </Map>
                     </APIProvider>
-                </div>
+                </Box>
             </div>
         </>
     );
