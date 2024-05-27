@@ -2,6 +2,8 @@
 const config = {
     parser: "@typescript-eslint/parser",
     parserOptions: {
+        "sourceType": "module",
+        "ecmaVersion": 2020,
         project: true,
     },
     plugins: ["@typescript-eslint", "prettier"],
@@ -40,4 +42,4 @@ const config = {
         "max-len": ["warn", { code: 80 }],
     },
 };
-module.exports = config;
+export default config;
