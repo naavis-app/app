@@ -1,6 +1,14 @@
 "use client";
 
-import { Text, Link, Button, Switch, Card, Flex, Popover } from "@radix-ui/themes";
+import {
+    Text,
+    Link,
+    Button,
+    Switch,
+    Card,
+    Flex,
+    Popover,
+} from "@radix-ui/themes";
 import ThemeToggle from "./ThemeToggle";
 
 import AccountButton from "./auth/AccountButton";
@@ -27,7 +35,7 @@ export default function Navbar() {
         fetchUser();
     }, []);
 
-    if(width === undefined) {
+    if (width === undefined) {
         return null;
     }
 
@@ -112,61 +120,63 @@ export default function Navbar() {
                             ) : (
                                 <Popover.Root>
                                     <Popover.Trigger>
-                                            <button aria-label="Hamburger Menu" 
-                                            className="hamburger-button">
-                                                <HamburgerLogo />
-                                            </button>
+                                        <button
+                                            aria-label="Hamburger Menu"
+                                            className="hamburger-button"
+                                        >
+                                            <HamburgerLogo />
+                                        </button>
                                     </Popover.Trigger>
                                     <Popover.Content className="flex flex-col space-y-6">
                                         {!user?.id ? (
-                                        <Link
-                                            href="/sign-in"
-                                            className="hover:no-underline"
-                                        >
-                                            <Text
-                                                className="rounded-md border-2 border-blue-500 
+                                            <Link
+                                                href="/sign-in"
+                                                className="hover:no-underline"
+                                            >
+                                                <Text
+                                                    className="rounded-md border-2 border-blue-500 
                                                 bg-transparent px-8 py-2 
                                                 font-bold text-blue-500 transition-all 
                                                 hover:border-blue-600 hover:bg-blue-600 
                                                 hover:bg-opacity-50 hover:text-white"
-                                            >
-                                                Sign in
-                                            </Text>
-                                        </Link>
-                                    ) : (
-                                        <AccountButton user={user} />
-                                    )}
+                                                >
+                                                    Sign in
+                                                </Text>
+                                            </Link>
+                                        ) : (
+                                            <AccountButton user={user} />
+                                        )}
 
-                                    {user?.id ? (
-                                        <Link
-                                            href="/dashboard"
-                                            className="hover:no-underline"
-                                        >
-                                            <Text
-                                                className="rounded-md border-2
+                                        {user?.id ? (
+                                            <Link
+                                                href="/dashboard"
+                                                className="hover:no-underline"
+                                            >
+                                                <Text
+                                                    className="rounded-md border-2
                                             border-blue-500 bg-blue-500
                                             px-4 py-2 font-bold text-white
                                             transition-colors hover:border-blue-700
                                             hover:bg-blue-700"
+                                                >
+                                                    Dashboard
+                                                </Text>
+                                            </Link>
+                                        ) : (
+                                            <Link
+                                                href="/sign-up"
+                                                className="hover:no-underline"
                                             >
-                                                Dashboard
-                                            </Text>
-                                        </Link>
-                                    ) : (
-                                        <Link
-                                            href="/sign-up"
-                                            className="hover:no-underline"
-                                        >
-                                            <Text
-                                                className="rounded-md border-2 border-blue-500 
+                                                <Text
+                                                    className="rounded-md border-2 border-blue-500 
                                                 bg-blue-500 px-4 py-2 font-bold text-white 
                                                 transition-colors hover:border-blue-700
                                                 hover:bg-blue-700"
-                                            >
-                                                Get Started
-                                            </Text>
-                                        </Link>
-                                    )}
+                                                >
+                                                    Get Started
+                                                </Text>
+                                            </Link>
+                                        )}
                                     </Popover.Content>
                                 </Popover.Root>
                             )}

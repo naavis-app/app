@@ -12,8 +12,10 @@ export default function Tagline() {
                 className="flex select-none flex-col items-center justify-center
             p-0 pb-5 text-center"
             >
-                <Text className="text-4xl sm:text-6xl font-bold 
-                text-white leading-tight sm:leading-none">
+                <Text
+                    className="text-4xl font-bold leading-tight 
+                text-white sm:text-6xl sm:leading-none"
+                >
                     Location sharing,{" "}
                     <span className="text-blue-500">reimagined.</span>
                 </Text>

@@ -32,11 +32,15 @@ export default function Page() {
     };
     return (
         <div
-            className="flex h-full w-full flex-1 flex-col items-center 
-        justify-center overflow-scroll mt-20"
+            className="mt-20 flex h-full w-full flex-1 flex-col 
+        items-center justify-center overflow-scroll"
         >
             <div className="w-[300px] md:w-[400px]">
-                <Card size={"4"} variant="surface" className="w-[300px] md:w-[400px]">
+                <Card
+                    size={"4"}
+                    variant="surface"
+                    className="w-[300px] md:w-[400px]"
+                >
                     <Heading size={"6"} mb="6">
                         Create an Account
                     </Heading>

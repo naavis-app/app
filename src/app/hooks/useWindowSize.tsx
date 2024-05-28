@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function useWindowSize() {
     function getSize() {
-        if(typeof window !== 'undefined') {
+        if (typeof window !== "undefined") {
             return {
                 width: window.innerWidth || undefined,
                 height: window.innerHeight || undefined,
-            }
+            };
         }
     }
 
@@ -17,10 +17,10 @@ export default function useWindowSize() {
             setWindowSize(getSize());
         }
 
-        window.addEventListener('resize', handleResize);
+        window.addEventListener("resize", handleResize);
         handleResize();
 
-        return () => window.removeEventListener('resize', handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     return windowSize;

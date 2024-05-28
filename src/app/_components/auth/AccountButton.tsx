@@ -41,11 +41,7 @@ export default function AccountButton({ user }: AccountButtonProps) {
                         <Text className="text-sm text-gray-500">{user.id}</Text>
                         <Box className="flex justify-end">
                             <Link href="/logout">
-                                <Button
-                                    variant={"surface"}
-                                >
-                                    Log out
-                                </Button>
+                                <Button variant={"surface"}>Log out</Button>
                             </Link>
                         </Box>
                     </Flex>
