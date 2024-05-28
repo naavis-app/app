@@ -33,10 +33,10 @@ export default function Page() {
     return (
         <div
             className="flex h-full w-full flex-1 flex-col items-center 
-        justify-center overflow-scroll"
+        justify-center overflow-scroll mt-20"
         >
-            <div className="w-[400px]">
-                <Card size={"4"} variant="surface" style={{ width: "400px" }}>
+            <div className="w-[300px] md:w-[400px]">
+                <Card size={"4"} variant="surface" className="w-[300px] md:w-[400px]">
                     <Heading size={"6"} mb="6">
                         Create an Account
                     </Heading>
@@ -105,7 +105,7 @@ export default function Page() {
                         <Flex justify="end" gap={"3"} mt={"6"}>
                             <NextLink href="/sign-in">
                                 <Button size={"2"} variant="soft">
-                                    I already have an account
+                                    Sign-in
                                 </Button>
                             </NextLink>
                             <Button size={"2"} variant="solid">

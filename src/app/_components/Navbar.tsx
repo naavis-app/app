@@ -51,7 +51,7 @@ export default function Navbar() {
                         >
                             <ThemeToggle />
 
-                            {width > 1024 ? (
+                            {width > 768 ? (
                                 <>
                                     {!user?.id ? (
                                         <Link
