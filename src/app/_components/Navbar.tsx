@@ -10,10 +10,12 @@ import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
 import HamburgerLogo from "./HamburgerLogo";
 import useWindowSize from "../hooks/useWindowSize";
+import { useState } from "react";
 
 export default function Navbar() {
     const [user, setUser] = useAtom(userAtom);
-    const { width } = useWindowSize();
+    const width = useWindowSize().width;
+    const [isMounted, setIsMounted] = useState(false);
 
     async function fetchUser() {
         console.log("fetching user");
@@ -25,15 +27,32 @@ export default function Navbar() {
 
     useEffect(() => {
         fetchUser();
+        setIsMounted(true);
     }, []);
 
-    if(width === undefined) {
-        return null;
+    if(!isMounted) {
+        return (
+            <nav className="fixed z-50 flex w-full select-none p-4">
+                <Card className="w-full" variant={"classic"}>
+                    <Flex justify={"between"}>
+                        <Link href="/" className="hover:no-underline">
+                            <Text className="text-2xl font-bold text-blue-500 hover:no-underline">
+                                Location App
+                            </Text>
+                        </Link>
+                        <div className="flex flex-row items-center justify-center gap-2 text-white">
+                            <ThemeToggle />
+                            <p className="font-bold">Loading...</p>
+                        </div>
+                    </Flex>
+                </Card>
+            </nav>
+        );
     }
 
     return (
         <>
-            <div className="fixed z-50 flex w-full select-none p-4">
+            <nav className="fixed z-50 flex w-full select-none p-4">
                 <Card className="w-full" variant={"classic"}>
                     <Flex justify={"between"}>
                         <Link href="/" className="hover:no-underline">
@@ -47,11 +66,11 @@ export default function Navbar() {
 
                         <div
                             className="flex flex-row items-center justify-center 
-                gap-2 text-white"
+                            gap-2 text-white"
                         >
                             <ThemeToggle />
 
-                            {width > 768 ? (
+                            {width! > 768 ? (
                                 <>
                                     {!user?.id ? (
                                         <Link
@@ -173,7 +192,7 @@ export default function Navbar() {
                         </div>
                     </Flex>
                 </Card>
-            </div>
+            </nav>
         </>
     );
 }
