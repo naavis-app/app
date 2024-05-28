@@ -27,6 +27,10 @@ export default function Navbar() {
         fetchUser();
     }, []);
 
+    if(width === undefined) {
+        return null;
+    }
+
     return (
         <>
             <div className="fixed z-50 flex w-full select-none p-4">
@@ -105,7 +109,7 @@ export default function Navbar() {
                                         </Link>
                                     )}
                                 </>
-                            ): (
+                            ) : (
                                 <Popover.Root>
                                     <Popover.Trigger>
                                             <button aria-label="Hamburger Menu" 
