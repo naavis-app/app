@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 
 export default function useWindowSize() {
     function getSize() {
-        return {
-            width: window.innerWidth || undefined,
-            height: window.innerHeight || undefined,
+        if(typeof window !== 'undefined') {
+            return {
+                width: window.innerWidth || undefined,
+                height: window.innerHeight || undefined,
+            }
         }
     }
 
