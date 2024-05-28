@@ -12,6 +12,7 @@ import {
     Button,
 } from "@radix-ui/themes";
 import { DatabaseUser, User } from "lucia";
+import Link from "next/link";
 import { signOut } from "~/server/lib/auth";
 interface AccountButtonProps {
     user: User;
@@ -39,12 +40,9 @@ export default function AccountButton({ user }: AccountButtonProps) {
                         </Text>
                         <Text className="text-sm text-gray-500">{user.id}</Text>
                         <Box className="flex justify-end">
-                            <Button
-                                variant={"surface"}
-                                onClick={() => signOut()}
-                            >
-                                Sign out
-                            </Button>
+                            <Link href="/logout">
+                                <Button variant={"surface"}>Log out</Button>
+                            </Link>
                         </Box>
                     </Flex>
                 </Popover.Content>
