@@ -27,19 +27,10 @@ import {
     IconButton,
     Text,
 } from "@radix-ui/themes";
-import AccountButton from "../auth/AccountButton";
-import { validateRequest } from "~/server/lib/auth";
+
 import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
-import Link from "next/link";
 import SideNavItem from "./SideNavItem";
-
-const paths = [
-    { label: "Dashboard", path: "/dashboard" },
-    { label: "Map", path: "/map" },
-    { label: "Settings", path: "/settings" },
-    { label: "Logout", path: "/logout" },
-];
 
 export default function SideNav() {
     const [user] = useAtom(userAtom);
@@ -82,21 +73,21 @@ export default function SideNav() {
                         <SideNavItem
                             icon={<HomeIcon />}
                             url={"/dashboard"}
-                            label={"Dashboard"}
+                            label={"Home"}
                         />
                         <SideNavItem
                             icon={<GlobeIcon />}
-                            url={"/map"}
+                            url={"/dashboard/map"}
                             label={"Map"}
                         />
                         <SideNavItem
                             icon={<CubeIcon />}
-                            url={"/devices"}
+                            url={"/dashboard/devices"}
                             label={"Devices"}
                         />
                         <SideNavItem
                             icon={<GearIcon />}
-                            url={"/settings"}
+                            url={"/dashboard/settings"}
                             label={"Settings"}
                         />
                         <SideNavItem

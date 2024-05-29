@@ -4,7 +4,7 @@ import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 import { env } from "~/env";
 
-export default function DashboardHome() {
+export default function DashboardMap() {
 	const [position, setPosition] = useState<google.maps.LatLngLiteral>({
 		lat: 0,
 		lng: 0,
@@ -23,6 +23,19 @@ export default function DashboardHome() {
 	});
 
 	return <>
-		<p>Dashboard home!!!</p>
+		<APIProvider apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
+			<Map
+				mapId={"7342a481321c1609"}
+				defaultCenter={position}
+				center={position}
+				defaultZoom={8}
+				streetViewControl={false}
+			>
+				<AdvancedMarker
+					position={position}
+					title={"test"}
+				/>
+			</Map>
+		</APIProvider>
 	</>
 }
