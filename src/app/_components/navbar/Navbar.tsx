@@ -74,7 +74,7 @@ export default function Navbar() {
                             {width! > 768 ? (
                                 <>
                                     {!user?.id ? (
-                                        <SignInButton xPadding={4} />
+                                        <SignInButton xPaddingClass="px-4" />
                                     ) : (
                                         <AccountButton user={user} />
                                     )}
@@ -97,7 +97,7 @@ export default function Navbar() {
                                     </Popover.Trigger>
                                     <Popover.Content className="flex flex-col space-y-6">
                                         {!user?.id ? (
-                                            <SignInButton xPadding={8} />
+                                            <SignInButton xPaddingClass="px-8" />
                                         ) : (
                                             <AccountButton user={user} />
                                         )}
