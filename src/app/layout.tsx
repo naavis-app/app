@@ -5,7 +5,7 @@ import { GeistSans } from "geist/font/sans";
 import { TRPCReactProvider } from "~/trpc/react";
 
 import "@radix-ui/themes/styles.css";
-import Navbar from "./_components/Navbar";
+import Navbar from "./_components/navbar/Navbar";
 import { Providers } from "./providers";
 
 export const metadata = {

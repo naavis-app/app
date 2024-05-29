@@ -7,7 +7,7 @@ const hexColors = {
     inherit: "none",
 } as const;
 
-export default function HamburgerLogo() {
+export default function HamburgerIcon() {
     const [theme, setTheme] = useAtom(themeAtom);
 
     return (
