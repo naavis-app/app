@@ -1,8 +1,4 @@
-
-import {
-    Link,
-    Text,
-} from '@radix-ui/themes';
+import { Link, Text } from "@radix-ui/themes";
 
 export default function Logo() {
     return (

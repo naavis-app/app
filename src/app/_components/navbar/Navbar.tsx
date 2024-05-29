@@ -42,7 +42,7 @@ export default function Navbar() {
         setIsMounted(true);
     }, []);
 
-    if(!isMounted) {
+    if (!isMounted) {
         return (
             <nav className="fixed z-50 flex w-full select-none p-4">
                 <Card className="w-full" variant={"classic"}>

@@ -1,11 +1,8 @@
-import { Link, Text } from '@radix-ui/themes';
+import { Link, Text } from "@radix-ui/themes";
 
 export default function GetStartedButton() {
     return (
-        <Link
-            href="/sign-up"
-            className="hover:no-underline"
-        >
+        <Link href="/sign-up" className="hover:no-underline">
             <Text
                 className="rounded-md border-2 
                 border-blue-500 
