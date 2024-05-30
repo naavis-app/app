@@ -2,11 +2,17 @@
 
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Card, Heading, Box, Text } from '@radix-ui/themes';
+import { 
+    Card, 
+    Heading, 
+    Box, 
+    Text,
+    Flex,
+    Button,
+} from '@radix-ui/themes';
 
 export default function Page() {
     const [file, setFile] = useState(null);
-    const [uploading, setUploading] = useState(false);
 
     const handleFileChange = (e: any) => {
         setFile(e.target.files[0]);
@@ -17,7 +23,6 @@ export default function Page() {
             toast.error("You must upload a file!");
         }
 
-        setUploading(true);
         const imageFormData = new FormData();
         imageFormData.append("file", file!);
 
@@ -29,10 +34,33 @@ export default function Page() {
 
             const data = await response.json();
             console.log(data.status);
-            setUploading(false);
+
+            if(data.success) {
+                toast.success('Image file uploaded successfully!')
+            } else {
+                toast.error('Image file upload failed!');
+            }
         } catch (error: any) {
-            toast.error(error);
-            setUploading(false);
+            toast.error(error.message);
+        }
+    }
+
+    const handleSubmitDefault = async (e: any) => {
+        try {
+            const response = await fetch('/api/upload-d', {
+                method: "POST",
+            });
+
+            const data = await response.json();
+            console.log(data.status);
+
+            if(data.success) {
+                toast.success('Default file uploaded successfully!')
+            } else {
+                toast.error('Default file upload failed!');
+            }
+        } catch (error: any) {
+            toast.error(error.message);
         }
     }
 
@@ -47,14 +75,20 @@ export default function Page() {
                 <Heading size={"6"} mb="6">
                     Upload a Profile Picture
                 </Heading>
-                <Box mb={"5"} position="relative">
-                    <Text size={"2"} weight="medium" mb={"1"}>
-                        Profile Picture
-                    </Text>
-                    <input type="file" accept="image/*" onChange={handleFileChange} />
-                </Box>
+                <form action={handleSubmit}>
+                    <Box mb={"5"} position="relative">
+                        <input type="file" accept="image/*" onChange={handleFileChange} />
+                    </Box>
+                    <Flex justify="end" gap={"3"} mt={"6"}>
+                            <Button type="button" size={"2"} variant="soft" onClick={handleSubmitDefault}>
+                                Keep Default
+                            </Button>
+                            <Button size={"2"} variant="solid" >
+                                Continue
+                            </Button>
+                    </Flex>
+                </form>
             </Card>
-
         </div>
     );
 }

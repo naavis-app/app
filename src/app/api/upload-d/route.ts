@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { randInt } from "~/server/lib/googleauth";
-import { redirect } from 'next/navigation';
+import path from "path";
+import fs from 'fs';
 
 const s = new S3Client({
     region: process.env.AWS_S3_LOCATION,
@@ -13,11 +14,10 @@ const s = new S3Client({
 
 async function uploadFileToS3(file: any, fileName: any, mimeType: string) {
     const fileBuffer = file;
-    fileName = fileName + randInt(51).toString();
 
     const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key: `${fileName}`,
+        Key: `${fileName}-${randInt(51)}`,
         Body: fileBuffer,
         ContentType: mimeType
     }
@@ -31,16 +31,12 @@ async function uploadFileToS3(file: any, fileName: any, mimeType: string) {
 
 export async function POST(request: any) {
     try {
-        const formData = await request.formData();
-        const file = formData.get('file');
+        const filePath = path.join(process.cwd(), 'public', 'boat.jpg');
+        const fileBuffer = fs.readFileSync(filePath);
+        const mimeType = 'jpeg';
+        const fileName = 'boat.jpeg';
 
-        if(!file) {
-            return NextResponse.json({ error: "file is required" }, { status: 400 });
-        }
-
-        const buffer = Buffer.from(await file.arrayBuffer());
-        const mimeType = file.type;
-        const objectURL = await uploadFileToS3(buffer, file.name, mimeType);
+        const objectURL = await uploadFileToS3(fileBuffer, fileName, mimeType);
 
         return NextResponse.json({ success: true, objectURL })
     } catch (error: any) {

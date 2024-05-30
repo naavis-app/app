@@ -14,8 +14,8 @@ export default function Page() {
             className="flex h-full w-full flex-1 flex-col
         items-center justify-center overflow-scroll"
         >
-            <div className="w-[400px]">
-                <Card size={"4"} variant="surface" style={{ width: "400px" }}>
+            <div className="w-[300px] md:w-[400px]">
+                <Card size={"4"} variant="surface" className="w-[300px] md:w-[400px]">
                     <Heading size={"6"} mb="6">
                         Enter your email
                     </Heading>
