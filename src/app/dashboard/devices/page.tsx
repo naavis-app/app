@@ -40,7 +40,7 @@ const devices = [
     },
     {
         name: "Device 4",
-        type: "Desktop",
+        type: "Smartwatch",
         id: "4",
         lastUpdated: new Date(),
         latitude: 50,
@@ -87,7 +87,7 @@ export default function DashboardDevices() {
                 <Text size={"8"} weight={"bold"}>
                     Device Manager
                 </Text>
-                <Text size={"4"}>Track and manage all your devices</Text>
+                <Text size={"4"} color="gray">Track and manage all the devices connected to your account</Text>
             </Flex>
 
             <Flex
@@ -131,32 +131,16 @@ export default function DashboardDevices() {
             </Flex>
 
             <Card className="mt-4">
-                <Table.Root>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.ColumnHeaderCell>
-                                Name
-                            </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>
-                                Location
-                            </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>
-                                Last Updated
-                            </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>
-                                Type
-                            </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>
-                                Actions
-                            </Table.ColumnHeaderCell>
-                        </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                        {devices.map((device) => (
-                            <DeviceRow device={device} key={device.id} />
-                        ))}
-                    </Table.Body>
-                </Table.Root>
+                {devices.map((device) => (
+                    <DeviceRow device={device} key={device.id} />
+                ))}
+            </Card>
+
+            {
+                /* TODO: PAGINATION */
+            }
+            <Card className="mt-4">
+
             </Card>
         </>
     );
