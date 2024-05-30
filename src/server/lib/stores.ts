@@ -14,4 +14,4 @@ interface DatabaseUserAttributes {
     id?: string,
     username?: string,
     profile_pic?: string,
-}
+} // defines types to mitigate SEVERAL errors with this 
