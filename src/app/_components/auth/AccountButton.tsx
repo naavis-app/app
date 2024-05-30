@@ -14,11 +14,14 @@ import {
 import { DatabaseUser, User } from "lucia";
 import Link from "next/link";
 import { signOut } from "~/server/lib/auth";
+import getConfig from "next/config";
 interface AccountButtonProps {
     user: User;
 }
 
 export default function AccountButton({ user }: AccountButtonProps) {
+    const BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME;
+
     return (
         <>
             <Popover.Root>
@@ -26,9 +29,10 @@ export default function AccountButton({ user }: AccountButtonProps) {
                     <div>
                         <Avatar
                             size="3"
-                            src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
+                            src={user.profile_pic || 
+                                "https://i.imgur.com/NgKWNj3.jpg" }
                             radius="full"
-                            fallback={"A"}
+                            fallback={'A'}
                             className="border-2 border-blue-400 p-[2px] shadow-md hover:cursor-pointer dark:border-red-400"
                         />
                     </div>

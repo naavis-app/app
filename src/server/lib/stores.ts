@@ -5,7 +5,7 @@ this is done using global state management from jotai.
 check https://jotai.org/docs/introduction for more information. */
 
 import { atom } from "jotai";
-import { User } from "lucia";
+import { User } from "lucia";    
 
 export const themeAtom = atom<"light" | "dark" | "inherit">("dark");
 export const userAtom = atom<null | User>(null);

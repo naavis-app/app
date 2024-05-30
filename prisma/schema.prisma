@@ -16,6 +16,7 @@ model User {
   lastname    String?
   email       String?   @unique
   github_id   Int?      @unique
+  profile_pic String?   @unique
   devices     Device[]  @relation("UserDevices")
   ownedGroups Group[]   @relation("GroupOwner")
   sessions    Session[] @relation("UserSessions")

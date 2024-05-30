@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { randInt } from "~/server/lib/googleauth";
-import { redirect } from 'next/navigation';
+import { db } from "~/server/db";
 
 const s = new S3Client({
     region: process.env.AWS_S3_LOCATION,
@@ -33,6 +33,7 @@ export async function POST(request: any) {
     try {
         const formData = await request.formData();
         const file = formData.get('file');
+        const userId = formData.get('userId') as string;
 
         if(!file) {
             return NextResponse.json({ error: "file is required" }, { status: 400 });
@@ -42,7 +43,16 @@ export async function POST(request: any) {
         const mimeType = file.type;
         const objectURL = await uploadFileToS3(buffer, file.name, mimeType);
 
-        return NextResponse.json({ success: true, objectURL })
+        await db.user.update({
+            where: {
+                id: userId
+            },
+            data: {
+                profile_pic: objectURL
+            },
+        });
+
+        return NextResponse.json({ success: true })
     } catch (error: any) {
         return NextResponse.json({ error: "Error uploading file!: " + error })
     }

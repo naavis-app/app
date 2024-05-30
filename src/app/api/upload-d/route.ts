@@ -3,6 +3,7 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { randInt } from "~/server/lib/googleauth";
 import path from "path";
 import fs from 'fs';
+import { db } from "~/server/db";
 
 const s = new S3Client({
     region: process.env.AWS_S3_LOCATION,
@@ -14,10 +15,11 @@ const s = new S3Client({
 
 async function uploadFileToS3(file: any, fileName: any, mimeType: string) {
     const fileBuffer = file;
+    fileName = fileName + randInt(51).toString();
 
     const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key: `${fileName}-${randInt(51)}`,
+        Key: `${fileName}`,
         Body: fileBuffer,
         ContentType: mimeType
     }
@@ -31,12 +33,23 @@ async function uploadFileToS3(file: any, fileName: any, mimeType: string) {
 
 export async function POST(request: any) {
     try {
+        const formData = await request.formData();
+        const userId = formData.get('userId') as string;
         const filePath = path.join(process.cwd(), 'public', 'boat.jpg');
         const fileBuffer = fs.readFileSync(filePath);
         const mimeType = 'jpeg';
         const fileName = 'boat.jpeg';
 
         const objectURL = await uploadFileToS3(fileBuffer, fileName, mimeType);
+
+        await db.user.update({
+            where: {
+                id: userId
+            },
+            data: {
+                profile_pic: objectURL
+            },
+        });
 
         return NextResponse.json({ success: true, objectURL })
     } catch (error: any) {

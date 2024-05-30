@@ -27,6 +27,7 @@ const lucia = new Lucia(adapter, {
     getUserAttributes: (attributes: DatabaseUserAttributes) => {
         return {
             username: attributes.username,
+            profile_pic: attributes.profile_pic,
         };
     },
 });
@@ -41,6 +42,7 @@ declare module "lucia" {
 interface DatabaseUserAttributes {
     github_id?: number;
     username: string;
+    profile_pic?: string;
 }
 
 export async function login(formData: FormData): Promise<ActionResult> {
@@ -188,7 +190,7 @@ export async function signup(formData: FormData): Promise<ActionResult> {
         sessionCookie.value,
         sessionCookie.attributes,
     );
-    return redirect("/sign-in");
+    return redirect(`/sign-up/picture`);
 }
 
 export async function signOut(): Promise<ActionResult> {

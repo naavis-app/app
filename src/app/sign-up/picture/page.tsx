@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { 
     Card, 
@@ -10,13 +10,27 @@ import {
     Flex,
     Button,
 } from '@radix-ui/themes';
+import { useAtom } from "jotai";
+import { userAtom } from "~/server/lib/stores";
+import { validateRequest } from "~/server/lib/auth";
+import { redirect } from "next/navigation";
 
 export default function Page() {
+    const [user, setUser] = useAtom(userAtom);
     const [file, setFile] = useState(null);
+
+    async function fetchUser() {
+        const data = await validateRequest();
+        setUser(data.user);
+    }
+
+    useEffect(() => {
+        fetchUser();
+    }, []);
 
     const handleFileChange = (e: any) => {
         setFile(e.target.files[0]);
-    }
+    };
 
     const handleSubmit = async (e: any) => {
         if(!file) {
@@ -25,6 +39,7 @@ export default function Page() {
 
         const imageFormData = new FormData();
         imageFormData.append("file", file!);
+        imageFormData.append("userId", user!.id);
 
         try {
             const response = await fetch('/api/upload', {
@@ -36,7 +51,8 @@ export default function Page() {
             console.log(data.status);
 
             if(data.success) {
-                toast.success('Image file uploaded successfully!')
+                toast.success('Image file uploaded successfully!');
+                return redirect('/sign-in');
             } else {
                 toast.error('Image file upload failed!');
             }
@@ -46,16 +62,21 @@ export default function Page() {
     }
 
     const handleSubmitDefault = async (e: any) => {
+        const imageFormData = new FormData();
+        imageFormData.append("userId", user!.id);
+
         try {
             const response = await fetch('/api/upload-d', {
                 method: "POST",
+                body: imageFormData
             });
 
             const data = await response.json();
             console.log(data.status);
 
             if(data.success) {
-                toast.success('Default file uploaded successfully!')
+                toast.success('Default file uploaded successfully!');
+                return redirect('/sign-in');
             } else {
                 toast.error('Default file upload failed!');
             }
