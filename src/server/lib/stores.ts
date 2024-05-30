@@ -5,13 +5,13 @@ this is done using global state management from jotai.
 check https://jotai.org/docs/introduction for more information. */
 
 import { atom } from "jotai";
-import { User } from "lucia";    
+import { User } from "lucia";
 
 export const themeAtom = atom<"light" | "dark" | "inherit">("dark");
 export const userAtom = atom<null | DatabaseUserAttributes>(null);
 
 interface DatabaseUserAttributes {
-    id?: string,
-    username?: string,
-    profile_pic?: string,
-} // defines types to mitigate SEVERAL errors with this 
+    id?: string;
+    username?: string;
+    profile_pic?: string;
+} // defines types to mitigate SEVERAL errors with this

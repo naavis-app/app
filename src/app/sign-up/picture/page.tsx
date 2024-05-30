@@ -2,18 +2,11 @@
 
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { 
-    Card, 
-    Heading, 
-    Box, 
-    Text,
-    Flex,
-    Button,
-} from '@radix-ui/themes';
+import { Card, Heading, Box, Text, Flex, Button } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
 import { validateRequest } from "~/server/lib/auth";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export default function Page() {
     const router = useRouter();
@@ -34,61 +27,63 @@ export default function Page() {
     };
 
     const handleSubmit = async (e: any) => {
-        if(!file) {
+        if (!file) {
             toast.error("You must upload a file!");
         }
 
         const imageFormData = new FormData();
         imageFormData.append("file", file!);
-        imageFormData.append("userId", user?.id ?? '');
+        imageFormData.append("userId", user?.id ?? "");
 
         try {
-            const response = await fetch('/api/upload', {
+            const response = await fetch("/api/upload", {
                 method: "POST",
-                body: imageFormData
+                body: imageFormData,
             });
 
             const data = await response.json();
             console.log(data.status);
 
-            if(data.success) {
-                toast.success('Image file uploaded successfully!');
-                router.push('/dashboard');
+            if (data.success) {
+                toast.success("Image file uploaded successfully!");
+                router.push("/dashboard");
             } else {
-                toast.error('Image file upload failed!');
+                toast.error("Image file upload failed!");
             }
         } catch (error: any) {
             toast.error(error.message);
         }
-    }
+    };
 
     const handleSubmitDefault = async (e: any) => {
         const imageFormData = new FormData();
-        imageFormData.append("userId", user?.id ?? '');
+        imageFormData.append("userId", user?.id ?? "");
 
         try {
-            const response = await fetch('/api/upload-d', {
+            const response = await fetch("/api/upload-d", {
                 method: "POST",
-                body: imageFormData
+                body: imageFormData,
             });
 
             const data = await response.json();
             console.log(data.status);
 
-            if(data.success) {
-                toast.success('Default file uploaded successfully!');
-                router.push('/dashboard');
+            if (data.success) {
+                toast.success("Default file uploaded successfully!");
+                router.push("/dashboard");
             } else {
-                toast.error('Default file upload failed!');
+                toast.error("Default file upload failed!");
             }
         } catch (error: any) {
             toast.error(error.message);
         }
-    }
+    };
 
     return (
-        <div className="mt-20 flex h-full w-full flex-1 flex-col 
-        items-center justify-center overflow-scroll">
+        <div
+            className="mt-20 flex h-full w-full flex-1 flex-col 
+        items-center justify-center overflow-scroll"
+        >
             <Card
                 size={"4"}
                 variant="surface"
@@ -99,15 +94,24 @@ export default function Page() {
                 </Heading>
                 <form action={handleSubmit}>
                     <Box mb={"5"} position="relative">
-                        <input type="file" accept="image/*" onChange={handleFileChange} />
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                        />
                     </Box>
                     <Flex justify="end" gap={"3"} mt={"6"}>
-                            <Button type="button" size={"2"} variant="soft" onClick={handleSubmitDefault}>
-                                Keep Default
-                            </Button>
-                            <Button size={"2"} variant="solid" >
-                                Continue
-                            </Button>
+                        <Button
+                            type="button"
+                            size={"2"}
+                            variant="soft"
+                            onClick={handleSubmitDefault}
+                        >
+                            Keep Default
+                        </Button>
+                        <Button size={"2"} variant="solid">
+                            Continue
+                        </Button>
                     </Flex>
                 </form>
             </Card>

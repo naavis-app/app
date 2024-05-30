@@ -1,6 +1,10 @@
 import { Link, Text } from "@radix-ui/themes";
 
-export default function SignInButton({ xPaddingClass }: { xPaddingClass: string }) {
+export default function SignInButton({
+    xPaddingClass,
+}: {
+    xPaddingClass: string;
+}) {
     return (
         <Link href="/sign-in" className="hover:no-underline">
             <Text

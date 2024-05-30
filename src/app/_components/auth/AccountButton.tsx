@@ -29,10 +29,12 @@ export default function AccountButton({ user }: AccountButtonProps) {
                     <div>
                         <Avatar
                             size="3"
-                            src={user.profile_pic || 
-                                "https://i.imgur.com/NgKWNj3.jpg" } // when the user has yet to upload a profile picture
+                            src={
+                                user.profile_pic ||
+                                "https://i.imgur.com/NgKWNj3.jpg"
+                            } // when the user has yet to upload a profile picture
                             radius="full"
-                            fallback={'A'}
+                            fallback={"A"}
                             className="border-2 border-blue-400 p-[2px] shadow-md hover:cursor-pointer dark:border-red-400"
                         />
                     </div>
@@ -56,7 +58,7 @@ export default function AccountButton({ user }: AccountButtonProps) {
 }
 
 interface DatabaseUserAttributes {
-    id?: string,
-    username?: string,
-    profile_pic?: string,
+    id?: string;
+    username?: string;
+    profile_pic?: string;
 }
