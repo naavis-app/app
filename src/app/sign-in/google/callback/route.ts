@@ -69,6 +69,7 @@ export async function GET(request: Request): Promise<Response> {
         const firstName = googleUser.given_name;
         const lastName = googleUser.family_name;
         const userName = createUsername(firstName, lastName);
+        const profilePic = googleUser.picture;
         const userId = generateIdFromEntropySize(10);
 
         await db.user.create({
@@ -78,6 +79,7 @@ export async function GET(request: Request): Promise<Response> {
                 firstname: firstName,
                 lastname: lastName,
                 email: googleUser.email,
+                profile_pic: profilePic,
             },
         });
 
@@ -111,4 +113,5 @@ interface GoogleUser {
     email: string;
     given_name: string;
     family_name: string;
+    picture?: string;
 }

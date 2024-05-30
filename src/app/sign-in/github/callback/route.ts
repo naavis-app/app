@@ -61,6 +61,7 @@ export async function GET(request: Request): Promise<Response> {
         };
 
         const { firstName, lastName } = splitName(githubUser.name || "");
+        const profilePic = `https://github.com/${githubUser.login}.png`;
         const userId = generateIdFromEntropySize(10);
 
         await db.user.create({
@@ -70,6 +71,7 @@ export async function GET(request: Request): Promise<Response> {
                 username: githubUser.login,
                 firstname: firstName,
                 lastname: lastName,
+                profile_pic: profilePic,
             },
         });
 
@@ -102,6 +104,7 @@ interface GitHubUser {
     id: string;
     login: string;
     name: string;
+    picture: string;
 }
 
 // ! TODO: validate requests/signout
