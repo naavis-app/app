@@ -1,3 +1,7 @@
+/* same as the other upload endpoint but only uploads a default image
+in the event that the user does not want to add a profile picture
+*/
+
 import { NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { randInt } from "~/server/lib/googleauth";

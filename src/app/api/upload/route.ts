@@ -1,3 +1,7 @@
+/* uploads a file that is uploaded to a form to amazon s3, where it is stored,
+and the link to the image is stored on the database for use in our application.
+*/
+
 import { NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { randInt } from "~/server/lib/googleauth";

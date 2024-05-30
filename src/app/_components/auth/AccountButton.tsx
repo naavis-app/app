@@ -30,7 +30,7 @@ export default function AccountButton({ user }: AccountButtonProps) {
                         <Avatar
                             size="3"
                             src={user.profile_pic || 
-                                "https://i.imgur.com/NgKWNj3.jpg" }
+                                "https://i.imgur.com/NgKWNj3.jpg" } // when the user has yet to upload a profile picture
                             radius="full"
                             fallback={'A'}
                             className="border-2 border-blue-400 p-[2px] shadow-md hover:cursor-pointer dark:border-red-400"
@@ -45,7 +45,7 @@ export default function AccountButton({ user }: AccountButtonProps) {
                         <Text className="text-sm text-gray-500">{user.id}</Text>
                         <Box className="flex justify-end">
                             <Link href="/logout">
-                                <Button variant={"surface"}>Log out</Button>
+                                <Button variant={"surface"}>Log Out</Button>
                             </Link>
                         </Box>
                     </Flex>
