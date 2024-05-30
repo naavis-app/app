@@ -41,7 +41,7 @@ export default function deviceRow({ device }: DeviceRowProps) {
                         <Icon icon={icon} width={24} height={24} />
                         <Flex direction={"column"}>
                             <Text>{device.name}</Text>
-                            <Text size={"2"}>{`Last updated a million years ago`}</Text>
+                            <Text size={"2"} color={"gray"}>{`Last updated a million years ago`}</Text>
                         </Flex>
                     </Flex>
                 </Box>
