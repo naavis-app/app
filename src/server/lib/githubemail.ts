@@ -39,7 +39,6 @@ export async function emailSubmit(formData: FormData): Promise<EmailProps> {
     await db.user.update({
         where: {
             id: user?.id,
-            username: user?.username,
         },
         data: {
             email: email,
