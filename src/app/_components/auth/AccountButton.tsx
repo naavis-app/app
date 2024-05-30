@@ -16,7 +16,7 @@ import Link from "next/link";
 import { signOut } from "~/server/lib/auth";
 import getConfig from "next/config";
 interface AccountButtonProps {
-    user: User;
+    user: DatabaseUserAttributes;
 }
 
 export default function AccountButton({ user }: AccountButtonProps) {
@@ -53,4 +53,10 @@ export default function AccountButton({ user }: AccountButtonProps) {
             </Popover.Root>
         </>
     );
+}
+
+interface DatabaseUserAttributes {
+    id?: string,
+    username?: string,
+    profile_pic?: string,
 }

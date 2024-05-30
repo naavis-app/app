@@ -8,4 +8,10 @@ import { atom } from "jotai";
 import { User } from "lucia";    
 
 export const themeAtom = atom<"light" | "dark" | "inherit">("dark");
-export const userAtom = atom<null | User>(null);
+export const userAtom = atom<null | DatabaseUserAttributes>(null);
+
+interface DatabaseUserAttributes {
+    id?: string,
+    username?: string,
+    profile_pic?: string,
+}
