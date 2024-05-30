@@ -13,9 +13,10 @@ import {
 import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
 import { validateRequest } from "~/server/lib/auth";
-import { redirect } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+    const router = useRouter();
     const [user, setUser] = useAtom(userAtom);
     const [file, setFile] = useState(null);
 
@@ -52,7 +53,7 @@ export default function Page() {
 
             if(data.success) {
                 toast.success('Image file uploaded successfully!');
-                return redirect('/sign-in');
+                router.push('/dashboard');
             } else {
                 toast.error('Image file upload failed!');
             }
@@ -76,7 +77,7 @@ export default function Page() {
 
             if(data.success) {
                 toast.success('Default file uploaded successfully!');
-                return redirect('/sign-in');
+                router.push('/dashboard');
             } else {
                 toast.error('Default file upload failed!');
             }
