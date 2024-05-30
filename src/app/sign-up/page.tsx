@@ -30,6 +30,7 @@ export default function Page() {
             toast.error(response.error);
         }
     };
+
     return (
         <div
             className="mt-20 flex h-full w-full flex-1 flex-col 

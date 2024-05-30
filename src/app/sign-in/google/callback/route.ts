@@ -8,6 +8,7 @@ import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
 import { db } from "~/server/db";
+import { randInt } from "~/server/lib/googleauth";
 
 export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url);
@@ -57,10 +58,6 @@ export async function GET(request: Request): Promise<Response> {
                 },
             });
         }
-
-        const randInt = (max: number) => {
-            return Math.floor(Math.random() * max);
-        };
 
         const createUsername = (
             firstName: string,

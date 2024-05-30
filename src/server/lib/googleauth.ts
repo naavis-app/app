@@ -48,3 +48,7 @@ interface DatabaseUserAttributes {
     given_name?: string;
     family_name?: string;
 }
+
+export const randInt = (max: number) => {
+    return Math.floor(Math.random() * max);
+};
