@@ -11,7 +11,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
         <>
             <div className="relative flex grow gap-4 px-4 pb-4 pt-[6rem]">
                 <SideNav />
-                <Box className="w-full rounded-md p-4">{children}</Box>
+                <Box className="w-full rounded-md p-4 relative ">{children}</Box>
             </div>
         </>
     );

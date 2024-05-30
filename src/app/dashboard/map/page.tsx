@@ -2,6 +2,7 @@
 
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
+import GroupSelector from "~/app/_components/dashboard/GroupSelector";
 import { env } from "~/env";
 
 export default function DashboardMap() {
@@ -24,6 +25,7 @@ export default function DashboardMap() {
 
     return (
         <>
+            <GroupSelector />
             <APIProvider apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
                 <Map
                     mapId={"7342a481321c1609"}
