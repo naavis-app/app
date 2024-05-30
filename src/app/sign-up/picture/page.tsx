@@ -40,7 +40,7 @@ export default function Page() {
 
         const imageFormData = new FormData();
         imageFormData.append("file", file!);
-        imageFormData.append("userId", user!.id);
+        imageFormData.append("userId", user?.id ?? '');
 
         try {
             const response = await fetch('/api/upload', {
@@ -64,7 +64,7 @@ export default function Page() {
 
     const handleSubmitDefault = async (e: any) => {
         const imageFormData = new FormData();
-        imageFormData.append("userId", user!.id);
+        imageFormData.append("userId", user?.id ?? '');
 
         try {
             const response = await fetch('/api/upload-d', {
