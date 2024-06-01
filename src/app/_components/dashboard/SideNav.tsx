@@ -35,6 +35,8 @@ import SideNavItem from "./SideNavItem";
 export default function SideNav() {
     const [user] = useAtom(userAtom);
 
+    // same thing below for the user id (check AccountButton.tsx).
+    // can be commented out for debugging
     return (
         <>
             <Box className="box-border w-full max-w-[300px]">
@@ -63,10 +65,12 @@ export default function SideNav() {
                                 )}
                                 <Flex direction={"column"}>
                                     <Text weight={"bold"}>
-                                        {user ? user.username : "NO USER"}
+                                        {user ? user.firstname + " " + 
+                                            user.lastname : "NO USER"}
                                     </Text>
-                                    <Text>{user ? user.id : "NO USER"}</Text>
-                                </Flex>
+                                    <Text>{user ? user.username : "NO USER"}</Text>
+                                    {/* <Text>{user ? user.id : "NO USER"}</Text> */} 
+                                </Flex> 
                             </Flex>
                         </Card>
 

@@ -11,7 +11,10 @@ export const themeAtom = atom<"light" | "dark" | "inherit">("dark");
 export const userAtom = atom<null | DatabaseUserAttributes>(null);
 
 interface DatabaseUserAttributes {
+    firstname?: string;
+    lastname?: string;
     id?: string;
     username?: string;
     profile_pic?: string;
+    email?: string;
 } // defines types to mitigate SEVERAL errors with this

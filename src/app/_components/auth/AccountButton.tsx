@@ -11,6 +11,7 @@ import {
     Popover,
     Button,
 } from "@radix-ui/themes";
+import * as Separator from '@radix-ui/react-separator';
 import { DatabaseUser, User } from "lucia";
 import Link from "next/link";
 import { signOut } from "~/server/lib/auth";
@@ -48,11 +49,14 @@ export default function AccountButton({ user }: AccountButtonProps) {
                             {user.username}
                         </Text>
                         {/* <Text className="text-sm text-gray-500">{user.id}</Text> */} 
-                        <Box className="flex justify-end">
-                            <Link href="/logout">
-                                <Button variant={"surface"}>Log Out</Button>
+                        <div className="flex flex-row gap-2 justify-end">
+                            <Link href="/edit-account">
+                                <Button variant={"surface"}>Edit Profile</Button>
                             </Link>
-                        </Box>
+                            <Link href="/logout">
+                                <Button variant={"solid"}>Log Out</Button>
+                            </Link>
+                        </div>
                     </Flex>
                 </Popover.Content>
             </Popover.Root>
@@ -65,6 +69,7 @@ interface DatabaseUserAttributes {
     id?: string;
     username?: string;
     profile_pic?: string;
-    firstname: string,
-    lastname: string,
+    firstname?: string,
+    lastname?: string,
+    email?: string;
 }

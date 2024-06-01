@@ -30,6 +30,7 @@ const lucia = new Lucia(adapter, {
             firstname: attributes.firstname,
             lastname: attributes.lastname,
             profile_pic: attributes.profile_pic,
+            email: attributes.email,
         };
     },
 });
