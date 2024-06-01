@@ -1,6 +1,6 @@
 "use client";
 
-import { CaretSortIcon, GridIcon, ListBulletIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon, GridIcon, ListBulletIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import {
     Box,
     Button,
@@ -112,7 +112,13 @@ export default function DashboardDevices() {
                 justify={"between"}
                 className="mt-4"
             >
-                <TextField.Root placeholder={"Search"} />
+                <Box maxWidth={"300px"}>
+                    <TextField.Root placeholder={"Search devices..."} size={"3"}>
+                        <TextField.Slot>
+                            <MagnifyingGlassIcon />
+                        </TextField.Slot>
+                    </TextField.Root>
+                </Box>
 
                 <Flex gap={"2"}>
                     <DropdownMenu.Root>
