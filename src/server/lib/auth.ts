@@ -27,6 +27,8 @@ const lucia = new Lucia(adapter, {
     getUserAttributes: (attributes: DatabaseUserAttributes) => {
         return {
             username: attributes.username,
+            firstname: attributes.firstname,
+            lastname: attributes.lastname,
             profile_pic: attributes.profile_pic,
         };
     },
@@ -42,6 +44,8 @@ declare module "lucia" {
 interface DatabaseUserAttributes {
     github_id?: number;
     username: string;
+    firstname: string,
+    lastname: string,
     profile_pic?: string;
 }
 

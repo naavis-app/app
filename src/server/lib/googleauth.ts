@@ -48,6 +48,8 @@ interface DatabaseUserAttributes {
     given_name?: string;
     family_name?: string;
     profile_pic?: string;
+    firstname: string,
+    lastname: string,
 }
 
 export const randInt = (max: number) => {

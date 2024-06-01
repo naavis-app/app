@@ -42,9 +42,12 @@ export default function AccountButton({ user }: AccountButtonProps) {
                 <Popover.Content sideOffset={5} alignOffset={5}>
                     <Flex gap={"4"} direction="column">
                         <Text className="text-lg font-bold">
+                            {user.firstname}{" "}{user.lastname}
+                        </Text>
+                        <Text className="text-md">
                             {user.username}
                         </Text>
-                        <Text className="text-sm text-gray-500">{user.id}</Text>
+                        {/* <Text className="text-sm text-gray-500">{user.id}</Text> */} 
                         <Box className="flex justify-end">
                             <Link href="/logout">
                                 <Button variant={"surface"}>Log Out</Button>
@@ -55,10 +58,13 @@ export default function AccountButton({ user }: AccountButtonProps) {
             </Popover.Root>
         </>
     );
-}
+} // commented out user id as its probably not a good idea to make that public
+// however for any debugging purposes it can be uncommented
 
 interface DatabaseUserAttributes {
     id?: string;
     username?: string;
     profile_pic?: string;
+    firstname: string,
+    lastname: string,
 }
