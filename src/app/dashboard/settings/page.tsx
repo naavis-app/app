@@ -13,7 +13,6 @@ import {
 } from "@radix-ui/themes";
 import DeviceRow from "~/app/_components/dashboard/DeviceRow";
 
-
 export default function DashboardDevices() {
     return (
         <>
@@ -38,7 +37,11 @@ export default function DashboardDevices() {
                         </Text>
                         <Text size={"4"}>Manage your device settings.</Text>
 
-                        <Flex direction={"row"} justify={"between"} className="mt-4">
+                        <Flex
+                            direction={"row"}
+                            justify={"between"}
+                            className="mt-4"
+                        >
                             <Button variant="outline">Add device</Button>
                             <Button>Save changes</Button>
                         </Flex>
@@ -52,14 +55,16 @@ export default function DashboardDevices() {
                         </Text>
                         <Text size={"4"}>Manage your emergency contacts.</Text>
 
-                        <Flex direction={"row"} justify={"between"} className="mt-4">
+                        <Flex
+                            direction={"row"}
+                            justify={"between"}
+                            className="mt-4"
+                        >
                             <Button variant="outline">Add contact</Button>
                             <Button>Save changes</Button>
                         </Flex>
                     </Flex>
                 </Card>
-
-                
             </Flex>
         </>
     );

@@ -93,7 +93,9 @@ export default function DashboardDevices() {
                 <Text size={"8"} weight={"bold"}>
                     Device Manager
                 </Text>
-                <Text size={"4"} color="gray">Track and manage all the devices connected to your account</Text>
+                <Text size={"4"} color="gray">
+                    Track and manage all the devices connected to your account
+                </Text>
             </Flex>
 
             <Flex
@@ -134,7 +136,10 @@ export default function DashboardDevices() {
                         </DropdownMenu.Content>
                     </DropdownMenu.Root>
 
-                    <SegmentedControl.Root defaultValue="grid" onValueChange={(e) => setViewMode(e)}>
+                    <SegmentedControl.Root
+                        defaultValue="grid"
+                        onValueChange={(e) => setViewMode(e)}
+                    >
                         <SegmentedControl.Item value="grid">
                             <GridIcon />
                         </SegmentedControl.Item>
@@ -145,28 +150,35 @@ export default function DashboardDevices() {
                 </Flex>
             </Flex>
 
-            {
-                viewMode === "grid" ? (
-                    <Flex className="mt-4" direction={"row"} wrap={"wrap"} gap={"4"} >
-                        {devices.map((device) => (
-                            <DeviceRow device={device} key={device.id} viewMode={viewMode} />
-                        ))}
-                    </Flex>
-                ) : (
-                    <Card className="mt-4">
-                        {devices.map((device) => (
-                            <DeviceRow device={device} key={device.id} viewMode={viewMode} />
-                        ))}
-                    </Card>
-                )
-            }
+            {viewMode === "grid" ? (
+                <Flex
+                    className="mt-4"
+                    direction={"row"}
+                    wrap={"wrap"}
+                    gap={"4"}
+                >
+                    {devices.map((device) => (
+                        <DeviceRow
+                            device={device}
+                            key={device.id}
+                            viewMode={viewMode}
+                        />
+                    ))}
+                </Flex>
+            ) : (
+                <Card className="mt-4">
+                    {devices.map((device) => (
+                        <DeviceRow
+                            device={device}
+                            key={device.id}
+                            viewMode={viewMode}
+                        />
+                    ))}
+                </Card>
+            )}
 
-            {
-                /* TODO: PAGINATION */
-            }
-            <Card className="mt-4">
-
-            </Card>
+            {/* TODO: PAGINATION */}
+            <Card className="mt-4"></Card>
         </>
     );
 }
