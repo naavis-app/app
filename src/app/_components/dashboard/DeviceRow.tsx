@@ -1,7 +1,8 @@
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
-import { Pencil1Icon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons";
+import { GearIcon, Pencil1Icon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons";
 import {
     AspectRatio,
+    Badge,
     Box,
     Button,
     Card,
@@ -17,6 +18,7 @@ interface Device {
     id: string;
     type: string;
     lastUpdated: Date;
+    connection: string;
     latitude: number;
     longitude: number;
 }
@@ -81,7 +83,7 @@ export default function deviceRow({ device, viewMode }: DeviceRowProps) {
                             longitude={device.longitude}
                         />
                     </AspectRatio>
-                    <Flex direction={"row"} justify={"center"} align={"center"}>
+                    <Flex direction={"column"}>
                         <Flex direction={"row"} gap={"2"} align={"center"}>
                             <Icon icon={icon} width={24} height={24} />
                             <Flex direction={"column"}>
@@ -92,15 +94,11 @@ export default function deviceRow({ device, viewMode }: DeviceRowProps) {
                                 >{`Last updated a million years ago`}</Text>
                             </Flex>
                         </Flex>
-                        <Flex direction={"row"} gap={"2"}>
+                        <Flex className="mt-2" direction={"row"} gap={"2"} justify={"end"}>
+                            <Badge color={"green"}>{device.connection}</Badge>
+
                             <Button variant={"ghost"}>
-                                <Pencil1Icon />
-                            </Button>
-                            <Button variant={"ghost"}>
-                                <TrashIcon />
-                            </Button>
-                            <Button variant={"ghost"}>
-                                <ReloadIcon />
+                                <GearIcon />
                             </Button>
                         </Flex>
                     </Flex>
