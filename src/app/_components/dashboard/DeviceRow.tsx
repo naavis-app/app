@@ -94,7 +94,7 @@ export default function deviceRow({ device, viewMode }: DeviceRowProps) {
                                 >{`Last updated a million years ago`}</Text>
                             </Flex>
                         </Flex>
-                        <Flex className="mt-2" direction={"row"} gap={"2"} justify={"end"}>
+                        <Flex className="mt-2" direction={"row"} gap={"2"} justify={"between"}>
                             <Badge color={"green"}>{device.connection}</Badge>
 
                             <Button variant={"ghost"}>
