@@ -1,16 +1,20 @@
 "use client";
 
-import { CaretSortIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon, GridIcon, ListBulletIcon } from "@radix-ui/react-icons";
 import {
     Box,
     Button,
     Card,
+    Container,
     DropdownMenu,
     Flex,
+    Grid,
+    SegmentedControl,
     Table,
     Text,
     TextField,
 } from "@radix-ui/themes";
+import { useState } from "react";
 import DeviceRow from "~/app/_components/dashboard/DeviceRow";
 
 const devices = [
@@ -81,6 +85,8 @@ const devices = [
 ];
 
 export default function DashboardDevices() {
+    const [viewMode, setViewMode] = useState("grid");
+
     return (
         <>
             <Flex direction={"column"}>
@@ -127,14 +133,33 @@ export default function DashboardDevices() {
                             </DropdownMenu.Item>
                         </DropdownMenu.Content>
                     </DropdownMenu.Root>
+
+                    <SegmentedControl.Root defaultValue="grid" onValueChange={(e) => setViewMode(e)}>
+                        <SegmentedControl.Item value="grid">
+                            <GridIcon />
+                        </SegmentedControl.Item>
+                        <SegmentedControl.Item value="list">
+                            <ListBulletIcon />
+                        </SegmentedControl.Item>
+                    </SegmentedControl.Root>
                 </Flex>
             </Flex>
 
-            <Card className="mt-4">
-                {devices.map((device) => (
-                    <DeviceRow device={device} key={device.id} />
-                ))}
-            </Card>
+            {
+                viewMode === "grid" ? (
+                    <Flex className="mt-4" direction={"row"} wrap={"wrap"} gap={"4"} >
+                        {devices.map((device) => (
+                            <DeviceRow device={device} key={device.id} viewMode={viewMode} />
+                        ))}
+                    </Flex>
+                ) : (
+                    <Card className="mt-4">
+                        {devices.map((device) => (
+                            <DeviceRow device={device} key={device.id} viewMode={viewMode} />
+                        ))}
+                    </Card>
+                )
+            }
 
             {
                 /* TODO: PAGINATION */
