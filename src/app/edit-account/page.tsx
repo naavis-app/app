@@ -13,11 +13,55 @@ import NextLink from "next/link";
 import toast from 'react-hot-toast';
 import { useAtom } from 'jotai';
 import { userAtom } from '~/server/lib/stores';
+import { useState } from 'react';
 import { validateRequest } from '~/server/lib/auth';
-import { RxPencil1 } from 'react-icons/rx';
+import { useRouter } from 'next/navigation';
+import EditableInput from '../_components/edit-account/EditInput';
+import { edit } from '~/server/lib/auth';
 
 export default function Page() {
     const [user, setUser] = useAtom(userAtom);
+    const [file, setFile] = useState(null);
+    const [toggler, setToggler] = useState(false);
+    const router = useRouter();
+
+    const handleSubmit = async (e: FormData) => {
+        e.append('userId', user?.id ?? "");
+        const response = await edit(e);
+
+        if(response.error) {
+            toast.error(response.error);
+            return;
+        }
+
+        if(file) {
+            const imageFormData = new FormData();
+            imageFormData.append('file', file);
+            imageFormData.append('userId', user?.id ?? "");
+
+            try {
+                const response = await fetch("/api/upload", {
+                    method: "POST",
+                    body: imageFormData,
+                });
+
+                const data = await response.json();
+                console.log(data.status);
+
+                if(data.success) {
+                    toast.success("Image file uploaded successfully!");
+                } else {
+                    toast.error("Image file upload failed!");
+                }
+            } catch (error: any) {
+                toast.error(error.message);
+            }
+        }
+    };
+
+    const handleFileChange = (e: any) => {
+        setFile(e.target.files[0]);
+    }
 
     return (
         <div className='mt-20 h-full w-full
@@ -31,58 +75,33 @@ export default function Page() {
                 <Heading size={"6"} mb="6">
                     Edit Your Account
                 </Heading>
-                <form>
+                <form action={handleSubmit}>
                     <Box mb={"5"}>
                         <Text size={"2"} weight="medium" mb={"1"}>
                             First Name
                         </Text>
-                        <TextField.Root
-                            size={"2"}
-                            variant="surface"
-                            name="firstname"
-                            placeholder="Enter your first name"
-                            value={user?.firstname}
-                            required
-                        />
+                        <EditableInput name="firstname" 
+                            placeholder="first name" />
                     </Box>
                     <Box mb={"5"}>
                         <Text size={"2"} weight="medium" mb={"1"}>
                             Last Name
                         </Text>
-                        <TextField.Root
-                            size={"2"}
-                            variant="surface"
-                            name="lastname"
-                            placeholder="Enter your last name"
-                            value={user?.lastname}
-                            required
-                        />
+                        <EditableInput name="lastname"
+                            placeholder="last name" />
                     </Box>
                     <Box mb={"5"}>
                         <Text size={"2"} weight="medium" mb={"1"}>
                             Email
                         </Text>
-                        <TextField.Root
-                            size={"2"}
-                            variant="surface"
-                            name="email"
-                            placeholder="Enter your email"
-                            value={user?.email}
-                            required
-                        />
+                        <EditableInput name="email" placeholder="email" />
                     </Box>
                     <Box mb={"5"}>
                         <Text size={"2"} weight="medium" mb={"1"}>
                             Username
                         </Text>
-                        <TextField.Root
-                            size={"2"}
-                            variant="surface"
-                            name="username"
-                            placeholder="Enter your username"
-                            value={user?.username}
-                            required
-                        />
+                        <EditableInput name="username" 
+                            placeholder="username" />
                     </Box>
                     <Box mb={"5"} position="relative">
                         <Text size={"2"} weight="medium" mb={"1"}>
@@ -91,14 +110,13 @@ export default function Page() {
                         <input
                             type="file"
                             accept="image/*"
+                            onChange={handleFileChange}
                         />
                     </Box>
                     <Flex justify="end" gap={"3"} mt={"6"}>
-                        <NextLink href="/edit-password">
-                            <Button size={"2"} variant="soft">
-                                Edit Password
-                            </Button>
-                        </NextLink>
+                        <Button size={"2"} variant="soft">
+                            Edit Password
+                        </Button>
                         <Button size={"2"} variant="solid">
                             Save
                         </Button>

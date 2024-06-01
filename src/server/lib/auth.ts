@@ -125,7 +125,9 @@ export async function signup(formData: FormData): Promise<ActionResult> {
             error: "Invalid username",
         };
     }
+
     const password = formData.get("password");
+
     if (
         typeof password !== "string" ||
         password.length < 6 ||
@@ -196,6 +198,77 @@ export async function signup(formData: FormData): Promise<ActionResult> {
         sessionCookie.attributes,
     );
     return redirect(`/sign-up/picture`);
+}
+
+export async function edit(formData: FormData): Promise<ActionResult> {
+    let username = formData.get("username");
+
+    if (
+        typeof username != "string" ||
+        username.length < 3 ||
+        username.length > 31 ||
+        !/^[a-z0-9_-]+$/.test(username)
+    ) {
+        return {
+            error: "Invalid username",
+        };
+    }
+
+    const password = formData.get("password");
+
+    if (
+        typeof password !== "string" ||
+        password.length < 6 ||
+        password.length > 255
+    ) {
+        return {
+            error: "Invalid password",
+        };
+    }
+
+    const firstname = formData.get("firstname");
+    if (typeof firstname !== "string" || firstname.length > 255) {
+        return {
+            error: "Invalid first name",
+        };
+    }
+
+    const lastname = formData.get("lastname");
+    if (typeof lastname !== "string" || lastname.length > 255) {
+        return {
+            error: "Invalid last name",
+        };
+    }
+
+    const email = formData.get("email");
+    if (typeof email !== "string" || email.length > 255) {
+        return {
+            error: "Invalid email",
+        };
+    }
+
+    let userId = formData.get('userId');
+
+    await db.user.update({
+        where: {
+            id: userId as string
+        },
+        data: {
+            username: username,
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+        },
+    });
+
+    const session = await lucia.createSession(userId as string, {});
+    const sessionCookie = lucia.createSessionCookie(session.id);
+    cookies().set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes,
+    );
+    return redirect(`/dashboard`);
 }
 
 export async function signOut(): Promise<ActionResult> {

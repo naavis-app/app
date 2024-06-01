@@ -70,7 +70,8 @@ export default function Page() {
                                 </Link>
                             </Flex>
                             <div className="flex flex-row
-                            items-center justify-end w-full">
+                            items-center justify-end w-full
+                            relative">
                                 <TextField.Root
                                     size={"2"}
                                     variant="surface"

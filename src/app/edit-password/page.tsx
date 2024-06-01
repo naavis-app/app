@@ -8,7 +8,7 @@ import {
     Flex,
     TextField
 } from '@radix-ui/themes';
-
+import NextLink from 'next/link';
 
 export default function Page() {
     return (
@@ -32,9 +32,16 @@ export default function Page() {
                         >
                         </TextField.Root>
                     </Box>
-                    <Button size={"3"} variant="solid">
-                        Save
-                    </Button>
+                    <Flex gap={"2"}>
+                        <NextLink href="/edit-account">
+                            <Button size={"3"} variant="surface">
+                                Back
+                            </Button>
+                        </NextLink>
+                        <Button size={"3"} variant="solid">
+                            Save
+                        </Button>
+                    </Flex>
                 </form>
             </Card>
         </div>

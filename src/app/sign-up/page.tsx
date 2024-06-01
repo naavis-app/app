@@ -107,7 +107,7 @@ export default function Page() {
                                 Password
                             </Text>
                             <div className="flex flex-row items-center 
-                            justify-end w-full">
+                            justify-end w-full relative">
                                 <TextField.Root
                                     size={"2"}
                                     variant="surface"
