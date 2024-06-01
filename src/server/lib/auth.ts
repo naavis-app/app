@@ -214,18 +214,6 @@ export async function edit(formData: FormData): Promise<ActionResult> {
         };
     }
 
-    const password = formData.get("password");
-
-    if (
-        typeof password !== "string" ||
-        password.length < 6 ||
-        password.length > 255
-    ) {
-        return {
-            error: "Invalid password",
-        };
-    }
-
     const firstname = formData.get("firstname");
     if (typeof firstname !== "string" || firstname.length > 255) {
         return {
@@ -269,7 +257,47 @@ export async function edit(formData: FormData): Promise<ActionResult> {
         sessionCookie.attributes,
     );
     return redirect(`/dashboard`);
-}
+} // editing all other profile fields but passwords
+
+export async function editPassword(formData: FormData): Promise<ActionResult> { 
+    const password = formData.get('password') || formData.get('text');
+    const userId = formData.get('userId');
+
+    if (
+        typeof password !== "string" ||
+        password.length < 6 ||
+        password.length > 255
+    ) {
+        return {
+            error: "Invalid password",
+        };
+    }
+
+    const passwordHash = await hash(password, {
+        memoryCost: 19456,
+        timeCost: 2,
+        outputLen: 32,
+        parallelism: 1,
+    });
+
+    await db.user.update({
+        where: {
+            id: userId as string
+        },
+        data: {
+            password: passwordHash,
+        },
+    });
+
+    const session = await lucia.createSession(userId as string, {});
+    const sessionCookie = lucia.createSessionCookie(session.id);
+    cookies().set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes,
+    );
+    return redirect(`/dashboard`);
+} // editing specifically for passwords
 
 export async function signOut(): Promise<ActionResult> {
     const sessionId = cookies().get(lucia.sessionCookieName)?.value;

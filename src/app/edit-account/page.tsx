@@ -1,3 +1,7 @@
+/* to edit your account. this page is a little annoying,
+it doesnt update immediately which is something that needs to be worked on later.
+*/
+
 "use client";
 
 import {
@@ -14,7 +18,6 @@ import toast from 'react-hot-toast';
 import { useAtom } from 'jotai';
 import { userAtom } from '~/server/lib/stores';
 import { useState } from 'react';
-import { validateRequest } from '~/server/lib/auth';
 import { useRouter } from 'next/navigation';
 import EditableInput from '../_components/edit-account/EditInput';
 import { edit } from '~/server/lib/auth';
@@ -22,17 +25,12 @@ import { edit } from '~/server/lib/auth';
 export default function Page() {
     const [user, setUser] = useAtom(userAtom);
     const [file, setFile] = useState(null);
-    const [toggler, setToggler] = useState(false);
+    const [check, setCheck] = useState(true);
     const router = useRouter();
 
     const handleSubmit = async (e: FormData) => {
         e.append('userId', user?.id ?? "");
-        const response = await edit(e);
-
-        if(response.error) {
-            toast.error(response.error);
-            return;
-        }
+        await edit(e);
 
         if(file) {
             const imageFormData = new FormData();
@@ -75,33 +73,38 @@ export default function Page() {
                 <Heading size={"6"} mb="6">
                     Edit Your Account
                 </Heading>
-                <form action={handleSubmit}>
+                <form action={(e: FormData) => {
+                    setCheck(false);
+                    handleSubmit(e);
+                }}>
                     <Box mb={"5"}>
                         <Text size={"2"} weight="medium" mb={"1"}>
                             First Name
                         </Text>
                         <EditableInput name="firstname" 
-                            placeholder="first name" />
+                            placeholder="first name" check={check} />
                     </Box>
                     <Box mb={"5"}>
                         <Text size={"2"} weight="medium" mb={"1"}>
                             Last Name
                         </Text>
                         <EditableInput name="lastname"
-                            placeholder="last name" />
+                            placeholder="last name" check={check} />
                     </Box>
                     <Box mb={"5"}>
                         <Text size={"2"} weight="medium" mb={"1"}>
                             Email
                         </Text>
-                        <EditableInput name="email" placeholder="email" />
+                        <EditableInput name="email" placeholder="email" 
+                        check={check} />
                     </Box>
                     <Box mb={"5"}>
                         <Text size={"2"} weight="medium" mb={"1"}>
                             Username
                         </Text>
                         <EditableInput name="username" 
-                            placeholder="username" />
+                            placeholder="username" 
+                            check={check} />
                     </Box>
                     <Box mb={"5"} position="relative">
                         <Text size={"2"} weight="medium" mb={"1"}>
@@ -114,10 +117,12 @@ export default function Page() {
                         />
                     </Box>
                     <Flex justify="end" gap={"3"} mt={"6"}>
-                        <Button size={"2"} variant="soft">
-                            Edit Password
-                        </Button>
-                        <Button size={"2"} variant="solid">
+                        <NextLink href="edit-password">
+                            <Button size={"2"} variant="soft" type="button">
+                                Edit Password
+                            </Button>
+                        </NextLink>
+                        <Button size={"2"} variant="solid" type="submit">
                             Save
                         </Button>
                     </Flex>

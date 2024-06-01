@@ -6,8 +6,8 @@ import { userAtom } from '~/server/lib/stores';
 import { RxPencil1 } from 'react-icons/rx';
 import { FaCheck } from 'react-icons/fa';
 
-export default function EditableInput({ name, placeholder }: 
-    {name: string, placeholder: string}) {
+export default function EditableInput({ name, placeholder, check }: 
+    {name: string, placeholder: string, check: boolean}) {
     const [user, setUser] = useAtom(userAtom);
     const [currField, setCurrField] = useState(name);
     const [val, setVal] = useState<string>(user?.firstname!);
@@ -32,6 +32,12 @@ export default function EditableInput({ name, placeholder }:
         }
     }, []);
 
+    useEffect(() => {
+        if(!check) {
+            setToggle(true);
+        }
+    }, [check]);
+
     const handleInputChange = (e: any) => {
         setVal(e.target.value);
     }
@@ -52,6 +58,7 @@ export default function EditableInput({ name, placeholder }:
                 disabled={!toggle}
                 onChange={handleInputChange}
             />
+            <input type="hidden" name={name} value={val} />
             <button
             className="absolute right-4"
             onClick={(e) => {

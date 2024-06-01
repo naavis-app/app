@@ -119,6 +119,7 @@ export default function Page() {
                                     required
                                 />
                                 <button
+                                type="button"
                                 className="absolute right-4"
                                 onClick={(e) => {
                                     e.preventDefault();
@@ -135,7 +136,8 @@ export default function Page() {
                                     Sign-in
                                 </Button>
                             </NextLink>
-                            <Button size={"2"} variant="solid">
+                            <Button size={"2"} variant="solid"
+                            type="submit" >
                                 Continue
                             </Button>
                         </Flex>
