@@ -21,8 +21,16 @@ import { BsGithub, BsGoogle } from "react-icons/bs";
 
 import NextLink from "next/link";
 import { login } from "~/server/lib/auth";
+import { useState } from "react";
+
+import {
+    ImEye,
+    ImEyeBlocked
+} from 'react-icons/im';
 
 export default function Page() {
+    const [toggle, setToggle] = useState<boolean>(false);
+
     return (
         <div
             className="mt-20 flex h-full w-full flex-1
@@ -61,14 +69,29 @@ export default function Page() {
                                     </Text>
                                 </Link>
                             </Flex>
-                            <TextField.Root
-                                size={"2"}
-                                variant="surface"
-                                name="password"
-                                placeholder="Enter your password"
-                                type="password"
-                                spellCheck={false}
-                            />
+                            <div className="flex flex-row
+                            items-center justify-end w-full">
+                                <TextField.Root
+                                    size={"2"}
+                                    variant="surface"
+                                    name="password"
+                                    autoComplete="current-password"
+                                    placeholder="Enter your password"
+                                    type={toggle ? "text" : "password"}
+                                    className="w-full pr-10"
+                                    spellCheck={false}
+                                    required
+                                />
+                                <button
+                                className="absolute right-4"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setToggle(!toggle)}}
+                                    >                      
+                                        {!toggle && <ImEyeBlocked />}
+                                        {toggle && <ImEye />}
+                                </button>
+                            </div>
                         </Box>
                         <Flex justify="end" gap={"3"} mt={"6"}>
                             <NextLink href="/sign-up">
