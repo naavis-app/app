@@ -81,7 +81,7 @@ export async function login(formData: FormData): Promise<ActionResult> {
 
     if (!existingUser) {
         return {
-            error: "Taken username!",
+            error: "Not a valid user!",
         };
     }
 
