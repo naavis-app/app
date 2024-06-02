@@ -81,7 +81,7 @@ export async function login(formData: FormData): Promise<ActionResult> {
 
     if (!existingUser) {
         return {
-            error: "Not a valid user!",
+            error: "Incorrect username!",
         };
     }
 
@@ -98,7 +98,7 @@ export async function login(formData: FormData): Promise<ActionResult> {
 
     if (!validPassword) {
         return {
-            error: "Incorrect username or password",
+            error: "Incorrect password!",
         };
     }
 
