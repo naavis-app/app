@@ -7,6 +7,7 @@ import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { Lucia } from "lucia";
 import { GitHub } from "arctic";
 import { db } from "~/server/db";
+import { DatabaseUserAttributes } from "./auth";
 
 const adapter = new PrismaAdapter(db.session, db.user);
 export const github = new GitHub(
@@ -25,7 +26,6 @@ export const lucia = new Lucia(adapter, {
         return {
             githubId: attributes.github_id,
             username: attributes.username,
-            name: attributes.name,
         };
     },
 });
@@ -35,14 +35,4 @@ declare module "lucia" {
         Lucia: typeof lucia;
         DatabaseUserAttributes: DatabaseUserAttributes;
     }
-}
-
-interface DatabaseUserAttributes {
-    github_id?: number;
-    username: string;
-    name: string;
-    email: string;
-    given_name?: string;
-    family_name?: string;
-    profile_pic?: string;
 }

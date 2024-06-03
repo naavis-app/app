@@ -35,6 +35,15 @@ const lucia = new Lucia(adapter, {
     },
 });
 
+export interface DatabaseUserAttributes {
+    github_id?: number;
+    username: string;
+    firstname: string,
+    lastname: string,
+    profile_pic?: string;
+    email: string;
+}
+
 declare module "lucia" {
     interface Register {
         Lucia: typeof lucia;
@@ -42,13 +51,7 @@ declare module "lucia" {
     }
 }
 
-interface DatabaseUserAttributes {
-    github_id?: number;
-    username: string;
-    firstname: string,
-    lastname: string,
-    profile_pic?: string;
-}
+
 
 export async function login(formData: FormData): Promise<ActionResult> {
     const username = formData.get("username");
@@ -237,7 +240,7 @@ export async function edit(formData: FormData): Promise<ActionResult> {
 
     let userId = formData.get('userId');
 
-    await db.user.update({
+    const newUser = await db.user.update({
         where: {
             id: userId as string
         },
@@ -256,7 +259,12 @@ export async function edit(formData: FormData): Promise<ActionResult> {
         sessionCookie.value,
         sessionCookie.attributes,
     );
-    return redirect(`/dashboard`);
+
+    return {
+        user: {
+            ...newUser,
+        } as User
+    }
 } // editing all other profile fields but passwords
 
 export async function editPassword(formData: FormData): Promise<ActionResult> { 
@@ -317,7 +325,8 @@ export async function signOut(): Promise<ActionResult> {
 }
 
 interface ActionResult {
-    error: string;
+    error?: string;
+    user?: User;
 }
 
 export const validateRequest = cache(
@@ -357,12 +366,3 @@ export const validateRequest = cache(
         return result;
     },
 );
-
-interface DatabaseUserAttributes {
-    github_id?: number;
-    username: string;
-    name: string;
-    email: string;
-    given_name?: string;
-    family_name?: string;
-}
