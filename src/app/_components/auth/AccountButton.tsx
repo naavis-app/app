@@ -50,7 +50,7 @@ export default function AccountButton({ user }: AccountButtonProps) {
                         </Text>
                         {/* <Text className="text-sm text-gray-500">{user.id}</Text> */} 
                         <div className="flex flex-row gap-2 justify-end">
-                            <Link href="/edit-account">
+                            <Link href="/dashboard/settings">
                                 <Button variant={"surface"}>Edit Profile</Button>
                             </Link>
                             <Link href="/logout">
