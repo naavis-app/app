@@ -9,7 +9,7 @@ import Navbar from "./_components/navbar/Navbar";
 import { Providers } from "./providers";
 
 export const metadata = {
-    title: "Location App",
+    title: "Naavis ⛵️",
     description: "Location sharing, reimagined.",
     icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
