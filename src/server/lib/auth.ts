@@ -13,6 +13,7 @@ import { generateIdFromEntropySize } from "lucia";
 import { hash } from "@node-rs/argon2";
 import { Lucia } from "lucia";
 import type { Session, User } from "lucia";
+import prismaTypes from "@prisma/client";
 import { cache } from "react";
 
 const adapter = new PrismaAdapter(db.session, db.user);
@@ -36,12 +37,13 @@ const lucia = new Lucia(adapter, {
 });
 
 export interface DatabaseUserAttributes {
-    github_id?: number;
+    id: string;
+    github_id?: number | null;
     username: string;
     firstname: string,
     lastname: string,
-    profile_pic?: string;
-    email: string;
+    profile_pic?: string | null;
+    email: string | null;
 }
 
 declare module "lucia" {
@@ -51,7 +53,22 @@ declare module "lucia" {
     }
 }
 
+function filterUserAttributes(user: prismaTypes.User): DatabaseUserAttributes {
+    return {
+        id: user.id,
+        github_id: user.github_id,
+        username: user.username,
+        firstname: user.firstname || "",
+        lastname: user.lastname || "",
+        profile_pic: user.profile_pic,
+        email: user.email,
+    }
+}
 
+interface ActionResult {
+    error?: string;
+    user?: DatabaseUserAttributes;
+}
 
 export async function login(formData: FormData): Promise<ActionResult> {
     const username = formData.get("username");
@@ -261,9 +278,7 @@ export async function edit(formData: FormData): Promise<ActionResult> {
     );
 
     return {
-        user: {
-            ...newUser,
-        } as User
+        user: filterUserAttributes(newUser),
     }
 } // editing all other profile fields but passwords
 
@@ -322,11 +337,6 @@ export async function signOut(): Promise<ActionResult> {
     });
 
     return redirect("/");
-}
-
-interface ActionResult {
-    error?: string;
-    user?: User;
 }
 
 export const validateRequest = cache(
