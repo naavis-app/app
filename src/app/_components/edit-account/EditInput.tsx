@@ -30,7 +30,7 @@ export default function EditableInput({ name, placeholder, check }:
             default:
                 setVal('');
         }
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         if(!check) {

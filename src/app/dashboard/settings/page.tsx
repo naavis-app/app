@@ -5,28 +5,37 @@ import {
     Box,
     Button,
     Card,
+    Container,
     DropdownMenu,
     Flex,
     Table,
     Text,
     TextField,
 } from "@radix-ui/themes";
-import DeviceRow from "~/app/_components/dashboard/DeviceRow";
+import { useAtom } from "jotai";
+import toast from "react-hot-toast";
+import EditAccount from "~/app/_components/dashboard/EditAccount";
+import { userAtom } from "~/server/lib/stores";
+
+type Inputs = {
+    username: string
+    firstname: string
+    lastname: string
+}
 
 export default function DashboardDevices() {
     return (
         <>
-            <Flex direction={"column"}>
+            <Flex direction={"column"} className="max-w-xl">
                 <Card size={"3"}>
+
                     <Flex direction={"column"}>
                         <Text size={"8"} weight={"bold"}>
                             Profile
                         </Text>
-                        <Text size={"4"}>Update your profile information.</Text>
+                        <Text size={"4"} className="mb-4">Update your profile information.</Text>
 
-                        <Flex direction={"row"} justify={"end"}>
-                            <Button>Save changes</Button>
-                        </Flex>
+                        <EditAccount />
                     </Flex>
                 </Card>
 

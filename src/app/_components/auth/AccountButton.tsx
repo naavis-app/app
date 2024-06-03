@@ -14,7 +14,7 @@ import {
 import * as Separator from '@radix-ui/react-separator';
 import { DatabaseUser, User } from "lucia";
 import Link from "next/link";
-import { signOut } from "~/server/lib/auth";
+import { DatabaseUserAttributes, signOut } from "~/server/lib/auth";
 import getConfig from "next/config";
 interface AccountButtonProps {
     user: DatabaseUserAttributes;
@@ -62,14 +62,4 @@ export default function AccountButton({ user }: AccountButtonProps) {
             </Popover.Root>
         </>
     );
-} // commented out user id as its probably not a good idea to make that public
-// however for any debugging purposes it can be uncommented
-
-interface DatabaseUserAttributes {
-    id?: string;
-    username?: string;
-    profile_pic?: string;
-    firstname?: string,
-    lastname?: string,
-    email?: string;
 }
