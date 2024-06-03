@@ -22,12 +22,22 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import EditableInput from '../edit-account/EditInput';
 import { edit } from '~/server/lib/auth';
+import { useDropzone } from 'react-dropzone';
 
 export default function EditAccount() {
+    const [check, setCheck] = useState<boolean>(true);
     const [user, setUser] = useAtom(userAtom);
-    const [file, setFile] = useState(null);
-    const [check, setCheck] = useState(true);
-    const router = useRouter();
+    const [file, setFile] = useState<File | null>(null);
+    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+        accept: {
+            'image/jpeg': ['.jpeg', '.jpg'],
+            'image/png': ['.png']
+        },
+        maxFiles: 1,
+        onDrop: (acceptedFiles) => {
+            setFile(acceptedFiles[0] || null);
+        }
+    });
 
     const handleSubmit = async (e: FormData) => {
         e.append('userId', user?.id ?? "");
@@ -65,15 +75,11 @@ export default function EditAccount() {
         }
     };
 
-    const handleFileChange = (e: any) => {
-        setFile(e.target.files[0]);
-    }
-
     return (
-
-        <form action={(e: FormData) => {
+        <form onSubmit={(e: React.FormEvent) => {
+            e.preventDefault();
             setCheck(false);
-            handleSubmit(e);
+            handleSubmit(new FormData(e.target as HTMLFormElement));
         }}>
             <Box mb={"5"}>
                 <Text size={"2"} weight="medium" mb={"1"}>
@@ -107,17 +113,23 @@ export default function EditAccount() {
                 <Text size={"2"} weight="medium" mb={"1"}>
                     Profile Picture
                 </Text>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                />
+                {
+                    file ? (
+                        <>
+                            <img src={URL.createObjectURL(file)} alt="Selected" className="w-32 h-32 object-cover" />
+                            <Button onClick={() => setFile(null)}>
+                                Try again
+                            </Button>
+                        </>
+                    ) : (
+                        <div {...getRootProps()} className="p-4 border-2 border-dashed border-gray-300/50 rounded-lg text-center">
+                            <input {...getInputProps()} />
+                            <p className="text-gray-500 select-none">Drag 'n' drop or click to select</p>
+                        </div>)
+                }
             </Box>
             <Flex justify="end" gap={"3"} mt={"6"}>
                 <NextLink href="edit-password">
-                    <Button size={"2"} variant="soft" type="button">
-                        Edit Password
-                    </Button>
                 </NextLink>
                 <Button size={"2"} variant="solid" type="submit">
                     Save
