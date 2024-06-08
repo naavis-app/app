@@ -14,7 +14,7 @@ import {
     Text,
     TextField,
 } from "@radix-ui/themes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DeviceRow from "~/app/_components/dashboard/DeviceRow";
 
 const devices = [
@@ -94,6 +94,15 @@ const devices = [
 
 export default function DashboardDevices() {
     const [viewMode, setViewMode] = useState("grid");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchedDevices, setSearchedDevices] = useState(devices);
+
+    useEffect(() => {
+        setSearchedDevices(devices.filter((device) => {
+            return device.name.toLowerCase()
+            .includes(searchQuery.toLowerCase());
+        }));
+    }, [searchQuery]);
 
     return (
         <>
@@ -102,7 +111,8 @@ export default function DashboardDevices() {
                     Device Manager
                 </Text>
                 <Text size={"4"} color="gray">
-                    Track and manage all the devices connected to your account
+                    Track and manage all the 
+                    devices connected to your account
                 </Text>
             </Flex>
 
@@ -113,7 +123,9 @@ export default function DashboardDevices() {
                 className="mt-4"
             >
                 <Box maxWidth={"300px"}>
-                    <TextField.Root placeholder={"Search devices..."} size={"3"}>
+                    <TextField.Root placeholder={"Search devices..."} 
+                    size={"3"}
+                    onChange={(e) => setSearchQuery(e.target.value)}>
                         <TextField.Slot>
                             <MagnifyingGlassIcon />
                         </TextField.Slot>
@@ -171,7 +183,7 @@ export default function DashboardDevices() {
                     wrap={"wrap"}
                     gap={"4"}
                 >
-                    {devices.map((device) => (
+                    {searchedDevices.map((device) => (
                         <DeviceRow
                             device={device}
                             key={device.id}
@@ -181,7 +193,7 @@ export default function DashboardDevices() {
                 </Flex>
             ) : (
                 <Card className="mt-4">
-                    {devices.map((device) => (
+                    {searchedDevices.map((device) => (
                         <DeviceRow
                             device={device}
                             key={device.id}
