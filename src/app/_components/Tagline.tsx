@@ -1,8 +1,15 @@
+"use client";
+
+import { useAtom } from "jotai";
+import { userAtom } from "~/server/lib/stores";
+
 // tagline for our website. you can see it on the homepage!
 
 import { Link, Text } from "@radix-ui/themes";
 
 export default function Tagline() {
+    const [user, setUser] = useAtom(userAtom);
+
     return (
         <div
             className="flex h-full w-full flex-col 
@@ -20,13 +27,13 @@ export default function Tagline() {
                     <span className="text-blue-500">reimagined.</span>
                 </Text>
             </div>
-            <Link href="/sign-up">
+            <Link href={user?.id ? "/dashboard" : "/sign-up"}>
                 <button
                     className="rounded-md bg-blue-500
                 px-4 py-3 font-bold text-white
                 transition-colors hover:bg-blue-700"
                 >
-                    Get Started
+                    {user?.id ? "Dashboard" : "Get Started"}
                 </button>
             </Link>
         </div>
