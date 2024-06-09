@@ -55,7 +55,7 @@ export default function SideNav() {
                                 {user ? (
                                     <Avatar
                                         size="3"
-                                        src={user.profile_pic}
+                                        src={user.profile_pic!}
                                         radius="full"
                                         fallback={"A"}
                                         className="shadow-md"
