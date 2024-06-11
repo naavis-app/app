@@ -11,7 +11,7 @@ import {
     Text,
 } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
-import MiniMapPreview from "./MiniMapPreview";
+import MiniMapPreview from "../MiniMapPreview";
 
 interface Device {
     name: string;
@@ -28,7 +28,7 @@ interface DeviceRowProps {
     viewMode: string;
 }
 
-export default function deviceRow({ device, viewMode }: DeviceRowProps) {
+export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
     const [icon, setIcon] = useState("");
 
     useEffect(() => {

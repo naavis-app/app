@@ -44,7 +44,7 @@ export default function Navbar() {
 
     if (!isMounted) {
         return (
-            <nav className="fixed z-50 flex w-full select-none p-4">
+            <nav className="fixed z-[100] flex w-full select-none p-4">
                 <Card className="w-full" variant={"classic"}>
                     <Flex justify={"between"}>
                         <Logo />
@@ -60,7 +60,7 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="fixed z-50 flex w-full select-none p-4">
+            <nav className="fixed z-[100] flex w-full select-none p-4">
                 <Card className="w-full" variant={"classic"}>
                     <Flex justify={"between"}>
                         <Logo />
