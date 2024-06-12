@@ -39,6 +39,7 @@ model Device {
   longitude          Float    @default(0)
   speed              Float    @default(0)
   lastLocationUpdate DateTime @default(now())
+  connection         String   @default("Online")
   userId             String
   user               User     @relation("UserDevices", fields: [userId], references: [id])
 }

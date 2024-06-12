@@ -12,16 +12,7 @@ import {
 } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import MiniMapPreview from "../MiniMapPreview";
-
-interface Device {
-    name: string;
-    id: string;
-    type: string;
-    lastUpdated: Date;
-    connection: string;
-    latitude: number;
-    longitude: number;
-}
+import { Device } from "@prisma/client";
 
 interface DeviceRowProps {
     device: Device;

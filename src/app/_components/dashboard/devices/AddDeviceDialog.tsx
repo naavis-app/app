@@ -25,23 +25,31 @@ const deviceTypes = [{
 
 import { api } from "~/trpc/react";
 
-export default function AddDeviceDialog() {
+export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
 	const [user, setUser] = useAtom(userAtom);
+
+	const [dialogOpen, setDialogOpen] = useState(false);
 	const [addingDevice, setAddingDevice] = useState(false);
 
 	const [deviceName, setDeviceName] = useState("");
 	const [deviceType, setDeviceType] = useState("1");
 
 	const createDevice = api.device.create.useMutation({
-		onSuccess: () => {
-			toast.success("Device has been added!");
+		onSuccess: (device) => {
+			refetch();
+
+			toast.success(`${device.name} has been added!`);
 			setDeviceName("");
 			setDeviceType("");
+
 			setAddingDevice(false);
+			setDialogOpen(false);
 		},
 		onError: () => {
-			toast.error("Failed to add device");
+			toast.error(`Failed to add ${deviceName}`);
+
 			setAddingDevice(false);
+			setDialogOpen(false);
 		},
 	});
 
@@ -59,8 +67,8 @@ export default function AddDeviceDialog() {
 	};
 
 	return (
-		<Dialog.Root>
-			<Dialog.Trigger asChild>
+		<Dialog.Root open={dialogOpen} onOpenChange={(open) => setDialogOpen}>
+			<Dialog.Trigger asChild onClick={() => setDialogOpen(!dialogOpen)}>
 				<Button variant={"solid"}>
 					<PlusCircledIcon />New Device
 				</Button>

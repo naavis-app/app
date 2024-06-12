@@ -18,92 +18,32 @@ import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import DeviceRow from "~/app/_components/dashboard/devices/DeviceRow";
-import { userAtom } from "~/server/lib/stores";
+import { deviceListAtom, userAtom } from "~/server/lib/stores";
 import * as Dialog from '@radix-ui/react-dialog';
 import AddDeviceDialog from "~/app/_components/dashboard/devices/AddDeviceDialog";
-
-
-const devices = [
-    {
-        name: "Device 1",
-        type: "Phone",
-        id: "1",
-        lastUpdated: new Date(),
-        connection: "Offline",
-        latitude: 0,
-        longitude: 0,
-    },
-    {
-        name: "Device 2",
-        type: "Tablet",
-        id: "2",
-        lastUpdated: new Date(),
-        connection: "Online",
-        latitude: 10,
-        longitude: 20,
-    },
-    {
-        name: "Device 3",
-        type: "Laptop",
-        id: "3",
-        lastUpdated: new Date(),
-        connection: "Offline",
-        latitude: 30,
-        longitude: 40,
-    },
-    {
-        name: "Device 4",
-        type: "Smartwatch",
-        id: "4",
-        lastUpdated: new Date(),
-        connection: "Online",
-        latitude: 50,
-        longitude: 60,
-    },
-    {
-        name: "Device 5",
-        type: "Phone",
-        id: "5",
-        lastUpdated: new Date(),
-        connection: "Online",
-        latitude: 70,
-        longitude: 80,
-    },
-    {
-        name: "Device 6",
-        type: "Tablet",
-        id: "6",
-        lastUpdated: new Date(),
-        connection: "Online",
-        latitude: 90,
-        longitude: 100,
-    },
-    {
-        name: "Device 7",
-        type: "Laptop",
-        id: "7",
-        lastUpdated: new Date(),
-        connection: "Offline",
-        latitude: 110,
-        longitude: 120,
-    },
-    {
-        name: "Device 8",
-        type: "Desktop",
-        id: "8",
-        lastUpdated: new Date(),
-        connection: "Offline",
-        latitude: 130,
-        longitude: 140,
-    },
-];
+import { api } from "~/trpc/react";
+import { Device } from "@prisma/client";
 
 export default function DashboardDevices() {
     const [user, setUser] = useAtom(userAtom);
 
+    const deviceQuery = api.device.list.useQuery({
+		userId: user?.id || ""
+	});
+
+    const [devices, setDevices] = useAtom(deviceListAtom);
+
+    const [page, setPage] = useState(1);
     const [viewMode, setViewMode] = useState("grid");
     const [searchQuery, setSearchQuery] = useState("");
-    const [searchedDevices, setSearchedDevices] = useState(devices);
+    const [searchedDevices, setSearchedDevices] = useState<Device[]>([]);
+
+    useEffect(() => {
+        if (deviceQuery.data) {
+            setDevices(deviceQuery.data);
+            setSearchedDevices(deviceQuery.data);
+        }
+    }, [deviceQuery.data]);
 
     useEffect(() => {
         setSearchedDevices(devices.filter((device) => {
@@ -182,7 +122,7 @@ export default function DashboardDevices() {
                         </SegmentedControl.Item>
                     </SegmentedControl.Root>
 
-                    <AddDeviceDialog />
+                    <AddDeviceDialog refetch={() => {deviceQuery.refetch()}} />
                 </Flex>
             </Flex>
 
