@@ -8,6 +8,7 @@ import {
     ButtonIcon,
     CardStackIcon,
     CaretDownIcon,
+    Component1Icon,
     CubeIcon,
     ExitIcon,
     GearIcon,
@@ -83,6 +84,11 @@ export default function SideNav() {
                             icon={<GlobeIcon />}
                             url={"/dashboard/map"}
                             label={"Map"}
+                        />
+                        <SideNavItem
+                            icon={<Component1Icon />}
+                            url={"/dashboard/groups"}
+                            label={"Groups"}
                         />
                         <SideNavItem
                             icon={<CubeIcon />}

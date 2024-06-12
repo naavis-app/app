@@ -28,8 +28,8 @@ export default function DashboardDevices() {
     const [user, setUser] = useAtom(userAtom);
 
     const deviceQuery = api.device.list.useQuery({
-		userId: user?.id || ""
-	});
+        userId: user?.id || ""
+    });
 
     const [devices, setDevices] = useAtom(deviceListAtom);
 
@@ -122,7 +122,7 @@ export default function DashboardDevices() {
                         </SegmentedControl.Item>
                     </SegmentedControl.Root>
 
-                    <AddDeviceDialog refetch={() => {deviceQuery.refetch()}} />
+                    <AddDeviceDialog refetch={() => { deviceQuery.refetch() }} />
                 </Flex>
             </Flex>
 
