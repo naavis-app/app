@@ -61,6 +61,8 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
  */
 export const createCallerFactory = t.createCallerFactory;
 
+// TODO: Mutation middleware for ALL routers
+
 /**
  * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
  *
