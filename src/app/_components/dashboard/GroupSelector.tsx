@@ -1,8 +1,9 @@
 "use client";
 
-import { Card, Box, DropdownMenu, Select, Button } from "@radix-ui/themes";
+import { Card, Box, DropdownMenu, Select, Button, Flex } from "@radix-ui/themes";
 import { Icon } from "@iconify-icon/react";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 export default function GroupSelector() {
     return (
@@ -28,13 +29,24 @@ export default function GroupSelector() {
                             <Select.Item value="4">Family Group 4</Select.Item>
                             <Select.Item value="5">Family Group 5</Select.Item>
                             <Select.Separator />
-                            <Button
-                                variant={"outline"}
-                                className="mx-auto w-full items-center justify-center"
-                            >
-                                <PlusCircledIcon />
-                                New Group
-                            </Button>
+                            <Flex gap={"4"} className="m-1 mx-auto">
+                                <Button
+                                    variant={"ghost"}
+                                    className="w-full"
+                                >
+                                    <Link href="/dashboard/groups/#create" className="w-full flex items-center justify-center">
+                                        Create
+                                    </Link>
+                                </Button>
+                                <Button
+                                    variant={"ghost"}
+                                    className="w-full"
+                                >
+                                    <Link href="/dashboard/groups/#join" className="w-full flex items-center justify-center">
+                                        Join
+                                    </Link>
+                                </Button>
+                            </Flex>
                         </Select.Group>
                     </Select.Content>
                 </Select.Root>
