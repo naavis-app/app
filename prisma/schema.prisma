@@ -45,12 +45,13 @@ model Device {
 }
 
 model Group {
-  id      String  @id @default(uuid())
-  name    String
-  ownerId String
-  owner   User    @relation("GroupOwner", fields: [ownerId], references: [id])
-  places  Place[] @relation("GroupPlaces")
-  members User[]  @relation("GroupMembers")
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  ownerId     String
+  owner       User    @relation("GroupOwner", fields: [ownerId], references: [id])
+  places      Place[] @relation("GroupPlaces")
+  members     User[]  @relation("GroupMembers")
 }
 
 model Place {

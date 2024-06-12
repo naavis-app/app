@@ -7,8 +7,9 @@ check https://jotai.org/docs/introduction for more information. */
 import { atom } from "jotai";
 import { DatabaseUser, User } from "lucia";
 import { DatabaseUserAttributes } from "./auth";
-import { Device } from "@prisma/client";
+import { Device, Group } from "@prisma/client";
 
 export const themeAtom = atom<"light" | "dark" | "inherit">("dark");
 export const userAtom = atom<null | DatabaseUserAttributes>(null);
 export const deviceListAtom = atom<Device[]>([]);
+export const groupListAtom = atom<Group[]>([]);

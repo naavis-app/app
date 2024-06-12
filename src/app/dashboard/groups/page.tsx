@@ -1,10 +1,32 @@
+"use client";
+
 import { Link1Icon, PlusCircledIcon } from "@radix-ui/react-icons";
 import { Button, Flex, Popover, Table, Text, Tooltip } from "@radix-ui/themes";
+import { useAtom } from "jotai";
+import { useEffect, useState } from "react";
 import { FaCrown } from "react-icons/fa";
 import { LuCrown } from "react-icons/lu";
+import CreateGroupDialog from "~/app/_components/dashboard/groups/CreateGroupDialog";
 import GroupRow from "~/app/_components/dashboard/groups/GroupRow";
+import { groupListAtom, userAtom } from "~/server/lib/stores";
+import { api } from "~/trpc/react";
 
 export default function GroupsPage() {
+    const [user, setUser] = useAtom(userAtom);
+
+    const groupQuery = api.group.list.useQuery({
+        userId: user?.id || "",
+    });
+
+    const [groups, setGroups] = useAtom(groupListAtom);
+    const [page, setPage] = useState(1);
+
+    useEffect(() => {
+        if (groupQuery.data) {
+            setGroups(groupQuery.data);
+        }
+    }, [groupQuery.data]);
+
     return (
         <>
             <Flex direction={"column"}>
@@ -13,9 +35,7 @@ export default function GroupsPage() {
                         Your Groups
                     </Text>
                     <div className="flex flex-row gap-2 justify-center items-center">
-                        <Button variant="solid" id="create">
-                            Create Group
-                        </Button>
+                        <CreateGroupDialog refetch={groupQuery.refetch} />
                         <Button variant="outline" id="join">
                             Join Group
                         </Button>
@@ -48,7 +68,7 @@ export default function GroupsPage() {
                     </Table.Header>
 
                     <Table.Body>
-                        <GroupRow name="Family" isOwner={true} members={["1", "2", "3"]} />
+                        <GroupRow name="Your Group" isOwner={true} members={["1", "2", "3"]} />
                         <GroupRow
                             name="Red Rangers"
                             isOwner={true}
@@ -64,6 +84,12 @@ export default function GroupsPage() {
                             isOwner={false}
                             members={["1", "2", "3"]}
                         />
+                        {
+                            /* TODO: Group members preview system */
+                        }
+                        {groups.map((group) => (
+                            <GroupRow key={group.id} name={group.name} isOwner={group.ownerId === user?.id} members={[""]} />
+                        ))}
                     </Table.Body>
                 </Table.Root>
             </Flex>

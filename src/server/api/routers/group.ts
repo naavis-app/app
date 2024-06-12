@@ -6,6 +6,7 @@ export const groupRouter = createTRPCRouter({
         .input(
             z.object({
                 name: z.string(),
+                description: z.string(),
                 ownerId: z.string(),
             }),
         )
@@ -14,6 +15,7 @@ export const groupRouter = createTRPCRouter({
                 return await ctx.db.group.create({
                     data: {
                         name: input.name,
+                        description: input.description,
                         owner: {
                             connect: { id: input.ownerId },
                         },
@@ -32,6 +34,7 @@ export const groupRouter = createTRPCRouter({
             z.object({
                 id: z.string(),
                 name: z.string(),
+                description: z.string(),
             }),
         )
         .mutation(async ({ ctx, input }) => {
