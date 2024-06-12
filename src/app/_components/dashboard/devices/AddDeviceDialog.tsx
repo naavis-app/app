@@ -1,3 +1,5 @@
+"use client";
+
 import { PlusCircledIcon } from "@radix-ui/react-icons"
 import { Button, Card, DropdownMenu, Flex, Select, Text, TextField } from "@radix-ui/themes"
 import { useAtom } from "jotai";
@@ -6,20 +8,22 @@ import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
 import * as Dialog from '@radix-ui/react-dialog';
 
+
 const deviceTypes = [{
 	name: "Phone",
-	id: "1"
+	id: 'phone'
 }, {
 	name: "Tablet",
-	id: "2"
+	id: 'tablet'
 }, {
 	name: "Laptop",
-	id: "3"
+	id: 'laptop'
 }, {
 	name: "Smartwatch",
-	id: "4"
+	id: 'smartwatch'
 }];
 
+import { api } from "~/trpc/react";
 
 export default function AddDeviceDialog() {
 	const [user, setUser] = useAtom(userAtom);
@@ -28,17 +32,30 @@ export default function AddDeviceDialog() {
 	const [deviceName, setDeviceName] = useState("");
 	const [deviceType, setDeviceType] = useState("1");
 
-	const newDevice = async () => {
+	const createDevice = api.device.create.useMutation({
+		onSuccess: () => {
+			toast.success("Device has been added!");
+			setDeviceName("");
+			setDeviceType("");
+			setAddingDevice(false);
+		},
+		onError: () => {
+			toast.error("Failed to add device");
+			setAddingDevice(false);
+		},
+	});
+
+	const newDevice = () => {
 		if (addingDevice) return;
 		if (!user) return toast.error("You must be logged in to add a device");
 
 		setAddingDevice(true);
 
-		await (new Promise((resolve) => setTimeout(resolve, 2000)));
-
-		toast.success(`Device ${deviceName} (${deviceType}) added!`);
-
-		setAddingDevice(false);
+		createDevice.mutate({
+			name: deviceName,
+			type: deviceType as 'phone' | 'tablet' | 'laptop' | 'smartwatch',
+			userId: user.id
+		});
 	};
 
 	return (
