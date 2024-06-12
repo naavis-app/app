@@ -64,9 +64,17 @@ export default function DashboardDevices() {
     return (
         <>
             <Flex direction={"column"}>
-                <Text size={"8"} weight={"bold"}>
-                    Device Manager
-                </Text>
+                <Flex justify={"between"} align={"center"}>
+                    <Text size={"8"} weight={"bold"}>
+                        Device Manager
+                    </Text>
+                    <AddDeviceDialog
+                        refetch={() => {
+                            deviceQuery.refetch();
+                        }}
+                    />
+                </Flex>
+
                 <Text size={"4"} color="gray">
                     Track and manage all the devices connected to your account
                 </Text>
@@ -131,12 +139,6 @@ export default function DashboardDevices() {
                             <ListBulletIcon />
                         </SegmentedControl.Item>
                     </SegmentedControl.Root>
-
-                    <AddDeviceDialog
-                        refetch={() => {
-                            deviceQuery.refetch();
-                        }}
-                    />
                 </Flex>
             </Flex>
 
