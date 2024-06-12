@@ -14,7 +14,7 @@ export default async function Logout() {
         async function handleLogout() {
             setUser(null);
             await signOut();
-            router.push('/');
+            router.push("/");
         }
 
         handleLogout();

@@ -28,8 +28,12 @@ export default function GroupSelector() {
                             <Select.Item value="4">Family Group 4</Select.Item>
                             <Select.Item value="5">Family Group 5</Select.Item>
                             <Select.Separator />
-                            <Button variant={"outline"} className="w-full justify-center items-center mx-auto">
-                                <PlusCircledIcon />New Group
+                            <Button
+                                variant={"outline"}
+                                className="mx-auto w-full items-center justify-center"
+                            >
+                                <PlusCircledIcon />
+                                New Group
                             </Button>
                         </Select.Group>
                     </Select.Content>

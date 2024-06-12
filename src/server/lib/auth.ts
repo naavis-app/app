@@ -40,8 +40,8 @@ export interface DatabaseUserAttributes {
     id: string;
     github_id?: number | null;
     username: string;
-    firstname: string,
-    lastname: string,
+    firstname: string;
+    lastname: string;
     profile_pic?: string | null;
     email: string | null;
 }
@@ -62,7 +62,7 @@ function filterUserAttributes(user: prismaTypes.User): DatabaseUserAttributes {
         lastname: user.lastname || "",
         profile_pic: user.profile_pic,
         email: user.email,
-    }
+    };
 }
 
 interface ActionResult {
@@ -255,11 +255,11 @@ export async function edit(formData: FormData): Promise<ActionResult> {
         };
     }
 
-    let userId = formData.get('userId');
+    let userId = formData.get("userId");
 
     const newUser = await db.user.update({
         where: {
-            id: userId as string
+            id: userId as string,
         },
         data: {
             username: username,
@@ -279,12 +279,12 @@ export async function edit(formData: FormData): Promise<ActionResult> {
 
     return {
         user: filterUserAttributes(newUser),
-    }
+    };
 } // editing all other profile fields but passwords
 
-export async function editPassword(formData: FormData): Promise<ActionResult> { 
-    const password = formData.get('password') || formData.get('text');
-    const userId = formData.get('userId');
+export async function editPassword(formData: FormData): Promise<ActionResult> {
+    const password = formData.get("password") || formData.get("text");
+    const userId = formData.get("userId");
 
     if (
         typeof password !== "string" ||
@@ -305,7 +305,7 @@ export async function editPassword(formData: FormData): Promise<ActionResult> {
 
     await db.user.update({
         where: {
-            id: userId as string
+            id: userId as string,
         },
         data: {
             password: passwordHash,

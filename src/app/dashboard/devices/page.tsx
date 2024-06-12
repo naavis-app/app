@@ -1,6 +1,12 @@
 "use client";
 
-import { CaretSortIcon, GridIcon, ListBulletIcon, MagnifyingGlassIcon, PlusCircledIcon } from "@radix-ui/react-icons";
+import {
+    CaretSortIcon,
+    GridIcon,
+    ListBulletIcon,
+    MagnifyingGlassIcon,
+    PlusCircledIcon,
+} from "@radix-ui/react-icons";
 import {
     Box,
     Button,
@@ -19,7 +25,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import DeviceRow from "~/app/_components/dashboard/devices/DeviceRow";
 import { deviceListAtom, userAtom } from "~/server/lib/stores";
-import * as Dialog from '@radix-ui/react-dialog';
+import * as Dialog from "@radix-ui/react-dialog";
 import AddDeviceDialog from "~/app/_components/dashboard/devices/AddDeviceDialog";
 import { api } from "~/trpc/react";
 import { Device } from "@prisma/client";
@@ -28,7 +34,7 @@ export default function DashboardDevices() {
     const [user, setUser] = useAtom(userAtom);
 
     const deviceQuery = api.device.list.useQuery({
-        userId: user?.id || ""
+        userId: user?.id || "",
     });
 
     const [devices, setDevices] = useAtom(deviceListAtom);
@@ -46,10 +52,13 @@ export default function DashboardDevices() {
     }, [deviceQuery.data]);
 
     useEffect(() => {
-        setSearchedDevices(devices.filter((device) => {
-            return device.name.toLowerCase()
-                .includes(searchQuery.toLowerCase());
-        }));
+        setSearchedDevices(
+            devices.filter((device) => {
+                return device.name
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase());
+            }),
+        );
     }, [searchQuery]);
 
     return (
@@ -59,8 +68,7 @@ export default function DashboardDevices() {
                     Device Manager
                 </Text>
                 <Text size={"4"} color="gray">
-                    Track and manage all the
-                    devices connected to your account
+                    Track and manage all the devices connected to your account
                 </Text>
             </Flex>
 
@@ -71,9 +79,11 @@ export default function DashboardDevices() {
                 className="mt-4"
             >
                 <Box maxWidth={"300px"}>
-                    <TextField.Root placeholder={"Search devices..."}
+                    <TextField.Root
+                        placeholder={"Search devices..."}
                         size={"3"}
-                        onChange={(e) => setSearchQuery(e.target.value)}>
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    >
                         <TextField.Slot>
                             <MagnifyingGlassIcon />
                         </TextField.Slot>
@@ -122,7 +132,11 @@ export default function DashboardDevices() {
                         </SegmentedControl.Item>
                     </SegmentedControl.Root>
 
-                    <AddDeviceDialog refetch={() => { deviceQuery.refetch() }} />
+                    <AddDeviceDialog
+                        refetch={() => {
+                            deviceQuery.refetch();
+                        }}
+                    />
                 </Flex>
             </Flex>
 

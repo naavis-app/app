@@ -12,17 +12,17 @@ import {
     Flex,
     TextField,
     Button,
-    Container
-} from '@radix-ui/themes';
+    Container,
+} from "@radix-ui/themes";
 import NextLink from "next/link";
-import toast from 'react-hot-toast';
-import { useAtom } from 'jotai';
-import { userAtom } from '~/server/lib/stores';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import EditableInput from '../edit-account/EditInput';
-import { edit } from '~/server/lib/auth';
-import { useDropzone } from 'react-dropzone';
+import toast from "react-hot-toast";
+import { useAtom } from "jotai";
+import { userAtom } from "~/server/lib/stores";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import EditableInput from "../edit-account/EditInput";
+import { edit } from "~/server/lib/auth";
+import { useDropzone } from "react-dropzone";
 
 export default function EditAccount() {
     const [check, setCheck] = useState<boolean>(true);
@@ -30,17 +30,17 @@ export default function EditAccount() {
     const [file, setFile] = useState<File | null>(null);
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
         accept: {
-            'image/jpeg': ['.jpeg', '.jpg'],
-            'image/png': ['.png']
+            "image/jpeg": [".jpeg", ".jpg"],
+            "image/png": [".png"],
         },
         maxFiles: 1,
         onDrop: (acceptedFiles) => {
             setFile(acceptedFiles[0] || null);
-        }
+        },
     });
 
     const handleSubmit = async (e: FormData) => {
-        e.append('userId', user?.id ?? "");
+        e.append("userId", user?.id ?? "");
         let response = await edit(e);
 
         if (response.error) {
@@ -52,8 +52,8 @@ export default function EditAccount() {
 
         if (file) {
             const imageFormData = new FormData();
-            imageFormData.append('file', file);
-            imageFormData.append('userId', user?.id ?? "");
+            imageFormData.append("file", file);
+            imageFormData.append("userId", user?.id ?? "");
 
             try {
                 const response = await fetch("/api/upload", {
@@ -76,65 +76,80 @@ export default function EditAccount() {
     };
 
     return (
-        <form onSubmit={(e: React.FormEvent) => {
-            e.preventDefault();
-            setCheck(false);
-            handleSubmit(new FormData(e.target as HTMLFormElement));
-        }}>
+        <form
+            onSubmit={(e: React.FormEvent) => {
+                e.preventDefault();
+                setCheck(false);
+                handleSubmit(new FormData(e.target as HTMLFormElement));
+            }}
+        >
             <Box mb={"5"}>
                 <Text size={"2"} weight="medium" mb={"1"}>
                     First Name
                 </Text>
-                <EditableInput name="firstname"
-                    placeholder="first name" check={check} />
+                <EditableInput
+                    name="firstname"
+                    placeholder="first name"
+                    check={check}
+                />
             </Box>
             <Box mb={"5"}>
                 <Text size={"2"} weight="medium" mb={"1"}>
                     Last Name
                 </Text>
-                <EditableInput name="lastname"
-                    placeholder="last name" check={check} />
+                <EditableInput
+                    name="lastname"
+                    placeholder="last name"
+                    check={check}
+                />
             </Box>
             <Box mb={"5"}>
                 <Text size={"2"} weight="medium" mb={"1"}>
                     Email
                 </Text>
-                <EditableInput name="email"
-                    placeholder="email" check={check} />
+                <EditableInput name="email" placeholder="email" check={check} />
             </Box>
             <Box mb={"5"}>
                 <Text size={"2"} weight="medium" mb={"1"}>
                     Username
                 </Text>
-                <EditableInput name="username"
-                    placeholder="username" check={check} />
+                <EditableInput
+                    name="username"
+                    placeholder="username"
+                    check={check}
+                />
             </Box>
             <Box mb={"5"} position="relative">
                 <Text size={"2"} weight="medium" mb={"1"}>
                     Profile Picture
                 </Text>
-                {
-                    file ? (
-                        <>
-                            <img src={URL.createObjectURL(file)} alt="Selected" className="w-32 h-32 object-cover" />
-                            <Button onClick={() => setFile(null)}>
-                                Try again
-                            </Button>
-                        </>
-                    ) : (
-                        <div {...getRootProps()} className="p-4 border-2 border-dashed border-gray-300/50 rounded-lg text-center">
-                            <input {...getInputProps()} />
-                            <p className="text-gray-500 select-none">Drag 'n' drop or click to select</p>
-                        </div>)
-                }
+                {file ? (
+                    <>
+                        <img
+                            src={URL.createObjectURL(file)}
+                            alt="Selected"
+                            className="h-32 w-32 object-cover"
+                        />
+                        <Button onClick={() => setFile(null)}>Try again</Button>
+                    </>
+                ) : (
+                    <div
+                        {...getRootProps()}
+                        className="rounded-lg border-2 border-dashed border-gray-300/50 p-4 text-center"
+                    >
+                        <input {...getInputProps()} />
+                        <p className="select-none text-gray-500">
+                            Drag 'n' drop or click to select
+                        </p>
+                    </div>
+                )}
             </Box>
             <Flex justify="end" gap={"3"} mt={"6"}>
-                <NextLink href="edit-password">
-                </NextLink>
+                <NextLink href="edit-password"></NextLink>
                 <Button size={"2"} variant="solid" type="submit">
                     Save
                 </Button>
             </Flex>
         </form>
-    )
+    );
 }

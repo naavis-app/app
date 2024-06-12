@@ -23,10 +23,7 @@ import { signup } from "~/server/lib/auth";
 import toast from "react-hot-toast";
 import { useState } from "react";
 
-import {
-    ImEye,
-    ImEyeBlocked
-} from 'react-icons/im';
+import { ImEye, ImEyeBlocked } from "react-icons/im";
 
 export default function Page() {
     const [toggle, setToggle] = useState<boolean>(false);
@@ -106,8 +103,10 @@ export default function Page() {
                             <Text size={"2"} weight="medium" mb={"1"}>
                                 Password
                             </Text>
-                            <div className="flex flex-row items-center 
-                            justify-end w-full relative">
+                            <div
+                                className="relative flex w-full 
+                            flex-row items-center justify-end"
+                            >
                                 <TextField.Root
                                     size={"2"}
                                     variant="surface"
@@ -119,12 +118,13 @@ export default function Page() {
                                     required
                                 />
                                 <button
-                                type="button"
-                                className="absolute right-4"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setToggle(!toggle)}}
-                                    >
+                                    type="button"
+                                    className="absolute right-4"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setToggle(!toggle);
+                                    }}
+                                >
                                     {!toggle && <ImEyeBlocked />}
                                     {toggle && <ImEye />}
                                 </button>
@@ -136,8 +136,7 @@ export default function Page() {
                                     Sign-in
                                 </Button>
                             </NextLink>
-                            <Button size={"2"} variant="solid"
-                            type="submit" >
+                            <Button size={"2"} variant="solid" type="submit">
                                 Continue
                             </Button>
                         </Flex>

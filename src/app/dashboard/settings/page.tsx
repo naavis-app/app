@@ -18,22 +18,23 @@ import EditAccount from "~/app/_components/dashboard/EditAccount";
 import { userAtom } from "~/server/lib/stores";
 
 type Inputs = {
-    username: string
-    firstname: string
-    lastname: string
-}
+    username: string;
+    firstname: string;
+    lastname: string;
+};
 
 export default function DashboardDevices() {
     return (
         <>
             <Flex direction={"column"} className="max-w-xl">
                 <Card size={"3"}>
-
                     <Flex direction={"column"}>
                         <Text size={"8"} weight={"bold"}>
                             Profile
                         </Text>
-                        <Text size={"4"} className="mb-4">Update your profile information.</Text>
+                        <Text size={"4"} className="mb-4">
+                            Update your profile information.
+                        </Text>
 
                         <EditAccount />
                     </Flex>

@@ -109,8 +109,7 @@ export default function Page() {
                         >
                             Keep Default
                         </Button>
-                        <Button size={"2"} variant="solid"
-                        type="submit">
+                        <Button size={"2"} variant="solid" type="submit">
                             Continue
                         </Button>
                     </Flex>

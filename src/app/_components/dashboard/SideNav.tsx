@@ -66,12 +66,17 @@ export default function SideNav() {
                                 )}
                                 <Flex direction={"column"}>
                                     <Text weight={"bold"}>
-                                        {user ? user.firstname + " " + 
-                                            user.lastname : "NO USER"}
+                                        {user
+                                            ? user.firstname +
+                                              " " +
+                                              user.lastname
+                                            : "NO USER"}
                                     </Text>
-                                    <Text>{user ? user.username : "NO USER"}</Text>
-                                    {/* <Text>{user ? user.id : "NO USER"}</Text> */} 
-                                </Flex> 
+                                    <Text>
+                                        {user ? user.username : "NO USER"}
+                                    </Text>
+                                    {/* <Text>{user ? user.id : "NO USER"}</Text> */}
+                                </Flex>
                             </Flex>
                         </Card>
 

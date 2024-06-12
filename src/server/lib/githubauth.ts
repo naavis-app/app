@@ -13,7 +13,7 @@ const adapter = new PrismaAdapter(db.session, db.user);
 export const github = new GitHub(
     process.env.GITHUB_CLIENT_ID!,
     process.env.GITHUB_CLIENT_SECRET!,
-    { redirectURI: process.env.GITHUB_CALLBACK_URL!, }
+    { redirectURI: process.env.GITHUB_CALLBACK_URL! },
 );
 
 export const lucia = new Lucia(adapter, {

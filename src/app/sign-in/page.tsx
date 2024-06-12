@@ -23,10 +23,7 @@ import NextLink from "next/link";
 import { login } from "~/server/lib/auth";
 import { useState } from "react";
 
-import {
-    ImEye,
-    ImEyeBlocked
-} from 'react-icons/im';
+import { ImEye, ImEyeBlocked } from "react-icons/im";
 
 export default function Page() {
     const [toggle, setToggle] = useState<boolean>(false);
@@ -69,9 +66,11 @@ export default function Page() {
                                     </Text>
                                 </Link>
                             </Flex>
-                            <div className="flex flex-row
-                            items-center justify-end w-full
-                            relative">
+                            <div
+                                className="relative flex
+                            w-full flex-row items-center
+                            justify-end"
+                            >
                                 <TextField.Root
                                     size={"2"}
                                     variant="surface"
@@ -84,14 +83,15 @@ export default function Page() {
                                     required
                                 />
                                 <button
-                                type="button"
-                                className="absolute right-4"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setToggle(!toggle)}}
-                                    >                      
-                                        {!toggle && <ImEyeBlocked />}
-                                        {toggle && <ImEye />}
+                                    type="button"
+                                    className="absolute right-4"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setToggle(!toggle);
+                                    }}
+                                >
+                                    {!toggle && <ImEyeBlocked />}
+                                    {toggle && <ImEye />}
                                 </button>
                             </div>
                         </Box>
@@ -101,8 +101,7 @@ export default function Page() {
                                     Create an account
                                 </Button>
                             </NextLink>
-                            <Button size={"2"} variant="solid"
-                            type="submit">
+                            <Button size={"2"} variant="solid" type="submit">
                                 Sign in
                             </Button>
                         </Flex>

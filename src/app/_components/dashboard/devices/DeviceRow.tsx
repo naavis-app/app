@@ -1,5 +1,10 @@
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
-import { GearIcon, Pencil1Icon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons";
+import {
+    GearIcon,
+    Pencil1Icon,
+    ReloadIcon,
+    TrashIcon,
+} from "@radix-ui/react-icons";
 import {
     AspectRatio,
     Badge,
@@ -85,7 +90,12 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                                 >{`Last updated a million years ago`}</Text>
                             </Flex>
                         </Flex>
-                        <Flex className="mt-2" direction={"row"} gap={"2"} justify={"between"}>
+                        <Flex
+                            className="mt-2"
+                            direction={"row"}
+                            gap={"2"}
+                            justify={"between"}
+                        >
                             <Badge color={"green"}>{device.connection}</Badge>
 
                             <Button variant={"ghost"}>

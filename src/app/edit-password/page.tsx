@@ -3,32 +3,22 @@ or smth like that to email) */
 
 "use client";
 
-import {
-    Card,
-    Heading,
-    Box,
-    Button,
-    Flex,
-    TextField
-} from '@radix-ui/themes';
-import NextLink from 'next/link';
-import { useState } from 'react';
-import { editPassword } from '~/server/lib/auth';
-import { useAtom } from 'jotai';
-import { userAtom } from '~/server/lib/stores';
-import toast from 'react-hot-toast';
+import { Card, Heading, Box, Button, Flex, TextField } from "@radix-ui/themes";
+import NextLink from "next/link";
+import { useState } from "react";
+import { editPassword } from "~/server/lib/auth";
+import { useAtom } from "jotai";
+import { userAtom } from "~/server/lib/stores";
+import toast from "react-hot-toast";
 
-import {
-    ImEye,
-    ImEyeBlocked
-} from 'react-icons/im';
+import { ImEye, ImEyeBlocked } from "react-icons/im";
 
 export default function Page() {
     const [user, setUser] = useAtom(userAtom);
     const [toggle, setToggle] = useState<boolean>(false);
 
     const handlePassword = async (e: FormData) => {
-        e.append('userId', user?.id ?? '');
+        e.append("userId", user?.id ?? "");
         const response = await editPassword(e);
 
         if (response.error) {
@@ -36,11 +26,13 @@ export default function Page() {
         } else {
             toast.success("Password updated!");
         }
-    }
+    };
 
     return (
-        <div className="mt-20 flex h-full w-full flex-1 flex-col 
-        items-center justify-center overflow-scroll">
+        <div
+            className="mt-20 flex h-full w-full flex-1 flex-col 
+        items-center justify-center overflow-scroll"
+        >
             <Card
                 size={"4"}
                 variant="surface"
@@ -51,29 +43,32 @@ export default function Page() {
                 </Heading>
                 <form action={handlePassword}>
                     <Box mb={"5"}>
-                        <div className="flex flex-row
-                            items-center justify-end w-full
-                            relative">
-                                <TextField.Root
-                                    size={"2"}
-                                    variant="surface"
-                                    name="password"
-                                    autoComplete="current-password"
-                                    placeholder="Enter your password"
-                                    type={toggle ? "text" : "password"}
-                                    className="w-full pr-10"
-                                    spellCheck={false}
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    className="absolute right-4"
-                                    onClick={(e) => {
+                        <div
+                            className="relative flex
+                            w-full flex-row items-center
+                            justify-end"
+                        >
+                            <TextField.Root
+                                size={"2"}
+                                variant="surface"
+                                name="password"
+                                autoComplete="current-password"
+                                placeholder="Enter your password"
+                                type={toggle ? "text" : "password"}
+                                className="w-full pr-10"
+                                spellCheck={false}
+                                required
+                            />
+                            <button
+                                type="button"
+                                className="absolute right-4"
+                                onClick={(e) => {
                                     e.preventDefault();
-                                    setToggle(!toggle)}}
-                                >                      
-                                    {!toggle && <ImEyeBlocked />}
-                                    {toggle && <ImEye />}
+                                    setToggle(!toggle);
+                                }}
+                            >
+                                {!toggle && <ImEyeBlocked />}
+                                {toggle && <ImEye />}
                             </button>
                         </div>
                     </Box>
@@ -90,5 +85,5 @@ export default function Page() {
                 </form>
             </Card>
         </div>
-    )   
+    );
 }
