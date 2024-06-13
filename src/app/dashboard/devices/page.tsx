@@ -15,6 +15,7 @@ import {
     DropdownMenu,
     Flex,
     Grid,
+    Section,
     SegmentedControl,
     Table,
     Text,
@@ -149,6 +150,7 @@ export default function DashboardDevices() {
                         direction={"row"}
                         wrap={"wrap"}
                         gap={"4"}
+                        overflow={"scroll"}
                     >
                         {searchedDevices.map((device) => (
                             <DeviceRow
@@ -159,7 +161,7 @@ export default function DashboardDevices() {
                         ))}
                     </Flex>
                 ) : (
-                    <Card className="mt-4">
+                    <Card className="mt-4 overflow-scroll">
                         {searchedDevices.map((device) => (
                             <DeviceRow
                                 device={device}
