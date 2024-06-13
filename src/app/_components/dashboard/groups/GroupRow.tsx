@@ -12,8 +12,9 @@ export default function GroupRow({ name, isOwner, members }: GroupRowProps) {
     members = ["1", "2", "3"];
     return (
         <>
-            <Table.Row className="">
-                <Table.RowHeaderCell className="flex h-full flex-row items-center gap-2">
+            <Table.Row className="h-full">
+                <Table.RowHeaderCell className="flex h-full flex-row items-center gap-2"
+                p="5">
                     {isOwner ? (
                         <Tooltip content="You own this group">
                             <LuCrown className="text text-amber-400" />
@@ -23,14 +24,14 @@ export default function GroupRow({ name, isOwner, members }: GroupRowProps) {
                     )}
                     {name}
                 </Table.RowHeaderCell>
-                <Table.Cell>
-                    {members.map((member) => (
+                <Table.Cell className="">
+                    {members.map((member, index) => (
                         <Avatar
                             radius={"full"}
                             key={member}
                             src="https://placehold.co/400x400"
                             size="1"
-                            className=" -ml-3 border-2 border-white"
+                            className={`${index !== 0 ? '-ml-3' : ''} border-2 border-white`}
                             fallback={""}
                         />
                     ))}
