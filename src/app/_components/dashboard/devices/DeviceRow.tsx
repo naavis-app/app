@@ -24,22 +24,16 @@ interface DeviceRowProps {
     viewMode: string;
 }
 
-export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
-    const [icon, setIcon] = useState("");
+const deviceIconMap: { [key: string]: string } = {
+    phone: 'mdi:cellphone',
+    tablet: 'mdi:tablet',
+    laptop: 'mdi:laptop',
+    desktop: 'ph:computer-tower',
+    smartwatch: 'mdi:watch',
+}
 
-    useEffect(() => {
-        if (device.type === "Phone") {
-            setIcon("mdi:cellphone");
-        } else if (device.type === "Tablet") {
-            setIcon("mdi:tablet");
-        } else if (device.type === "Laptop") {
-            setIcon("mdi:laptop");
-        } else if (device.type === "Desktop") {
-            setIcon("ph:computer-tower");
-        } else if (device.type === "Smartwatch") {
-            setIcon("mdi:watch");
-        }
-    }, []);
+export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
+    const icon = deviceIconMap[device.type];
 
     if (viewMode == "list") {
         return (
@@ -52,7 +46,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                             align={"center"}
                             gap="3"
                         >
-                            <Icon icon={icon} width={24} height={24} />
+                            <Icon icon={icon!} width={24} height={24} />
                             <Flex direction={"column"}>
                                 <Text>{device.name}</Text>
                                 <Text
@@ -81,7 +75,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                     </AspectRatio>
                     <Flex direction={"column"}>
                         <Flex direction={"row"} gap={"2"} align={"center"}>
-                            <Icon icon={icon} width={24} height={24} />
+                            <Icon icon={icon!} width={24} height={24} />
                             <Flex direction={"column"}>
                                 <Text>{device.name}</Text>
                                 <Text

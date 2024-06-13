@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
@@ -11,12 +12,15 @@ export const deviceRouter = createTRPCRouter({
             }),
         )
         .mutation(async ({ ctx, input }) => {
-            const user = ctx.db.user.findUnique({
+            const user = await ctx.db.user.findUnique({
                 where: { id: input.userId },
             });
 
             if (!user) {
-                throw new Error("User not found");
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "User not found",
+                })
             }
 
             try {
@@ -29,7 +33,10 @@ export const deviceRouter = createTRPCRouter({
                 });
             } catch (e) {
                 console.error(e);
-                throw new Error("Failed to create device");
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to create device"
+                })
             }
         }),
     list: publicProcedure
@@ -39,12 +46,15 @@ export const deviceRouter = createTRPCRouter({
             }),
         )
         .query(async ({ ctx, input }) => {
-            const user = ctx.db.user.findUnique({
+            const user = await ctx.db.user.findUnique({
                 where: { id: input.userId },
             });
 
             if (!user) {
-                throw new Error("User not found");
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "User not found"
+                })
             }
 
             return ctx.db.device.findMany({ where: { userId: input.userId } });
