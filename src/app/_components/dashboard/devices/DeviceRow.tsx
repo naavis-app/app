@@ -33,7 +33,57 @@ const deviceIconMap: { [key: string]: string } = {
 }
 
 export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
+    const [lastUpdated, setLastUpdated] = useState("...");
     const icon = deviceIconMap[device.type];
+    const updateDate = new Date(device.lastLocationUpdate);
+    const currentDate = new Date();
+
+    const diffYear = currentDate.getFullYear() - updateDate.getFullYear();
+    const diffMonth = currentDate.getMonth() - updateDate.getMonth();
+    const diffDays = currentDate.getDate() - updateDate.getDate();
+    const diffHours = currentDate.getHours() - updateDate.getHours();
+    const diffMinutes = currentDate.getMinutes() - updateDate.getMinutes();
+    const diffSeconds = currentDate.getSeconds() - updateDate.getSeconds();
+
+    useEffect(() => {
+        if (diffYear !== 0) {
+            if(diffYear === 1) {
+                setLastUpdated(`${diffYear} year`);
+            } else {
+                setLastUpdated(`${diffYear} years`);
+            }
+        } else if (diffMonth !== 0) {
+            if(diffMonth === 1) {
+                setLastUpdated(`${diffMonth} month`);
+            } else {
+                setLastUpdated(`${diffMonth} months`);
+            }
+        } else if (diffDays !== 0) {
+            if(diffDays === 1) {
+                setLastUpdated(`${diffDays} day`);
+            } else {
+                setLastUpdated(`${diffDays} days`);
+            }
+        } else if (diffHours !== 0) {
+            if(diffHours === 1) {
+                setLastUpdated(`${diffHours} hour`);
+            } else {
+                setLastUpdated(`${diffHours} hours`);
+            }
+        } else if (diffMinutes !== 0) {
+            if(diffMinutes === 1) {
+                setLastUpdated(`${diffMinutes} minute`);
+            } else {
+                setLastUpdated(`${diffMinutes} minutes`);
+            }
+        } else if (diffSeconds !== 0) {
+            if(diffSeconds === 1) {
+                setLastUpdated(`${diffSeconds} second`);
+            } else {
+                setLastUpdated(`${diffSeconds} seconds`);
+            }
+        }
+    }, []);
 
     if (viewMode == "list") {
         return (
@@ -52,7 +102,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                                 <Text
                                     size={"2"}
                                     color={"gray"}
-                                >{`Last updated a million years ago`}</Text>
+                                >{`Last updated ${lastUpdated} ago`}</Text>
                             </Flex>
                         </Flex>
                     </Box>
@@ -62,7 +112,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
     } else {
         return (
             <>
-                <Card className="h-fit w-fit p-2">
+                <Card className="h-fit p-2 w-[260px]">
                     <AspectRatio
                         ratio={8 / 5}
                         className="mb-2 overflow-hidden rounded-md shadow-md"
@@ -81,7 +131,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                                 <Text
                                     size={"2"}
                                     color={"gray"}
-                                >{`Last updated a million years ago`}</Text>
+                                >{`Last updated ${lastUpdated} ago`}</Text>
                             </Flex>
                         </Flex>
                         <Flex
