@@ -32,6 +32,7 @@ import {
 import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
 import SideNavItem from "./SideNavItem";
+import ThemeToggle from "../ThemeToggle";
 
 export default function SideNav() {
     const [user] = useAtom(userAtom);
@@ -46,12 +47,20 @@ export default function SideNav() {
                     gap={"2"}
                     style={{
                         height: "100%",
-                        justifyContent: "space-between",
                         padding: "2",
                     }}
+                    className="bg-[--color-panel] shadow-md h-full w-full"
                 >
-                    <div className="flex flex-col gap-2">
-                        <Card>
+                    <Flex direction={"column"} gap={"2"} className="p-4">
+                        <Text>
+                            ⛵️ WHEEEE
+                        </Text>
+                    </Flex>
+                    <div className="h-[1px] w-full bg-[--accent-4]">
+
+                    </div>
+                    <Flex direction={"column"} gap={"2"} className="p-4">
+                        <Card className="">
                             <Flex direction={"row"} align={"center"} gap={"2"}>
                                 {user ? (
                                     <Avatar
@@ -68,8 +77,8 @@ export default function SideNav() {
                                     <Text weight={"bold"}>
                                         {user
                                             ? user.firstname +
-                                              " " +
-                                              user.lastname
+                                            " " +
+                                            user.lastname
                                             : "NO USER"}
                                     </Text>
                                     <Text>
@@ -100,6 +109,9 @@ export default function SideNav() {
                             url={"/dashboard/devices"}
                             label={"Devices"}
                         />
+                    </Flex>
+
+                    <Flex direction={"column"} gap={"2"} className="mt-auto">
                         <SideNavItem
                             icon={<GearIcon />}
                             url={"/dashboard/settings"}
@@ -110,7 +122,8 @@ export default function SideNav() {
                             url={"/logout"}
                             label={"Logout"}
                         />
-                    </div>
+                        <ThemeToggle />
+                    </Flex>
                 </Flex>
             </Box>
         </>

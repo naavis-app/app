@@ -9,9 +9,9 @@ import { Box, Card } from "@radix-ui/themes";
 export default function Dashboard({ children }: { children: React.ReactNode }) {
     return (
         <>
-            <div className="relative flex grow gap-4 px-4 pb-4 pt-[6rem]">
+            <div className="relative flex grow gap-4 bg-[--accent-4]">
                 <SideNav />
-                <Box className="relative w-full rounded-md p-4 ">
+                <Box className="relative w-full rounded-md p-4 pl-0">
                     {children}
                 </Box>
             </div>

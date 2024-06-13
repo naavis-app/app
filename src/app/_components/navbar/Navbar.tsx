@@ -23,11 +23,13 @@ import GetStartedButton from "./GetStartedButton";
 import DashboardButton from "./DashboardButton";
 import Logo from "./Logo";
 import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
     const [user, setUser] = useAtom(userAtom);
     const width = useWindowSize().width;
     const [isMounted, setIsMounted] = useState(false);
+    const pathName = usePathname();
 
     async function fetchUser() {
         console.log("fetching user");
@@ -41,6 +43,10 @@ export default function Navbar() {
         fetchUser();
         setIsMounted(true);
     }, []);
+
+    if (pathName.startsWith("/dashboard")) {
+        return <></>;
+    }
 
     if (!isMounted) {
         return (
