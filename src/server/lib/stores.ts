@@ -11,5 +11,7 @@ import { Device, Group } from "@prisma/client";
 
 export const themeAtom = atom<"light" | "dark" | "inherit">("dark");
 export const userAtom = atom<null | DatabaseUserAttributes>(null);
+
+export const sidenavOpenAtom = atom<boolean>(true);
 export const deviceListAtom = atom<Device[]>([]);
 export const groupListAtom = atom<Group[]>([]);

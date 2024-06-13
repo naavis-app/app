@@ -35,7 +35,7 @@ import {
 } from "@radix-ui/themes";
 
 import { useAtom } from "jotai";
-import { userAtom } from "~/server/lib/stores";
+import { sidenavOpenAtom, userAtom } from "~/server/lib/stores";
 import SideNavItem from "./SideNavItem";
 import ThemeToggle from "../ThemeToggle";
 import { motion } from "framer-motion";
@@ -43,22 +43,21 @@ import { motion } from "framer-motion";
 
 export default function SideNav() {
     const [user] = useAtom(userAtom);
-    const [open, setOpen] = useState(true);
+    const [sidenavOpen, setOpen] = useAtom(sidenavOpenAtom);
 
     // same thing below for the user id (check AccountButton.tsx).
     // can be commented out for debugging
     return (
         <>
             <motion.div
-            animate={{
-                width: open ? "350px" : "80px",
-            }}
-            className="box-border w-full max-w-[300px]">
+                animate={{
+                    width: sidenavOpen ? "350px" : "80px",
+                }}
+                className="box-border">
                 <Flex
                     direction={"column"}
                     style={{
                         height: "100%",
-                        padding: "2",
                     }}
                     className="bg-[--color-panel] shadow-md h-full w-full"
                 >
@@ -72,9 +71,9 @@ export default function SideNav() {
                             <motion.div
                                 className="!-mr-4"
                                 animate={{
-                                    rotate: open ? 180 : 0
+                                    rotate: sidenavOpen ? 180 : 0
                                 }}>
-                                <Button className="!w-[2rem] !h-[2rem] !p-0" radius={"full"} onClick={() => setOpen(!open)}>
+                                <Button className="!w-[2rem] !h-[2rem] !p-0" radius={"full"} onClick={() => setOpen(!sidenavOpen)}>
                                     <CaretLeftIcon height={"1.4rem"} width={"1.4em"} />
                                 </Button>
                             </motion.div>
