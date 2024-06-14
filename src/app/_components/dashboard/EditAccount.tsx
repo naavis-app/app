@@ -62,7 +62,6 @@ export default function EditAccount() {
                 });
 
                 const data = await response.json();
-                console.log(data.status);
 
                 if (data.success) {
                     toast.success("Image file uploaded successfully!");

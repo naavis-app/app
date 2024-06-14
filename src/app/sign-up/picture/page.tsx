@@ -42,7 +42,6 @@ export default function Page() {
             });
 
             const data = await response.json();
-            console.log(data.status);
 
             if (data.success) {
                 toast.success("Image file uploaded successfully!");
@@ -66,7 +65,6 @@ export default function Page() {
             });
 
             const data = await response.json();
-            console.log(data.status);
 
             if (data.success) {
                 toast.success("Default file uploaded successfully!");

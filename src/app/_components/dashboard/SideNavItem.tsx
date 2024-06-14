@@ -17,8 +17,6 @@ export default function SideNavItem({ label, icon, url }: SideNavItemProps) {
     const [open] = useAtom(sidenavOpenAtom);
     const pathname = usePathname();
 
-    console.log(pathname === url, pathname, url);
-
     const inner = (
         <div className={clsx("flex w-full flex-row items-center gap-2 rounded-md p-4 text-[--accent-11] transition-all ease-in-out hover:cursor-pointer hover:bg-[--accent-3]",
             (!open ? "p-2" : "pl-8 justify-start"),
