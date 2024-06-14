@@ -16,7 +16,7 @@ export default function ThemeToggle() {
     };
 
     return (
-        <Button size="2" variant="outline" onClick={toggleTheme}>
+        <Button size="2" variant="outline" className="w-fit" onClick={toggleTheme}>
             {theme == "light" ? <MoonIcon /> : <SunIcon />}
         </Button>
     );

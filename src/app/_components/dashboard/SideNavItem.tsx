@@ -4,6 +4,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { sidenavOpenAtom } from "~/server/lib/stores";
 import { useAtom } from "jotai";
+import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 interface SideNavItemProps {
     label: string;
@@ -13,17 +15,26 @@ interface SideNavItemProps {
 
 export default function SideNavItem({ label, icon, url }: SideNavItemProps) {
     const [open] = useAtom(sidenavOpenAtom);
+    const pathname = usePathname();
+
+    console.log(pathname === url, pathname, url);
 
     const inner = (
-        <div className="flex w-full flex-row items-center gap-2 rounded-md p-2 pl-8 text-[--accent-11] transition-all ease-in-out hover:cursor-pointer hover:bg-[--accent-3]">
-            {icon}
+        <div className={clsx("flex w-full flex-row items-center gap-2 rounded-md p-4 text-[--accent-11] transition-all ease-in-out hover:cursor-pointer hover:bg-[--accent-3]",
+            (!open ? "p-2" : "pl-8 justify-start"),
+            (pathname == url ? "border-[1px]" : "")
+        )}>
+            <div className={clsx(!open ? '' : '')}>
+                {icon}
+            </div>
             <motion.div
                 animate={{
                     opacity: open ? 1 : 0,
-                    x: open ? 0 : -20,
+                    x: open ? 22 : 0,
                 }}
+                className="absolute"
             >
-            <Text>{label}</Text>
+                <Text>{label}</Text>
             </motion.div>
         </div>
     );

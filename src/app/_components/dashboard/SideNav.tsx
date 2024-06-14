@@ -62,16 +62,29 @@ export default function SideNav() {
                     className="bg-[--color-panel] shadow-md h-full w-full"
                 >
                     <Flex direction={"column"} height={"5rem"} className="p-4 pb-0 relative" justify={"center"}>
-                        <Text>
-                            ⛵️ WHEEEE
-                        </Text>
+                        <div className="flex flex-row gap-2">
+                            <Text>
+                                ⛵️
+                            </Text>
+                            <motion.div
+                                animate={{
+                                    opacity: sidenavOpen ? 1 : 0,
+                                    x: sidenavOpen ? 0 : 20,
+                                }}
+                            >
+                                <Text>
+                                    WHEEEE
+                                </Text>
+                            </motion.div>
+                        </div>
+
 
 
                         <Flex className="p-4 w-full absolute" direction={"row"} justify={"end"}>
                             <motion.div
                                 className="!-mr-4"
                                 animate={{
-                                    rotate: sidenavOpen ? 180 : 0
+                                    rotate: sidenavOpen ? 0 : 180
                                 }}>
                                 <Button className="!w-[2rem] !h-[2rem] !p-0" radius={"full"} onClick={() => setOpen(!sidenavOpen)}>
                                     <CaretLeftIcon height={"1.4rem"} width={"1.4em"} />
@@ -148,8 +161,6 @@ export default function SideNav() {
                         />
                         <ThemeToggle />
                     </Flex>
-
-
                 </Flex>
             </motion.div>
         </>
