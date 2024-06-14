@@ -25,12 +25,12 @@ interface DeviceRowProps {
 }
 
 const deviceIconMap: { [key: string]: string } = {
-    phone: 'mdi:cellphone',
-    tablet: 'mdi:tablet',
-    laptop: 'mdi:laptop',
-    desktop: 'ph:computer-tower',
-    smartwatch: 'mdi:watch',
-}
+    phone: "mdi:cellphone",
+    tablet: "mdi:tablet",
+    laptop: "mdi:laptop",
+    desktop: "ph:computer-tower",
+    smartwatch: "mdi:watch",
+};
 
 export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
     const [lastUpdated, setLastUpdated] = useState("...");
@@ -47,37 +47,37 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
 
     useEffect(() => {
         if (diffYear !== 0) {
-            if(diffYear === 1) {
+            if (diffYear === 1) {
                 setLastUpdated(`${diffYear} year`);
             } else {
                 setLastUpdated(`${diffYear} years`);
             }
         } else if (diffMonth !== 0) {
-            if(diffMonth === 1) {
+            if (diffMonth === 1) {
                 setLastUpdated(`${diffMonth} month`);
             } else {
                 setLastUpdated(`${diffMonth} months`);
             }
         } else if (diffDays !== 0) {
-            if(diffDays === 1) {
+            if (diffDays === 1) {
                 setLastUpdated(`${diffDays} day`);
             } else {
                 setLastUpdated(`${diffDays} days`);
             }
         } else if (diffHours !== 0) {
-            if(diffHours === 1) {
+            if (diffHours === 1) {
                 setLastUpdated(`${diffHours} hour`);
             } else {
                 setLastUpdated(`${diffHours} hours`);
             }
         } else if (diffMinutes !== 0) {
-            if(diffMinutes === 1) {
+            if (diffMinutes === 1) {
                 setLastUpdated(`${diffMinutes} minute`);
             } else {
                 setLastUpdated(`${diffMinutes} minutes`);
             }
         } else if (diffSeconds !== 0) {
-            if(diffSeconds === 1) {
+            if (diffSeconds === 1) {
                 setLastUpdated(`${diffSeconds} second`);
             } else {
                 setLastUpdated(`${diffSeconds} seconds`);
@@ -112,7 +112,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
     } else {
         return (
             <>
-                <Card className="h-fit p-2 w-[260px]">
+                <Card className="h-fit w-[260px] p-2">
                     <AspectRatio
                         ratio={8 / 5}
                         className="mb-2 overflow-hidden rounded-md shadow-md"

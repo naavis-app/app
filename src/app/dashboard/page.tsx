@@ -25,7 +25,7 @@ export default function DashboardHome() {
 
     return (
         <>
-            <Flex direction={"column"} gap={"4"}  className="h-full">
+            <Flex direction={"column"} gap={"4"} className="h-full">
                 <Card className="flex-grow">
                     <p>Top</p>
                 </Card>

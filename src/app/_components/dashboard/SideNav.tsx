@@ -40,7 +40,6 @@ import SideNavItem from "./SideNavItem";
 import ThemeToggle from "../ThemeToggle";
 import { motion, AnimatePresence } from "framer-motion";
 
-
 export default function SideNav() {
     const [user] = useAtom(userAtom);
     const [sidenavOpen, setOpen] = useAtom(sidenavOpenAtom);
@@ -53,88 +52,114 @@ export default function SideNav() {
                 animate={{
                     width: sidenavOpen ? "350px" : "80px",
                 }}
-                className="box-border">
+                className="box-border"
+            >
                 <Flex
                     direction={"column"}
                     style={{
                         height: "100%",
                     }}
-                    className="bg-[--color-panel] shadow-md h-full w-full"
+                    className="h-full w-full bg-[--color-panel] shadow-md"
                 >
-                    <Flex direction={"column"} height={"5rem"} className="p-4 pb-0 relative" justify={"center"}>
+                    <Flex
+                        direction={"column"}
+                        height={"5rem"}
+                        className="relative p-4 pb-0"
+                        justify={"center"}
+                    >
                         <div className="flex flex-row gap-2">
-                            <Text>
-                                ⛵️
-                            </Text>
+                            <Text>⛵️</Text>
                             <motion.div
                                 animate={{
                                     opacity: sidenavOpen ? 1 : 0,
                                     x: sidenavOpen ? 0 : 20,
                                 }}
                             >
-                                <Text>
-                                    WHEEEE
-                                </Text>
+                                <Text>WHEEEE</Text>
                             </motion.div>
                         </div>
 
-
-
-                        <Flex className="p-4 w-full absolute" direction={"row"} justify={"end"}>
+                        <Flex
+                            className="absolute w-full p-4"
+                            direction={"row"}
+                            justify={"end"}
+                        >
                             <motion.div
                                 className="!-mr-4"
                                 animate={{
-                                    rotate: sidenavOpen ? 0 : 180
-                                }}>
-                                <Button className="!w-[2rem] !h-[2rem] !p-0" radius={"full"} onClick={() => setOpen(!sidenavOpen)}>
-                                    <CaretLeftIcon height={"1.4rem"} width={"1.4em"} />
+                                    rotate: sidenavOpen ? 0 : 180,
+                                }}
+                            >
+                                <Button
+                                    className="!h-[2rem] !w-[2rem] !p-0"
+                                    radius={"full"}
+                                    onClick={() => setOpen(!sidenavOpen)}
+                                >
+                                    <CaretLeftIcon
+                                        height={"1.4rem"}
+                                        width={"1.4em"}
+                                    />
                                 </Button>
                             </motion.div>
                         </Flex>
                     </Flex>
 
-
                     <Flex direction={"column"} gap={"2"} className="p-4">
-                        <AnimatePresence
-
-                        >
-                            {sidenavOpen && <Card>
-                                <Flex direction={"row"} align={"center"} gap={"2"}>
-                                    {user ? (
-                                        <Avatar
-                                            size="3"
-                                            src={user.profile_pic!}
-                                            radius="full"
-                                            fallback={"A"}
-                                            className="shadow-md"
-                                        />
-                                    ) : (
-                                        <></>
-                                    )}
-                                    <Flex direction={"column"}>
-                                        <Text weight={"bold"}>
-                                            {user
-                                                ? user.firstname +
-                                                " " +
-                                                user.lastname
-                                                : "NO USER"}
-                                        </Text>
-                                        <Text>
-                                            {user ? user.username : "NO USER"}
-                                        </Text>
-                                        {/* <Text>{user ? user.id : "NO USER"}</Text> */}
+                        <AnimatePresence>
+                            {sidenavOpen && (
+                                <Card>
+                                    <Flex
+                                        direction={"row"}
+                                        align={"center"}
+                                        gap={"2"}
+                                    >
+                                        {user ? (
+                                            <Avatar
+                                                size="3"
+                                                src={user.profile_pic!}
+                                                radius="full"
+                                                fallback={"A"}
+                                                className="shadow-md"
+                                            />
+                                        ) : (
+                                            <></>
+                                        )}
+                                        <Flex direction={"column"}>
+                                            <Text weight={"bold"}>
+                                                {user
+                                                    ? user.firstname +
+                                                      " " +
+                                                      user.lastname
+                                                    : "NO USER"}
+                                            </Text>
+                                            <Text>
+                                                {user
+                                                    ? user.username
+                                                    : "NO USER"}
+                                            </Text>
+                                            {/* <Text>{user ? user.id : "NO USER"}</Text> */}
+                                        </Flex>
                                     </Flex>
-                                </Flex>
-                            </Card>}
-                            {!sidenavOpen && <motion.div
-                                transition={{ duration: 0.2 }}
-                                animate={{
-                                    opacity: sidenavOpen ? 0 : 1,
-                                    x: sidenavOpen ? -20 : 0,
-                                }}
-                                className="flex items-center justify-center pb-2">
-                                <Avatar size="3" src={user?.profile_pic!} radius="full" fallback={"A"} className="shadow-md" />
-                            </motion.div>}
+                                </Card>
+                            )}
+                            {!sidenavOpen && (
+                                <motion.div
+                                    transition={{ duration: 0.2 }}
+                                    animate={{
+                                        opacity: sidenavOpen ? 0 : 1,
+                                        x: sidenavOpen ? -20 : 0,
+                                    }}
+                                    className="flex items-center justify-center pb-2"
+                                >
+                                    <Avatar
+                                        size="3"
+                                        src={user?.profile_pic!}
+                                        radius="full"
+                                        fallback={"A"}
+                                        className="shadow-md"
+                                    />
+                                </motion.div>
+                            )}
                         </AnimatePresence>
 
                         <SideNavItem

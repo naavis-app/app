@@ -20,7 +20,7 @@ export const deviceRouter = createTRPCRouter({
                 throw new TRPCError({
                     code: "NOT_FOUND",
                     message: "User not found",
-                })
+                });
             }
 
             try {
@@ -35,8 +35,8 @@ export const deviceRouter = createTRPCRouter({
                 console.error(e);
                 throw new TRPCError({
                     code: "BAD_REQUEST",
-                    message: "Failed to create device"
-                })
+                    message: "Failed to create device",
+                });
             }
         }),
     list: publicProcedure
@@ -53,8 +53,8 @@ export const deviceRouter = createTRPCRouter({
             if (!user) {
                 throw new TRPCError({
                     code: "NOT_FOUND",
-                    message: "User not found"
-                })
+                    message: "User not found",
+                });
             }
 
             return ctx.db.device.findMany({ where: { userId: input.userId } });

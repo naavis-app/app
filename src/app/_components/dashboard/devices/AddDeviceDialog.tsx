@@ -81,9 +81,7 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger asChild onClick={() => setDialogOpen(!dialogOpen)}>
-                <Button variant={"solid"}>
-                    New Device
-                </Button>
+                <Button variant={"solid"}>New Device</Button>
             </Dialog.Trigger>
 
             <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60 blur-sm" />
@@ -127,7 +125,10 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
                             justify={"between"}
                             align={"center"}
                         >
-                            <Dialog.Close asChild onClick={() => setDialogOpen(false)}>
+                            <Dialog.Close
+                                asChild
+                                onClick={() => setDialogOpen(false)}
+                            >
                                 <Button variant="ghost">Cancel</Button>
                             </Dialog.Close>
 

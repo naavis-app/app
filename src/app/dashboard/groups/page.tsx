@@ -1,7 +1,15 @@
 "use client";
 
 import { Link1Icon, PlusCircledIcon } from "@radix-ui/react-icons";
-import { Button, Card, Flex, Popover, Table, Text, Tooltip } from "@radix-ui/themes";
+import {
+    Button,
+    Card,
+    Flex,
+    Popover,
+    Table,
+    Text,
+    Tooltip,
+} from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { FaCrown } from "react-icons/fa";
@@ -34,7 +42,7 @@ export default function GroupsPage() {
                     <Text size={"8"} weight={"bold"}>
                         Your Groups
                     </Text>
-                    <div className="flex flex-row gap-2 justify-center items-center">
+                    <div className="flex flex-row items-center justify-center gap-2">
                         <CreateGroupDialog refetch={groupQuery.refetch} />
                         <Button variant="outline" id="join">
                             Join Group
@@ -69,7 +77,11 @@ export default function GroupsPage() {
                         </Table.Header>
 
                         <Table.Body>
-                            <GroupRow name="Your Group" isOwner={true} members={["1", "2", "3"]} />
+                            <GroupRow
+                                name="Your Group"
+                                isOwner={true}
+                                members={["1", "2", "3"]}
+                            />
                             <GroupRow
                                 name="Red Rangers"
                                 isOwner={true}
@@ -85,11 +97,14 @@ export default function GroupsPage() {
                                 isOwner={false}
                                 members={["1", "2", "3"]}
                             />
-                            {
-                                /* TODO: Group members preview system */
-                            }
+                            {/* TODO: Group members preview system */}
                             {groups.map((group) => (
-                                <GroupRow key={group.id} name={group.name} isOwner={group.ownerId === user?.id} members={[""]} />
+                                <GroupRow
+                                    key={group.id}
+                                    name={group.name}
+                                    isOwner={group.ownerId === user?.id}
+                                    members={[""]}
+                                />
                             ))}
                         </Table.Body>
                     </Table.Root>

@@ -3,8 +3,6 @@ import { deviceRouter } from "~/server/api/routers/device";
 import { userRouter } from "~/server/api/routers/user";
 import { groupRouter } from "./routers/group";
 
-
-
 /**
  * This is the primary router for your server.
  *
