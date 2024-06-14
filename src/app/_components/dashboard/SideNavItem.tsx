@@ -22,7 +22,7 @@ export default function SideNavItem({ label, icon, url }: SideNavItemProps) {
     const inner = (
         <div className={clsx("flex w-full flex-row items-center gap-2 rounded-md p-4 text-[--accent-11] transition-all ease-in-out hover:cursor-pointer hover:bg-[--accent-3]",
             (!open ? "p-2" : "pl-8 justify-start"),
-            (pathname == url ? "border-[1px]" : "")
+            (pathname == url ? " shadow-md" : "")
         )}>
             <div className={clsx(!open ? '' : '')}>
                 {icon}

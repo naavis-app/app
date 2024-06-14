@@ -1,7 +1,7 @@
 "use client";
 
 import { Link1Icon, PlusCircledIcon } from "@radix-ui/react-icons";
-import { Button, Flex, Popover, Table, Text, Tooltip } from "@radix-ui/themes";
+import { Button, Card, Flex, Popover, Table, Text, Tooltip } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { FaCrown } from "react-icons/fa";
@@ -46,53 +46,55 @@ export default function GroupsPage() {
                 </Text>
             </Flex>
 
-            <Flex
-                direction={"row"}
-                gap={"2"}
-                justify={"between"}
-                className="mt-4 w-full"
-            >
-                <Table.Root className="w-full max-w-4xl">
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.ColumnHeaderCell>
-                                Name
-                            </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>
-                                Members
-                            </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>
-                                Actions
-                            </Table.ColumnHeaderCell>
-                        </Table.Row>
-                    </Table.Header>
+            <Card className="mt-4">
+                <Flex
+                    direction={"row"}
+                    gap={"2"}
+                    justify={"between"}
+                    className="w-full pb-4"
+                >
+                    <Table.Root className="w-full max-w-4xl">
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.ColumnHeaderCell>
+                                    Name
+                                </Table.ColumnHeaderCell>
+                                <Table.ColumnHeaderCell>
+                                    Members
+                                </Table.ColumnHeaderCell>
+                                <Table.ColumnHeaderCell>
+                                    Actions
+                                </Table.ColumnHeaderCell>
+                            </Table.Row>
+                        </Table.Header>
 
-                    <Table.Body>
-                        <GroupRow name="Your Group" isOwner={true} members={["1", "2", "3"]} />
-                        <GroupRow
-                            name="Red Rangers"
-                            isOwner={true}
-                            members={["1", "2", "3"]}
-                        />
-                        <GroupRow
-                            name="Blue Rangers"
-                            isOwner={false}
-                            members={["1", "2", "3"]}
-                        />
-                        <GroupRow
-                            name="Green Rangers"
-                            isOwner={false}
-                            members={["1", "2", "3"]}
-                        />
-                        {
-                            /* TODO: Group members preview system */
-                        }
-                        {groups.map((group) => (
-                            <GroupRow key={group.id} name={group.name} isOwner={group.ownerId === user?.id} members={[""]} />
-                        ))}
-                    </Table.Body>
-                </Table.Root>
-            </Flex>
+                        <Table.Body>
+                            <GroupRow name="Your Group" isOwner={true} members={["1", "2", "3"]} />
+                            <GroupRow
+                                name="Red Rangers"
+                                isOwner={true}
+                                members={["1", "2", "3"]}
+                            />
+                            <GroupRow
+                                name="Blue Rangers"
+                                isOwner={false}
+                                members={["1", "2", "3"]}
+                            />
+                            <GroupRow
+                                name="Green Rangers"
+                                isOwner={false}
+                                members={["1", "2", "3"]}
+                            />
+                            {
+                                /* TODO: Group members preview system */
+                            }
+                            {groups.map((group) => (
+                                <GroupRow key={group.id} name={group.name} isOwner={group.ownerId === user?.id} members={[""]} />
+                            ))}
+                        </Table.Body>
+                    </Table.Root>
+                </Flex>
+            </Card>
         </>
     );
 }
