@@ -38,7 +38,7 @@ import { useAtom } from "jotai";
 import { sidenavOpenAtom, userAtom } from "~/server/lib/stores";
 import SideNavItem from "./SideNavItem";
 import ThemeToggle from "../ThemeToggle";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 
 export default function SideNav() {
@@ -95,34 +95,47 @@ export default function SideNav() {
 
 
                     <Flex direction={"column"} gap={"2"} className="p-4">
-                        <Card className="">
-                            <Flex direction={"row"} align={"center"} gap={"2"}>
-                                {user ? (
-                                    <Avatar
-                                        size="3"
-                                        src={user.profile_pic!}
-                                        radius="full"
-                                        fallback={"A"}
-                                        className="shadow-md"
-                                    />
-                                ) : (
-                                    <></>
-                                )}
-                                <Flex direction={"column"}>
-                                    <Text weight={"bold"}>
-                                        {user
-                                            ? user.firstname +
-                                            " " +
-                                            user.lastname
-                                            : "NO USER"}
-                                    </Text>
-                                    <Text>
-                                        {user ? user.username : "NO USER"}
-                                    </Text>
-                                    {/* <Text>{user ? user.id : "NO USER"}</Text> */}
+                        <AnimatePresence
+
+                        >
+                            {sidenavOpen && <Card>
+                                <Flex direction={"row"} align={"center"} gap={"2"}>
+                                    {user ? (
+                                        <Avatar
+                                            size="3"
+                                            src={user.profile_pic!}
+                                            radius="full"
+                                            fallback={"A"}
+                                            className="shadow-md"
+                                        />
+                                    ) : (
+                                        <></>
+                                    )}
+                                    <Flex direction={"column"}>
+                                        <Text weight={"bold"}>
+                                            {user
+                                                ? user.firstname +
+                                                " " +
+                                                user.lastname
+                                                : "NO USER"}
+                                        </Text>
+                                        <Text>
+                                            {user ? user.username : "NO USER"}
+                                        </Text>
+                                        {/* <Text>{user ? user.id : "NO USER"}</Text> */}
+                                    </Flex>
                                 </Flex>
-                            </Flex>
-                        </Card>
+                            </Card>}
+                            {!sidenavOpen && <motion.div
+                                transition={{ duration: 0.2 }}
+                                animate={{
+                                    opacity: sidenavOpen ? 0 : 1,
+                                    x: sidenavOpen ? -20 : 0,
+                                }}
+                                className="flex items-center justify-center pb-2">
+                                <Avatar size="3" src={user?.profile_pic!} radius="full" fallback={"A"} className="shadow-md" />
+                            </motion.div>}
+                        </AnimatePresence>
 
                         <SideNavItem
                             icon={<HomeIcon />}
