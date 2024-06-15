@@ -38,7 +38,7 @@ export default function GroupRow({ name, isOwner, members }: GroupRowProps) {
                         />
                     ))}
                 </Table.Cell>
-                <Table.Cell className="flex h-full flex-col items-center">
+                <Table.Cell className="flex flex-col items-center">
                     <Button variant="ghost" className="w-full">
                         <GearIcon />
                     </Button>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
 import {
@@ -39,10 +39,35 @@ import { sidenavOpenAtom, userAtom } from "~/server/lib/stores";
 import SideNavItem from "./SideNavItem";
 import ThemeToggle from "../ThemeToggle";
 import { motion, AnimatePresence } from "framer-motion";
+import useWindowSize from "~/app/hooks/useWindowSize";
 
 export default function SideNav() {
     const [user] = useAtom(userAtom);
     const [sidenavOpen, setOpen] = useAtom(sidenavOpenAtom);
+    const [togglerVisible, setTogglerVisible] = useState(true);
+    const { width, height } = useWindowSize();
+
+    useEffect(() => {
+        if (width! < 1024) {
+            setOpen(false);
+            setTogglerVisible(false);
+        } else if (width! >= 1024) {
+            setOpen(true);
+            setTogglerVisible(true);
+        }
+
+        if (width! > 1440) {
+            setTogglerVisible(false);
+        }
+    }, [width]);
+    /* 
+    ^^^changes when the navbar is open and closed based on size
+    also toggles if the button is visible or not.
+    on small screens and very large screens, you cannot use the button
+    (as keeping the navbar open is super ugly on small screens.
+    keeping it closed also makes the page look very empty on super
+    large screens)
+    */
 
     // same thing below for the user id (check AccountButton.tsx).
     // can be commented out for debugging
@@ -90,16 +115,21 @@ export default function SideNav() {
                                     rotate: sidenavOpen ? 0 : 180,
                                 }}
                             >
-                                <Button
-                                    className="!h-[2rem] !w-[2rem] !p-0"
-                                    radius={"full"}
-                                    onClick={() => setOpen(!sidenavOpen)}
-                                >
-                                    <CaretLeftIcon
-                                        height={"1.4rem"}
-                                        width={"1.4em"}
-                                    />
-                                </Button>
+                                {
+                                    togglerVisible ?
+                                    <Button
+                                        className="!h-[2rem] !w-[2rem] !p-0"
+                                        radius={"full"}
+                                        onClick={() => setOpen(!sidenavOpen)}
+                                    >
+                                        <CaretLeftIcon
+                                            height={"1.4rem"}
+                                            width={"1.4em"}
+                                        />
+                                    </Button>
+                                    :
+                                    null
+                                }
                             </motion.div>
                         </Flex>
                     </Flex>

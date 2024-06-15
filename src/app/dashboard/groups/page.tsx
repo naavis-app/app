@@ -16,11 +16,15 @@ import { FaCrown } from "react-icons/fa";
 import { LuCrown } from "react-icons/lu";
 import CreateGroupDialog from "~/app/_components/dashboard/groups/CreateGroupDialog";
 import GroupRow from "~/app/_components/dashboard/groups/GroupRow";
+import useWindowSize from "~/app/hooks/useWindowSize";
 import { groupListAtom, userAtom } from "~/server/lib/stores";
 import { api } from "~/trpc/react";
 
 export default function GroupsPage() {
     const [user, setUser] = useAtom(userAtom);
+    const { width, height } = useWindowSize();
+    /* used to dynamically move the create
+    and join group buttons based on screen size*/
 
     const groupQuery = api.group.list.useQuery({
         userId: user?.id || "",
@@ -38,20 +42,39 @@ export default function GroupsPage() {
     return (
         <>
             <Flex direction={"column"}>
-                <div className="flex flex-row justify-between">
+                <div className={`flex 
+                    flex-row justify-between`}>
                     <Text size={"8"} weight={"bold"}>
                         Your Groups
                     </Text>
-                    <div className="flex flex-row items-center justify-center gap-2">
+                    {
+                        width! >= 768 ?
+                        <div className="flex flex-row items-center justify-center gap-2">
+                            <CreateGroupDialog refetch={groupQuery.refetch} />
+                            <Button variant="outline" id="join">
+                                Join Group
+                            </Button>
+                        </div>
+                        :
+                        null
+                    }
+                </div>
+                <Text size={"4"} color="gray">
+                    Create and manage your groups
+                </Text>
+                {
+                    width! >= 768 ?
+                    null
+                    :
+                    <div className="flex flex-row 
+                    items-center gap-2
+                    mt-2">
                         <CreateGroupDialog refetch={groupQuery.refetch} />
                         <Button variant="outline" id="join">
                             Join Group
                         </Button>
                     </div>
-                </div>
-                <Text size={"4"} color="gray">
-                    Create and manage your groups
-                </Text>
+                }
             </Flex>
 
             <Card className="mt-4">
@@ -64,13 +87,16 @@ export default function GroupsPage() {
                     <Table.Root className="w-full max-w-4xl">
                         <Table.Header>
                             <Table.Row>
-                                <Table.ColumnHeaderCell>
+                                <Table.ColumnHeaderCell
+                                className="w-1/3">
                                     Name
                                 </Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell>
+                                <Table.ColumnHeaderCell
+                                className="w-1/3">
                                     Members
                                 </Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell>
+                                <Table.ColumnHeaderCell
+                                className="w-1/3 text-center" >
                                     Actions
                                 </Table.ColumnHeaderCell>
                             </Table.Row>
@@ -113,3 +139,4 @@ export default function GroupsPage() {
         </>
     );
 }
+// fix scrolling horizontally issue in table
