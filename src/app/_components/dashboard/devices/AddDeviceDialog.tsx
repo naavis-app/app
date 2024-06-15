@@ -68,6 +68,8 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
     const newDevice = () => {
         if (addingDevice) return;
         if (!user) return toast.error("You must be logged in to add a device");
+        if (!deviceName.length) return toast.error("You must enter a name!");
+        if (!deviceType) return toast.error("You must select a device type!");
 
         setAddingDevice(true);
 
@@ -89,14 +91,15 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
                 <Card variant="surface" className="min-w-[24rem]">
                     <Flex direction={"column"} className="p-2" gap={"2"}>
                         <Text size={"5"} weight={"bold"}>
-                            Add a new device
+                            Add A New Device
                         </Text>
 
                         <Flex direction={"column"} gap={"2"}>
                             <Text size={"3"}>Device Name</Text>
                             <TextField.Root
-                                placeholder="Device Name"
+                                placeholder="Name of Your Device"
                                 onChange={(e) => setDeviceName(e.target.value)}
+                                required
                             />
 
                             <Text size={"3"}>Device Type</Text>

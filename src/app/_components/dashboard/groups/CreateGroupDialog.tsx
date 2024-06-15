@@ -42,8 +42,11 @@ export default function CreateGroupDialog({
 
     const newDevice = () => {
         if (addingDevice) return;
-        if (!user)
+        if (!user) {
             return toast.error("You must be logged in to create a group");
+        }
+        if (!groupName) return toast.error("You must enter a name!");
+        if (!groupDescription) return toast.error("You must enter a description!");
 
         setAddingDevice(true);
 
@@ -65,22 +68,24 @@ export default function CreateGroupDialog({
                 <Card variant="surface" className="min-w-[24rem]">
                     <Flex direction={"column"} className="p-2" gap={"2"}>
                         <Text size={"5"} weight={"bold"}>
-                            Create a new group
+                            Create A New Group
                         </Text>
 
                         <Flex direction={"column"} gap={"2"}>
                             <Text size={"3"}>Group Name</Text>
                             <TextField.Root
-                                placeholder="Name"
+                                placeholder="Your group's name..."
                                 onChange={(e) => setGroupName(e.target.value)}
+                                required
                             />
 
                             <Text size={"3"}>Description</Text>
                             <TextField.Root
-                                placeholder="Description"
+                                placeholder="Your group's description..."
                                 onChange={(e) =>
                                     setGroupDescription(e.target.value)
                                 }
+                                required
                             />
                         </Flex>
 

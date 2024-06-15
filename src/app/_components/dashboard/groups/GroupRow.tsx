@@ -1,6 +1,7 @@
 import { GearIcon } from "@radix-ui/react-icons";
 import { Avatar, Button, Table, Tooltip } from "@radix-ui/themes";
 import { LuCrown } from "react-icons/lu";
+import useWindowSize from "~/app/hooks/useWindowSize";
 
 interface GroupRowProps {
     name: string;
@@ -9,24 +10,28 @@ interface GroupRowProps {
 }
 
 export default function GroupRow({ name, isOwner, members }: GroupRowProps) {
+    const { width, height } = useWindowSize();
+
     members = ["1", "2", "3"];
     return (
         <>
             <Table.Row className="h-full">
                 <Table.RowHeaderCell
-                    className="flex h-full flex-row items-center gap-2"
-                    p="5"
+                    className={`flex h-full flex-row items-center gap-2
+                    ${width! <= 640 && isOwner ? 
+                    `text-amber-400` : ""}`} p="5"
                 >
-                    {isOwner ? (
+                    {isOwner && width! >= 640 ? (
                         <Tooltip content="You own this group">
                             <LuCrown className="text text-amber-400" />
                         </Tooltip>
                     ) : (
-                        <LuCrown className="text text-transparent" />
+                        // <LuCrown className="text text-transparent" />
+                        null
                     )}
                     {name}
                 </Table.RowHeaderCell>
-                <Table.Cell className="">
+                <Table.Cell className="h-full">
                     {members.map((member, index) => (
                         <Avatar
                             radius={"full"}
@@ -38,7 +43,7 @@ export default function GroupRow({ name, isOwner, members }: GroupRowProps) {
                         />
                     ))}
                 </Table.Cell>
-                <Table.Cell className="flex flex-col items-center">
+                <Table.Cell className="text-center">
                     <Button variant="ghost" className="w-full">
                         <GearIcon />
                     </Button>
