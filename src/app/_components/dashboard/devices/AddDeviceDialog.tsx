@@ -40,8 +40,8 @@ import { api } from "~/trpc/react";
 export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
     const [user, setUser] = useAtom(userAtom);
 
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [addingDevice, setAddingDevice] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+    const [addingDevice, setAddingDevice] = useState<boolean>(false);
 
     const [deviceName, setDeviceName] = useState("");
     const [deviceType, setDeviceType] = useState("1");

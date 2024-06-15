@@ -2,9 +2,9 @@ import {
     DropdownMenu,
     Button,
 } from '@radix-ui/themes';
-import { RxPencil1 } from "react-icons/rx";
 import { GearIcon } from '@radix-ui/react-icons';
-import { FiTrash2 } from "react-icons/fi";
+import EditDeviceDialog from './EditDeviceDialog';
+import DeleteDeviceDialog from './DeleteDeviceDialog';
 
 export default function DeviceDropdown() {
     return (
@@ -16,14 +16,10 @@ export default function DeviceDropdown() {
             </DropdownMenu.Trigger>
             <DropdownMenu.Content>
                 <DropdownMenu.Item>
-                    <RxPencil1 />
-                    Edit Device
+                    <EditDeviceDialog />
                 </DropdownMenu.Item>
                 <DropdownMenu.Item>
-                    <div className='flex items-center gap-2 h-full text-red-500'>
-                        <FiTrash2 />
-                        Delete Device
-                    </div>
+                    <DeleteDeviceDialog />
                 </DropdownMenu.Item>
             </DropdownMenu.Content>
         </DropdownMenu.Root>
