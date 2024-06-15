@@ -106,6 +106,9 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                             </Flex>
                         </Flex>
                     </Box>
+                    <Button variant={"ghost"}>
+                            <GearIcon />
+                    </Button>
                 </Flex>
             </>
         );
