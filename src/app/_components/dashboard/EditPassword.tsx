@@ -98,3 +98,6 @@ export default function EditPassword() {
         </form>
     )
 }
+
+/* separate page for editing passwords (might make it more secure later, OTP
+or smth like that to email) */
