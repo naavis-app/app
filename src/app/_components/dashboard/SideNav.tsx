@@ -21,6 +21,19 @@ import {
     PinRightIcon,
     SewingPinIcon,
 } from "@radix-ui/react-icons";
+import { 
+    FaHome,
+    FaMapMarkedAlt, 
+} from 'react-icons/fa';
+import { 
+    FaUserGroup, 
+    FaCaretLeft
+} from 'react-icons/fa6';
+import { MdDevices } from "react-icons/md";
+import { 
+    IoSettingsSharp, 
+} from "react-icons/io5";
+import { TbLogout } from "react-icons/tb";
 
 import { clsx } from "clsx";
 import {
@@ -122,7 +135,7 @@ export default function SideNav() {
                                         radius={"full"}
                                         onClick={() => setOpen(!sidenavOpen)}
                                     >
-                                        <CaretLeftIcon
+                                        <FaCaretLeft
                                             height={"1.4rem"}
                                             width={"1.4em"}
                                         />
@@ -193,22 +206,22 @@ export default function SideNav() {
                         </AnimatePresence>
 
                         <SideNavItem
-                            icon={<HomeIcon />}
+                            icon={<FaHome />}
                             url={"/dashboard"}
                             label={"Home"}
                         />
                         <SideNavItem
-                            icon={<GlobeIcon />}
+                            icon={<FaMapMarkedAlt />}
                             url={"/dashboard/map"}
                             label={"Map"}
                         />
                         <SideNavItem
-                            icon={<Component1Icon />}
+                            icon={<FaUserGroup />}
                             url={"/dashboard/groups"}
                             label={"Groups"}
                         />
                         <SideNavItem
-                            icon={<CubeIcon />}
+                            icon={<MdDevices />}
                             url={"/dashboard/devices"}
                             label={"Devices"}
                         />
@@ -218,12 +231,12 @@ export default function SideNav() {
 
                     <Flex direction={"column"} gap={"2"} className="p-4">
                         <SideNavItem
-                            icon={<GearIcon />}
+                            icon={<IoSettingsSharp />}
                             url={"/dashboard/settings"}
                             label={"Settings"}
                         />
                         <SideNavItem
-                            icon={<ExitIcon />}
+                            icon={<TbLogout />}
                             url={"/logout"}
                             label={"Logout"}
                         />
