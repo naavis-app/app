@@ -2,6 +2,8 @@ import { GearIcon } from "@radix-ui/react-icons";
 import { Avatar, Button, Table, Tooltip } from "@radix-ui/themes";
 import { LuCrown } from "react-icons/lu";
 import useWindowSize from "~/app/hooks/useWindowSize";
+import GroupDropdown from "./GroupDropdown";
+import { Group } from "@radix-ui/react-dropdown-menu";
 
 interface GroupRowProps {
     name: string;
@@ -44,9 +46,7 @@ export default function GroupRow({ name, isOwner, members }: GroupRowProps) {
                     ))}
                 </Table.Cell>
                 <Table.Cell className="text-center">
-                    <Button variant="ghost" className="w-full">
-                        <GearIcon />
-                    </Button>
+                    <GroupDropdown />
                 </Table.Cell>
             </Table.Row>
         </>

@@ -14,10 +14,12 @@ import {
     Flex,
     Table,
     Text,
+    DropdownMenu,
 } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import MiniMapPreview from "../MiniMapPreview";
 import { Device } from "@prisma/client";
+import DeviceDropdown from "./DeviceDropdown";
 
 interface DeviceRowProps {
     device: Device;
@@ -106,9 +108,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                             </Flex>
                         </Flex>
                     </Box>
-                    <Button variant={"ghost"}>
-                            <GearIcon />
-                    </Button>
+                    <DeviceDropdown />
                 </Flex>
             </>
         );
@@ -145,9 +145,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                         >
                             <Badge color={"green"}>{device.connection}</Badge>
 
-                            <Button variant={"ghost"}>
-                                <GearIcon />
-                            </Button>
+                            <DeviceDropdown />
                         </Flex>
                     </Flex>
                 </Card>
