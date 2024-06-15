@@ -221,7 +221,7 @@ export async function signup(formData: FormData): Promise<ActionResult> {
 }
 
 export async function edit(formData: FormData): Promise<ActionResult> {
-    let username = formData.get("username");
+    const username = formData.get("username");
 
     if (
         typeof username != "string" ||
@@ -257,7 +257,7 @@ export async function edit(formData: FormData): Promise<ActionResult> {
 
     let userId = formData.get("userId");
 
-    const newUser = await db.user.update({
+    const editUser = await db.user.update({
         where: {
             id: userId as string,
         },
@@ -278,7 +278,7 @@ export async function edit(formData: FormData): Promise<ActionResult> {
     );
 
     return {
-        user: filterUserAttributes(newUser),
+        user: filterUserAttributes(editUser),
     };
 } // editing all other profile fields but passwords
 
@@ -303,7 +303,7 @@ export async function editPassword(formData: FormData): Promise<ActionResult> {
         parallelism: 1,
     });
 
-    await db.user.update({
+    const editPasswordUser = await db.user.update({
         where: {
             id: userId as string,
         },
@@ -319,7 +319,9 @@ export async function editPassword(formData: FormData): Promise<ActionResult> {
         sessionCookie.value,
         sessionCookie.attributes,
     );
-    return redirect(`/dashboard`);
+    return {
+        user: filterUserAttributes(editPasswordUser),
+    };
 } // editing specifically for passwords
 
 export async function signOut(): Promise<ActionResult> {

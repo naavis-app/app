@@ -21,6 +21,7 @@ import { userAtom } from "~/server/lib/stores";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import EditableInput from "../edit-account/EditInput";
+import { editPassword } from "~/server/lib/auth";
 import { edit } from "~/server/lib/auth";
 import { useDropzone } from "react-dropzone";
 
@@ -134,7 +135,9 @@ export default function EditAccount() {
                 ) : (
                     <div
                         {...getRootProps()}
-                        className="rounded-lg border-2 border-dashed border-gray-300/50 p-4 text-center"
+                        className="rounded-lg border-2 
+                        border-dashed border-gray-300/50 
+                        p-4 text-center"
                     >
                         <input {...getInputProps()} />
                         <p className="select-none text-gray-500">

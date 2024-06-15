@@ -15,6 +15,7 @@ import {
 import { useAtom } from "jotai";
 import toast from "react-hot-toast";
 import EditAccount from "~/app/_components/dashboard/EditAccount";
+import EditPassword from "~/app/_components/dashboard/EditPassword";
 import { userAtom } from "~/server/lib/stores";
 
 type Inputs = {
@@ -37,6 +38,19 @@ export default function DashboardDevices() {
                         </Text>
 
                         <EditAccount />
+                    </Flex>
+                </Card>
+
+                <Card className="mt-4" size={"3"}>
+                    <Flex direction={"column"}>
+                        <Text size={"8"} weight={"bold"}>
+                            Password
+                        </Text>
+                        <Text size={"4"} className="mb-4">
+                            Update your password.
+                        </Text>
+
+                        <EditPassword />
                     </Flex>
                 </Card>
 
