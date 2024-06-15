@@ -71,34 +71,28 @@ export default function DashboardDevices() {
                     <Text size={"8"} weight={"bold"}>
                         Device Manager
                     </Text>
-                    {
-                        width! >= 768 ?
+                    {width! >= 768 ? (
                         <AddDeviceDialog
-                        refetch={() => {
-                            deviceQuery.refetch();
-                        }}
+                            refetch={() => {
+                                deviceQuery.refetch();
+                            }}
                         />
-                        :
-                        null
-                    }
+                    ) : null}
                 </Flex>
 
                 <Text size={"4"} color="gray">
                     Track and manage all the devices connected to your account
                 </Text>
 
-                {
-                    width! >= 768 ?
-                    null
-                    :
+                {width! >= 768 ? null : (
                     <div className="mt-2">
                         <AddDeviceDialog
-                        refetch={() => {
-                            deviceQuery.refetch();
-                        }}
+                            refetch={() => {
+                                deviceQuery.refetch();
+                            }}
                         />
                     </div>
-                }
+                )}
             </Flex>
 
             <Flex

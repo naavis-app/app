@@ -21,18 +21,10 @@ import {
     PinRightIcon,
     SewingPinIcon,
 } from "@radix-ui/react-icons";
-import { 
-    FaHome,
-    FaMapMarkedAlt, 
-} from 'react-icons/fa';
-import { 
-    FaUserGroup, 
-    FaCaretLeft
-} from 'react-icons/fa6';
+import { FaHome, FaMapMarkedAlt } from "react-icons/fa";
+import { FaUserGroup, FaCaretLeft } from "react-icons/fa6";
 import { MdDevices } from "react-icons/md";
-import { 
-    IoSettingsSharp, 
-} from "react-icons/io5";
+import { IoSettingsSharp } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
 
 import { clsx } from "clsx";
@@ -128,8 +120,7 @@ export default function SideNav() {
                                     rotate: sidenavOpen ? 0 : 180,
                                 }}
                             >
-                                {
-                                    togglerVisible ?
+                                {togglerVisible ? (
                                     <Button
                                         className="!h-[2rem] !w-[2rem] !p-0"
                                         radius={"full"}
@@ -140,9 +131,7 @@ export default function SideNav() {
                                             width={"1.4em"}
                                         />
                                     </Button>
-                                    :
-                                    null
-                                }
+                                ) : null}
                             </motion.div>
                         </Flex>
                     </Flex>

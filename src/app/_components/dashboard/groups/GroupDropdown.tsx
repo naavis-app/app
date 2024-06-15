@@ -1,20 +1,15 @@
-import {
-    DropdownMenu,
-    Button,
-} from '@radix-ui/themes';
-import { GearIcon } from '@radix-ui/react-icons';
-import EditGroupDialog from './EditGroupDialog';
-import DeleteGroupDialog from './DeleteGroupDialog';
-import { 
-    IoSettingsSharp, 
-} from "react-icons/io5";
+import { DropdownMenu, Button } from "@radix-ui/themes";
+import { GearIcon } from "@radix-ui/react-icons";
+import EditGroupDialog from "./EditGroupDialog";
+import DeleteGroupDialog from "./DeleteGroupDialog";
+import { IoSettingsSharp } from "react-icons/io5";
 
 export default function GroupDropdown() {
     return (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger>
                 <Button variant={"ghost"}>
-                        <IoSettingsSharp />
+                    <IoSettingsSharp />
                 </Button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content>

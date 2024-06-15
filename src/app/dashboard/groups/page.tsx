@@ -42,39 +42,37 @@ export default function GroupsPage() {
     return (
         <>
             <Flex direction={"column"}>
-                <div className={`flex 
-                    flex-row justify-between`}>
+                <div
+                    className={`flex 
+                    flex-row justify-between`}
+                >
                     <Text size={"8"} weight={"bold"}>
                         Your Groups
                     </Text>
-                    {
-                        width! >= 768 ?
+                    {width! >= 768 ? (
                         <div className="flex flex-row items-center justify-center gap-2">
                             <CreateGroupDialog refetch={groupQuery.refetch} />
                             <Button variant="outline" id="join">
                                 Join Group
                             </Button>
                         </div>
-                        :
-                        null
-                    }
+                    ) : null}
                 </div>
                 <Text size={"4"} color="gray">
                     Create and manage your groups
                 </Text>
-                {
-                    width! >= 768 ?
-                    null
-                    :
-                    <div className="flex flex-row 
-                    items-center gap-2
-                    mt-2">
+                {width! >= 768 ? null : (
+                    <div
+                        className="mt-2 flex 
+                    flex-row items-center
+                    gap-2"
+                    >
                         <CreateGroupDialog refetch={groupQuery.refetch} />
                         <Button variant="outline" id="join">
                             Join Group
                         </Button>
                     </div>
-                }
+                )}
             </Flex>
 
             <Card className="mt-4">
@@ -87,16 +85,13 @@ export default function GroupsPage() {
                     <Table.Root className="w-full max-w-4xl">
                         <Table.Header>
                             <Table.Row>
-                                <Table.ColumnHeaderCell
-                                className="w-1/3">
+                                <Table.ColumnHeaderCell className="w-1/3">
                                     Name
                                 </Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell
-                                className="w-1/3">
+                                <Table.ColumnHeaderCell className="w-1/3">
                                     Members
                                 </Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell
-                                className="w-1/3 text-center" >
+                                <Table.ColumnHeaderCell className="w-1/3 text-center">
                                     Actions
                                 </Table.ColumnHeaderCell>
                             </Table.Row>

@@ -46,7 +46,8 @@ export default function CreateGroupDialog({
             return toast.error("You must be logged in to create a group");
         }
         if (!groupName) return toast.error("You must enter a name!");
-        if (!groupDescription) return toast.error("You must enter a description!");
+        if (!groupDescription)
+            return toast.error("You must enter a description!");
 
         setAddingDevice(true);
 

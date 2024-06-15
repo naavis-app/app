@@ -1,18 +1,11 @@
-
-import {
-    Box,
-    Text,
-    Flex,
-    Button,
-    TextField,
-} from '@radix-ui/themes';
+import { Box, Text, Flex, Button, TextField } from "@radix-ui/themes";
 import { RxPencil1 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
-import { editPassword } from '~/server/lib/auth';
-import toast from 'react-hot-toast';
+import { editPassword } from "~/server/lib/auth";
+import toast from "react-hot-toast";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 
 export default function EditPassword() {
@@ -33,13 +26,13 @@ export default function EditPassword() {
             setUser(response.user || null);
         }
     };
-    
+
     const handleInputChange = (e: any) => {
         setPassVal(e.target.value);
     };
 
     return (
-        <form 
+        <form
             onSubmit={(e: React.FormEvent) => {
                 e.preventDefault();
                 setToggleCheck(false);
@@ -48,7 +41,7 @@ export default function EditPassword() {
         >
             <Box mb={"5"}>
                 <div
-                className="relative flex
+                    className="relative flex
                 w-full flex-row items-center
                 justify-end"
                 >
@@ -67,14 +60,14 @@ export default function EditPassword() {
                     <input type="hidden" name="password" value={passVal} />
                     <button
                         type="button"
-                        className='absolute right-10'
+                        className="absolute right-10"
                         onClick={(e) => {
                             e.preventDefault();
                             setToggleEye(!toggleEye);
-                    }}>
-                        {eyeVisible && (
-                            toggleEye ? <ImEye /> : <ImEyeBlocked />
-                        )}
+                        }}
+                    >
+                        {eyeVisible &&
+                            (toggleEye ? <ImEye /> : <ImEyeBlocked />)}
                     </button>
                     <button
                         type="button"
@@ -96,7 +89,7 @@ export default function EditPassword() {
                 </Flex>
             </Box>
         </form>
-    )
+    );
 }
 
 /* separate page for editing passwords (might make it more secure later, OTP
