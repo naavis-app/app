@@ -30,9 +30,11 @@ import * as Dialog from "@radix-ui/react-dialog";
 import AddDeviceDialog from "~/app/_components/dashboard/devices/AddDeviceDialog";
 import { api } from "~/trpc/react";
 import { Device } from "@prisma/client";
+import useWindowSize from "~/app/hooks/useWindowSize";
 
 export default function DashboardDevices() {
     const [user, setUser] = useAtom(userAtom);
+    const { width, height } = useWindowSize();
 
     const deviceQuery = api.device.list.useQuery({
         userId: user?.id || "",
@@ -69,20 +71,38 @@ export default function DashboardDevices() {
                     <Text size={"8"} weight={"bold"}>
                         Device Manager
                     </Text>
-                    <AddDeviceDialog
+                    {
+                        width! >= 768 ?
+                        <AddDeviceDialog
                         refetch={() => {
                             deviceQuery.refetch();
                         }}
-                    />
+                        />
+                        :
+                        null
+                    }
                 </Flex>
 
                 <Text size={"4"} color="gray">
                     Track and manage all the devices connected to your account
                 </Text>
+
+                {
+                    width! >= 768 ?
+                    null
+                    :
+                    <div className="mt-2">
+                        <AddDeviceDialog
+                        refetch={() => {
+                            deviceQuery.refetch();
+                        }}
+                        />
+                    </div>
+                }
             </Flex>
 
             <Flex
-                direction={"row"}
+                direction={width! >= 640 ? "row" : "column"}
                 gap={"2"}
                 justify={"between"}
                 className="mt-4"
