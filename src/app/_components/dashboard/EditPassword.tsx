@@ -13,10 +13,13 @@ import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
 import { editPassword } from '~/server/lib/auth';
 import toast from 'react-hot-toast';
+import { ImEye, ImEyeBlocked } from "react-icons/im";
 
 export default function EditPassword() {
     const [user, setUser] = useAtom(userAtom);
     const [toggleCheck, setToggleCheck] = useState<boolean>(false);
+    const [eyeVisible, setEyeVisible] = useState<boolean>(false);
+    const [toggleEye, setToggleEye] = useState<boolean>(false);
     const [passVal, setPassVal] = useState<string>("");
 
     const handleSubmit = async (e: FormData) => {
@@ -55,7 +58,7 @@ export default function EditPassword() {
                         placeholder={`Enter your new password`}
                         className="w-full pr-10"
                         value={passVal}
-                        type="password"
+                        type={toggleEye ? "text" : "password"}
                         name="password"
                         required
                         disabled={!toggleCheck}
@@ -63,9 +66,22 @@ export default function EditPassword() {
                     />
                     <input type="hidden" name="password" value={passVal} />
                     <button
+                        type="button"
+                        className='absolute right-10'
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setToggleEye(!toggleEye);
+                    }}>
+                        {eyeVisible && (
+                            toggleEye ? <ImEye /> : <ImEyeBlocked />
+                        )}
+                    </button>
+                    <button
+                        type="button"
                         className="absolute right-4"
                         onClick={(e) => {
                             e.preventDefault();
+                            setEyeVisible(!eyeVisible);
                             setToggleCheck(!toggleCheck);
                         }}
                     >
