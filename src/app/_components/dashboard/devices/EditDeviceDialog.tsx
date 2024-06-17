@@ -91,7 +91,7 @@ export default function EditDeviceDialog() {
                                 // onClick={newDevice}
                                 disabled={addingDevice}
                             >
-                                Add Device
+                                Save
                             </Button>
                         </Flex>
                     </Flex>
