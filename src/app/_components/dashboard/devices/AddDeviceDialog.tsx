@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
 import * as Dialog from "@radix-ui/react-dialog";
 
-const deviceTypes = [
+export const deviceTypes = [
     {
         name: "Phone",
         id: "phone",

@@ -1,4 +1,4 @@
-import { DropdownMenu, Button } from "@radix-ui/themes";
+import { Popover, Button } from "@radix-ui/themes";
 import { GearIcon } from "@radix-ui/react-icons";
 import EditGroupDialog from "./EditGroupDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
@@ -6,20 +6,18 @@ import { IoSettingsSharp } from "react-icons/io5";
 
 export default function GroupDropdown() {
     return (
-        <DropdownMenu.Root>
-            <DropdownMenu.Trigger>
+        <Popover.Root>
+            <Popover.Trigger>
                 <Button variant={"ghost"}>
                     <IoSettingsSharp />
                 </Button>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content>
-                <DropdownMenu.Item>
+            </Popover.Trigger>
+            <Popover.Content>
+                <div className="flex flex-col gap-3">
                     <EditGroupDialog />
-                </DropdownMenu.Item>
-                <DropdownMenu.Item>
                     <DeleteGroupDialog />
-                </DropdownMenu.Item>
-            </DropdownMenu.Content>
-        </DropdownMenu.Root>
+                </div>
+            </Popover.Content>
+        </Popover.Root>
     );
 }

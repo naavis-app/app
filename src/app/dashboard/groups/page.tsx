@@ -98,7 +98,7 @@ export default function GroupsPage() {
                         </Table.Header>
 
                         <Table.Body>
-                            <GroupRow
+                            {/* <GroupRow
                                 name="Your Group"
                                 isOwner={true}
                                 members={["1", "2", "3"]}
@@ -117,7 +117,7 @@ export default function GroupsPage() {
                                 name="Green Rangers"
                                 isOwner={false}
                                 members={["1", "2", "3"]}
-                            />
+                            /> */}
                             {/* TODO: Group members preview system */}
                             {groups.map((group) => (
                                 <GroupRow
