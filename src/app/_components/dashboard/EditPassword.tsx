@@ -67,7 +67,7 @@ export default function EditPassword() {
                         }}
                     >
                         {eyeVisible &&
-                            (toggleEye ? <ImEye /> : <ImEyeBlocked />)}
+                            (toggleEye ? <ImEyeBlocked /> : <ImEye />)}
                     </button>
                     <button
                         type="button"

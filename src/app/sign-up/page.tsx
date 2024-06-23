@@ -125,8 +125,8 @@ export default function Page() {
                                         setToggle(!toggle);
                                     }}
                                 >
-                                    {!toggle && <ImEyeBlocked />}
-                                    {toggle && <ImEye />}
+                                    {!toggle && <ImEye />}
+                                    {toggle && <ImEyeBlocked />}
                                 </button>
                             </div>
                         </Box>
