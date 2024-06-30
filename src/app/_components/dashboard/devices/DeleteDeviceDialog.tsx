@@ -30,7 +30,6 @@ export default function DeleteDeviceDialog() {
                 <Button variant="ghost" color="red"
                 className="flex h-full items-center gap-2">
                     <FiTrash2 />
-                    Delete Device
                 </Button>
             </Dialog.Trigger>
         </Dialog.Root>

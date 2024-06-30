@@ -162,12 +162,12 @@ export default function SideNav() {
                                                     ? user.firstname +
                                                       " " +
                                                       user.lastname
-                                                    : "NO USER"}
+                                                    : "Loading..."}
                                             </Text>
                                             <Text>
                                                 {user
                                                     ? user.username
-                                                    : "NO USER"}
+                                                    : "Loading..."}
                                             </Text>
                                             {/* <Text>{user ? user.id : "NO USER"}</Text> */}
                                         </Flex>

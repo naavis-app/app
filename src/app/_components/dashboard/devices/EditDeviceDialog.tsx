@@ -33,7 +33,6 @@ export default function EditDeviceDialog() {
                 className="flex h-full items-center gap-2"
                 highContrast>
                     <RxPencil1 />
-                    Edit Device
                 </Button>
             </Dialog.Trigger>
 

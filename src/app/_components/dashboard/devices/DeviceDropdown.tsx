@@ -9,19 +9,10 @@ import { useState } from "react";
 export default function DeviceDropdown() {
     return (
         <>
-            <Popover.Root>
-                <Popover.Trigger>
-                    <Button variant={"ghost"}>
-                        <IoSettingsSharp />
-                    </Button>
-                </Popover.Trigger>
-                <Popover.Content>
-                    <div className="flex flex-col gap-3">
-                        <EditDeviceDialog />
-                        <DeleteDeviceDialog />
-                    </div>
-                </Popover.Content>
-            </Popover.Root>
+            <div className="flex flex-row gap-5 mt-1">
+                <EditDeviceDialog />
+                <DeleteDeviceDialog />
+            </div>
         </>
     );
 }
