@@ -6,7 +6,7 @@ import { IoSettingsSharp } from "react-icons/io5";
 import * as Dialog from '@radix-ui/react-dialog';
 import { useState } from "react";
 
-export default function DeviceDropdown() {
+export default function DeviceButtons() {
     return (
         <>
             <div className="flex flex-row gap-5 mt-1">

@@ -19,7 +19,7 @@ import {
 import { useEffect, useState } from "react";
 import MiniMapPreview from "../MiniMapPreview";
 import { Device } from "@prisma/client";
-import DeviceDropdown from "./DeviceDropdown";
+import DeviceButtons from "./DeviceButtons";
 
 interface DeviceRowProps {
     device: Device;
@@ -95,7 +95,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                             </Flex>
                         </Flex>
                     </Box>
-                    <DeviceDropdown />
+                    <DeviceButtons />
                 </Flex>
             </>
         );
@@ -132,7 +132,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                         >
                             <Badge color={"green"}>{device.connection}</Badge>
 
-                            <DeviceDropdown />
+                            <DeviceButtons />
                         </Flex>
                     </Flex>
                 </Card>
