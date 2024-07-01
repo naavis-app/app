@@ -47,42 +47,29 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
     const diffMinutes = currentDate.getMinutes() - updateDate.getMinutes();
     const diffSeconds = currentDate.getSeconds() - updateDate.getSeconds();
 
+    const time = [
+        { value: diffYear, singular: 'year', plural: 'years' },
+        { value: diffMonth, singular: 'month', plural: 'months' },
+        { value: diffDays, singular: 'day', plural: 'days' },
+        { value: diffHours, singular: 'hour', plural: 'hours' },
+        { value: diffMinutes, singular: 'minute', plural: 'minutes' },
+        { value: diffSeconds, singular: 'second', plural: 'seconds' },
+    ];
+
     useEffect(() => {
-        if (diffYear !== 0) {
-            if (diffYear === 1) {
-                setLastUpdated(`${diffYear} year`);
-            } else {
-                setLastUpdated(`${diffYear} years`);
+        if (currentDate.getDate() >= 1 &&
+            currentDate.getDate() <= 15 &&
+            updateDate.getDate() >= 20 &&
+            updateDate.getDate() <= 31 && diffMonth <= 1) {
+                time[2]!.value = (updateDate.getDate() + 
+                currentDate.getDate()) - updateDate.getDate();
+                time[1]!.value = 0;
             }
-        } else if (diffMonth !== 0) {
-            if (diffMonth === 1) {
-                setLastUpdated(`${diffMonth} month`);
-            } else {
-                setLastUpdated(`${diffMonth} months`);
-            }
-        } else if (diffDays !== 0) {
-            if (diffDays === 1) {
-                setLastUpdated(`${diffDays} day`);
-            } else {
-                setLastUpdated(`${diffDays} days`);
-            }
-        } else if (diffHours !== 0) {
-            if (diffHours === 1) {
-                setLastUpdated(`${diffHours} hour`);
-            } else {
-                setLastUpdated(`${diffHours} hours`);
-            }
-        } else if (diffMinutes !== 0) {
-            if (diffMinutes === 1) {
-                setLastUpdated(`${diffMinutes} minute`);
-            } else {
-                setLastUpdated(`${diffMinutes} minutes`);
-            }
-        } else if (diffSeconds !== 0) {
-            if (diffSeconds === 1) {
-                setLastUpdated(`${diffSeconds} second`);
-            } else {
-                setLastUpdated(`${diffSeconds} seconds`);
+
+        for (const { value, singular, plural } of time) {
+            if (value !== 0) {
+                setLastUpdated(`${value} ${value === 1 ? singular : plural}`);
+                break;
             }
         }
     }, []);
