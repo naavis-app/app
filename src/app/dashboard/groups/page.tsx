@@ -2,6 +2,7 @@
 
 import { Link1Icon, PlusCircledIcon } from "@radix-ui/react-icons";
 import {
+    Box,
     Button,
     Card,
     Flex,
@@ -41,38 +42,22 @@ export default function GroupsPage() {
 
     return (
         <>
-            <Flex direction={"column"}>
-                <div
-                    className={`flex 
-                    flex-row justify-between`}
-                >
+            <Flex className="flex-col md:flex-row md:!justify-between w-full">
+                <Flex direction={"column"}>
                     <Text size={"8"} weight={"bold"}>
                         Your Groups
                     </Text>
-                    {width! >= 768 ? (
-                        <div className="flex flex-row items-center justify-center gap-2">
-                            <CreateGroupDialog refetch={groupQuery.refetch} />
-                            <Button variant="outline" id="join">
-                                Join Group
-                            </Button>
-                        </div>
-                    ) : null}
-                </div>
-                <Text size={"4"} color="gray">
-                    Create and manage your groups
-                </Text>
-                {width! >= 768 ? null : (
-                    <div
-                        className="mt-2 flex 
-                    flex-row items-center
-                    gap-2"
-                    >
-                        <CreateGroupDialog refetch={groupQuery.refetch} />
-                        <Button variant="outline" id="join">
-                            Join Group
-                        </Button>
-                    </div>
-                )}
+                    <Text size={"4"} color="gray">
+                        Create and manage your groups
+                    </Text>
+                </Flex>
+
+                <Flex direction={"row"} className="mt-4" gap={"2"}>
+                    <CreateGroupDialog refetch={groupQuery.refetch} />
+                    <Button variant="outline" id="join">
+                        Join Group
+                    </Button>
+                </Flex>
             </Flex>
 
             <Card className="mt-4">
@@ -82,7 +67,7 @@ export default function GroupsPage() {
                     justify={"between"}
                     className="w-full pb-4"
                 >
-                    <Table.Root className="w-full max-w-4xl">
+                    <Table.Root className="w-full max-w-4xl min-h-[8rem]">
                         <Table.Header>
                             <Table.Row>
                                 <Table.ColumnHeaderCell className="w-1/3">

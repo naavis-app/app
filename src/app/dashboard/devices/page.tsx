@@ -66,18 +66,16 @@ export default function DashboardDevices() {
     return (
         <>
             <Flex className="flex-col md:flex-row md:!justify-between w-full">
-                <Box>
-                    <Flex justify={"between"} align={"center"}>
-                        <Text size={"8"} weight={"bold"}>
-                            Device Manager
-                        </Text>
-                    </Flex>
-
+                <Flex direction={"column"}>
+                    <Text size={"8"} weight={"bold"}>
+                        Device Manager
+                    </Text>
                     <Text size={"4"} color="gray">
                         Track and manage all the devices connected to your account
                     </Text>
-                </Box>
-                <Box className="mt-4 max-w-[12rem]">
+                </Flex>
+
+                <Box className="m-4">
                     <AddDeviceDialog
                         refetch={() => {
                             deviceQuery.refetch();
