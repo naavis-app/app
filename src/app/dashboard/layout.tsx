@@ -23,20 +23,6 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
                     <PageTransitionEffect>
                         {children}
                     </PageTransitionEffect>
-
-                    {/* {
-                        pathname.endsWith("/map") && (
-                            <APIProvider apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-                                <Map
-                                    mapId={"7342a481321c1609"}
-                                    defaultCenter={{ lat: 0, lng: 0 }}
-                                    center={{ lat: 0, lng: 0 }}
-                                    defaultZoom={8}
-                                    streetViewControl={false}
-                                />
-                            </APIProvider>
-                        )
-                    } */}
                 </Box>
             </div>
         </>
