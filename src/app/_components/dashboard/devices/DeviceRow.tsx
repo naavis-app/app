@@ -48,23 +48,28 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
     const diffSeconds = currentDate.getSeconds() - updateDate.getSeconds();
 
     const time = [
-        { value: diffYear, singular: 'year', plural: 'years' },
-        { value: diffMonth, singular: 'month', plural: 'months' },
-        { value: diffDays, singular: 'day', plural: 'days' },
-        { value: diffHours, singular: 'hour', plural: 'hours' },
-        { value: diffMinutes, singular: 'minute', plural: 'minutes' },
-        { value: diffSeconds, singular: 'second', plural: 'seconds' },
+        { value: diffYear, singular: "year", plural: "years" },
+        { value: diffMonth, singular: "month", plural: "months" },
+        { value: diffDays, singular: "day", plural: "days" },
+        { value: diffHours, singular: "hour", plural: "hours" },
+        { value: diffMinutes, singular: "minute", plural: "minutes" },
+        { value: diffSeconds, singular: "second", plural: "seconds" },
     ];
 
     useEffect(() => {
-        if (currentDate.getDate() >= 1 &&
+        if (
+            currentDate.getDate() >= 1 &&
             currentDate.getDate() <= 15 &&
             updateDate.getDate() >= 20 &&
-            updateDate.getDate() <= 31 && diffMonth <= 1) {
-                time[2]!.value = (updateDate.getDate() + 
-                currentDate.getDate()) - updateDate.getDate();
-                time[1]!.value = 0;
-            }
+            updateDate.getDate() <= 31 &&
+            diffMonth <= 1
+        ) {
+            time[2]!.value =
+                updateDate.getDate() +
+                currentDate.getDate() -
+                updateDate.getDate();
+            time[1]!.value = 0;
+        }
 
         for (const { value, singular, plural } of time) {
             if (value !== 0) {

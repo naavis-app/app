@@ -28,17 +28,22 @@ export default function EditDeviceDialog() {
 
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
-            <Dialog.Trigger asChild onClick={() => setDialogOpen(prevOpen => !prevOpen)}>
-                <Button variant="ghost"
-                color="gray"
-                className="flex h-full items-center gap-2"
-                highContrast>
+            <Dialog.Trigger
+                asChild
+                onClick={() => setDialogOpen((prevOpen) => !prevOpen)}
+            >
+                <Button
+                    variant="ghost"
+                    color="gray"
+                    className="flex h-full items-center gap-2"
+                    highContrast
+                >
                     <RxPencil1 />
                 </Button>
             </Dialog.Trigger>
 
             <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60" />
-            <Dialog.Content className="fixed insert-0 z-50 flex items-center justify-center">
+            <Dialog.Content className="insert-0 fixed z-50 flex items-center justify-center">
                 <Card variant="surface" className="min-w-[24rem]">
                     <Flex direction="column" className="p-2" gap="2">
                         <Text size="5" weight="bold">

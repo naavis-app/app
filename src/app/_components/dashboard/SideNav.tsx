@@ -155,13 +155,21 @@ export default function SideNav() {
                                                 className="shadow-md"
                                             />
                                         </Skeleton>
-                                        <Flex direction={"column"} className="w-[12rem]">
+                                        <Flex
+                                            direction={"column"}
+                                            className="w-[12rem]"
+                                        >
                                             <Skeleton loading={!user}>
                                                 <Text weight={"bold"}>
-                                                    {user?.firstname || "" + user?.lastname || ""}
+                                                    {user?.firstname ||
+                                                        "" + user?.lastname ||
+                                                        ""}
                                                 </Text>
                                             </Skeleton>
-                                            <Skeleton loading={!user} className="mt-1">
+                                            <Skeleton
+                                                loading={!user}
+                                                className="mt-1"
+                                            >
                                                 <Text>
                                                     {user?.username || "x"}
                                                 </Text>

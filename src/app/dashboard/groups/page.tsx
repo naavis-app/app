@@ -42,7 +42,7 @@ export default function GroupsPage() {
 
     return (
         <>
-            <Flex className="flex-col md:flex-row md:!justify-between w-full">
+            <Flex className="w-full flex-col md:flex-row md:!justify-between">
                 <Flex direction={"column"}>
                     <Text size={"8"} weight={"bold"}>
                         Your Groups
@@ -67,7 +67,7 @@ export default function GroupsPage() {
                     justify={"between"}
                     className="w-full pb-4"
                 >
-                    <Table.Root className="w-full max-w-4xl min-h-[8rem]">
+                    <Table.Root className="min-h-[8rem] w-full max-w-4xl">
                         <Table.Header>
                             <Table.Row>
                                 <Table.ColumnHeaderCell className="w-1/3">

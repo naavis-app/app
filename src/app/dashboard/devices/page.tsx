@@ -65,13 +65,14 @@ export default function DashboardDevices() {
 
     return (
         <>
-            <Flex className="flex-col md:flex-row md:!justify-between w-full">
+            <Flex className="w-full flex-col md:flex-row md:!justify-between">
                 <Flex direction={"column"}>
                     <Text size={"8"} weight={"bold"}>
                         Device Manager
                     </Text>
                     <Text size={"4"} color="gray">
-                        Track and manage all the devices connected to your account
+                        Track and manage all the devices connected to your
+                        account
                     </Text>
                 </Flex>
 

@@ -59,8 +59,8 @@ export const groupRouter = createTRPCRouter({
                 });
             }
         }),
-    getOrCreateInviteCode: publicProcedure.input(z
-        .object({ groupId: z.string() }))
+    getOrCreateInviteCode: publicProcedure
+        .input(z.object({ groupId: z.string() }))
         .mutation(async ({ ctx, input }) => {
             try {
                 const group = await ctx.db.group.findUnique({

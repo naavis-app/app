@@ -20,9 +20,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
                 <SideNav />
 
                 <Box className="relative max-h-[100vh] w-full overflow-y-scroll rounded-md p-8">
-                    <PageTransitionEffect>
-                        {children}
-                    </PageTransitionEffect>
+                    <PageTransitionEffect>{children}</PageTransitionEffect>
                 </Box>
             </div>
         </>

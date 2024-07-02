@@ -28,21 +28,16 @@ export default function DashboardMap() {
         <>
             <GroupSelector />
             <AspectRatio>
-                <APIProvider 
-                    apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                <APIProvider apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
+                    <Map
+                        mapId={"7342a481321c1609"}
+                        defaultCenter={position}
+                        center={position}
+                        defaultZoom={8}
+                        streetViewControl={false}
                     >
-                        <Map
-                            mapId={"7342a481321c1609"}
-                            defaultCenter={position}
-                            center={position}
-                            defaultZoom={8}
-                            streetViewControl={false}
-                        >
-                            <AdvancedMarker
-                                position={position}
-                                title={"test"}
-                            />
-                        </Map>
+                        <AdvancedMarker position={position} title={"test"} />
+                    </Map>
                 </APIProvider>
             </AspectRatio>
         </>

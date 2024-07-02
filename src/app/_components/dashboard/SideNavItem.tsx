@@ -18,7 +18,12 @@ export default function SideNavItem({ label, icon, url }: SideNavItemProps) {
     const pathname = usePathname();
 
     const inner = (
-        <Tooltip content={label} side="right" align="center" className={clsx(open ? "opacity-0" : "")}>
+        <Tooltip
+            content={label}
+            side="right"
+            align="center"
+            className={clsx(open ? "opacity-0" : "")}
+        >
             <div
                 className={clsx(
                     "flex w-full flex-row items-center gap-2 rounded-md p-4 text-[--accent-11] transition-all ease-in-out hover:cursor-pointer hover:bg-[--accent-3]",

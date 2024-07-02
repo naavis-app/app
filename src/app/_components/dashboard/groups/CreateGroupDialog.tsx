@@ -2,7 +2,7 @@
 
 import { Button, Card, Flex, Text, TextField } from "@radix-ui/themes";
 import { useAtom } from "jotai";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -40,14 +40,10 @@ export default function CreateGroupDialog({
         },
     });
 
-    const newDevice = () => {
+    const newDevice = (e: FormData) => {
         if (addingDevice) return;
-        if (!user) {
+        if (!user)
             return toast.error("You must be logged in to create a group");
-        }
-        if (!groupName) return toast.error("You must enter a name!");
-        if (!groupDescription)
-            return toast.error("You must enter a description!");
 
         setAddingDevice(true);
 
@@ -64,53 +60,57 @@ export default function CreateGroupDialog({
                 <Button variant={"solid"}>Create Group</Button>
             </Dialog.Trigger>
 
-            <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60" />
+            <Dialog.Overlay className="fixed inset-0 z-40 bg-black/20" />
             <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center">
-                <Card variant="surface" className="min-w-[24rem]">
+                <Card className="min-w-[24rem]">
                     <Flex direction={"column"} className="p-2" gap={"2"}>
-                        <Text size={"5"} weight={"bold"}>
-                            Create A New Group
-                        </Text>
+                        <form action={newDevice}>
+                            <Text size={"5"} weight={"bold"}>
+                                Create A New Group
+                            </Text>
 
-                        <Flex direction={"column"} gap={"2"}>
-                            <Text size={"3"}>Group Name</Text>
-                            <TextField.Root
-                                placeholder="Your group's name..."
-                                onChange={(e) => setGroupName(e.target.value)}
-                                required
-                            />
+                            <Flex direction={"column"} gap={"2"}>
+                                <Text size={"3"}>Group Name</Text>
+                                <TextField.Root
+                                    placeholder="Your group's name..."
+                                    onChange={(e) =>
+                                        setGroupName(e.target.value)
+                                    }
+                                    required
+                                />
 
-                            <Text size={"3"}>Description</Text>
-                            <TextField.Root
-                                placeholder="Your group's description..."
-                                onChange={(e) =>
-                                    setGroupDescription(e.target.value)
-                                }
-                                required
-                            />
-                        </Flex>
+                                <Text size={"3"}>Description</Text>
+                                <TextField.Root
+                                    placeholder="Your group's description..."
+                                    onChange={(e) =>
+                                        setGroupDescription(e.target.value)
+                                    }
+                                    required
+                                />
+                            </Flex>
 
-                        <Flex
-                            direction={"row"}
-                            className="mt-2"
-                            justify={"between"}
-                            align={"center"}
-                        >
-                            <Dialog.Close
-                                asChild
-                                onClick={() => setDialogOpen(false)}
+                            <Flex
+                                direction={"row"}
+                                className="mt-2"
+                                justify={"between"}
+                                align={"center"}
                             >
-                                <Button variant="ghost">Cancel</Button>
-                            </Dialog.Close>
+                                <Dialog.Close
+                                    asChild
+                                    onClick={() => setDialogOpen(false)}
+                                >
+                                    <Button variant="ghost">Cancel</Button>
+                                </Dialog.Close>
 
-                            <Button
-                                variant={"solid"}
-                                onClick={newDevice}
-                                disabled={addingDevice}
-                            >
-                                Create Group
-                            </Button>
-                        </Flex>
+                                <Button
+                                    variant={"solid"}
+                                    disabled={addingDevice}
+                                    type="submit"
+                                >
+                                    Create Group
+                                </Button>
+                            </Flex>
+                        </form>
                     </Flex>
                 </Card>
             </Dialog.Content>
