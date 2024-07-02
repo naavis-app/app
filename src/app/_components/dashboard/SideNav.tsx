@@ -36,6 +36,7 @@ import {
     DropdownMenu,
     Flex,
     IconButton,
+    Skeleton,
     Text,
 } from "@radix-ui/themes";
 
@@ -145,31 +146,26 @@ export default function SideNav() {
                                         align={"center"}
                                         gap={"2"}
                                     >
-                                        {user ? (
+                                        <Skeleton loading={!user}>
                                             <Avatar
                                                 size="3"
-                                                src={user.profile_pic!}
+                                                src={user?.profile_pic!}
                                                 radius="full"
                                                 fallback={"A"}
                                                 className="shadow-md"
                                             />
-                                        ) : (
-                                            <></>
-                                        )}
-                                        <Flex direction={"column"}>
-                                            <Text weight={"bold"}>
-                                                {user
-                                                    ? user.firstname +
-                                                      " " +
-                                                      user.lastname
-                                                    : "Loading..."}
-                                            </Text>
-                                            <Text>
-                                                {user
-                                                    ? user.username
-                                                    : "Loading..."}
-                                            </Text>
-                                            {/* <Text>{user ? user.id : "NO USER"}</Text> */}
+                                        </Skeleton>
+                                        <Flex direction={"column"} className="w-[12rem]">
+                                            <Skeleton loading={!user}>
+                                                <Text weight={"bold"}>
+                                                    {user?.firstname || "" + user?.lastname || ""}
+                                                </Text>
+                                            </Skeleton>
+                                            <Skeleton loading={!user} className="mt-1">
+                                                <Text>
+                                                    {user?.username || "x"}
+                                                </Text>
+                                            </Skeleton>
                                         </Flex>
                                     </Flex>
                                 </Card>
