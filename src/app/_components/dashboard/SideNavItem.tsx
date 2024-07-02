@@ -32,6 +32,10 @@ export default function SideNavItem({ label, icon, url }: SideNavItemProps) {
                         opacity: open ? 1 : 0,
                         x: open ? 22 : 0,
                     }}
+                    initial={{
+                        opacity: 1,
+                        x: 22,
+                    }}
                     className="absolute"
                 >
                     <Text>{label}</Text>
