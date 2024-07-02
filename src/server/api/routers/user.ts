@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { validateRequest } from "~/server/lib/auth";
@@ -27,7 +28,10 @@ export const userRouter = createTRPCRouter({
                 });
             } catch (e) {
                 console.error(e);
-                throw new Error("Failed to create device");
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to update user",
+                });
             }
         }),
 });

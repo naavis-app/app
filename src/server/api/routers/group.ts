@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
@@ -26,7 +27,10 @@ export const groupRouter = createTRPCRouter({
                 });
             } catch (e) {
                 console.error(e);
-                throw new Error("Failed to create group");
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to create group",
+                });
             }
         }),
     update: publicProcedure
@@ -49,18 +53,28 @@ export const groupRouter = createTRPCRouter({
                 });
             } catch (e) {
                 console.error(e);
-                throw new Error("Failed to update group");
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to update group",
+                });
             }
         }),
     getOrCreateInviteCode: publicProcedure.input(z
         .object({ groupId: z.string() }))
         .mutation(async ({ ctx, input }) => {
             try {
-                let group = await ctx.db.group.findUnique({
+                const group = await ctx.db.group.findUnique({
                     where: {
                         id: input.groupId,
                     },
                 });
+
+                if (!group) {
+                    throw new TRPCError({
+                        code: "NOT_FOUND",
+                        message: "Group not found",
+                    });
+                }
 
                 if (group?.inviteCode) {
                     return group.inviteCode;
@@ -80,7 +94,10 @@ export const groupRouter = createTRPCRouter({
                 }
             } catch (e) {
                 console.error(e);
-                throw new Error("Failed to get or create invite code");
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to get or create invite code",
+                });
             }
         }),
     list: publicProcedure
@@ -90,14 +107,22 @@ export const groupRouter = createTRPCRouter({
             }),
         )
         .query(async ({ ctx, input }) => {
-            // Find groups that the user is a member of
-            return ctx.db.group.findMany({
-                where: {
-                    members: {
-                        some: { id: input.userId },
+            try {
+                // Find groups that the user is a member of
+                return ctx.db.group.findMany({
+                    where: {
+                        members: {
+                            some: { id: input.userId },
+                        },
                     },
-                },
-            });
+                });
+            } catch (e) {
+                console.error(e);
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to list groups",
+                });
+            }
         }),
     delete: publicProcedure
         .input(
@@ -115,7 +140,10 @@ export const groupRouter = createTRPCRouter({
                 });
             } catch (e) {
                 console.error(e);
-                throw new Error("Failed to delete group");
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to delete group",
+                });
             }
         }),
 });
