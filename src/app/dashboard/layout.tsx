@@ -24,7 +24,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
                         {children}
                     </PageTransitionEffect>
 
-                    {
+                    {/* {
                         pathname.endsWith("/map") && (
                             <APIProvider apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
                                 <Map
@@ -36,7 +36,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
                                 />
                             </APIProvider>
                         )
-                    }
+                    } */}
                 </Box>
             </div>
         </>
