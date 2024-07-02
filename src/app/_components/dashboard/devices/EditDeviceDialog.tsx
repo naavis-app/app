@@ -11,7 +11,6 @@ import { RxPencil1 } from "react-icons/rx";
 import { deviceTypes } from "./AddDeviceDialog";
 
 import { api } from "~/trpc/react";
-import { randInt } from "~/server/lib/googleauth";
 
 export default function EditDeviceDialog() {
     const [user, setUser] = useAtom(userAtom);
@@ -41,67 +40,74 @@ export default function EditDeviceDialog() {
                     <RxPencil1 />
                 </Button>
             </Dialog.Trigger>
+            <Dialog.Portal>
+                <Dialog.Overlay className="DialogOverlay
+                fixed inset-0 z-40 bg-black/60" />
+                <Dialog.Content className="DialogContent
+                fixed inset-0 z-50 flex items-center 
+                justify-center p-4">
+                    <Card variant="surface" className="Card min-w-[24rem]">
+                        <Flex direction={"column"} className="p-2" gap={"2"}>
+                            <Text size={"5"} weight={"bold"}>
+                                Edit Your Device
+                            </Text>
 
-            <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60" />
-            <Dialog.Content className="insert-0 fixed z-50 flex items-center justify-center">
-                <Card variant="surface" className="min-w-[24rem]">
-                    <Flex direction="column" className="p-2" gap="2">
-                        <Text size="5" weight="bold">
-                            Edit Your Device
-                        </Text>
-
-                        <Flex direction={"column"} gap={"2"}>
-                            <Text size={"3"}>Device Name</Text>
-                            <TextField.Root
-                                placeholder="Name of Your Device"
-                                onChange={(e) => setDeviceName(e.target.value)}
-                                required
-                            />
-
-                            <Text size={"3"}>Device Type</Text>
-                            <Select.Root
-                                onValueChange={(e) => setDeviceType(e)}
-                            >
-                                <Select.Trigger
-                                    variant="surface"
-                                    className="z-10"
+                            <Flex direction={"column"} gap={"2"}>
+                                <Text size={"3"}
+                                className="Label">Device Name</Text>
+                                <TextField.Root
+                                className="Input"
+                                    placeholder="Name of Your Device"
+                                    onChange={(e) => setDeviceName(e.target.value)}
+                                    required
                                 />
-                                <Select.Content>
-                                    <Select.Group>
-                                        {deviceTypes.map((type) => (
-                                            <Select.Item value={type.id}>
-                                                {type.name}
-                                            </Select.Item>
-                                        ))}
-                                    </Select.Group>
-                                </Select.Content>
-                            </Select.Root>
-                        </Flex>
 
-                        <Flex
-                            direction={"row"}
-                            className="mt-2"
-                            justify={"between"}
-                            align={"center"}
-                        >
-                            <Dialog.Close
-                                asChild
-                                onClick={() => setDialogOpen(false)}
-                            >
-                                <Button variant="ghost">Cancel</Button>
-                            </Dialog.Close>
+                                <Text size={"3"}
+                                className="Label">Device Type</Text>
+                                <Select.Root
+                                    onValueChange={(e) => setDeviceType(e)}
+                                >
+                                    <Select.Trigger
+                                        variant="surface"
+                                        className="z-10"
+                                    />
+                                    <Select.Content>
+                                        <Select.Group>
+                                            {deviceTypes.map((type) => (
+                                                <Select.Item value={type.id}>
+                                                    {type.name}
+                                                </Select.Item>
+                                            ))}
+                                        </Select.Group>
+                                    </Select.Content>
+                                </Select.Root>
+                            </Flex>
 
-                            <Button
-                                variant={"solid"}
-                                // onClick={newDevice}
-                                disabled={addingDevice}
+                            <Flex
+                                direction={"row"}
+                                className="mt-2"
+                                justify={"between"}
+                                align={"center"}
                             >
-                                Save
-                            </Button>
+                                <Dialog.Close
+                                    asChild
+                                    onClick={() => setDialogOpen(false)}
+                                >
+                                    <Button variant="ghost">Cancel</Button>
+                                </Dialog.Close>
+
+                                <Button
+                                    variant={"solid"}
+                                    // onClick={newDevice}
+                                    disabled={addingDevice}
+                                >
+                                    Save
+                                </Button>
+                            </Flex>
                         </Flex>
-                    </Flex>
-                </Card>
-            </Dialog.Content>
+                    </Card>
+                </Dialog.Content>
+            </Dialog.Portal>
         </Dialog.Root>
     );
 }
