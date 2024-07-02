@@ -37,7 +37,7 @@ export default function EditDeviceDialog() {
                 </Button>
             </Dialog.Trigger>
 
-            <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60 blur-sm" />
+            <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60" />
             <Dialog.Content className="fixed insert-0 z-50 flex items-center justify-center">
                 <Card variant="surface" className="min-w-[24rem]">
                     <Flex direction="column" className="p-2" gap="2">

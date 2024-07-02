@@ -34,7 +34,6 @@ import useWindowSize from "~/app/hooks/useWindowSize";
 
 export default function DashboardDevices() {
     const [user, setUser] = useAtom(userAtom);
-    const { width, height } = useWindowSize();
 
     const deviceQuery = api.device.list.useQuery({
         userId: user?.id || "",
@@ -66,40 +65,31 @@ export default function DashboardDevices() {
 
     return (
         <>
-            <Flex direction={"column"}>
-                <Flex justify={"between"} align={"center"}>
-                    <Text size={"8"} weight={"bold"}>
-                        Device Manager
+            <Flex className="flex-col md:flex-row md:!justify-between w-full">
+                <Box>
+                    <Flex justify={"between"} align={"center"}>
+                        <Text size={"8"} weight={"bold"}>
+                            Device Manager
+                        </Text>
+                    </Flex>
+
+                    <Text size={"4"} color="gray">
+                        Track and manage all the devices connected to your account
                     </Text>
-                    {width! >= 768 ? (
-                        <AddDeviceDialog
-                            refetch={() => {
-                                deviceQuery.refetch();
-                            }}
-                        />
-                    ) : null}
-                </Flex>
-
-                <Text size={"4"} color="gray">
-                    Track and manage all the devices connected to your account
-                </Text>
-
-                {width! >= 768 ? null : (
-                    <div className="mt-2">
-                        <AddDeviceDialog
-                            refetch={() => {
-                                deviceQuery.refetch();
-                            }}
-                        />
-                    </div>
-                )}
+                </Box>
+                <Box className="mt-4 max-w-[12rem]">
+                    <AddDeviceDialog
+                        refetch={() => {
+                            deviceQuery.refetch();
+                        }}
+                    />
+                </Box>
             </Flex>
 
             <Flex
-                direction={width! >= 640 ? "row" : "column"}
                 gap={"2"}
                 justify={"between"}
-                className="mt-4"
+                className="mt-4 flex-col sm:flex-row"
             >
                 <Box maxWidth={"300px"}>
                     <TextField.Root
