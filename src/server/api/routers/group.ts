@@ -52,6 +52,37 @@ export const groupRouter = createTRPCRouter({
                 throw new Error("Failed to update group");
             }
         }),
+    getOrCreateInviteCode: publicProcedure.input(z
+        .object({ groupId: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            try {
+                let group = await ctx.db.group.findUnique({
+                    where: {
+                        id: input.groupId,
+                    },
+                });
+
+                if (group?.inviteCode) {
+                    return group.inviteCode;
+                } else {
+                    // TODO: This is not a good way to generate invite codes
+                    let inviteCode = Math.random().toString(36).substring(2, 8);
+                    await ctx.db.group.update({
+                        where: {
+                            id: input.groupId,
+                        },
+                        data: {
+                            inviteCode: inviteCode,
+                        },
+                    });
+
+                    return inviteCode;
+                }
+            } catch (e) {
+                console.error(e);
+                throw new Error("Failed to get or create invite code");
+            }
+        }),
     list: publicProcedure
         .input(
             z.object({
