@@ -27,12 +27,13 @@ export default function EditDeviceDialog() {
 
     const editDevice = () => {
         if (editingDevice) return;
-        if (!user) return toast.error("You must be logged in to edit a device!");
+        if (!user)
+            return toast.error("You must be logged in to edit a device!");
         if (!deviceName.length) return toast.error("You must enter a name!");
         if (!deviceType) return toast.error("You must select a device type!");
 
         setEditingDevice(true);
-    }
+    };
 
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -50,76 +51,84 @@ export default function EditDeviceDialog() {
                 </Button>
             </Dialog.Trigger>
             <Dialog.Portal>
-                <Dialog.Overlay className="DialogOverlay
-                fixed inset-0 z-40 bg-black/60" />
-                <Dialog.Content className="DialogContent
+                <Dialog.Overlay
+                    className="DialogOverlay
+                fixed inset-0 z-40 bg-black/60"
+                />
+                <Dialog.Content
+                    className="DialogContent
                 fixed inset-0 z-50 flex items-center 
-                justify-center p-4">
-                    <div className="min-w-[24rem] bg-surface
-                    shadow rounded-lg">
-                        <div className="flex flex-col p-2 gap-2">
+                justify-center p-4"
+                >
+                    <div
+                        className="bg-surface min-w-[24rem]
+                    rounded-lg shadow"
+                    >
+                        <div className="flex flex-col gap-2 p-2">
                             <div className="text-xl font-bold">
                                 Edit Your Device
                             </div>
                             <div className="flex flex-col gap-2">
-                                <label className="text-md"
-                                >
-                                    Device Name
-                                </label>
-                                    <input type="text"
+                                <label className="text-md">Device Name</label>
+                                <input
+                                    type="text"
                                     placeholder="Name of Your Device"
-                                    onChange={(e) => setDeviceName(e.target.value)} 
+                                    onChange={(e) =>
+                                        setDeviceName(e.target.value)
+                                    }
                                     required
-                                    className="bg-[#111525] border p-2 
-                                    border-[#4a5065]
-                                    rounded-lg 
+                                    className="rounded-lg border border-[#4a5065] 
+                                    bg-[#111525]
+                                    p-2 
+                                    focus:border-transparent
                                     focus:outline-none
                                     focus:ring-2
-                                    focus:ring-blue-500
-                                    focus:border-transparent"
-                                    />
-                                    <label className="text-md"
-                                    >
-                                        Device Type
-                                    </label>
+                                    focus:ring-blue-500"
+                                />
+                                <label className="text-md">Device Type</label>
 
-                                    <select 
-                                    onChange={(e) => setDeviceType(e.target.value)}
-                                    className="border border-[#4a5065]
-                                    rounded-lg p-2 focus:outline-none 
+                                <select
+                                    onChange={(e) =>
+                                        setDeviceType(e.target.value)
+                                    }
+                                    className="rounded-lg border
+                                    border-[#4a5065] p-2 focus:border-transparent 
+                                    focus:outline-none
                                     focus:ring-2
-                                    focus:ring-blue-500
-                                    focus:border-transparent"
-                                    >
-                                        {deviceTypes.map((type) => (
-                                            <option value={type.id}>
-                                                {type.name}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    focus:ring-blue-500"
+                                >
+                                    {deviceTypes.map((type) => (
+                                        <option value={type.id}>
+                                            {type.name}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
-                            <div className="
-                            flex mt-2 justify-between
-                            items-center">
-                                <button
-                                onClick={() => setDialogOpen(false)}
+                            <div
                                 className="
-                                bg-transparent
-                                text-gray-700 py-1
-                                px-4 rounded
-                                text-[#98abf6]">
+                            mt-2 flex items-center
+                            justify-between"
+                            >
+                                <button
+                                    onClick={() => setDialogOpen(false)}
+                                    className="
+                                rounded
+                                bg-transparent px-4
+                                py-1 text-[#98abf6]
+                                text-gray-700"
+                                >
                                     Cancel
                                 </button>
                                 <button
-                                onClick={editDevice}
-                                disabled={editingDevice}
-                                className="bg-[#3e63de] hover:bg-blue-700 
-                                text-white py-1 px-4 rounded 
+                                    onClick={editDevice}
+                                    disabled={editingDevice}
+                                    className="rounded bg-[#3e63de] 
+                                px-4 py-1 text-white hover:bg-blue-700 
                                 disabled:bg-blue-300"
-                            >
-                                Save
-                            </button>
+                                >
+                                    Save
+                                </button>
                             </div>
                         </div>
                     </div>
