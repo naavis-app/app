@@ -16,36 +16,36 @@ export default function CreateGroupDialog({
     const [user, setUser] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [addingDevice, setAddingDevice] = useState(false);
+    const [addingGroup, setAddingGroup] = useState(false);
 
     const [groupName, setGroupName] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
 
     const createGroup = api.group.create.useMutation({
-        onSuccess: (device) => {
+        onSuccess: (group) => {
             refetch();
 
-            toast.success(`${device.name} has been created!`);
+            toast.success(`${group.name} has been created!`);
             setGroupName("");
             setGroupDescription("");
 
-            setAddingDevice(false);
+            setAddingGroup(false);
             setDialogOpen(false);
         },
         onError: () => {
             toast.error(`Failed to create ${groupName}`);
 
-            setAddingDevice(false);
+            setAddingGroup(false);
             setDialogOpen(false);
         },
     });
 
-    const newDevice = (e: FormData) => {
-        if (addingDevice) return;
+    const newGroup = () => {
+        if (addingGroup) return;
         if (!user)
             return toast.error("You must be logged in to create a group");
 
-        setAddingDevice(true);
+        setAddingGroup(true);
 
         createGroup.mutate({
             name: groupName,
@@ -59,61 +59,82 @@ export default function CreateGroupDialog({
             <Dialog.Trigger asChild onClick={() => setDialogOpen(!dialogOpen)}>
                 <Button variant={"solid"}>Create Group</Button>
             </Dialog.Trigger>
-
             <Dialog.Overlay className="fixed inset-0 z-40 bg-black/20" />
-            <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center">
-                <Card className="min-w-[24rem]">
-                    <Flex direction={"column"} className="p-2" gap={"2"}>
-                        <form action={newDevice}>
-                            <Text size={"5"} weight={"bold"}>
+                <Dialog.Content
+                    className="DialogContent
+                fixed inset-0 z-50 flex items-center 
+                justify-center p-4"
+                >
+                    <div
+                        className="bg-[#141B30] min-w-[24rem]
+                    rounded-lg shadow p-2 border border-[#293040]"
+                    >
+                        <div className="flex flex-col gap-2 p-2">
+                            <div className="text-xl font-bold">
                                 Create A New Group
-                            </Text>
-
-                            <Flex direction={"column"} gap={"2"}>
-                                <Text size={"3"}>Group Name</Text>
-                                <TextField.Root
-                                    placeholder="Your group's name..."
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label className="text-md">Group Name</label>
+                                <input
+                                    type="text"
+                                    placeholder="Name of Your Device"
                                     onChange={(e) =>
                                         setGroupName(e.target.value)
                                     }
                                     required
+                                    className="rounded-lg border border-[#4a5065] 
+                                    bg-[#111525]
+                                    p-2 
+                                    focus:border-transparent
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-blue-500"
                                 />
-
-                                <Text size={"3"}>Description</Text>
-                                <TextField.Root
+                                <label className="text-md">Description</label>
+                            </div>
+                            <input
+                                    type="text"
                                     placeholder="Your group's description..."
                                     onChange={(e) =>
-                                        setGroupDescription(e.target.value)
+                                        setGroupName(e.target.value)
                                     }
                                     required
+                                    className="rounded-lg border border-[#4a5065] 
+                                    bg-[#111525]
+                                    p-2 
+                                    focus:border-transparent
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-blue-500"
                                 />
-                            </Flex>
-
-                            <Flex
-                                direction={"row"}
-                                className="mt-2"
-                                justify={"between"}
-                                align={"center"}
+                            <div
+                                className="
+                            mt-2 flex items-center
+                            justify-between"
                             >
-                                <Dialog.Close
-                                    asChild
+                                <button
                                     onClick={() => setDialogOpen(false)}
+                                    className="
+                                rounded
+                                bg-transparent px-4
+                                py-1 text-[#98abf6]
+                                hover:bg-[#1A2B60]"
                                 >
-                                    <Button variant="ghost">Cancel</Button>
-                                </Dialog.Close>
-
-                                <Button
-                                    variant={"solid"}
-                                    disabled={addingDevice}
-                                    type="submit"
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={newGroup}
+                                    disabled={addingGroup}
+                                    className="rounded bg-[#3e63de] 
+                                px-4 py-1 text-white hover:bg-blue-700 
+                                disabled:bg-blue-300"
                                 >
                                     Create Group
-                                </Button>
-                            </Flex>
-                        </form>
-                    </Flex>
-                </Card>
-            </Dialog.Content>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </Dialog.Content>
         </Dialog.Root>
     );
 }
