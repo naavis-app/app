@@ -109,9 +109,9 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
                                         setDeviceName(e.target.value)
                                     }
                                     required
-                                    className="rounded-lg border border-[#4a5065] 
-                                    bg-[#111525]
-                                    p-2 
+                                    className="rounded-lg border 
+                                    border-[#4a5065] 
+                                    bg-[#111525] p-2 
                                     focus:border-transparent
                                     focus:outline-none
                                     focus:ring-2
@@ -124,7 +124,8 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
                                         setDeviceType(e.target.value)
                                     }
                                     className="rounded-lg border
-                                    border-[#4a5065] p-2 focus:border-transparent 
+                                    border-[#4a5065] p-2 
+                                    focus:border-transparent 
                                     focus:outline-none
                                     focus:ring-2
                                     focus:ring-blue-500"
