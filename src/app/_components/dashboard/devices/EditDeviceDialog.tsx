@@ -61,8 +61,8 @@ export default function EditDeviceDialog() {
                 justify-center p-4"
                 >
                     <div
-                        className="bg-surface min-w-[24rem]
-                    rounded-lg shadow"
+                        className="bg-[#141B30] min-w-[24rem]
+                    rounded-lg shadow p-2 border border-[#293040]"
                     >
                         <div className="flex flex-col gap-2 p-2">
                             <div className="text-xl font-bold">
@@ -115,7 +115,8 @@ export default function EditDeviceDialog() {
                                     className="
                                 rounded
                                 bg-transparent px-4
-                                py-1 text-[#98abf6]"
+                                py-1 text-[#98abf6]
+                                hover:bg-[#1A2B60]"
                                 >
                                     Cancel
                                 </button>
