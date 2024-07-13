@@ -25,10 +25,14 @@ export default function EditGroupDialog() {
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger asChild onClick={() => setDialogOpen(!dialogOpen)}>
-                <div className="flex h-full items-center gap-2">
+                <Button
+                variant="ghost"
+                color="gray"
+                className="flex h-full items-center gap-2"
+                highContrast
+                >
                     <RxPencil1 />
-                    Edit Group
-                </div>
+                </Button>
             </Dialog.Trigger>
         </Dialog.Root>
     );

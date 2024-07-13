@@ -25,10 +25,13 @@ export default function DeleteGroupDialog() {
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger asChild onClick={() => setDialogOpen(!dialogOpen)}>
-                <div className="flex h-full items-center gap-2 text-red-500">
+                <Button
+                variant="ghost"
+                color="red"
+                className="flex h-full items-center gap-2"
+                >
                     <FiTrash2 />
-                    Delete Group
-                </div>
+                </Button>
             </Dialog.Trigger>
         </Dialog.Root>
     );

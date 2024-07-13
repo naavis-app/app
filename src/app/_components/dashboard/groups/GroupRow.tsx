@@ -3,6 +3,7 @@ import { Avatar, Button, Table, Tooltip } from "@radix-ui/themes";
 import { LuCrown } from "react-icons/lu";
 import useWindowSize from "~/app/hooks/useWindowSize";
 import GroupDropdown from "./GroupDropdown";
+import GroupButtons from "./GroupButtons";
 import { Group } from "@radix-ui/react-dropdown-menu";
 
 interface GroupRowProps {
@@ -45,10 +46,10 @@ export default function GroupRow({ name, isOwner, members }: GroupRowProps) {
                         />
                     ))}
                 </Table.Cell>
-                <Table.Cell className="text-center">
-                    <GroupDropdown />
+                <Table.Cell className=""> 
+                    <GroupButtons />
                 </Table.Cell>
             </Table.Row>
         </>
-    );
+    ); // ! need to fix table cell!!!
 }
