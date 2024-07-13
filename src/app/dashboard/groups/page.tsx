@@ -76,7 +76,7 @@ export default function GroupsPage() {
                                 <Table.ColumnHeaderCell className="w-1/3">
                                     Members
                                 </Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell className="w-1/3 text-center">
+                                <Table.ColumnHeaderCell className="w-1/3">
                                     Actions
                                 </Table.ColumnHeaderCell>
                             </Table.Row>

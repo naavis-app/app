@@ -1,5 +1,7 @@
 "use client";
 
+// edit device dialog
+
 import { Button, Card, Flex, Select, Text, TextField } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
