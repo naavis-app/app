@@ -115,8 +115,7 @@ export default function EditDeviceDialog() {
                                     className="
                                 rounded
                                 bg-transparent px-4
-                                py-1 text-[#98abf6]
-                                text-gray-700"
+                                py-1 text-[#98abf6]"
                                 >
                                     Cancel
                                 </button>
