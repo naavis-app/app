@@ -42,6 +42,9 @@ export default function CreateGroupDialog({
 
     const newGroup = () => {
         if (addingGroup) return;
+        if (!user) return toast.error("You must be logged in to add a device!");
+        if (!groupName.length) return toast.error("You must enter a name!");
+        if (!groupDescription) return toast.error("You must enter a description!");
         if (!user)
             return toast.error("You must be logged in to create a group");
 
@@ -59,10 +62,9 @@ export default function CreateGroupDialog({
             <Dialog.Trigger asChild onClick={() => setDialogOpen(!dialogOpen)}>
                 <Button variant={"solid"}>Create Group</Button>
             </Dialog.Trigger>
-            <Dialog.Overlay className="fixed inset-0 z-40 bg-black/20" />
+            <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60" />
                 <Dialog.Content
-                    className="DialogContent
-                fixed inset-0 z-50 flex items-center 
+                    className="fixed inset-0 z-50 flex items-center 
                 justify-center p-4"
                 >
                     <div

@@ -48,11 +48,9 @@ export default function EditGroupDialog() {
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay 
-                className="DialogOverlay
-                fixed insert-0 z-40 bg-black/60"/>
+                className="fixed inset-0 z-40 bg-black/60"/>
                 <Dialog.Content
-                    className="DialogContent
-                fixed inset-0 z-50 flex items-center 
+                    className="fixed inset-0 z-50 flex items-center 
                 justify-center p-4"
                 >
                     <div
