@@ -11,7 +11,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import EditableInput from "../../edit-account/EditInput";
 import { RxPencil1 } from "react-icons/rx";
 import { deviceTypes } from "./AddDeviceDialog";
-
+import { db } from "~/server/db";
 import { api } from "~/trpc/react";
 
 interface EditDeviceProps {
@@ -26,15 +26,43 @@ export default function EditDeviceDialog({
 
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
     const [editingDevice, setEditingDevice] = useState<boolean>(false);
+    const [startingEdit, setStartingEdit] = useState<boolean>(false);
 
     const [deviceName, setDeviceName] = useState("");
     const [deviceType, setDeviceType] = useState("1");
+
+    const [placeholderDeviceName, setPlaceholderDeviceName] = useState("");
+    const [placeholderDeviceType, setPlaceholderDeviceType] = useState("");
+
+    const { mutate, error } = api.device.read.useMutation({
+        onSuccess: (device) => {
+            setPlaceholderDeviceName(device.name);
+            setPlaceholderDeviceType(device.type);
+            setDeviceName(device.name);
+            setDeviceType(device.type);
+            setDialogOpen(true);
+        },
+    });
+
+    const readDevice = () => {
+        mutate({ id: deviceId, userId: user!.id });
+    };
+
+    useEffect(() => {
+        if (startingEdit) {
+            readDevice();
+        }
+    }, [startingEdit]);
+
+    if (error) {
+        toast.error("Couldn't get the device!");
+    }
 
     const deviceQuery = api.device.update.useMutation({
         onSuccess: (device) => {
             refetch();
 
-            toast.success(`Device has been updated!`);
+            toast.success(`${deviceName} has been updated!`);
             setDeviceName("");
             setDeviceType("");
 
@@ -79,8 +107,7 @@ export default function EditDeviceDialog({
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger
                 asChild
-                onClick={() => setDialogOpen((prevOpen) => !prevOpen)}
-            >
+                onClick={() => readDevice()}>
                 <Button
                     variant="ghost"
                     color="gray"
@@ -110,6 +137,7 @@ export default function EditDeviceDialog({
                                 <label className="text-md">Device Name</label>
                                 <input
                                     type="text"
+                                    value={placeholderDeviceName}
                                     placeholder="Name of Your Device"
                                     onChange={(e) =>
                                         setDeviceName(e.target.value)
@@ -129,6 +157,7 @@ export default function EditDeviceDialog({
                                     onChange={(e) =>
                                         setDeviceType(e.target.value)
                                     }
+                                    value={placeholderDeviceType}
                                     className="bg-[#111525]
                                     rounded-lg border
                                     border-[#4a5065] p-2 focus:border-transparent 

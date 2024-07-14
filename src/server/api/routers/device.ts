@@ -61,6 +61,59 @@ export const deviceRouter = createTRPCRouter({
             return ctx.db.device.findMany({ where: { userId: input.userId } });
         }),
 
+    read: publicProcedure
+        .input(
+            z.object({
+                id: z.string(),
+                userId: z.string(),
+            }),
+        )
+        .mutation(async ({ ctx, input }) => {
+            const user = await ctx.db.user.findUnique({
+                where: {
+                    id: input.userId,
+                }
+            });
+
+            if (!user) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "User not found",
+                });
+            }
+
+            try {
+                const device = await ctx.db.device.findUnique({
+                    where: {
+                        id: input.id,
+                        userId: input.userId,
+                    }
+                });
+
+                if (!device) {
+                    throw new TRPCError({
+                        code: "NOT_FOUND",
+                        message: "Device was not found!"
+                    })
+                }
+
+                if (device.userId !== input.userId) {
+                    throw new TRPCError({
+                        code: "NOT_FOUND",
+                        message: "Device does not belong to the user!"
+                    })
+                }
+
+                return device;
+            } catch (e) {
+                console.error(e);
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to find device",
+                });
+            }
+        }),
+
     update: publicProcedure
         .input(
             z.object({
@@ -135,7 +188,7 @@ export const deviceRouter = createTRPCRouter({
                 console.error(e);
                 throw new TRPCError({
                     code: "BAD_REQUEST",
-                    message: "Failed to update device",
+                    message: "Failed to delete device",
                 })
             }
         })
