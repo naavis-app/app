@@ -104,4 +104,39 @@ export const deviceRouter = createTRPCRouter({
                 });
             }
         }),
+    
+    delete: publicProcedure
+        .input(
+            z.object({
+                id: z.string(),
+                userId: z.string(),
+            }),
+        )
+        .query(async ({ ctx, input }) => {
+            const user = await ctx.db.user.findUnique({
+                where: { id: input.userId },
+            });
+
+            if (!user) {
+                throw new TRPCError ({
+                    code: "NOT_FOUND",
+                    message: "User not found",
+                });
+            }
+
+            try {
+                return await ctx.db.device.delete({
+                    where: {
+                        id: input.id,
+                        userId: input.userId,
+                    },
+                });
+            } catch (e) {
+                console.error(e);
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to update device",
+                })
+            }
+        })
 });

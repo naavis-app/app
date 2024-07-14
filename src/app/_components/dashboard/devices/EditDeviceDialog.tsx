@@ -51,10 +51,18 @@ export default function EditDeviceDialog({
 
     const editDevice = () => {
         if (editingDevice) return;
-        if (!user)
+        if (!user) {
+            setDialogOpen(false);
             return toast.error("You must be logged in to edit a device!");
-        if (!deviceName.length) return toast.error("You must enter a name!");
-        if (!deviceType) return toast.error("You must select a device type!");
+        }
+        if (!deviceName.length) {
+            setDialogOpen(false);
+            return toast.error("You must enter a name!");
+        }
+        if (!deviceType) { 
+            setDialogOpen(false);
+            return toast.error("You must select a device type!");
+        }
 
         setEditingDevice(true);
 
@@ -64,6 +72,7 @@ export default function EditDeviceDialog({
             type: deviceType as "phone" | "tablet" | "laptop" | "smartwatch",
             userId: user.id,
         });
+
     };
 
     return (
@@ -120,7 +129,8 @@ export default function EditDeviceDialog({
                                     onChange={(e) =>
                                         setDeviceType(e.target.value)
                                     }
-                                    className="rounded-lg border
+                                    className="bg-[#111525]
+                                    rounded-lg border
                                     border-[#4a5065] p-2 focus:border-transparent 
                                     focus:outline-none
                                     focus:ring-2

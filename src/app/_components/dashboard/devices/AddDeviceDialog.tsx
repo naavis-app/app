@@ -122,7 +122,8 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
                                     onChange={(e) =>
                                         setDeviceType(e.target.value)
                                     }
-                                    className="rounded-lg border
+                                    className="bg-[#111525]
+                                    rounded-lg border
                                     border-[#4a5065] p-2 
                                     focus:border-transparent 
                                     focus:outline-none

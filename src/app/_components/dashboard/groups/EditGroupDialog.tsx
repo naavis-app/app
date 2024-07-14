@@ -48,10 +48,18 @@ export default function EditGroupDialog({
 
     const editGroup = () => {
         if (editingGroup) return;
-        if (!user)
+        if (!user) {
+            setDialogOpen(false);
             return toast.error("You must be logged in to edit a group!");
-        if (!groupName.length) return toast.error("You must enter a name!");
-        if (!groupDescription) return toast.error("You must enter a description!");
+        }
+        if (!groupName.length) {
+            setDialogOpen(false);
+            return toast.error("You must enter a name!");
+        }
+        if (!groupDescription) {
+            setDialogOpen(false);
+            return toast.error("You must enter a description!");
+        }
 
         setEditingGroup(true);
 
