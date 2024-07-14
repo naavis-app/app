@@ -19,8 +19,9 @@ interface EditDeviceProps {
     deviceId: string,
 }
 
-export default function EditDeviceDialog({ refetch, deviceId } : 
-    EditDeviceProps) {
+export default function EditDeviceDialog({ 
+    refetch, deviceId 
+} : EditDeviceProps) {
     const [user, setUser] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);

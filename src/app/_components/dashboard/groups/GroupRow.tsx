@@ -2,17 +2,17 @@ import { GearIcon } from "@radix-ui/react-icons";
 import { Avatar, Button, Table, Tooltip } from "@radix-ui/themes";
 import { LuCrown } from "react-icons/lu";
 import useWindowSize from "~/app/hooks/useWindowSize";
-import GroupDropdown from "./GroupDropdown";
 import GroupButtons from "./GroupButtons";
 import { Group } from "@radix-ui/react-dropdown-menu";
 
 interface GroupRowProps {
+    groupId: string;
     name: string;
     isOwner: boolean;
     members: string[];
 }
 
-export default function GroupRow({ name, isOwner, members }: GroupRowProps) {
+export default function GroupRow({ groupId, name, isOwner, members }: GroupRowProps) {
     const { width, height } = useWindowSize();
 
     members = ["1", "2", "3"];
@@ -47,9 +47,9 @@ export default function GroupRow({ name, isOwner, members }: GroupRowProps) {
                     ))}
                 </Table.Cell>
                 <Table.Cell className=""> 
-                    <GroupButtons />
+                    <GroupButtons groupId={groupId}/>
                 </Table.Cell>
             </Table.Row>
         </>
-    ); // ! need to fix table cell!!!
+    );
 }

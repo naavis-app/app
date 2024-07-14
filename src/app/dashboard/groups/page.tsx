@@ -106,7 +106,7 @@ export default function GroupsPage() {
                             {/* TODO: Group members preview system */}
                             {groups.map((group) => (
                                 <GroupRow
-                                    key={group.id}
+                                    groupId={group.id}
                                     name={group.name}
                                     isOwner={group.ownerId === user?.id}
                                     members={[""]}

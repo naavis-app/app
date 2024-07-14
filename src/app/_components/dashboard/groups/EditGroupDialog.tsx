@@ -11,11 +11,14 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { api } from "~/trpc/react";
 import { RxPencil1 } from "react-icons/rx";
 
+interface EditGroupProps {
+    refetch: () => void,
+    groupId: string,
+}
+
 export default function EditGroupDialog({ 
-    refetch
- } : { 
-    refetch: () => void 
-}) {
+    refetch, groupId
+ } : EditGroupProps) {
     const [user, setUser] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -24,9 +27,24 @@ export default function EditGroupDialog({
     const [groupName, setGroupName] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
 
-    const groupQuery = api.device.list.useQuery({
-        userId: user?.id || "",
-    });
+    const groupQuery = api.group.update.useMutation({
+        onSuccess: (device) => {
+            refetch();
+
+            toast.success(`Group has been updated!`);
+            setGroupName("");
+            setGroupDescription("");
+
+            setEditingGroup(false);
+            setDialogOpen(false);
+        },
+        onError: () => {
+            toast.error(`Failed to updated ${groupName}`);
+
+            setEditingGroup(false);
+            setDialogOpen(false);
+        }
+    })
 
     const editGroup = () => {
         if (editingGroup) return;
@@ -36,6 +54,12 @@ export default function EditGroupDialog({
         if (!groupDescription) return toast.error("You must enter a description!");
 
         setEditingGroup(true);
+
+        groupQuery.mutate({
+            id: groupId,
+            name: groupName,
+            description: groupDescription,
+        })
     };
 
     return (
