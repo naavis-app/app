@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
 import * as Dialog from "@radix-ui/react-dialog";
-import EditableInput from "../../edit-account/EditInput";
 import { RxPencil1 } from "react-icons/rx";
+import { FaCheck } from "react-icons/fa";
 import { deviceTypes } from "./AddDeviceDialog";
 import { db } from "~/server/db";
 import { api } from "~/trpc/react";
@@ -31,13 +31,10 @@ export default function EditDeviceDialog({
     const [deviceName, setDeviceName] = useState("");
     const [deviceType, setDeviceType] = useState("1");
 
-    const [placeholderDeviceName, setPlaceholderDeviceName] = useState("");
-    const [placeholderDeviceType, setPlaceholderDeviceType] = useState("");
+    const [nameToggle, setNameToggle] = useState<boolean>(false);
 
     const { mutate, error } = api.device.read.useMutation({
         onSuccess: (device) => {
-            setPlaceholderDeviceName(device.name);
-            setPlaceholderDeviceType(device.type);
             setDeviceName(device.name);
             setDeviceType(device.type);
             setDialogOpen(true);
@@ -78,6 +75,7 @@ export default function EditDeviceDialog({
     })
 
     const editDevice = () => {
+        setNameToggle(true);
         if (editingDevice) return;
         if (!user) {
             setDialogOpen(false);
@@ -135,29 +133,47 @@ export default function EditDeviceDialog({
                             </div>
                             <div className="flex flex-col gap-2">
                                 <label className="text-md">Device Name</label>
-                                <input
-                                    type="text"
-                                    value={placeholderDeviceName}
-                                    placeholder="Name of Your Device"
-                                    onChange={(e) =>
-                                        setDeviceName(e.target.value)
-                                    }
-                                    required
-                                    className="rounded-lg border border-[#4a5065] 
-                                    bg-[#111525]
-                                    p-2 
-                                    focus:border-transparent
-                                    focus:outline-none
-                                    focus:ring-2
-                                    focus:ring-blue-500"
-                                />
+                                <div className="relative flex w-full flex-row
+                                items-center justify-end">
+                                    <input
+                                        type="text"
+                                        value={deviceName}
+                                        placeholder="Name of Your Device"
+                                        onChange={(e) =>
+                                            setDeviceName(e.target.value)
+                                        }
+                                        required
+                                        disabled={!nameToggle}
+                                        className={`rounded-lg border 
+                                      border-[#4a5065]
+                                      bg-[#111525]
+                                        p-2 
+                                        focus:border-transparent
+                                        focus:outline-none
+                                        focus:ring-2
+                                        focus:ring-blue-500
+                                        w-full pr-10
+                                        ${!nameToggle ? 
+                                            'text-[#B4BCCC]':'text-white'}`}
+                                    />                                
+                                    <button
+                                        className="absolute right-4"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setNameToggle(!nameToggle);
+                                        }}
+                                    >
+                                        {!nameToggle && <RxPencil1 />}
+                                        {nameToggle && <FaCheck />}
+                                    </button>
+                                </div>
                                 <label className="text-md">Device Type</label>
 
                                 <select
                                     onChange={(e) =>
                                         setDeviceType(e.target.value)
                                     }
-                                    value={placeholderDeviceType}
+                                    value={deviceType}
                                     className="bg-[#111525]
                                     rounded-lg border
                                     border-[#4a5065] p-2 focus:border-transparent 
@@ -206,4 +222,5 @@ export default function EditDeviceDialog({
     );
 }
 
-/* UNFINISHED. DO NOT EDIT */
+/* edit device dialog. inputs for text that toggle, dynamic updating
+of name/type based on existing device. */ 
