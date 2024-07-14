@@ -11,7 +11,11 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { api } from "~/trpc/react";
 import { RxPencil1 } from "react-icons/rx";
 
-export default function EditGroupDialog() {
+export default function EditGroupDialog({ 
+    refetch
+ } : { 
+    refetch: () => void 
+}) {
     const [user, setUser] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -84,7 +88,7 @@ export default function EditGroupDialog() {
                                     type="text"
                                     placeholder="Your Group Description"
                                     onChange={(e) =>
-                                        setGroupName(e.target.value)
+                                        setGroupDescription(e.target.value)
                                     }
                                     required
                                     className="rounded-lg border border-[#4a5065] 

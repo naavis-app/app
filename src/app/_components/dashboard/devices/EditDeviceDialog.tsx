@@ -14,7 +14,13 @@ import { deviceTypes } from "./AddDeviceDialog";
 
 import { api } from "~/trpc/react";
 
-export default function EditDeviceDialog() {
+interface EditDeviceProps {
+    refetch: () => void,
+    deviceId: string,
+}
+
+export default function EditDeviceDialog({ refetch, deviceId } : 
+    EditDeviceProps) {
     const [user, setUser] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
@@ -23,9 +29,24 @@ export default function EditDeviceDialog() {
     const [deviceName, setDeviceName] = useState("");
     const [deviceType, setDeviceType] = useState("1");
 
-    const deviceQuery = api.device.list.useQuery({
-        userId: user?.id || "",
-    });
+    const deviceQuery = api.device.update.useMutation({
+        onSuccess: (device) => {
+            refetch();
+
+            toast.success(`Device has been updated!`);
+            setDeviceName("");
+            setDeviceType("");
+
+            setEditingDevice(false);
+            setDialogOpen(false);
+        },
+        onError: () => {
+            toast.error(`Failed to update ${deviceName}`);
+
+            setEditingDevice(false);
+            setDialogOpen(false);
+        }
+    })
 
     const editDevice = () => {
         if (editingDevice) return;
@@ -35,6 +56,13 @@ export default function EditDeviceDialog() {
         if (!deviceType) return toast.error("You must select a device type!");
 
         setEditingDevice(true);
+
+        deviceQuery.mutate({
+            id: deviceId,
+            name: deviceName,
+            type: deviceType as "phone" | "tablet" | "laptop" | "smartwatch",
+            userId: user.id,
+        });
     };
 
     return (

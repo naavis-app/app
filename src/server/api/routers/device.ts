@@ -39,6 +39,7 @@ export const deviceRouter = createTRPCRouter({
                 });
             }
         }),
+
     list: publicProcedure
         .input(
             z.object({
@@ -58,5 +59,49 @@ export const deviceRouter = createTRPCRouter({
             }
 
             return ctx.db.device.findMany({ where: { userId: input.userId } });
+        }),
+
+    update: publicProcedure
+        .input(
+            z.object({
+                id: z.string(),
+                name: z.string().optional(),
+                type: z.enum(["phone", "tablet", "laptop", "smartwatch"]).optional(),
+                userId: z.string(),
+            }),
+        )
+        .mutation(async ({ ctx, input }) => {
+            const user = await ctx.db.user.findUnique({
+                where: { 
+                    id: input.userId,
+                 },
+            });
+
+            if (!user) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "User not found",
+                });
+            }
+
+            try {
+                return await ctx.db.device.updateMany({
+                    where: { 
+                        id: input.id,
+                        userId: input.userId,
+                    },
+                    data: {
+                        name: input.name,
+                        type: input.type,
+                        lastLocationUpdate: new Date(),
+                    },
+                });
+            } catch (e) {
+                console.error(e);
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to update device",
+                });
+            }
         }),
 });

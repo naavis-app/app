@@ -23,6 +23,7 @@ import DeviceButtons from "./DeviceButtons";
 
 interface DeviceRowProps {
     device: Device;
+    deviceId: string;
     viewMode: string;
 }
 
@@ -34,7 +35,7 @@ const deviceIconMap: { [key: string]: string } = {
     smartwatch: "mdi:watch",
 };
 
-export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
+export default function DeviceRow({ device, deviceId, viewMode }: DeviceRowProps) {
     const [lastUpdated, setLastUpdated] = useState("...");
     const icon = deviceIconMap[device.type];
     const updateDate = new Date(device.lastLocationUpdate);
@@ -100,7 +101,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                             </Flex>
                         </Flex>
                     </Box>
-                    <DeviceButtons />
+                    <DeviceButtons deviceId={deviceId} />
                 </Flex>
             </>
         );
@@ -137,7 +138,7 @@ export default function DeviceRow({ device, viewMode }: DeviceRowProps) {
                         >
                             <Badge color={"green"}>{device.connection}</Badge>
 
-                            <DeviceButtons />
+                            <DeviceButtons deviceId={deviceId} />
                         </Flex>
                     </Flex>
                 </Card>

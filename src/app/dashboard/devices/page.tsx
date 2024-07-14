@@ -157,7 +157,7 @@ export default function DashboardDevices() {
                     {searchedDevices.map((device) => (
                         <DeviceRow
                             device={device}
-                            key={device.id}
+                            deviceId={device.id}
                             viewMode={viewMode}
                         />
                     ))}
@@ -167,7 +167,7 @@ export default function DashboardDevices() {
                     {searchedDevices.map((device) => (
                         <DeviceRow
                             device={device}
-                            key={device.id}
+                            deviceId={device.id}
                             viewMode={viewMode}
                         />
                     ))}

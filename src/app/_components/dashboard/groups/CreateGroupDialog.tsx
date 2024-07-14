@@ -10,7 +10,7 @@ import { api } from "~/trpc/react";
 
 export default function CreateGroupDialog({
     refetch,
-}: {
+} : {
     refetch: () => void;
 }) {
     const [user, setUser] = useAtom(userAtom);
