@@ -14,11 +14,9 @@ export default function DeviceButtons({ deviceId }: { deviceId: string }) {
     return (
         <>
             <div className="mt-1 flex flex-row gap-5">
-                <EditDeviceDialog 
-                refetch={
-                    () => deviceQuery.refetch()
-                }
-                deviceId={deviceId} 
+                <EditDeviceDialog
+                    refetch={() => deviceQuery.refetch()}
+                    deviceId={deviceId}
                 />
                 <DeleteDeviceDialog />
             </div>

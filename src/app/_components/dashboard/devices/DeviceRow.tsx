@@ -35,7 +35,11 @@ const deviceIconMap: { [key: string]: string } = {
     smartwatch: "mdi:watch",
 };
 
-export default function DeviceRow({ device, deviceId, viewMode }: DeviceRowProps) {
+export default function DeviceRow({
+    device,
+    deviceId,
+    viewMode,
+}: DeviceRowProps) {
     const [lastUpdated, setLastUpdated] = useState("...");
     const icon = deviceIconMap[device.type];
     const updateDate = new Date(device.lastLocationUpdate);

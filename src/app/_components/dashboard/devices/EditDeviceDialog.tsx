@@ -15,13 +15,14 @@ import { db } from "~/server/db";
 import { api } from "~/trpc/react";
 
 interface EditDeviceProps {
-    refetch: () => void,
-    deviceId: string,
+    refetch: () => void;
+    deviceId: string;
 }
 
-export default function EditDeviceDialog({ 
-    refetch, deviceId 
-} : EditDeviceProps) {
+export default function EditDeviceDialog({
+    refetch,
+    deviceId,
+}: EditDeviceProps) {
     const [user, setUser] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
@@ -71,8 +72,8 @@ export default function EditDeviceDialog({
 
             setEditingDevice(false);
             setDialogOpen(false);
-        }
-    })
+        },
+    });
 
     const editDevice = () => {
         setNameToggle(true);
@@ -85,7 +86,7 @@ export default function EditDeviceDialog({
             setDialogOpen(false);
             return toast.error("You must enter a name!");
         }
-        if (!deviceType) { 
+        if (!deviceType) {
             setDialogOpen(false);
             return toast.error("You must select a device type!");
         }
@@ -98,14 +99,11 @@ export default function EditDeviceDialog({
             type: deviceType as "phone" | "tablet" | "laptop" | "smartwatch",
             userId: user.id,
         });
-
     };
 
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
-            <Dialog.Trigger
-                asChild
-                onClick={() => readDevice()}>
+            <Dialog.Trigger asChild onClick={() => readDevice()}>
                 <Button
                     variant="ghost"
                     color="gray"
@@ -116,16 +114,14 @@ export default function EditDeviceDialog({
                 </Button>
             </Dialog.Trigger>
             <Dialog.Portal>
-                <Dialog.Overlay
-                    className="fixed inset-0 z-40 bg-black/60"
-                />
+                <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60" />
                 <Dialog.Content
                     className="fixed inset-0 z-50 flex items-center 
                 justify-center p-4"
                 >
                     <div
-                        className="bg-[#141B30] min-w-[24rem]
-                    rounded-lg shadow p-2 border border-[#293040]"
+                        className="min-w-[24rem] rounded-lg
+                    border border-[#293040] bg-[#141B30] p-2 shadow"
                     >
                         <div className="flex flex-col gap-2 p-2">
                             <div className="text-xl font-bold">
@@ -133,8 +129,10 @@ export default function EditDeviceDialog({
                             </div>
                             <div className="flex flex-col gap-2">
                                 <label className="text-md">Device Name</label>
-                                <div className="relative flex w-full flex-row
-                                items-center justify-end">
+                                <div
+                                    className="relative flex w-full flex-row
+                                items-center justify-end"
+                                >
                                     <input
                                         type="text"
                                         value={deviceName}
@@ -144,18 +142,21 @@ export default function EditDeviceDialog({
                                         }
                                         required
                                         disabled={!nameToggle}
-                                        className={`rounded-lg border 
+                                        className={`w-full rounded-lg 
+                                      border
                                       border-[#4a5065]
-                                      bg-[#111525]
-                                        p-2 
+                                        bg-[#111525] 
+                                        p-2
+                                        pr-10
                                         focus:border-transparent
                                         focus:outline-none
-                                        focus:ring-2
-                                        focus:ring-blue-500
-                                        w-full pr-10
-                                        ${!nameToggle ? 
-                                            'text-[#B4BCCC]':'text-white'}`}
-                                    />                                
+                                        focus:ring-2 focus:ring-blue-500
+                                        ${
+                                            !nameToggle
+                                                ? "text-[#B4BCCC]"
+                                                : "text-white"
+                                        }`}
+                                    />
                                     <button
                                         className="absolute right-4"
                                         onClick={(e) => {
@@ -174,9 +175,9 @@ export default function EditDeviceDialog({
                                         setDeviceType(e.target.value)
                                     }
                                     value={deviceType}
-                                    className="bg-[#111525]
-                                    rounded-lg border
-                                    border-[#4a5065] p-2 focus:border-transparent 
+                                    className="rounded-lg
+                                    border border-[#4a5065]
+                                    bg-[#111525] p-2 focus:border-transparent 
                                     focus:outline-none
                                     focus:ring-2
                                     focus:ring-blue-500"
@@ -223,4 +224,4 @@ export default function EditDeviceDialog({
 }
 
 /* edit device dialog. inputs for text that toggle, dynamic updating
-of name/type based on existing device. */ 
+of name/type based on existing device. */

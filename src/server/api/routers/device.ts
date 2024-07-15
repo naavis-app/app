@@ -72,7 +72,7 @@ export const deviceRouter = createTRPCRouter({
             const user = await ctx.db.user.findUnique({
                 where: {
                     id: input.userId,
-                }
+                },
             });
 
             if (!user) {
@@ -87,21 +87,21 @@ export const deviceRouter = createTRPCRouter({
                     where: {
                         id: input.id,
                         userId: input.userId,
-                    }
+                    },
                 });
 
                 if (!device) {
                     throw new TRPCError({
                         code: "NOT_FOUND",
-                        message: "Device was not found!"
-                    })
+                        message: "Device was not found!",
+                    });
                 }
 
                 if (device.userId !== input.userId) {
                     throw new TRPCError({
                         code: "NOT_FOUND",
-                        message: "Device does not belong to the user!"
-                    })
+                        message: "Device does not belong to the user!",
+                    });
                 }
 
                 return device;
@@ -119,15 +119,17 @@ export const deviceRouter = createTRPCRouter({
             z.object({
                 id: z.string(),
                 name: z.string().optional(),
-                type: z.enum(["phone", "tablet", "laptop", "smartwatch"]).optional(),
+                type: z
+                    .enum(["phone", "tablet", "laptop", "smartwatch"])
+                    .optional(),
                 userId: z.string(),
             }),
         )
         .mutation(async ({ ctx, input }) => {
             const user = await ctx.db.user.findUnique({
-                where: { 
+                where: {
                     id: input.userId,
-                 },
+                },
             });
 
             if (!user) {
@@ -139,7 +141,7 @@ export const deviceRouter = createTRPCRouter({
 
             try {
                 return await ctx.db.device.updateMany({
-                    where: { 
+                    where: {
                         id: input.id,
                         userId: input.userId,
                     },
@@ -157,7 +159,7 @@ export const deviceRouter = createTRPCRouter({
                 });
             }
         }),
-    
+
     delete: publicProcedure
         .input(
             z.object({
@@ -171,7 +173,7 @@ export const deviceRouter = createTRPCRouter({
             });
 
             if (!user) {
-                throw new TRPCError ({
+                throw new TRPCError({
                     code: "NOT_FOUND",
                     message: "User not found",
                 });
@@ -189,7 +191,7 @@ export const deviceRouter = createTRPCRouter({
                 throw new TRPCError({
                     code: "BAD_REQUEST",
                     message: "Failed to delete device",
-                })
+                });
             }
-        })
+        }),
 });

@@ -12,13 +12,11 @@ import { api } from "~/trpc/react";
 import { RxPencil1 } from "react-icons/rx";
 
 interface EditGroupProps {
-    refetch: () => void,
-    groupId: string,
+    refetch: () => void;
+    groupId: string;
 }
 
-export default function EditGroupDialog({ 
-    refetch, groupId
- } : EditGroupProps) {
+export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
     const [user, setUser] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -43,8 +41,8 @@ export default function EditGroupDialog({
 
             setEditingGroup(false);
             setDialogOpen(false);
-        }
-    })
+        },
+    });
 
     const editGroup = () => {
         if (editingGroup) return;
@@ -67,31 +65,30 @@ export default function EditGroupDialog({
             id: groupId,
             name: groupName,
             description: groupDescription,
-        })
+        });
     };
 
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger asChild onClick={() => setDialogOpen(!dialogOpen)}>
                 <Button
-                variant="ghost"
-                color="gray"
-                className="flex h-full items-center gap-2"
-                highContrast
+                    variant="ghost"
+                    color="gray"
+                    className="flex h-full items-center gap-2"
+                    highContrast
                 >
                     <RxPencil1 />
                 </Button>
             </Dialog.Trigger>
             <Dialog.Portal>
-                <Dialog.Overlay 
-                className="fixed inset-0 z-40 bg-black/60"/>
+                <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60" />
                 <Dialog.Content
                     className="fixed inset-0 z-50 flex items-center 
                 justify-center p-4"
                 >
                     <div
-                        className="bg-[#141B30] min-w-[24rem]
-                    rounded-lg shadow p-2 border border-[#293040]"
+                        className="min-w-[24rem] rounded-lg
+                    border border-[#293040] bg-[#141B30] p-2 shadow"
                     >
                         <div className="flex flex-col gap-2 p-2">
                             <div className="text-xl font-bold">
@@ -114,23 +111,25 @@ export default function EditGroupDialog({
                                     focus:ring-2
                                     focus:ring-blue-500"
                                 />
-                                <label className="text-md">Group Description</label>
+                                <label className="text-md">
+                                    Group Description
+                                </label>
                             </div>
                             <input
-                                    type="text"
-                                    placeholder="Your Group Description"
-                                    onChange={(e) =>
-                                        setGroupDescription(e.target.value)
-                                    }
-                                    required
-                                    className="rounded-lg border border-[#4a5065] 
+                                type="text"
+                                placeholder="Your Group Description"
+                                onChange={(e) =>
+                                    setGroupDescription(e.target.value)
+                                }
+                                required
+                                className="rounded-lg border border-[#4a5065] 
                                     bg-[#111525]
                                     p-2 
                                     focus:border-transparent
                                     focus:outline-none
                                     focus:ring-2
                                     focus:ring-blue-500"
-                                />
+                            />
                             <div
                                 className="
                             mt-2 flex items-center

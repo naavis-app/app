@@ -12,7 +12,12 @@ interface GroupRowProps {
     members: string[];
 }
 
-export default function GroupRow({ groupId, name, isOwner, members }: GroupRowProps) {
+export default function GroupRow({
+    groupId,
+    name,
+    isOwner,
+    members,
+}: GroupRowProps) {
     const { width, height } = useWindowSize();
 
     members = ["1", "2", "3"];
@@ -46,8 +51,8 @@ export default function GroupRow({ groupId, name, isOwner, members }: GroupRowPr
                         />
                     ))}
                 </Table.Cell>
-                <Table.Cell className=""> 
-                    <GroupButtons groupId={groupId}/>
+                <Table.Cell className="">
+                    <GroupButtons groupId={groupId} />
                 </Table.Cell>
             </Table.Row>
         </>

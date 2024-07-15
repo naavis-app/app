@@ -22,7 +22,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
                 appearance={theme}
                 className="relative flex flex-col"
             >
-                <Toaster/>
+                <Toaster />
                 {children}
             </Theme>
         </ThemeProvider>

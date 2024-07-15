@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
 import { api } from "~/trpc/react";
 
-export default function GroupButtons({ groupId } : { groupId: string }) {
+export default function GroupButtons({ groupId }: { groupId: string }) {
     const [user, setUser] = useAtom(userAtom);
 
     const groupQuery = api.device.list.useQuery({
@@ -14,14 +14,12 @@ export default function GroupButtons({ groupId } : { groupId: string }) {
     return (
         <>
             <div className="mt-1 flex flex-row gap-5">
-                <EditGroupDialog 
-                refetch={
-                    () => groupQuery.refetch()
-                }
-                groupId={groupId}
+                <EditGroupDialog
+                    refetch={() => groupQuery.refetch()}
+                    groupId={groupId}
                 />
                 <DeleteGroupDialog />
             </div>
         </>
-    )
+    );
 }

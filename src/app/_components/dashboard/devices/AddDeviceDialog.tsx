@@ -87,84 +87,78 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
             </Dialog.Trigger>
 
             <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60" />
-                <Dialog.Content
-                    className="fixed inset-0 z-50 flex items-center 
+            <Dialog.Content
+                className="fixed inset-0 z-50 flex items-center 
                 justify-center p-4"
+            >
+                <div
+                    className="min-w-[24rem] rounded-lg
+                    border border-[#293040] bg-[#141B30] p-2 shadow"
                 >
-                    <div
-                        className="bg-[#141B30] min-w-[24rem]
-                    rounded-lg shadow p-2 border border-[#293040]"
-                    >
-                        <div className="flex flex-col gap-2 p-2">
-                            <div className="text-xl font-bold">
-                                Add A New Device
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <label className="text-md">Device Name</label>
-                                <input
-                                    type="text"
-                                    placeholder="Name of Your Device"
-                                    onChange={(e) =>
-                                        setDeviceName(e.target.value)
-                                    }
-                                    required
-                                    className="rounded-lg border 
+                    <div className="flex flex-col gap-2 p-2">
+                        <div className="text-xl font-bold">
+                            Add A New Device
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <label className="text-md">Device Name</label>
+                            <input
+                                type="text"
+                                placeholder="Name of Your Device"
+                                onChange={(e) => setDeviceName(e.target.value)}
+                                required
+                                className="rounded-lg border 
                                     border-[#4a5065] 
                                     bg-[#111525] p-2 
                                     focus:border-transparent
                                     focus:outline-none
                                     focus:ring-2
                                     focus:ring-blue-500"
-                                />
-                                <label className="text-md">Device Type</label>
+                            />
+                            <label className="text-md">Device Type</label>
 
-                                <select
-                                    onChange={(e) =>
-                                        setDeviceType(e.target.value)
-                                    }
-                                    className="bg-[#111525]
-                                    rounded-lg border
-                                    border-[#4a5065] p-2 
+                            <select
+                                onChange={(e) => setDeviceType(e.target.value)}
+                                className="rounded-lg
+                                    border border-[#4a5065]
+                                    bg-[#111525] p-2 
                                     focus:border-transparent 
                                     focus:outline-none
                                     focus:ring-2
                                     focus:ring-blue-500"
-                                >
-                                    {deviceTypes.map((type) => (
-                                        <option value={type.id}>
-                                            {type.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                            >
+                                {deviceTypes.map((type) => (
+                                    <option value={type.id}>{type.name}</option>
+                                ))}
+                            </select>
+                        </div>
 
-                            <div
-                                className="
+                        <div
+                            className="
                             mt-2 flex items-center
                             justify-between"
-                            >
-                                <button
-                                    onClick={() => setDialogOpen(false)}
-                                    className="
+                        >
+                            <button
+                                onClick={() => setDialogOpen(false)}
+                                className="
                                 rounded
                                 bg-transparent px-4
                                 py-1 text-[#98abf6]
                                 hover:bg-[#1A2B60]"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    onClick={newDevice}
-                                    disabled={addingDevice}
-                                    className="rounded bg-[#3e63de] 
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={newDevice}
+                                disabled={addingDevice}
+                                className="rounded bg-[#3e63de] 
                                 px-4 py-1 text-white hover:bg-blue-700 
                                 disabled:bg-blue-300"
-                                >
-                                    Add Device
-                                </button>
-                            </div>
+                            >
+                                Add Device
+                            </button>
                         </div>
                     </div>
+                </div>
             </Dialog.Content>
         </Dialog.Root>
     );
