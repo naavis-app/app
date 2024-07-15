@@ -40,6 +40,12 @@ export default function EditDeviceDialog({
             setDeviceType(device.type);
             setDialogOpen(true);
         },
+        onError: () => {
+            toast.error(`Failed to get device!`);
+
+            setDeviceName(deviceName);
+            setDeviceType(deviceType);
+        },
     });
 
     const readDevice = () => {
@@ -143,11 +149,8 @@ export default function EditDeviceDialog({
                                         required
                                         disabled={!nameToggle}
                                         className={`w-full rounded-lg 
-                                      border
-                                      border-[#4a5065]
-                                        bg-[#111525] 
-                                        p-2
-                                        pr-10
+                                        border border-[#4a5065]
+                                        bg-[#111525] p-2 pr-10
                                         focus:border-transparent
                                         focus:outline-none
                                         focus:ring-2 focus:ring-blue-500
@@ -210,7 +213,7 @@ export default function EditDeviceDialog({
                                     disabled={editingDevice}
                                     className="rounded bg-[#3e63de] 
                                 px-4 py-1 text-white hover:bg-blue-700 
-                                disabled:bg-blue-300"
+                                disabled:bg-blue-500"
                                 >
                                     Save
                                 </button>

@@ -4,12 +4,13 @@
 
 import { Button, Card, Flex, Text, TextField } from "@radix-ui/themes";
 import { useAtom } from "jotai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
 import * as Dialog from "@radix-ui/react-dialog";
 import { api } from "~/trpc/react";
 import { RxPencil1 } from "react-icons/rx";
+import { FaCheck } from "react-icons/fa";
 
 interface EditGroupProps {
     refetch: () => void;
@@ -21,15 +22,47 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const [editingGroup, setEditingGroup] = useState(false);
+    const [startingEdit, setStartingEdit] = useState<boolean>(false);
 
     const [groupName, setGroupName] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
 
+    const [nameToggle, setNameToggle] = useState<boolean>(false);
+    const [descToggle, setDescToggle] = useState<boolean>(false);
+
+    const { mutate, error } = api.group.read.useMutation({
+        onSuccess: (group) => {
+            setGroupName(group.name);
+            setGroupDescription(group.description || "");
+            setDialogOpen(true);
+        },
+        onError: () => {
+            toast.error(`Failed to get group!`);
+
+            setGroupName(groupName);
+            setGroupDescription(groupDescription);
+        }
+    });
+
+    const readGroup = () => {
+        mutate({ id: groupId, userId: user!.id });
+    };
+
+    useEffect(() => {
+        if (startingEdit) {
+            readGroup();
+        }
+    }, [startingEdit]);
+
+    if (error) {
+        toast.error("Couldn't get the group!");
+    }
+
     const groupQuery = api.group.update.useMutation({
-        onSuccess: (device) => {
+        onSuccess: (group) => {
             refetch();
 
-            toast.success(`Group has been updated!`);
+            toast.success(`${group.name} has been updated!`);
             setGroupName("");
             setGroupDescription("");
 
@@ -45,6 +78,8 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
     });
 
     const editGroup = () => {
+        setNameToggle(true);
+        setDescToggle(true);
         if (editingGroup) return;
         if (!user) {
             setDialogOpen(false);
@@ -53,10 +88,6 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
         if (!groupName.length) {
             setDialogOpen(false);
             return toast.error("You must enter a name!");
-        }
-        if (!groupDescription) {
-            setDialogOpen(false);
-            return toast.error("You must enter a description!");
         }
 
         setEditingGroup(true);
@@ -70,7 +101,7 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
 
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
-            <Dialog.Trigger asChild onClick={() => setDialogOpen(!dialogOpen)}>
+            <Dialog.Trigger asChild onClick={() => readGroup()}>
                 <Button
                     variant="ghost"
                     color="gray"
@@ -96,40 +127,82 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                             </div>
                             <div className="flex flex-col gap-2">
                                 <label className="text-md">Group Name</label>
-                                <input
-                                    type="text"
-                                    placeholder="Name of Your Device"
-                                    onChange={(e) =>
-                                        setGroupName(e.target.value)
-                                    }
-                                    required
-                                    className="rounded-lg border border-[#4a5065] 
-                                    bg-[#111525]
-                                    p-2 
-                                    focus:border-transparent
-                                    focus:outline-none
-                                    focus:ring-2
-                                    focus:ring-blue-500"
-                                />
+                                <div
+                                className="relative flex w-full
+                                flex-row items-center justify-end">
+                                    <input
+                                        type="text"
+                                        value={groupName}
+                                        placeholder="Name of Your Device"
+                                        onChange={(e) =>
+                                            setGroupName(e.target.value)
+                                        }
+                                        required
+                                        disabled={!nameToggle}
+                                        className={`w-full
+                                        rounded-lg border border-[#4a5065] 
+                                        bg-[#111525] p-2 
+                                        focus:border-transparent
+                                        focus:outline-none
+                                        focus:ring-2
+                                        focus:ring-blue-500
+                                        ${
+                                            !nameToggle
+                                            ? "text-[#B4BCCC]"
+                                            : "text-white"
+                                        }`}
+                                    />
+                                    <button
+                                    className="absolute right-4"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setNameToggle(!nameToggle);
+                                    }}
+                                    >
+                                        {!nameToggle && <RxPencil1 />}
+                                        {nameToggle && <FaCheck />}
+                                    </button>
+                                </div>
                                 <label className="text-md">
                                     Group Description
                                 </label>
                             </div>
-                            <input
-                                type="text"
-                                placeholder="Your Group Description"
-                                onChange={(e) =>
-                                    setGroupDescription(e.target.value)
-                                }
-                                required
-                                className="rounded-lg border border-[#4a5065] 
-                                    bg-[#111525]
-                                    p-2 
-                                    focus:border-transparent
-                                    focus:outline-none
-                                    focus:ring-2
-                                    focus:ring-blue-500"
-                            />
+                            <div
+                            className="relative flex w-full flex-row
+                            items-center justify-ends">
+                                <input
+                                    type="text"
+                                    value={groupDescription}
+                                    placeholder="Your Group Description"
+                                    onChange={(e) =>
+                                        setGroupDescription(e.target.value)
+                                    }
+                                    required
+                                    disabled={!descToggle}
+                                    className={`w-full
+                                        rounded-lg 
+                                        border border-[#4a5065] 
+                                        bg-[#111525] p-2 
+                                        focus:border-transparent
+                                        focus:outline-none
+                                        focus:ring-2
+                                        focus:ring-blue-500
+                                        ${
+                                            !descToggle
+                                            ? "text-[#B4BCCC]"
+                                            : "text-white"
+                                        }`}
+                                />
+                                <button
+                                className="absolute right-4"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setDescToggle(!descToggle);
+                                }}>
+                                    {!descToggle && <RxPencil1 />}
+                                    {descToggle && <FaCheck />}
+                                </button>
+                            </div>
                             <div
                                 className="
                             mt-2 flex items-center

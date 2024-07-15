@@ -20,6 +20,10 @@ export default function GroupRow({
 }: GroupRowProps) {
     const { width, height } = useWindowSize();
 
+    if (name.length >= 15 && width! < 600) {
+        name = name.slice(0, 10) + "..."
+    }
+
     members = ["1", "2", "3"];
     return (
         <>

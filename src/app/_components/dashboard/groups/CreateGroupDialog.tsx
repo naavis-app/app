@@ -44,8 +44,6 @@ export default function CreateGroupDialog({
         if (addingGroup) return;
         if (!user) return toast.error("You must be logged in to add a device!");
         if (!groupName.length) return toast.error("You must enter a name!");
-        if (!groupDescription)
-            return toast.error("You must enter a description!");
         if (!user)
             return toast.error("You must be logged in to create a group");
 
@@ -96,7 +94,7 @@ export default function CreateGroupDialog({
                         <input
                             type="text"
                             placeholder="Your group's description..."
-                            onChange={(e) => setGroupName(e.target.value)}
+                            onChange={(e) => setGroupDescription(e.target.value)}
                             required
                             className="rounded-lg border border-[#4a5065] 
                                     bg-[#111525]
@@ -126,7 +124,7 @@ export default function CreateGroupDialog({
                                 disabled={addingGroup}
                                 className="rounded bg-[#3e63de] 
                                 px-4 py-1 text-white hover:bg-blue-700 
-                                disabled:bg-blue-300"
+                                disabled:bg-blue-500"
                             >
                                 Create Group
                             </button>

@@ -33,6 +33,60 @@ export const groupRouter = createTRPCRouter({
                 });
             }
         }),
+
+    read: publicProcedure
+        .input(
+            z.object({
+                id: z.string(),
+                userId: z.string(),
+            }),
+        )
+        .mutation(async ({ ctx, input }) => {
+            const user = await ctx.db.user.findUnique({
+                where: {
+                    id: input.userId,
+                },
+            });
+
+            if (!user) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "User not found",
+                });
+            }
+
+            try {
+                const group = await ctx.db.group.findUnique({
+                    where: {
+                        id: input.id,
+                        ownerId: input.userId,
+                    },
+                });
+
+                if (!group) {
+                    throw new TRPCError({
+                        code: "NOT_FOUND",
+                        message: "Group was not found!"
+                    });
+                }
+
+                if (group.ownerId !== input.userId) {
+                    throw new TRPCError({
+                        code: "NOT_FOUND",
+                        message: "User is not in this group!"
+                    });
+                }
+
+                return group
+            } catch (e) {
+                console.error(e);
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Failed to find group",
+                });
+            }
+        }),
+
     update: publicProcedure
         .input(
             z.object({
@@ -49,6 +103,7 @@ export const groupRouter = createTRPCRouter({
                     },
                     data: {
                         name: input.name,
+                        description: input.description
                     },
                 });
             } catch (e) {

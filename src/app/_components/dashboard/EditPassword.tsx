@@ -7,6 +7,7 @@ import { userAtom } from "~/server/lib/stores";
 import { editPassword } from "~/server/lib/auth";
 import toast from "react-hot-toast";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
+import useWindowSize from "~/app/hooks/useWindowSize";
 
 export default function EditPassword() {
     const [user, setUser] = useAtom(userAtom);
@@ -14,6 +15,7 @@ export default function EditPassword() {
     const [eyeVisible, setEyeVisible] = useState<boolean>(false);
     const [toggleEye, setToggleEye] = useState<boolean>(false);
     const [passVal, setPassVal] = useState<string>("");
+    const { width, height } = useWindowSize();
 
     const handleSubmit = async (e: FormData) => {
         e.append("userId", user?.id ?? "");
@@ -48,7 +50,9 @@ export default function EditPassword() {
                     <TextField.Root
                         size={"2"}
                         variant="surface"
-                        placeholder={`Enter your new password`}
+                        placeholder={width! >= 600 ?
+                            `Enter your new password` : 
+                            `**************`}
                         className="w-full pr-10"
                         value={passVal}
                         type={toggleEye ? "text" : "password"}

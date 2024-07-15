@@ -82,7 +82,7 @@ export default function DeviceRow({
                 break;
             }
         }
-    }, []);
+    }, [device.name, device.type]);
 
     if (viewMode == "list") {
         return (
