@@ -2,11 +2,12 @@
 
 import { Button, Card, Flex, Text, TextField } from "@radix-ui/themes";
 import { useAtom } from "jotai";
-import { FormEventHandler, useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
 import * as Dialog from "@radix-ui/react-dialog";
 import { api } from "~/trpc/react";
+import { themeAtom } from "~/server/lib/stores";
 
 export default function CreateGroupDialog({
     refetch,
@@ -20,6 +21,11 @@ export default function CreateGroupDialog({
 
     const [groupName, setGroupName] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
+
+    const [dialogStyle, setDialogStyle] = useState("");
+    const [dialogTextStyle, setDialogTextStyle] = useState("");
+    const [dialogButtonStyle, setDialogButtonStyle] = useState("");
+    const [theme, setTheme] = useAtom(themeAtom);
 
     const createGroup = api.group.create.useMutation({
         onSuccess: (group) => {
@@ -56,9 +62,24 @@ export default function CreateGroupDialog({
         });
     };
 
-    const dialogStyle = "border-dark-dialog-border bg-dark-dialog-bg";
-    const dialogTextStyle = "border-dark-dialog-text-border bg-dark-dialog-text-bg ";
-    // bg-[#d0d0d1] 
+    useEffect(() => {
+        if (theme === 'light') {
+            setDialogStyle(
+            "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+            );
+            setDialogTextStyle(
+            "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+            );
+            setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
+        } else if (theme === 'dark') {
+            setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
+            setDialogTextStyle(
+            "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+            );
+            setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
+        }
+    }, [theme]);
+
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger asChild onClick={() => setDialogOpen(!dialogOpen)}>
@@ -106,11 +127,10 @@ export default function CreateGroupDialog({
                         >
                             <button
                                 onClick={() => setDialogOpen(false)}
-                                className="
+                                className={`
                                 rounded
                                 bg-transparent px-4
-                                py-1 text-txt-only-button
-                                hover:bg-txt-button-hover"
+                                py-1 ${dialogButtonStyle}`}
                             >
                                 Cancel
                             </button>

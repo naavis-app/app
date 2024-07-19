@@ -104,9 +104,6 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
         }
     }, [theme]);
 
-    const dialog_Style = "border-dark-dialog-border bg-dark-dialog-bg";
-    const dialog_TextStyle = "border-dark-dialog-text-border bg-dark-dialog-text-bg ";
-
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger asChild onClick={() => setDialogOpen(!dialogOpen)}>

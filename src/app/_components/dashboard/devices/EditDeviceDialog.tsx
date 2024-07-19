@@ -34,7 +34,6 @@ export default function EditDeviceDialog({
 
     const [dialogStyle, setDialogStyle] = useState("");
     const [dialogTextStyle, setDialogTextStyle] = useState("");
-    const [dialogTextColor, setDialogTextColor] = useState("");
     const [dialogButtonStyle, setDialogButtonStyle] = useState("");
     const [theme, setTheme] = useAtom(themeAtom);
 
@@ -63,14 +62,12 @@ export default function EditDeviceDialog({
             "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
             );
             setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
-            setDialogTextColor("text-light-dialog-text");
         } else if (theme === 'dark') {
             setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
             setDialogTextStyle(
             "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
             );
             setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
-            setDialogTextColor("");
         }
     }, [theme]);
 
@@ -158,11 +155,11 @@ export default function EditDeviceDialog({
                     border ${dialogStyle} p-2 shadow`}
                     >
                         <div className="flex flex-col gap-2 p-2">
-                            <div className={`text-xl font-bold ${dialogTextColor}`}>
+                            <div className={`text-xl font-bold`}>
                                 Edit Your Device
                             </div>
                             <div className="flex flex-col gap-2">
-                                <label className={`text-md ${dialogTextColor}`}>Device Name</label>
+                                <label className={`text-md`}>Device Name</label>
                                 <div
                                     className="relative flex w-full flex-row
                                 items-center justify-end"
@@ -199,7 +196,7 @@ export default function EditDeviceDialog({
                                         {nameToggle && <FaCheck />}
                                     </button>
                                 </div>
-                                <label className={`text-md ${dialogTextColor}`}>Device Type</label>
+                                <label className={`text-md`}>Device Type</label>
 
                                 <select
                                     onChange={(e) =>

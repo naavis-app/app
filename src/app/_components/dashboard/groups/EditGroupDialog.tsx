@@ -11,6 +11,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { api } from "~/trpc/react";
 import { RxPencil1 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
+import { themeAtom } from "~/server/lib/stores";
 
 interface EditGroupProps {
     refetch: () => void;
@@ -26,6 +27,11 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
 
     const [groupName, setGroupName] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
+
+    const [dialogStyle, setDialogStyle] = useState("");
+    const [dialogTextStyle, setDialogTextStyle] = useState("");
+    const [dialogButtonStyle, setDialogButtonStyle] = useState("");
+    const [theme, setTheme] = useAtom(themeAtom);
 
     const [nameToggle, setNameToggle] = useState<boolean>(false);
     const [descToggle, setDescToggle] = useState<boolean>(false);
@@ -102,8 +108,23 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
         setDescToggle(false);
     };
 
-    const dialogStyle = "border-dark-dialog-border bg-dark-dialog-bg";
-    const dialogTextStyle = "border-dark-dialog-text-border bg-dark-dialog-text-bg ";
+    useEffect(() => {
+        if (theme === 'light') {
+            setDialogStyle(
+            "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+            );
+            setDialogTextStyle(
+            "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+            );
+            setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
+        } else if (theme === 'dark') {
+            setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
+            setDialogTextStyle(
+            "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+            );
+            setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
+        }
+    }, [theme]);
 
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -153,8 +174,9 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                                         focus:ring-blue-500
                                         ${
                                             !nameToggle
-                                            ? "text-disabled-text"
-                                            : "text-white"
+                                            ? `${theme === 'light' ? `text-light-disabled-text` 
+                                            : `text-dark-disabled-text`}`
+                                            : `${theme === 'light' ? `text-black` : `text-white`}`
                                         }`}
                                     />
                                     <button
@@ -193,8 +215,9 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                                         focus:ring-blue-500
                                         ${
                                             !descToggle
-                                            ? "text-disabled-text"
-                                            : "text-white"
+                                            ? `${theme === 'light' ? `text-light-disabled-text` 
+                                            : `text-dark-disabled-text`}`
+                                            : `${theme === 'light' ? `text-black` : `text-white`}`
                                         }`}
                                 />
                                 <button
@@ -214,11 +237,10 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                             >
                                 <button
                                     onClick={() => setDialogOpen(false)}
-                                    className="
+                                    className={`
                                 rounded
                                 bg-transparent px-4
-                                py-1 text-txt-only-button
-                                hover:bg-txt-button-hover"
+                                py-1 ${dialogButtonStyle}`}
                                 >
                                     Cancel
                                 </button>
