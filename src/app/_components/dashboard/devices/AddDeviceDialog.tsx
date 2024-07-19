@@ -11,10 +11,11 @@ import {
     TextField,
 } from "@radix-ui/themes";
 import { useAtom } from "jotai";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
 import * as Dialog from "@radix-ui/react-dialog";
+import { themeAtom } from "~/server/lib/stores";
 
 export const deviceTypes = [
     {
@@ -45,6 +46,11 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
 
     const [deviceName, setDeviceName] = useState("");
     const [deviceType, setDeviceType] = useState("1");
+
+    const [dialogStyle, setDialogStyle] = useState("");
+    const [dialogTextStyle, setDialogTextStyle] = useState("");
+    const [dialogButtonStyle, setDialogButtonStyle] = useState("");
+    const [theme, setTheme] = useAtom(themeAtom);
 
     const createDevice = api.device.create.useMutation({
         onSuccess: (device) => {
@@ -80,8 +86,26 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
         });
     };
 
-    const dialogStyle = "border-dark-dialog-border bg-dark-dialog-bg";
-    const dialogTextStyle = "border-dialog-text-border bg-dialog-text-bg ";
+    useEffect(() => {
+        if (theme === 'light') {
+            setDialogStyle(
+            "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+            );
+            setDialogTextStyle(
+            "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+            );
+            setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
+        } else if (theme === 'dark') {
+            setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
+            setDialogTextStyle(
+            "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+            );
+            setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
+        }
+    }, [theme]);
+
+    const dialog_Style = "border-dark-dialog-border bg-dark-dialog-bg";
+    const dialog_TextStyle = "border-dark-dialog-text-border bg-dark-dialog-text-bg ";
 
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -140,11 +164,10 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
                         >
                             <button
                                 onClick={() => setDialogOpen(false)}
-                                className="
+                                className={`
                                 rounded
                                 bg-transparent px-4
-                                py-1 text-txt-only-button
-                                hover:bg-txt-button-hover"
+                                py-1 ${dialogButtonStyle}`}
                             >
                                 Cancel
                             </button>

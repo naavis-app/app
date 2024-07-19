@@ -13,7 +13,7 @@ import { FaCheck } from "react-icons/fa";
 import { deviceTypes } from "./AddDeviceDialog";
 import { db } from "~/server/db";
 import { api } from "~/trpc/react";
-
+import { themeAtom } from "~/server/lib/stores";
 interface EditDeviceProps {
     refetch: () => void;
     deviceId: string;
@@ -32,6 +32,12 @@ export default function EditDeviceDialog({
     const [deviceName, setDeviceName] = useState("");
     const [deviceType, setDeviceType] = useState("1");
 
+    const [dialogStyle, setDialogStyle] = useState("");
+    const [dialogTextStyle, setDialogTextStyle] = useState("");
+    const [dialogTextColor, setDialogTextColor] = useState("");
+    const [dialogButtonStyle, setDialogButtonStyle] = useState("");
+    const [theme, setTheme] = useAtom(themeAtom);
+
     const [nameToggle, setNameToggle] = useState<boolean>(false);
 
     const { mutate, error } = api.device.read.useMutation({
@@ -47,6 +53,26 @@ export default function EditDeviceDialog({
             setDeviceType(deviceType);
         },
     });
+
+    useEffect(() => {
+        if (theme === 'light') {
+            setDialogStyle(
+            "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+            );
+            setDialogTextStyle(
+            "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+            );
+            setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
+            setDialogTextColor("text-light-dialog-text");
+        } else if (theme === 'dark') {
+            setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
+            setDialogTextStyle(
+            "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+            );
+            setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
+            setDialogTextColor("");
+        }
+    }, [theme]);
 
     const readDevice = () => {
         mutate({ id: deviceId, userId: user!.id });
@@ -109,9 +135,6 @@ export default function EditDeviceDialog({
         setNameToggle(false);
     };
 
-    const dialogStyle = "border-dark-dialog-border bg-dark-dialog-bg";
-    const dialogTextStyle = "border-dialog-text-border bg-dialog-text-bg ";
-
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger asChild onClick={() => readDevice()}>
@@ -135,11 +158,11 @@ export default function EditDeviceDialog({
                     border ${dialogStyle} p-2 shadow`}
                     >
                         <div className="flex flex-col gap-2 p-2">
-                            <div className="text-xl font-bold">
+                            <div className={`text-xl font-bold ${dialogTextColor}`}>
                                 Edit Your Device
                             </div>
                             <div className="flex flex-col gap-2">
-                                <label className="text-md">Device Name</label>
+                                <label className={`text-md ${dialogTextColor}`}>Device Name</label>
                                 <div
                                     className="relative flex w-full flex-row
                                 items-center justify-end"
@@ -160,8 +183,9 @@ export default function EditDeviceDialog({
                                         focus:ring-2 focus:ring-blue-500
                                         ${
                                             !nameToggle
-                                                ? "text-disabled-text"
-                                                : "text-white"
+                                                ? `${theme === 'light' ? `text-light-disabled-text` 
+                                                : `text-dark-disabled-text`}`
+                                                : `${theme === 'light' ? `text-black` : `text-white`}`
                                         }`}
                                     />
                                     <button
@@ -175,7 +199,7 @@ export default function EditDeviceDialog({
                                         {nameToggle && <FaCheck />}
                                     </button>
                                 </div>
-                                <label className="text-md">Device Type</label>
+                                <label className={`text-md ${dialogTextColor}`}>Device Type</label>
 
                                 <select
                                     onChange={(e) =>
@@ -203,11 +227,10 @@ export default function EditDeviceDialog({
                             >
                                 <button
                                     onClick={() => setDialogOpen(false)}
-                                    className="
+                                    className={`
                                 rounded
                                 bg-transparent px-4
-                                py-1 text-txt-only-button
-                                hover:bg-txt-button-hover"
+                                py-1 ${dialogButtonStyle}`}
                                 >
                                     Cancel
                                 </button>

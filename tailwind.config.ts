@@ -6,7 +6,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+                sans: ["var(--font-geist-sans)", ...fontFamily.sans
+
+                ],
             },
             colors: {
                 "span-col": "#0588f0",
@@ -14,14 +16,21 @@ export default {
                 "auth-color": "#222224",
                 "dark-dialog-bg": "#141B30",
                 "dark-dialog-border": "#293040",
-                "dialog-text-border": "#4a5065",
-                "dialog-text-bg": "#111525",
-                "txt-only-button": "#98abf6",
-                "txt-button-hover": "#1A2B60",
+                "dark-dialog-text-border": "#4a5065",
+                "dark-dialog-text-bg": "#111525",
+                "dark-txt-only-button": "#98abf6",
+                "dark-txt-button-hover": "#1A2B60",
+                "light-txt-only-button": "#2b4ebd",
+                "light-txt-button-hover": "#bfc5d3",
                 "reg-button-bg": "#3e63de",
-                "disabled-text": "#B4BCCC",
+                "dark-disabled-text": "#B4BCCC",
+                "light-disabled-text": "#51555f",
+                "light-disabled-bg": "#d7d8dd",
                 "light-dialog-bg": "#d0d0d1",
                 "light-dialog-border": "#757880",
+                "light-dialog-text-border": "#a6a8b1",
+                "light-dialog-text-bg": "#f8f8f8",
+                "light-dialog-text": "#1c2024",
             },
         },
     },

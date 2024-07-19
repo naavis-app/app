@@ -57,7 +57,7 @@ export default function CreateGroupDialog({
     };
 
     const dialogStyle = "border-dark-dialog-border bg-dark-dialog-bg";
-    const dialogTextStyle = "border-dialog-text-border bg-dialog-text-bg ";
+    const dialogTextStyle = "border-dark-dialog-text-border bg-dark-dialog-text-bg ";
     // bg-[#d0d0d1] 
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
