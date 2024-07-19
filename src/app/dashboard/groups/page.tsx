@@ -20,6 +20,7 @@ import GroupRow from "~/app/_components/dashboard/groups/GroupRow";
 import useWindowSize from "~/app/hooks/useWindowSize";
 import { groupListAtom, userAtom } from "~/server/lib/stores";
 import { api } from "~/trpc/react";
+import { Group } from "@prisma/client";
 
 export default function GroupsPage() {
     const [user, setUser] = useAtom(userAtom);

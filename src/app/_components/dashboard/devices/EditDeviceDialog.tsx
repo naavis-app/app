@@ -105,7 +105,12 @@ export default function EditDeviceDialog({
             type: deviceType as "phone" | "tablet" | "laptop" | "smartwatch",
             userId: user.id,
         });
+
+        setNameToggle(false);
     };
+
+    const dialogStyle = "border-dark-dialog-border bg-dark-dialog-bg";
+    const dialogTextStyle = "border-dialog-text-border bg-dialog-text-bg ";
 
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -126,8 +131,8 @@ export default function EditDeviceDialog({
                 justify-center p-4"
                 >
                     <div
-                        className="min-w-[24rem] rounded-lg
-                    border border-[#293040] bg-[#141B30] p-2 shadow"
+                        className={`min-w-[24rem] rounded-lg
+                    border ${dialogStyle} p-2 shadow`}
                     >
                         <div className="flex flex-col gap-2 p-2">
                             <div className="text-xl font-bold">
@@ -149,14 +154,13 @@ export default function EditDeviceDialog({
                                         required
                                         disabled={!nameToggle}
                                         className={`w-full rounded-lg 
-                                        border border-[#4a5065]
-                                        bg-[#111525] p-2 pr-10
+                                        border ${dialogTextStyle} p-2 pr-10
                                         focus:border-transparent
                                         focus:outline-none
                                         focus:ring-2 focus:ring-blue-500
                                         ${
                                             !nameToggle
-                                                ? "text-[#B4BCCC]"
+                                                ? "text-disabled-text"
                                                 : "text-white"
                                         }`}
                                     />
@@ -178,12 +182,11 @@ export default function EditDeviceDialog({
                                         setDeviceType(e.target.value)
                                     }
                                     value={deviceType}
-                                    className="rounded-lg
-                                    border border-[#4a5065]
-                                    bg-[#111525] p-2 focus:border-transparent 
+                                    className={`rounded-lg
+                                    border ${dialogTextStyle} p-2 focus:border-transparent 
                                     focus:outline-none
                                     focus:ring-2
-                                    focus:ring-blue-500"
+                                    focus:ring-blue-500`}
                                 >
                                     {deviceTypes.map((type) => (
                                         <option value={type.id}>
@@ -203,15 +206,15 @@ export default function EditDeviceDialog({
                                     className="
                                 rounded
                                 bg-transparent px-4
-                                py-1 text-[#98abf6]
-                                hover:bg-[#1A2B60]"
+                                py-1 text-txt-only-button
+                                hover:bg-txt-button-hover"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     onClick={editDevice}
                                     disabled={editingDevice}
-                                    className="rounded bg-[#3e63de] 
+                                    className="rounded bg-reg-button-bg
                                 px-4 py-1 text-white hover:bg-blue-700 
                                 disabled:bg-blue-500"
                                 >
