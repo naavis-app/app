@@ -7,6 +7,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import "@radix-ui/themes/styles.css";
 import Navbar from "./_components/navbar/Navbar";
 import { Providers } from "./providers";
+import React from "react";
 
 export const metadata = {
     title: "Naavis ⛵️",

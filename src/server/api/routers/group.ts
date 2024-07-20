@@ -77,7 +77,7 @@ export const groupRouter = createTRPCRouter({
                     });
                 }
 
-                return group
+                return group;
             } catch (e) {
                 console.error(e);
                 throw new TRPCError({
@@ -135,7 +135,7 @@ export const groupRouter = createTRPCRouter({
                     return group.inviteCode;
                 } else {
                     // TODO: This is not a good way to generate invite codes
-                    let inviteCode = Math.random().toString(36).substring(2, 8);
+                    const inviteCode = Math.random().toString(36).substring(2, 8);
                     await ctx.db.group.update({
                         where: {
                             id: input.groupId,

@@ -15,6 +15,7 @@ import { Lucia } from "lucia";
 import type { Session, User } from "lucia";
 import prismaTypes from "@prisma/client";
 import { cache } from "react";
+import toast from "react-hot-toast";
 
 const adapter = new PrismaAdapter(db.session, db.user);
 
@@ -133,7 +134,7 @@ export async function login(formData: FormData): Promise<ActionResult> {
 }
 
 export async function signup(formData: FormData): Promise<ActionResult> {
-    let username = formData.get("username");
+    const username = formData.get("username");
 
     if (
         typeof username != "string" ||
@@ -217,7 +218,7 @@ export async function signup(formData: FormData): Promise<ActionResult> {
         sessionCookie.value,
         sessionCookie.attributes,
     );
-    return redirect(`/sign-up/picture`);
+    return redirect("/sign-up/picture");
 }
 
 export async function edit(formData: FormData): Promise<ActionResult> {
@@ -255,7 +256,7 @@ export async function edit(formData: FormData): Promise<ActionResult> {
         };
     }
 
-    let userId = formData.get("userId");
+    const userId = formData.get("userId");
 
     const editUser = await db.user.update({
         where: {
@@ -374,7 +375,10 @@ export const validateRequest = cache(
                     sessionCookie.attributes,
                 );
             }
-        } catch {}
+        } catch (error) {
+            toast.error("Something unexpected occured!");
+            // for linter, if there was another plan for this catch, then do that
+        }
         return result;
     },
 );

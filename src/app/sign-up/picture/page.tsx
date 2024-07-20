@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { Card, Heading, Box, Text, Flex, Button } from "@radix-ui/themes";
+import { Card, Heading, Box, Flex, Button } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
 import { validateRequest } from "~/server/lib/auth";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 export default function Page() {
     const router = useRouter();

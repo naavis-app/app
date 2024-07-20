@@ -1,8 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { validateRequest } from "~/server/lib/auth";
-import { lucia } from "~/server/lib/googleauth";
 
 export const userRouter = createTRPCRouter({
     update: publicProcedure

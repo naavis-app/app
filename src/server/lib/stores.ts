@@ -7,7 +7,7 @@ check https://jotai.org/docs/introduction for more information. */
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
-import { DatabaseUser, User } from "lucia";
+// import { DatabaseUser, User } from "lucia";
 import { DatabaseUserAttributes } from "./auth";
 import { Device, Group } from "@prisma/client";
 

@@ -22,6 +22,7 @@ import NextLink from "next/link";
 import { signup } from "~/server/lib/auth";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import React from "react";
 
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 
