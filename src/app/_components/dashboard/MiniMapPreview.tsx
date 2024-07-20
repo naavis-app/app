@@ -1,6 +1,7 @@
 import { APIProvider, AdvancedMarker, Map } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 import { env } from "~/env";
+import React from "react";
 
 interface MiniMapProps {
     name: string;

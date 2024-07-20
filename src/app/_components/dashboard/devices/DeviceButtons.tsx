@@ -3,9 +3,10 @@ import DeleteDeviceDialog from "./DeleteDeviceDialog";
 import { api } from "~/trpc/react";
 import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
+import React from "react";
 
 export default function DeviceButtons({ deviceId }: { deviceId: string }) {
-    const [user, setUser] = useAtom(userAtom);
+    const [user] = useAtom(userAtom);
 
     const deviceQuery = api.device.list.useQuery({
         userId: user?.id || "",

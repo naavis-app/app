@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { Button, Card, Flex, Select, Text, TextField } from "@radix-ui/themes";
+import { Button } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import toast from "react-hot-toast";

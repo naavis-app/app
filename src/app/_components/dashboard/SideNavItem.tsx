@@ -6,6 +6,7 @@ import { sidenavOpenAtom } from "~/server/lib/stores";
 import { useAtom } from "jotai";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import React from "react";
 
 interface SideNavItemProps {
     label: string;

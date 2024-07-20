@@ -5,31 +5,26 @@ it doesnt update immediately which is something that needs to be worked on later
 "use client";
 
 import {
-    Card,
-    Heading,
     Box,
     Text,
     Flex,
-    TextField,
     Button,
-    Container,
 } from "@radix-ui/themes";
 import NextLink from "next/link";
 import toast from "react-hot-toast";
 import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import EditableInput from "../edit-account/EditInput";
-import { editPassword } from "~/server/lib/auth";
 import { edit } from "~/server/lib/auth";
 import { useDropzone } from "react-dropzone";
+import React from "react";
 
 export default function EditAccount() {
     const [check, setCheck] = useState<boolean>(true);
     const [user, setUser] = useAtom(userAtom);
     const [file, setFile] = useState<File | null>(null);
-    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    const { getRootProps, getInputProps } = useDropzone({
         accept: {
             "image/jpeg": [".jpeg", ".jpg"],
             "image/png": [".png"],
@@ -42,7 +37,7 @@ export default function EditAccount() {
 
     const handleSubmit = async (e: FormData) => {
         e.append("userId", user?.id ?? "");
-        let response = await edit(e);
+        const response = await edit(e);
 
         if (response.error) {
             toast.error(response.error);
@@ -141,7 +136,7 @@ export default function EditAccount() {
                     >
                         <input {...getInputProps()} />
                         <p className="select-none text-gray-500">
-                            Drag 'n' drop or click to select
+                            Drag &apos;n&apos; drop or click to select
                         </p>
                     </div>
                 )}

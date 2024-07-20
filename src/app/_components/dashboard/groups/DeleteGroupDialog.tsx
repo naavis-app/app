@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { Button, Card, Flex, Text, TextField } from "@radix-ui/themes";
+import { Button } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
 import * as Dialog from "@radix-ui/react-dialog";
 import { api } from "~/trpc/react";
+import React from "react";
 import { FiTrash2 } from "react-icons/fi";
 
 export default function DeleteGroupDialog() {

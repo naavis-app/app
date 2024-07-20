@@ -27,7 +27,7 @@ export default function Page() {
         setFile(e.target.files[0]);
     };
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async () => {
         if (!file) {
             toast.error("You must upload a file!");
         }
@@ -55,7 +55,7 @@ export default function Page() {
         }
     };
 
-    const handleSubmitDefault = async (e: any) => {
+    const handleSubmitDefault = async () => {
         const imageFormData = new FormData();
         imageFormData.append("userId", user?.id ?? "");
 

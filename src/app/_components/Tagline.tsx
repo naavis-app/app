@@ -2,19 +2,20 @@
 
 import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
+import React from "react";
 
 // tagline for our website. you can see it on the homepage!
 
 import { Link, Text } from "@radix-ui/themes";
 
 export default function Tagline() {
-    const [user, setUser] = useAtom(userAtom);
+    const [user] = useAtom(userAtom);
 
     return (
         <div
             className="flex h-full w-full flex-col 
         items-center justify-center"
-        data-testid="tagline-div"
+            data-testid="tagline-div"
         >
             <div
                 className="flex select-none flex-col items-center justify-center

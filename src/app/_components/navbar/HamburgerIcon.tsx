@@ -1,5 +1,6 @@
 import { useAtom } from "jotai";
 import { themeAtom } from "~/server/lib/stores";
+import React from "react";
 
 const hexColors = {
     dark: "FFF",
@@ -8,7 +9,7 @@ const hexColors = {
 } as const;
 
 export default function HamburgerIcon() {
-    const [theme, setTheme] = useAtom(themeAtom);
+    const [theme] = useAtom(themeAtom);
 
     return (
         <svg

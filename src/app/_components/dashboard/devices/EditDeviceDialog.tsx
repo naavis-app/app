@@ -2,7 +2,7 @@
 
 // edit device dialog
 
-import { Button, Card, Flex, Select, Text, TextField } from "@radix-ui/themes";
+import { Button } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -11,9 +11,9 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { RxPencil1 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
 import { deviceTypes } from "./AddDeviceDialog";
-import { db } from "~/server/db";
 import { api } from "~/trpc/react";
 import { themeAtom } from "~/server/lib/stores";
+import React from "react";
 interface EditDeviceProps {
     refetch: () => void;
     deviceId: string;
@@ -23,11 +23,11 @@ export default function EditDeviceDialog({
     refetch,
     deviceId,
 }: EditDeviceProps) {
-    const [user, setUser] = useAtom(userAtom);
+    const [user] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
     const [editingDevice, setEditingDevice] = useState<boolean>(false);
-    const [startingEdit, setStartingEdit] = useState<boolean>(false);
+    const [startingEdit] = useState<boolean>(false);
 
     const [deviceName, setDeviceName] = useState("");
     const [deviceType, setDeviceType] = useState("1");
@@ -35,7 +35,7 @@ export default function EditDeviceDialog({
     const [dialogStyle, setDialogStyle] = useState("");
     const [dialogTextStyle, setDialogTextStyle] = useState("");
     const [dialogButtonStyle, setDialogButtonStyle] = useState("");
-    const [theme, setTheme] = useAtom(themeAtom);
+    const [theme] = useAtom(themeAtom);
 
     const [nameToggle, setNameToggle] = useState<boolean>(false);
 
@@ -46,7 +46,7 @@ export default function EditDeviceDialog({
             setDialogOpen(true);
         },
         onError: () => {
-            toast.error(`Failed to get device!`);
+            toast.error("Failed to get device!");
 
             setDeviceName(deviceName);
             setDeviceType(deviceType);
@@ -54,18 +54,18 @@ export default function EditDeviceDialog({
     });
 
     useEffect(() => {
-        if (theme === 'light') {
+        if (theme === "light") {
             setDialogStyle(
-            "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
             );
             setDialogTextStyle(
-            "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
             );
             setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
-        } else if (theme === 'dark') {
+        } else if (theme === "dark") {
             setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
             setDialogTextStyle(
-            "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
             );
             setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
         }
@@ -86,7 +86,7 @@ export default function EditDeviceDialog({
     }
 
     const deviceQuery = api.device.update.useMutation({
-        onSuccess: (device) => {
+        onSuccess: () => {
             refetch();
 
             toast.success(`${deviceName} has been updated!`);
@@ -155,11 +155,11 @@ export default function EditDeviceDialog({
                     border ${dialogStyle} p-2 shadow`}
                     >
                         <div className="flex flex-col gap-2 p-2">
-                            <div className={`text-xl font-bold`}>
+                            <div className={"text-xl font-bold"}>
                                 Edit Your Device
                             </div>
                             <div className="flex flex-col gap-2">
-                                <label className={`text-md`}>Device Name</label>
+                                <label className={"text-md"}>Device Name</label>
                                 <div
                                     className="relative flex w-full flex-row
                                 items-center justify-end"
@@ -179,11 +179,11 @@ export default function EditDeviceDialog({
                                         focus:outline-none
                                         focus:ring-2 focus:ring-blue-500
                                         ${
-                                            !nameToggle
-                                                ? `${theme === 'light' ? `text-light-disabled-text` 
-                                                : `text-dark-disabled-text`}`
-                                                : `${theme === 'light' ? `text-black` : `text-white`}`
-                                        }`}
+        !nameToggle
+            ? `${theme === "light" ? "text-light-disabled-text" 
+                : "text-dark-disabled-text"}`
+            : `${theme === "light" ? "text-black" : "text-white"}`
+        }`}
                                     />
                                     <button
                                         className="absolute right-4"
@@ -196,7 +196,7 @@ export default function EditDeviceDialog({
                                         {nameToggle && <FaCheck />}
                                     </button>
                                 </div>
-                                <label className={`text-md`}>Device Type</label>
+                                <label className={"text-md"}>Device Type</label>
 
                                 <select
                                     onChange={(e) =>
@@ -209,8 +209,8 @@ export default function EditDeviceDialog({
                                     focus:ring-2
                                     focus:ring-blue-500`}
                                 >
-                                    {deviceTypes.map((type) => (
-                                        <option value={type.id}>
+                                    {deviceTypes.map((type, index) => (
+                                        <option key={index} value={type.id}>
                                             {type.name}
                                         </option>
                                     ))}

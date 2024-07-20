@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Card, Flex, Text, TextField } from "@radix-ui/themes";
+import { Button } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -8,13 +8,14 @@ import { userAtom } from "~/server/lib/stores";
 import * as Dialog from "@radix-ui/react-dialog";
 import { api } from "~/trpc/react";
 import { themeAtom } from "~/server/lib/stores";
+import React from "react";
 
 export default function CreateGroupDialog({
     refetch,
 }: {
     refetch: () => void;
 }) {
-    const [user, setUser] = useAtom(userAtom);
+    const [user] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const [addingGroup, setAddingGroup] = useState(false);
@@ -25,7 +26,7 @@ export default function CreateGroupDialog({
     const [dialogStyle, setDialogStyle] = useState("");
     const [dialogTextStyle, setDialogTextStyle] = useState("");
     const [dialogButtonStyle, setDialogButtonStyle] = useState("");
-    const [theme, setTheme] = useAtom(themeAtom);
+    const [theme] = useAtom(themeAtom);
 
     const createGroup = api.group.create.useMutation({
         onSuccess: (group) => {
@@ -63,18 +64,18 @@ export default function CreateGroupDialog({
     };
 
     useEffect(() => {
-        if (theme === 'light') {
+        if (theme === "light") {
             setDialogStyle(
-            "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
             );
             setDialogTextStyle(
-            "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
             );
             setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
-        } else if (theme === 'dark') {
+        } else if (theme === "dark") {
             setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
             setDialogTextStyle(
-            "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
             );
             setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
         }

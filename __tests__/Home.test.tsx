@@ -56,6 +56,7 @@ describe("unit tests", () => {
             wrapper: ({ children } : { children: any }) => <Provider>{children}</Provider>
         });
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [user, setUser] = result.current;
         setUser({ 
             id: "123",
@@ -63,7 +64,7 @@ describe("unit tests", () => {
             firstname: "test",
             lastname: "test",
             email: "test"
-         });
+        });
 
         render(
             <Provider>
@@ -81,6 +82,7 @@ describe("unit tests", () => {
             wrapper: ({ children } : { children: any }) => <Provider>{children}</Provider>
         });
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [user, setUser] = result.current;
         setUser({ 
             id: "", // null for testing
@@ -88,7 +90,7 @@ describe("unit tests", () => {
             firstname: "test",
             lastname: "test",
             email: "test"
-         });
+        });
 
         render(
             <Provider>
@@ -108,6 +110,7 @@ describe("integration tests", () => {
             wrapper: ({ children } : { children: any }) => <Provider>{children}</Provider>
         });
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [user, setUser] = result.current;
         setUser({
             id: "",

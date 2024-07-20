@@ -6,6 +6,7 @@ import { Button } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { themeAtom } from "../../server/lib/stores";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import React from "react";
 
 export default function ThemeToggle() {
     const [theme, setTheme] = useAtom(themeAtom);

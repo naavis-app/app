@@ -4,24 +4,20 @@
 
 import {
     Avatar,
-    Card,
     Flex,
-    Box,
     Text,
     Popover,
     Button,
 } from "@radix-ui/themes";
-import * as Separator from "@radix-ui/react-separator";
-import { DatabaseUser, User } from "lucia";
 import Link from "next/link";
-import { DatabaseUserAttributes, signOut } from "~/server/lib/auth";
-import getConfig from "next/config";
+import { DatabaseUserAttributes } from "~/server/lib/auth";
+import React from "react";
 interface AccountButtonProps {
     user: DatabaseUserAttributes;
 }
 
 export default function AccountButton({ user }: AccountButtonProps) {
-    const BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME;
+    // const BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME;
 
     return (
         <>
