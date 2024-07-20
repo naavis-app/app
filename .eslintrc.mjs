@@ -13,6 +13,11 @@ const config = {
         "plugin:@typescript-eslint/stylistic-type-checked",
         "plugin:prettier/recommended",
     ],
+    settings: {
+        react: {
+            version: "detect",
+        }
+    },
     rules: {
         "@typescript-eslint/array-type": "off",
         "@typescript-eslint/consistent-type-definitions": "off",
