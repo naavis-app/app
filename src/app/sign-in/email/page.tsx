@@ -7,6 +7,7 @@ unreliable [and we need those emails!]) */
 
 import { Card, Heading, Box, Button, TextField } from "@radix-ui/themes";
 import { emailSubmit } from "~/server/lib/githubemail";
+import React from "react";
 
 export default function Page() {
     return (

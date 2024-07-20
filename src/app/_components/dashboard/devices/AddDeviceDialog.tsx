@@ -1,14 +1,7 @@
 "use client";
 
-import { PlusCircledIcon } from "@radix-ui/react-icons";
 import {
     Button,
-    Card,
-    DropdownMenu,
-    Flex,
-    Select,
-    Text,
-    TextField,
 } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useState, useEffect } from "react";
@@ -16,6 +9,7 @@ import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
 import * as Dialog from "@radix-ui/react-dialog";
 import { themeAtom } from "~/server/lib/stores";
+import React from "react";
 
 export const deviceTypes = [
     {
@@ -39,7 +33,7 @@ export const deviceTypes = [
 import { api } from "~/trpc/react";
 
 export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
-    const [user, setUser] = useAtom(userAtom);
+    const [user] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
     const [addingDevice, setAddingDevice] = useState<boolean>(false);
@@ -50,7 +44,7 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
     const [dialogStyle, setDialogStyle] = useState("");
     const [dialogTextStyle, setDialogTextStyle] = useState("");
     const [dialogButtonStyle, setDialogButtonStyle] = useState("");
-    const [theme, setTheme] = useAtom(themeAtom);
+    const [theme] = useAtom(themeAtom);
 
     const createDevice = api.device.create.useMutation({
         onSuccess: (device) => {
@@ -87,18 +81,18 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
     };
 
     useEffect(() => {
-        if (theme === 'light') {
+        if (theme === "light") {
             setDialogStyle(
-            "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
             );
             setDialogTextStyle(
-            "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
             );
             setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
-        } else if (theme === 'dark') {
+        } else if (theme === "dark") {
             setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
             setDialogTextStyle(
-            "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
             );
             setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
         }
@@ -148,8 +142,8 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
                                     focus:ring-2
                                     focus:ring-blue-500`}
                             >
-                                {deviceTypes.map((type) => (
-                                    <option value={type.id}>{type.name}</option>
+                                {deviceTypes.map((type, index) => (
+                                    <option key={index} value={type.id}>{type.name}</option>
                                 ))}
                             </select>
                         </div>

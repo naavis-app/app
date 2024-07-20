@@ -5,6 +5,7 @@ import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 import { env } from "~/env";
 import { AspectRatio } from "@radix-ui/themes";
+import React from "react";
 
 export default function DashboardMap() {
     const [position, setPosition] = useState<google.maps.LatLngLiteral>({

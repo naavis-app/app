@@ -1,41 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
-import {
-    ArrowLeftIcon,
-    AvatarIcon,
-    ButtonIcon,
-    CardStackIcon,
-    CaretDownIcon,
-    CaretLeftIcon,
-    Component1Icon,
-    CubeIcon,
-    DoubleArrowLeftIcon,
-    ExitIcon,
-    GearIcon,
-    GlobeIcon,
-    HomeIcon,
-    PinLeftIcon,
-    PinRightIcon,
-    SewingPinIcon,
-} from "@radix-ui/react-icons";
 import { FaHome, FaMapMarkedAlt } from "react-icons/fa";
 import { FaUserGroup, FaCaretLeft } from "react-icons/fa6";
 import { MdDevices } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
 
-import { clsx } from "clsx";
 import {
     Avatar,
-    Box,
     Button,
     Card,
-    DropdownMenu,
     Flex,
-    IconButton,
     Skeleton,
     Text,
 } from "@radix-ui/themes";
@@ -51,7 +28,7 @@ export default function SideNav() {
     const [user] = useAtom(userAtom);
     const [sidenavOpen, setOpen] = useAtom(sidenavOpenAtom);
     const [togglerVisible, setTogglerVisible] = useState(true);
-    const { width, height } = useWindowSize();
+    const { width } = useWindowSize();
 
     useEffect(() => {
         if (width! < 1024) {

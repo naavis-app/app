@@ -1,10 +1,6 @@
 "use client";
 
 import {
-    Text,
-    Link,
-    Button,
-    Switch,
     Card,
     Flex,
     Popover,
@@ -23,7 +19,8 @@ import GetStartedButton from "./GetStartedButton";
 import DashboardButton from "./DashboardButton";
 import Logo from "./Logo";
 import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import React from "react";
 
 export default function Navbar() {
     const [user, setUser] = useAtom(userAtom);

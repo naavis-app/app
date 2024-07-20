@@ -8,6 +8,7 @@ import { userAtom } from "~/server/lib/stores";
 import * as Dialog from "@radix-ui/react-dialog";
 import EditableInput from "../../edit-account/EditInput";
 import { FiTrash2 } from "react-icons/fi";
+import React from "react";
 
 import { api } from "~/trpc/react";
 

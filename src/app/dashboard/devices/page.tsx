@@ -5,34 +5,28 @@ import {
     GridIcon,
     ListBulletIcon,
     MagnifyingGlassIcon,
-    PlusCircledIcon,
 } from "@radix-ui/react-icons";
 import {
     Box,
     Button,
     Card,
-    Container,
     DropdownMenu,
     Flex,
-    Grid,
-    Section,
     SegmentedControl,
-    Table,
     Text,
     TextField,
 } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import DeviceRow from "~/app/_components/dashboard/devices/DeviceRow";
 import { deviceListAtom, userAtom } from "~/server/lib/stores";
-import * as Dialog from "@radix-ui/react-dialog";
 import AddDeviceDialog from "~/app/_components/dashboard/devices/AddDeviceDialog";
 import { api } from "~/trpc/react";
 import { Device } from "@prisma/client";
-import useWindowSize from "~/app/hooks/useWindowSize";
+import React from "react";
 
 export default function DashboardDevices() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [user, setUser] = useAtom(userAtom);
 
     const deviceQuery = api.device.list.useQuery({
@@ -41,7 +35,7 @@ export default function DashboardDevices() {
 
     const [devices, setDevices] = useAtom(deviceListAtom);
 
-    const [page, setPage] = useState(1);
+    // const [page, setPage] = useState(1);
     const [viewMode, setViewMode] = useState("grid");
     const [searchQuery, setSearchQuery] = useState("");
     const [searchedDevices, setSearchedDevices] = useState<Device[]>([]);
@@ -154,8 +148,9 @@ export default function DashboardDevices() {
                     gap={"4"}
                     overflow={"scroll"}
                 >
-                    {searchedDevices.map((device) => (
+                    {searchedDevices.map((device, index) => (
                         <DeviceRow
+                            key={index}
                             device={device}
                             deviceId={device.id}
                             viewMode={viewMode}
@@ -164,8 +159,9 @@ export default function DashboardDevices() {
                 </Flex>
             ) : (
                 <Card className="mt-4 overflow-scroll">
-                    {searchedDevices.map((device) => (
+                    {searchedDevices.map((device, index) => (
                         <DeviceRow
+                            key={index}
                             device={device}
                             deviceId={device.id}
                             viewMode={viewMode}

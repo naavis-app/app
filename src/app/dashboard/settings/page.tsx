@@ -1,28 +1,21 @@
 "use client";
 
-import { CaretSortIcon } from "@radix-ui/react-icons";
+// import { CaretSortIcon } from "@radix-ui/react-icons";
 import {
-    Box,
     Button,
     Card,
-    Container,
-    DropdownMenu,
     Flex,
-    Table,
     Text,
-    TextField,
 } from "@radix-ui/themes";
-import { useAtom } from "jotai";
-import toast from "react-hot-toast";
 import EditAccount from "~/app/_components/dashboard/EditAccount";
 import EditPassword from "~/app/_components/dashboard/EditPassword";
-import { userAtom } from "~/server/lib/stores";
+import React from "react";
 
-type Inputs = {
-    username: string;
-    firstname: string;
-    lastname: string;
-};
+// type Inputs = {
+//     username: string;
+//     firstname: string;
+//     lastname: string;
+// };
 
 export default function DashboardDevices() {
     return (

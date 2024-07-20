@@ -1,29 +1,26 @@
 "use client";
 
-import { Link1Icon, PlusCircledIcon } from "@radix-ui/react-icons";
 import {
-    Box,
     Button,
     Card,
     Flex,
-    Popover,
     Table,
     Text,
-    Tooltip,
 } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { FaCrown } from "react-icons/fa";
-import { LuCrown } from "react-icons/lu";
 import CreateGroupDialog from "~/app/_components/dashboard/groups/CreateGroupDialog";
 import GroupRow from "~/app/_components/dashboard/groups/GroupRow";
 import useWindowSize from "~/app/hooks/useWindowSize";
 import { groupListAtom, userAtom } from "~/server/lib/stores";
 import { api } from "~/trpc/react";
-import { Group } from "@prisma/client";
+// import { Group } from "@prisma/client";
+import React from "react";
 
 export default function GroupsPage() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [user, setUser] = useAtom(userAtom);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { width, height } = useWindowSize();
     /* used to dynamically move the create
     and join group buttons based on screen size*/
@@ -33,6 +30,7 @@ export default function GroupsPage() {
     });
 
     const [groups, setGroups] = useAtom(groupListAtom);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [page, setPage] = useState(1);
 
     useEffect(() => {
@@ -105,8 +103,9 @@ export default function GroupsPage() {
                                 members={["1", "2", "3"]}
                             /> */}
                             {/* TODO: Group members preview system */}
-                            {groups.map((group) => (
+                            {groups.map((group, index) => (
                                 <GroupRow
+                                    key={index}
                                     groupId={group.id}
                                     name={group.name}
                                     isOwner={group.ownerId === user?.id}

@@ -7,6 +7,7 @@ import { useAtom } from "jotai";
 import { themeAtom } from "../server/lib/stores";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
+import React from "react";
 
 // interface children {
 //     children: React.ReactNode;

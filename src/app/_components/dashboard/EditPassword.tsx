@@ -1,13 +1,14 @@
-import { Box, Text, Flex, Button, TextField } from "@radix-ui/themes";
+import { Box, Flex, Button, TextField } from "@radix-ui/themes";
 import { RxPencil1 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
 import { editPassword } from "~/server/lib/auth";
 import toast from "react-hot-toast";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 import useWindowSize from "~/app/hooks/useWindowSize";
+import React from "react";
 
 export default function EditPassword() {
     const [user, setUser] = useAtom(userAtom);
@@ -15,11 +16,12 @@ export default function EditPassword() {
     const [eyeVisible, setEyeVisible] = useState<boolean>(false);
     const [toggleEye, setToggleEye] = useState<boolean>(false);
     const [passVal, setPassVal] = useState<string>("");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { width, height } = useWindowSize();
 
     const handleSubmit = async (e: FormData) => {
         e.append("userId", user?.id ?? "");
-        let response = await editPassword(e);
+        const response = await editPassword(e);
 
         if (response.error) {
             toast.error(response.error);
@@ -51,8 +53,8 @@ export default function EditPassword() {
                         size={"2"}
                         variant="surface"
                         placeholder={width! >= 600 ?
-                            `Enter your new password` : 
-                            `**************`}
+                            "Enter your new password" : 
+                            "**************"}
                         className="w-full pr-10"
                         value={passVal}
                         type={toggleEye ? "text" : "password"}

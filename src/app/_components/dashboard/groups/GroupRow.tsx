@@ -1,9 +1,8 @@
-import { GearIcon } from "@radix-ui/react-icons";
-import { Avatar, Button, Table, Tooltip } from "@radix-ui/themes";
+import { Avatar, Table, Tooltip } from "@radix-ui/themes";
 import { LuCrown } from "react-icons/lu";
 import useWindowSize from "~/app/hooks/useWindowSize";
 import GroupButtons from "./GroupButtons";
-import { Group } from "@radix-ui/react-dropdown-menu";
+import React from "react";
 
 interface GroupRowProps {
     groupId: string;
@@ -18,10 +17,11 @@ export default function GroupRow({
     isOwner,
     members,
 }: GroupRowProps) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { width, height } = useWindowSize();
 
     if (name.length >= 15 && width! < 600) {
-        name = name.slice(0, 10) + "..."
+        name = name.slice(0, 10) + "...";
     }
 
     members = ["1", "2", "3"];
@@ -30,7 +30,7 @@ export default function GroupRow({
             <Table.Row className="h-full">
                 <Table.RowHeaderCell
                     className={`flex h-full flex-row items-center gap-2
-                    ${width! <= 640 && isOwner ? `text-amber-400` : ""}`}
+                    ${width! <= 640 && isOwner ? "text-amber-400" : ""}`}
                     p="5"
                 >
                     {isOwner && width! >= 640 ? (
@@ -38,7 +38,7 @@ export default function GroupRow({
                             <LuCrown className="text text-amber-400" />
                         </Tooltip>
                     ) : // <LuCrown className="text text-transparent" />
-                    null}
+                        null}
                     {name}
                 </Table.RowHeaderCell>
                 <Table.Cell className="h-full">

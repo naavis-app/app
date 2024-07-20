@@ -1,25 +1,17 @@
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import {
-    GearIcon,
-    Pencil1Icon,
-    ReloadIcon,
-    TrashIcon,
-} from "@radix-ui/react-icons";
-import {
     AspectRatio,
     Badge,
     Box,
-    Button,
     Card,
     Flex,
-    Table,
     Text,
-    DropdownMenu,
 } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import MiniMapPreview from "../MiniMapPreview";
 import { Device } from "@prisma/client";
 import DeviceButtons from "./DeviceButtons";
+import React from "react";
 
 interface DeviceRowProps {
     device: Device;

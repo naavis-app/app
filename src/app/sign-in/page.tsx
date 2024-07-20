@@ -25,6 +25,8 @@ import { useState } from "react";
 
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 
+import React from "react";
+
 export default function Page() {
     const [toggle, setToggle] = useState<boolean>(false);
 

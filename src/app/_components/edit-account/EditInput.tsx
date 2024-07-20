@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import { userAtom } from "~/server/lib/stores";
 import { RxPencil1 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
+import React from "react";
 
 export default function EditableInput({
     name,
@@ -14,27 +15,27 @@ export default function EditableInput({
     placeholder: string;
     check: boolean;
 }) {
-    const [user, setUser] = useAtom(userAtom);
-    const [currField, setCurrField] = useState(name);
+    const [user] = useAtom(userAtom);
+    const [currField] = useState(name);
     const [val, setVal] = useState<string>(user?.firstname!);
     const [toggle, setToggle] = useState<boolean>(false);
 
     useEffect(() => {
         switch (currField) {
-            case "firstname":
-                setVal(user?.firstname!);
-                break;
-            case "lastname":
-                setVal(user?.lastname!);
-                break;
-            case "email":
-                setVal(user?.email!);
-                break;
-            case "username":
-                setVal(user?.username!);
-                break;
-            default:
-                setVal("");
+        case "firstname":
+            setVal(user?.firstname!);
+            break;
+        case "lastname":
+            setVal(user?.lastname!);
+            break;
+        case "email":
+            setVal(user?.email!);
+            break;
+        case "username":
+            setVal(user?.username!);
+            break;
+        default:
+            setVal("");
         }
     }, [user]);
 

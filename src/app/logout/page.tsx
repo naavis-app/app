@@ -7,6 +7,7 @@ import { signOut } from "~/server/lib/auth";
 import { userAtom } from "~/server/lib/stores";
 
 export default async function Logout() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [user, setUser] = useAtom(userAtom);
     const router = useRouter();
 
