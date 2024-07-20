@@ -16,16 +16,20 @@ interface children {
 export function Providers({ children }: { children: React.ReactNode }) {
     const [theme, setTheme] = useAtom(themeAtom);
 
-    useEffect(() => {
-        if (theme === 'inherit') {
-            const inheritedTheme = window.matchMedia("(prefers-color-scheme: dark)");
-            if (inheritedTheme.matches) {
-                setTheme('dark');
-            } else {
-                setTheme('light');
-            }
-        }
-    }, [theme]);
+    // useEffect(() => {
+    //     setTheme(theme);
+    // }, []);
+
+    // useEffect(() => {
+    //     if (theme === 'inherit') {
+    //         const inheritedTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    //         if (inheritedTheme.matches) {
+    //             setTheme('dark');
+    //         } else {
+    //             setTheme('light');
+    //         }
+    //     }
+    // }, [theme]);
 
     return (
         <ThemeProvider attribute="class">

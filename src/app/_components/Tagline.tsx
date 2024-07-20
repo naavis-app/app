@@ -14,6 +14,7 @@ export default function Tagline() {
         <div
             className="flex h-full w-full flex-col 
         items-center justify-center"
+        data-testid="tagline-div"
         >
             <div
                 className="flex select-none flex-col items-center justify-center

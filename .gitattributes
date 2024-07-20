@@ -1,0 +1,25 @@
+* text=auto
+package-lock.json merge=ours
+
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+
+*.html  text eol=lf
+*.css   text eol=lf
+*.scss  text eol=lf
+*.js    text eol=lf
+*.jsx   text eol=lf
+*.ts    text eol=lf
+*.tsx   text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.sh    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+
+dist/* linguist-generated
+build/* linguist-generated
+coverage/* linguist-generated
