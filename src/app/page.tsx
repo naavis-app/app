@@ -12,6 +12,16 @@ export default function Home() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [theme, setTheme] = useAtom(themeAtom);
 
+    if (theme === "inherit") {
+        const themeCheck = window.matchMedia("(prefers-color-scheme: dark)");
+
+        if (themeCheck.matches) {
+            setTheme("dark");
+        } else {
+            setTheme("light");
+        }
+    }
+
     return (
         <>
             <div className="absolute h-full w-full overflow-scroll" data-testid="home">
