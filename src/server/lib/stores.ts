@@ -11,9 +11,11 @@ import { atomWithStorage } from "jotai/utils";
 import { DatabaseUserAttributes } from "./auth";
 import { Device, Group } from "@prisma/client";
 
-export const themeAtom = atomWithStorage<"light" | "dark" | "inherit">(
+// i removed inherit. its causing too many problems with the background svg
+// and flashing onload
+export const themeAtom = atomWithStorage<"light" | "dark">( 
     "naavis-darkmode",
-    "inherit",
+    "dark",
 );
 export const userAtom = atomWithStorage<null | DatabaseUserAttributes>(
     "naavis-usersession",
