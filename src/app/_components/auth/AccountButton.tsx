@@ -13,7 +13,7 @@ import Link from "next/link";
 import { DatabaseUserAttributes } from "~/server/lib/auth";
 import React from "react";
 
-interface AccountButtonProps extends DatabaseUserAttributes {
+interface AccountButtonProps {
     user: DatabaseUserAttributes
 }
 
