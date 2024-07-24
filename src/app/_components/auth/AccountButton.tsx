@@ -12,8 +12,9 @@ import {
 import Link from "next/link";
 import { DatabaseUserAttributes } from "~/server/lib/auth";
 import React from "react";
-interface AccountButtonProps {
-    user: DatabaseUserAttributes;
+
+interface AccountButtonProps extends DatabaseUserAttributes {
+    user: DatabaseUserAttributes
 }
 
 export default function AccountButton({ user }: AccountButtonProps) {
@@ -32,7 +33,7 @@ export default function AccountButton({ user }: AccountButtonProps) {
                             } // when the user has yet to upload a profile picture
                             radius="full"
                             fallback={"A"}
-                            className="border-2 border-blue-400 p-[2px] shadow-md hover:cursor-pointer dark:border-red-400"
+                            className={"border-2 p-[2px] shadow-md hover:cursor-pointer border-blue-500"}
                         />
                     </div>
                 </Popover.Trigger>
