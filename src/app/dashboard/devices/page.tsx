@@ -142,11 +142,10 @@ export default function DashboardDevices() {
 
             {viewMode === "grid" ? (
                 <Flex
-                    className="mt-4"
+                    className="mt-4 !p-0"
                     direction={"row"}
                     wrap={"wrap"}
                     gap={"4"}
-                    overflow={"scroll"}
                 >
                     {searchedDevices.map((device, index) => (
                         <DeviceRow

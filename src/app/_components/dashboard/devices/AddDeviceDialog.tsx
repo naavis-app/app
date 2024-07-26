@@ -39,7 +39,7 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
     const [addingDevice, setAddingDevice] = useState<boolean>(false);
 
     const [deviceName, setDeviceName] = useState("");
-    const [deviceType, setDeviceType] = useState("1");
+    const [deviceType, setDeviceType] = useState("phone");
 
     const [dialogStyle, setDialogStyle] = useState("");
     const [dialogTextStyle, setDialogTextStyle] = useState("");
@@ -52,7 +52,7 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
 
             toast.success(`${device.name} has been added!`);
             setDeviceName("");
-            setDeviceType("");
+            setDeviceType("phone");
 
             setAddingDevice(false);
             setDialogOpen(false);
