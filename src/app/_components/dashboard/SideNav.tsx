@@ -23,6 +23,7 @@ import SideNavItem from "./SideNavItem";
 import ThemeToggle from "../ThemeToggle";
 import { motion, AnimatePresence } from "framer-motion";
 import useWindowSize from "~/app/hooks/useWindowSize";
+import Link from "next/link";
 
 export default function SideNav() {
     const [user] = useAtom(userAtom);
@@ -72,10 +73,10 @@ export default function SideNav() {
                     <Flex
                         direction={"column"}
                         height={"5rem"}
-                        className="relative p-4 pb-0"
+                        className="relative p-4 pb-0 "
                         justify={"center"}
                     >
-                        <div className="flex flex-row gap-2">
+                        <Link className="flex flex-row gap-2 !z-50 w-fit" href="/">
                             <Text>⛵️</Text>
                             <motion.div
                                 animate={{
@@ -85,15 +86,16 @@ export default function SideNav() {
                             >
                                 <Text>WHEEEE</Text>
                             </motion.div>
-                        </div>
+                        </Link>
 
+                        {/* Sidebar Toggle Button */}
                         <Flex
                             className="absolute w-full p-4"
                             direction={"row"}
                             justify={"end"}
                         >
                             <motion.div
-                                className="!-mr-4"
+                                className="!-mr-4 !z-[100]"
                                 animate={{
                                     rotate: sidenavOpen ? 0 : 180,
                                 }}

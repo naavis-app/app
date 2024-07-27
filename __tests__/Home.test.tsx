@@ -27,7 +27,7 @@ describe("unit tests", () => {
 
         expect(homeElement);
 
-        expect(homeElement).toHaveClass("absolute h-full w-full overflow-scroll");
+        expect(homeElement).toHaveClass("absolute h-full w-full");
     });
 
     test("render Tagline component and check main div for styles", () => {

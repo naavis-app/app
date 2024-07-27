@@ -14,7 +14,7 @@ export default function Home() {
 
     return (
         <>
-            <div className="absolute h-full w-full overflow-scroll" data-testid="home">
+            <div className="absolute h-full w-full" data-testid="home">
                 <div
                     className="h-[100vh]"
                     style={{
