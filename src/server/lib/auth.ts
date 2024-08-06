@@ -16,6 +16,7 @@ import type { Session, User } from "lucia";
 import prismaTypes from "@prisma/client";
 import { cache } from "react";
 import toast from "react-hot-toast";
+import redis from "../redis";
 
 const adapter = new PrismaAdapter(db.session, db.user);
 
@@ -71,8 +72,16 @@ interface ActionResult {
     user?: DatabaseUserAttributes;
 }
 
+async function cacheSession(session: Session) {
+    await redis.setex(`session:${session.id}`, 3600, JSON.stringify({ userId: session.userId }));
+}
+
 export async function login(formData: FormData): Promise<ActionResult> {
     const username = formData.get("username");
+
+    const cachedUser = await redis.get(`user:${username}`);
+    let existingUser;
+
     if (
         typeof username !== "string" ||
         username.length < 3 ||
@@ -83,6 +92,26 @@ export async function login(formData: FormData): Promise<ActionResult> {
             error: "Invalid username",
         };
     }
+
+    if (cachedUser) {
+        console.log(cachedUser);
+        existingUser = JSON.parse(cachedUser);
+    } else {
+        existingUser = await db.user.findUnique({
+            where: {
+                username: username,
+            },
+        });
+    
+        if (!existingUser) {
+            return {
+                error: "Incorrect username!",
+            };
+        }
+    }
+
+    await redis.setex(`user:${username}`, 3600, JSON.stringify(existingUser));
+
     const password = formData.get("password");
     if (
         typeof password !== "string" ||
@@ -91,18 +120,6 @@ export async function login(formData: FormData): Promise<ActionResult> {
     ) {
         return {
             error: "Invalid password",
-        };
-    }
-
-    const existingUser = await db.user.findUnique({
-        where: {
-            username: username,
-        },
-    });
-
-    if (!existingUser) {
-        return {
-            error: "Incorrect username!",
         };
     }
 
@@ -130,6 +147,9 @@ export async function login(formData: FormData): Promise<ActionResult> {
         sessionCookie.value,
         sessionCookie.attributes,
     );
+
+    await cacheSession(session); 
+
     return redirect("/dashboard");
 }
 
@@ -195,6 +215,8 @@ export async function signup(formData: FormData): Promise<ActionResult> {
     });
 
     if (existingUser) {
+        await redis.del(`user:${username}`);
+
         return {
             error: "Taken username",
         };
@@ -218,6 +240,9 @@ export async function signup(formData: FormData): Promise<ActionResult> {
         sessionCookie.value,
         sessionCookie.attributes,
     );
+
+    await cacheSession(session);
+
     return redirect("/sign-up/picture");
 }
 
@@ -270,6 +295,8 @@ export async function edit(formData: FormData): Promise<ActionResult> {
         },
     });
 
+    await redis.setex(`user:${username}`, 3600, JSON.stringify(editUser));
+
     const session = await lucia.createSession(userId as string, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
     cookies().set(
@@ -277,6 +304,8 @@ export async function edit(formData: FormData): Promise<ActionResult> {
         sessionCookie.value,
         sessionCookie.attributes,
     );
+
+    await cacheSession(session);
 
     return {
         user: filterUserAttributes(editUser),
@@ -320,6 +349,9 @@ export async function editPassword(formData: FormData): Promise<ActionResult> {
         sessionCookie.value,
         sessionCookie.attributes,
     );
+
+    await cacheSession(session);
+
     return {
         user: filterUserAttributes(editPasswordUser),
     };
@@ -328,6 +360,8 @@ export async function editPassword(formData: FormData): Promise<ActionResult> {
 export async function signOut(): Promise<ActionResult> {
     const sessionId = cookies().get(lucia.sessionCookieName)?.value;
     if (sessionId) {
+        await redis.del(`session:${sessionId}`);
+
         await db.session.delete({
             where: {
                 id: sessionId,
@@ -353,6 +387,20 @@ export const validateRequest = cache(
                 session: null,
             };
         }
+
+        // const cachedSession = await redis.get(`session:${sessionId}`);
+        
+        // if (cachedSession) {
+        //     const cachedData = JSON.parse(cachedSession);
+        //     const user = await db.user.findUnique({
+        //         where: { id: cachedData.userId },
+        //     });
+        //     return {
+        //         user: filterUserAttributes(user),
+        //         session: { id: sessionId, userId: cachedData.userId } as Session,
+        //     }
+        // }
+        // ! WILL IMPLEMENT SOON !
 
         const result = await lucia.validateSession(sessionId);
         // next.js throws when you attempt to set cookie when rendering page
