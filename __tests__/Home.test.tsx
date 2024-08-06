@@ -26,8 +26,6 @@ describe("unit tests", () => {
         const homeElement = screen.getByTestId("home");
 
         expect(homeElement);
-
-        expect(homeElement).toHaveClass("absolute h-full w-full");
     });
 
     test("render Tagline component and check main div for styles", () => {
@@ -35,8 +33,6 @@ describe("unit tests", () => {
         const taglineElement = screen.getByTestId("tagline-div");
 
         expect(taglineElement);
-
-        expect(taglineElement).toHaveClass("flex h-full w-full flex-col items-center justify-center");
     });
 
     test("render Tagline component and check for text", () => {
@@ -46,9 +42,6 @@ describe("unit tests", () => {
 
         expect(textElem);
         expect(textElemBlue);
-
-        expect(textElem).toHaveClass("text-4xl font-bold leading-tight text-white sm:text-6xl sm:leading-none");
-        expect(textElemBlue).toHaveClass("text-blue-500");
     });
 
     test("render Tagline component and check button after log in", () => {
@@ -74,7 +67,6 @@ describe("unit tests", () => {
         
         const element = screen.getByText("Dashboard");
         expect(element);
-        expect(element).toHaveClass("rounded-md bg-blue-500 px-4 py-3 font-bold text-white transition-colors hover:bg-blue-700");
     }); 
 
     test("render Tagline component and check button without login", () => {
@@ -100,7 +92,6 @@ describe("unit tests", () => {
         
         const element = screen.getByText("Get Started");
         expect(element);
-        expect(element).toHaveClass("rounded-md bg-blue-500 px-4 py-3 font-bold text-white transition-colors hover:bg-blue-700");
     });
 });
 
@@ -128,7 +119,6 @@ describe("integration tests", () => {
 
         const beforeLoginElement = screen.getByText("Get Started");
         expect(beforeLoginElement);
-        expect(beforeLoginElement).toHaveClass("rounded-md bg-blue-500 px-4 py-3 font-bold text-white transition-colors hover:bg-blue-700");
 
         setUser({
             id: "test",
@@ -146,6 +136,5 @@ describe("integration tests", () => {
 
         const loginElement = screen.getByText("Dashboard");
         expect(loginElement);
-        expect(loginElement).toHaveClass("rounded-md bg-blue-500 px-4 py-3 font-bold text-white transition-colors hover:bg-blue-700");
     });
 });

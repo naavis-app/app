@@ -31,6 +31,7 @@ export default {
                 "light-dialog-text-border": "#a6a8b1",
                 "light-dialog-text-bg": "#f8f8f8",
                 "light-dialog-text": "#1c2024",
+                "404-bg": "#111113",
             },
         },
     },
