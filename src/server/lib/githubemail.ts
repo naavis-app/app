@@ -8,10 +8,14 @@ public emails) so i went with this option. */
 import { db } from "../db";
 import { validateRequest } from "./auth";
 import { redirect } from "next/navigation";
+import redis from "../redis";
 
 export async function emailSubmit(formData: FormData): Promise<EmailProps> {
     const email = formData.get("email");
     const { user } = await validateRequest();
+
+    const cachedUser = await redis.get(`user:${user?.username}`);
+    let existingUser;
 
     if (
         typeof email !== "string" ||
@@ -24,11 +28,15 @@ export async function emailSubmit(formData: FormData): Promise<EmailProps> {
         };
     }
 
-    const existingUser = await db.user.findUnique({
-        where: {
-            email: email,
-        },
-    });
+    if (cachedUser) {
+        existingUser = JSON.parse(cachedUser);
+    } else {
+        existingUser = await db.user.findUnique({
+            where: {
+                email: email,
+            }
+        });
+    }
 
     if (existingUser) {
         return {

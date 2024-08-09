@@ -8,6 +8,8 @@ import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
 import { db } from "~/server/db";
+// import { cacheSession } from "~/server/lib/auth";
+// import redis from "~/server/redis";
 
 export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url);

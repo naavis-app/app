@@ -1,6 +1,9 @@
+// TODO: possible optimize redis cache
+
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import redis from "~/server/redis";
 
 export const deviceRouter = createTRPCRouter({
     create: publicProcedure
@@ -12,9 +15,16 @@ export const deviceRouter = createTRPCRouter({
             }),
         )
         .mutation(async ({ ctx, input }) => {
-            const user = await ctx.db.user.findUnique({
-                where: { id: input.userId },
-            });
+            const cachedUser = await redis.get(`user:${input.userId}`);
+            let user;
+
+            if (cachedUser) {
+                user = JSON.parse(cachedUser);
+            } else {
+                user = await ctx.db.user.findUnique({
+                    where: { id: input.userId },
+                });
+            }
 
             if (!user) {
                 throw new TRPCError({
@@ -24,13 +34,17 @@ export const deviceRouter = createTRPCRouter({
             }
 
             try {
-                return await ctx.db.device.create({
+                const createdDevice = await ctx.db.device.create({
                     data: {
                         name: input.name,
                         type: input.type,
                         userId: input.userId,
                     },
                 });
+
+                const cacheKey = `device:${createdDevice.id}`;
+
+                await redis.setex(cacheKey, 3600, JSON.stringify(createdDevice));
             } catch (e) {
                 console.error(e);
                 throw new TRPCError({
@@ -47,9 +61,23 @@ export const deviceRouter = createTRPCRouter({
             }),
         )
         .query(async ({ ctx, input }) => {
-            const user = await ctx.db.user.findUnique({
-                where: { id: input.userId },
-            });
+            const cacheKey = `user:${input.userId}:devices`;
+            const cachedDevices = await redis.get(cacheKey);
+
+            if (cachedDevices) {
+                return JSON.parse(cachedDevices);
+            }
+
+            const cachedUser = await redis.get(`user:${input.userId}`);
+            let user;
+
+            if (cachedUser) {
+                user = JSON.parse(cachedUser);
+            } else {
+                user = await ctx.db.user.findUnique({
+                    where: { id: input.userId },
+                });
+            }
 
             if (!user) {
                 throw new TRPCError({
@@ -58,7 +86,12 @@ export const deviceRouter = createTRPCRouter({
                 });
             }
 
-            return ctx.db.device.findMany({ where: { userId: input.userId } });
+            const devices = await ctx.db.device.findMany({ 
+                where: { userId: input.userId } 
+            });
+
+            await redis.setex(cacheKey, 3600, JSON.stringify(devices));
+            return devices;
         }),
 
     read: publicProcedure
@@ -69,11 +102,23 @@ export const deviceRouter = createTRPCRouter({
             }),
         )
         .mutation(async ({ ctx, input }) => {
-            const user = await ctx.db.user.findUnique({
-                where: {
-                    id: input.userId,
-                },
-            });
+            const cacheKey = `device:${input.id}`;
+            const cachedDevice = await redis.get(cacheKey);
+
+            if (cachedDevice) {
+                return JSON.parse(cachedDevice);
+            }
+
+            const cachedUser = await redis.get(`user:${input.userId}`);
+            let user;
+
+            if (cachedUser) {
+                user = JSON.parse(cachedUser);
+            } else {
+                user = await ctx.db.user.findUnique({
+                    where: { id: input.userId },
+                });
+            }
 
             if (!user) {
                 throw new TRPCError({
@@ -104,6 +149,8 @@ export const deviceRouter = createTRPCRouter({
                     });
                 }
 
+                await redis.setex(cacheKey, 3600, JSON.stringify(device));
+
                 return device;
             } catch (e) {
                 console.error(e);
@@ -126,11 +173,16 @@ export const deviceRouter = createTRPCRouter({
             }),
         )
         .mutation(async ({ ctx, input }) => {
-            const user = await ctx.db.user.findUnique({
-                where: {
-                    id: input.userId,
-                },
-            });
+            const cachedUser = await redis.get(`user:${input.userId}`);
+            let user;
+
+            if (cachedUser) {
+                user = JSON.parse(cachedUser);
+            } else {
+                user = await ctx.db.user.findUnique({
+                    where: { id: input.userId },
+                });
+            }
 
             if (!user) {
                 throw new TRPCError({
@@ -140,7 +192,7 @@ export const deviceRouter = createTRPCRouter({
             }
 
             try {
-                return await ctx.db.device.updateMany({
+                const updatedDevice =  await ctx.db.device.updateMany({
                     where: {
                         id: input.id,
                         userId: input.userId,
@@ -151,6 +203,11 @@ export const deviceRouter = createTRPCRouter({
                         lastLocationUpdate: new Date(),
                     },
                 });
+
+                await redis.del(`device:${input.id}`);
+                await redis.del(`user:${input.userId}:devices`);
+
+                return updatedDevice;
             } catch (e) {
                 console.error(e);
                 throw new TRPCError({
@@ -180,6 +237,8 @@ export const deviceRouter = createTRPCRouter({
             }
 
             try {
+                await redis.del(`device:${input.id}`);
+
                 return await ctx.db.device.delete({
                     where: {
                         id: input.id,

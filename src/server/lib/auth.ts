@@ -44,7 +44,8 @@ export interface DatabaseUserAttributes {
     username: string;
     firstname: string;
     lastname: string;
-    profile_pic?: string | null;
+    profile_pic: string | null; // if there are pfp errors, make this optional
+    // i made it mandatory for the cache
     email: string | null;
 }
 
@@ -72,7 +73,7 @@ interface ActionResult {
     user?: DatabaseUserAttributes;
 }
 
-async function cacheSession(session: Session) {
+export async function cacheSession(session: Session) {
     await redis.setex(`session:${session.id}`, 3600, JSON.stringify({ userId: session.userId }));
 }
 
@@ -94,7 +95,6 @@ export async function login(formData: FormData): Promise<ActionResult> {
     }
 
     if (cachedUser) {
-        console.log(cachedUser);
         existingUser = JSON.parse(cachedUser);
     } else {
         existingUser = await db.user.findUnique({
@@ -208,21 +208,26 @@ export async function signup(formData: FormData): Promise<ActionResult> {
         parallelism: 1,
     });
 
-    const existingUser = await db.user.findUnique({
-        where: {
-            username: username,
-        },
-    });
+    const cachedUser = await redis.get(`user:${username}`);
+    let existingUser;
+
+    if (cachedUser) {
+        existingUser = JSON.parse(cachedUser);
+    } else {
+        existingUser = await db.user.findUnique({
+            where: {
+                username: username,
+            },
+        });
+    }
 
     if (existingUser) {
-        await redis.del(`user:${username}`);
-
         return {
             error: "Taken username",
         };
     }
 
-    await db.user.create({
+    const createdUser = await db.user.create({
         data: {
             id: userId,
             username: username,
@@ -232,6 +237,8 @@ export async function signup(formData: FormData): Promise<ActionResult> {
             email: email,
         },
     });
+
+    await redis.setex(`user:${userId}`, 3600, JSON.stringify(createdUser));
 
     const session = await lucia.createSession(userId, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
@@ -296,6 +303,7 @@ export async function edit(formData: FormData): Promise<ActionResult> {
     });
 
     await redis.setex(`user:${username}`, 3600, JSON.stringify(editUser));
+    await redis.setex(`user:${userId}`, 3600, JSON.stringify(editUser));
 
     const session = await lucia.createSession(userId as string, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
@@ -388,19 +396,18 @@ export const validateRequest = cache(
             };
         }
 
-        // const cachedSession = await redis.get(`session:${sessionId}`);
+        const cachedSession = await redis.get(`session:${sessionId}`);
         
-        // if (cachedSession) {
-        //     const cachedData = JSON.parse(cachedSession);
-        //     const user = await db.user.findUnique({
-        //         where: { id: cachedData.userId },
-        //     });
-        //     return {
-        //         user: filterUserAttributes(user),
-        //         session: { id: sessionId, userId: cachedData.userId } as Session,
-        //     }
-        // }
-        // ! WILL IMPLEMENT SOON !
+        if (cachedSession) {
+            const cachedData = JSON.parse(cachedSession);
+            const user = await db.user.findUnique({
+                where: { id: cachedData.userId },
+            });
+            return {
+                user: filterUserAttributes(user!),
+                session: { id: sessionId, userId: cachedData.userId } as Session,
+            };
+        }
 
         const result = await lucia.validateSession(sessionId);
         // next.js throws when you attempt to set cookie when rendering page
