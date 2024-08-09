@@ -56,6 +56,7 @@ describe("unit tests", () => {
             username: "test",
             firstname: "test",
             lastname: "test",
+            profile_pic: "https://i.imgur.com/NgKWNj3.jpg",
             email: "test"
         });
 
@@ -81,6 +82,7 @@ describe("unit tests", () => {
             username: "test",
             firstname: "test",
             lastname: "test",
+            profile_pic: "https://i.imgur.com/NgKWNj3.jpg",
             email: "test"
         });
 
@@ -108,6 +110,7 @@ describe("integration tests", () => {
             username: "",
             firstname: "",
             lastname: "",
+            profile_pic: "",
             email: ""
         });
 
@@ -125,6 +128,7 @@ describe("integration tests", () => {
             username: "test",
             firstname: "test",
             lastname: "test",
+            profile_pic: "https://i.imgur.com/NgKWNj3.jpg",
             email: "test"
         });
 
