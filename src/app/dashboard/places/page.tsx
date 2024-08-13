@@ -12,7 +12,7 @@ import {
     Text,
 } from "@radix-ui/themes";
 import { useAtom } from "jotai";
-import { placeListAtom, selectedGroupId, userAtom } from "~/server/lib/stores";
+import { selectedGroupId, userAtom } from "~/server/lib/stores";
 import AddDeviceDialog from "~/app/_components/dashboard/devices/AddDeviceDialog";
 import { api } from "~/trpc/react";
 import React from "react";

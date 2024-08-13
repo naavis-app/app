@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Tooltip } from "@radix-ui/themes";
+import { Table } from "@radix-ui/themes";
 
 import { Place } from "@prisma/client";
 import PlaceButtons from "./PlaceButtons";
