@@ -1,6 +1,9 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import redis from "~/server/redis";
+
+// TODO: redis cache optimization and security optimizations
 
 export const groupRouter = createTRPCRouter({
     create: publicProcedure
@@ -13,7 +16,7 @@ export const groupRouter = createTRPCRouter({
         )
         .mutation(async ({ ctx, input }) => {
             try {
-                return await ctx.db.group.create({
+                const newGroup =  await ctx.db.group.create({
                     data: {
                         name: input.name,
                         description: input.description,
@@ -25,6 +28,13 @@ export const groupRouter = createTRPCRouter({
                         },
                     },
                 });
+
+                const cacheKey = `group:${newGroup.id}`;
+
+                await redis.del(`user:${input.ownerId}:groups`);
+                await redis.setex(cacheKey, 3600, JSON.stringify(newGroup));
+
+                return newGroup;
             } catch (e) {
                 console.error(e);
                 throw new TRPCError({
@@ -42,11 +52,18 @@ export const groupRouter = createTRPCRouter({
             }),
         )
         .mutation(async ({ ctx, input }) => {
-            const user = await ctx.db.user.findUnique({
-                where: {
-                    id: input.userId,
-                },
-            });
+            const cachedUser = await redis.get(`user:${input.userId}`);
+            let user;
+
+            if (cachedUser) {
+                user = JSON.parse(cachedUser);
+            } else {
+                user = await ctx.db.user.findUnique({
+                    where: {
+                        id: input.userId,
+                    },
+                });
+            }
 
             if (!user) {
                 throw new TRPCError({
@@ -56,12 +73,19 @@ export const groupRouter = createTRPCRouter({
             }
 
             try {
-                const group = await ctx.db.group.findUnique({
-                    where: {
-                        id: input.id,
-                        ownerId: input.userId,
-                    },
-                });
+                const cachedGroup = await redis.get(`group:${input.id}`);
+                let group;
+
+                if (cachedGroup) {
+                    group = JSON.parse(cachedGroup);
+                } else {
+                    group = await ctx.db.group.findUnique({
+                        where: {
+                            id: input.id,
+                            ownerId: input.userId,
+                        },
+                    });
+                }
 
                 if (!group) {
                     throw new TRPCError({
@@ -93,11 +117,13 @@ export const groupRouter = createTRPCRouter({
                 id: z.string(),
                 name: z.string(),
                 description: z.string(),
+                userId: z.string(),
+                // TODO: add owner validation
             }),
         )
         .mutation(async ({ ctx, input }) => {
             try {
-                return await ctx.db.group.update({
+                const updatedGroup = await ctx.db.group.update({
                     where: {
                         id: input.id,
                     },
@@ -106,6 +132,14 @@ export const groupRouter = createTRPCRouter({
                         description: input.description
                     },
                 });
+
+                await redis.del(`group:${input.id}`);
+                await redis.del(`user:${input.userId}:groups`);
+
+                const cacheKey = `group:${updatedGroup.id}`;
+                await redis.setex(cacheKey, 3600, JSON.stringify(updatedGroup));
+
+                return updatedGroup;
             } catch (e) {
                 console.error(e);
                 throw new TRPCError({
@@ -163,14 +197,42 @@ export const groupRouter = createTRPCRouter({
         )
         .query(async ({ ctx, input }) => {
             try {
-                // Find groups that the user is a member of
-                return ctx.db.group.findMany({
+                const cachedUser = await redis.get(`user:${input.userId}`);
+                let user;
+
+                if (cachedUser) {
+                    user = JSON.parse(cachedUser);
+                } else {
+                    user = await ctx.db.user.findUnique({
+                        where: { id: input.userId },
+                    });
+                }
+
+                if (!user) {
+                    throw new TRPCError({
+                        code: "NOT_FOUND",
+                        message: "User not found",
+                    });
+                }
+
+                const cacheKey = `user:${input.userId}:groups`;
+                const cachedGroups = await redis.get(cacheKey);
+
+                if (cachedGroups) {
+                    return JSON.parse(cachedGroups);
+                } 
+
+                const groups = await ctx.db.group.findMany({
                     where: {
                         members: {
                             some: { id: input.userId },
                         },
                     },
                 });
+
+                await redis.setex(cacheKey, 3600, JSON.stringify(groups));
+                return groups;
+                // Find groups that the user is a member of
             } catch (e) {
                 console.error(e);
                 throw new TRPCError({
@@ -183,11 +245,14 @@ export const groupRouter = createTRPCRouter({
         .input(
             z.object({
                 id: z.string(),
+                // TODO: add ownerid security.
             }),
         )
         .mutation(async ({ ctx, input }) => {
             // TODO: AHHHH REMEMBER WE NEED TO PROTECT ALL THESE ENDPOINTS
             try {
+                await redis.del(`group:${input.id}`);
+
                 return await ctx.db.group.delete({
                     where: {
                         id: input.id,

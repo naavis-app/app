@@ -1,4 +1,4 @@
-// TODO: possible optimize redis cache
+// TODO: possible optimization of redis cache
 
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
@@ -44,7 +44,10 @@ export const deviceRouter = createTRPCRouter({
 
                 const cacheKey = `device:${createdDevice.id}`;
 
+                await redis.del(`user:${input.userId}:devices`);
                 await redis.setex(cacheKey, 3600, JSON.stringify(createdDevice));
+
+                return createdDevice;
             } catch (e) {
                 console.error(e);
                 throw new TRPCError({
@@ -61,13 +64,6 @@ export const deviceRouter = createTRPCRouter({
             }),
         )
         .query(async ({ ctx, input }) => {
-            const cacheKey = `user:${input.userId}:devices`;
-            const cachedDevices = await redis.get(cacheKey);
-
-            if (cachedDevices) {
-                return JSON.parse(cachedDevices);
-            }
-
             const cachedUser = await redis.get(`user:${input.userId}`);
             let user;
 
@@ -84,6 +80,13 @@ export const deviceRouter = createTRPCRouter({
                     code: "NOT_FOUND",
                     message: "User not found",
                 });
+            }
+
+            const cacheKey = `user:${input.userId}:devices`;
+            const cachedDevices = await redis.get(cacheKey);
+
+            if (cachedDevices) {
+                return JSON.parse(cachedDevices);
             }
 
             const devices = await ctx.db.device.findMany({ 
@@ -192,7 +195,7 @@ export const deviceRouter = createTRPCRouter({
             }
 
             try {
-                const updatedDevice =  await ctx.db.device.updateMany({
+                const updatedDevice =  await ctx.db.device.update({
                     where: {
                         id: input.id,
                         userId: input.userId,
@@ -206,6 +209,9 @@ export const deviceRouter = createTRPCRouter({
 
                 await redis.del(`device:${input.id}`);
                 await redis.del(`user:${input.userId}:devices`);
+                
+                const cacheKey = `device:${updatedDevice.id}`;
+                await redis.setex(cacheKey, 3600, JSON.stringify(updatedDevice));
 
                 return updatedDevice;
             } catch (e) {

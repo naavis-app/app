@@ -25,6 +25,8 @@ import { api } from "~/trpc/react";
 import { Device } from "@prisma/client";
 import React from "react";
 
+// TODO: ADD PAGINATION TO AVOID TERRIBLE LOAD TIMES!
+
 export default function DashboardDevices() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [user, setUser] = useAtom(userAtom);

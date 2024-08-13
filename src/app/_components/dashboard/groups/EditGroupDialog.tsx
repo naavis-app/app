@@ -103,6 +103,7 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
             id: groupId,
             name: groupName,
             description: groupDescription,
+            userId: user.id
         });
 
         setNameToggle(false);
