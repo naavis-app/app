@@ -9,7 +9,7 @@ import { atomWithStorage } from "jotai/utils";
 
 // import { DatabaseUser, User } from "lucia";
 import { DatabaseUserAttributes } from "./auth";
-import { Device, Group } from "@prisma/client";
+import { Device, Group, Place } from "@prisma/client";
 
 // i removed inherit. its causing too many problems with the background svg
 // and flashing onload
@@ -23,5 +23,7 @@ export const userAtom = atomWithStorage<null | DatabaseUserAttributes>(
 );
 
 export const sidenavOpenAtom = atom<boolean>(true);
+export const selectedGroupId = atom<string | null>(null);
 export const deviceListAtom = atom<Device[]>([]);
 export const groupListAtom = atom<Group[]>([]);
+export const placeListAtom = atom<Place[]>([]);

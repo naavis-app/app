@@ -197,11 +197,14 @@ export default function SideNav() {
                             url={"/dashboard/devices"}
                             label={"Devices"}
                         />
+                        <SideNavItem
+                            icon={<MdDevices />}
+                            url="/dashboard/places"
+                            label="Places"
+                        />
                     </Flex>
 
-                    <div className="h-[1px] w-full bg-[--accent-4]"></div>
-
-                    <Flex direction={"column"} gap={"2"} className="p-4">
+                    <Flex direction={"column"} gap={"2"} className="p-4 mt-auto">
                         <SideNavItem
                             icon={<IoSettingsSharp />}
                             url={"/dashboard/settings"}
