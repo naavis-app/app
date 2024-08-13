@@ -8,7 +8,7 @@ public emails) so i went with this option. */
 import { db } from "../db";
 import { validateRequest } from "./auth";
 import { redirect } from "next/navigation";
-import redis from "../redis";
+import { redis } from "../redis";
 
 export async function emailSubmit(formData: FormData): Promise<EmailProps> {
     const email = formData.get("email");

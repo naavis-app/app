@@ -3,7 +3,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import redis from "~/server/redis";
+import { redis } from "~/server/redis";
 
 export const deviceRouter = createTRPCRouter({
     create: publicProcedure

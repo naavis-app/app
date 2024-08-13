@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import redis from "~/server/redis";
+import { redis } from "~/server/redis";
 
 // TODO: redis cache optimization and security optimizations
 

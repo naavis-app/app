@@ -16,7 +16,7 @@ import type { Session, User } from "lucia";
 import prismaTypes from "@prisma/client";
 import { cache } from "react";
 import toast from "react-hot-toast";
-import redis from "../redis";
+import { redis } from "../redis";
 
 const adapter = new PrismaAdapter(db.session, db.user);
 
