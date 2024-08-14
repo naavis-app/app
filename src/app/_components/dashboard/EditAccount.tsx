@@ -60,9 +60,9 @@ export default function EditAccount() {
                 const data = await response.json();
 
                 if (data.success) {
-                    toast.success("Image file uploaded successfully!");
+                    toast.success("Account edited successfully!");
                 } else {
-                    toast.error("Image file upload failed!");
+                    toast.error("Account edit failed!");
                 }
             } catch (error: any) {
                 toast.error(error.message);
@@ -75,7 +75,9 @@ export default function EditAccount() {
             onSubmit={(e: React.FormEvent) => {
                 e.preventDefault();
                 setCheck(false);
-                handleSubmit(new FormData(e.target as HTMLFormElement));
+                setTimeout(() => { // after the data is un-disabled, needs a moment
+                    handleSubmit(new FormData(e.target as HTMLFormElement));
+                }, 1000);
             }}
         >
             <Box mb={"5"}>

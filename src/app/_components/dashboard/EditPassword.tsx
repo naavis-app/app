@@ -17,7 +17,7 @@ export default function EditPassword() {
     const [toggleEye, setToggleEye] = useState<boolean>(false);
     const [passVal, setPassVal] = useState<string>("");
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { width, height } = useWindowSize();
+    const { width } = useWindowSize();
 
     const handleSubmit = async (e: FormData) => {
         e.append("userId", user?.id ?? "");
@@ -52,9 +52,7 @@ export default function EditPassword() {
                     <TextField.Root
                         size={"2"}
                         variant="surface"
-                        placeholder={width! >= 600 ?
-                            "Enter your new password" : 
-                            "**************"}
+                        placeholder={"**************"}
                         className="w-full pr-10"
                         value={passVal}
                         type={toggleEye ? "text" : "password"}

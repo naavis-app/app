@@ -9,6 +9,8 @@ import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
 import { db } from "~/server/db";
 import { randInt } from "~/server/lib/googleauth";
+import { cacheSession } from "~/server/lib/auth";
+import { redis } from "~/server/redis";
 
 export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url);
@@ -35,11 +37,10 @@ export async function GET(request: Request): Promise<Response> {
             },
         );
         const googleUser: GoogleUser = await googleUserResponse.json();
-
         const existingUser = await db.user.findUnique({
             where: {
                 email: googleUser.email,
-            },
+            }
         });
 
         if (existingUser) {
@@ -50,6 +51,8 @@ export async function GET(request: Request): Promise<Response> {
                 sessionCookie.value,
                 sessionCookie.attributes,
             );
+
+            await cacheSession(session);
 
             return new Response(null, {
                 status: 302,
@@ -63,7 +66,7 @@ export async function GET(request: Request): Promise<Response> {
             firstName: string,
             lastName: string,
         ): string => {
-            return firstName[0] + lastName + randInt(51);
+            return firstName[0] + lastName + randInt(10001);
         };
 
         const firstName = googleUser.given_name;
@@ -72,7 +75,7 @@ export async function GET(request: Request): Promise<Response> {
         const profilePic = googleUser.picture;
         const userId = generateIdFromEntropySize(10);
 
-        await db.user.create({
+        const createdUser = await db.user.create({
             data: {
                 id: userId,
                 username: userName,
@@ -83,6 +86,14 @@ export async function GET(request: Request): Promise<Response> {
             },
         });
 
+        if (!createdUser) {
+            return new Response("User creation failed", {
+                status: 500,
+            });
+        }
+
+        await redis.setex(`user:${userId}`, 3600, JSON.stringify(createdUser));
+
         const session = await lucia.createSession(userId, {});
         const sessionCookie = lucia.createSessionCookie(session.id);
         cookies().set(
@@ -90,6 +101,8 @@ export async function GET(request: Request): Promise<Response> {
             sessionCookie.value,
             sessionCookie.attributes,
         );
+
+        await cacheSession(session);
 
         return new Response(null, {
             status: 302,

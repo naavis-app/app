@@ -8,8 +8,8 @@ import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
 import { db } from "~/server/db";
-// import { cacheSession } from "~/server/lib/auth";
-// import { redis } from "~/server/redis";
+import { cacheSession } from "~/server/lib/auth";
+import { redis } from "~/server/redis";
 
 export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url);
@@ -46,6 +46,8 @@ export async function GET(request: Request): Promise<Response> {
                 sessionCookie.attributes,
             );
 
+            await cacheSession(session);
+
             return new Response(null, {
                 status: 302,
                 headers: {
@@ -66,7 +68,7 @@ export async function GET(request: Request): Promise<Response> {
         const profilePic = `https://github.com/${githubUser.login}.png`;
         const userId = generateIdFromEntropySize(10);
 
-        await db.user.create({
+        const createdUser = await db.user.create({
             data: {
                 id: userId,
                 github_id: Number(githubUser.id),
@@ -77,6 +79,8 @@ export async function GET(request: Request): Promise<Response> {
             },
         });
 
+        await redis.setex(`user:${userId}`, 3600, JSON.stringify(createdUser));
+
         const session = await lucia.createSession(userId, {});
         const sessionCookie = lucia.createSessionCookie(session.id);
         cookies().set(
@@ -84,6 +88,9 @@ export async function GET(request: Request): Promise<Response> {
             sessionCookie.value,
             sessionCookie.attributes,
         );
+
+        await cacheSession(session);
+
         return new Response(null, {
             status: 302,
             headers: {
