@@ -1,14 +1,8 @@
-/* dashboard page where we currently have our map set up. 
-will be updated heavily in the future */
-
 "use client";
 
-// import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import PageTransitionEffect from "../_components/PageTransitionEffect";
 import SideNav from "../_components/dashboard/SideNav";
 import { Box } from "@radix-ui/themes";
-// import { env } from "~/env";
-// import { AnimatePresence } from "framer-motion";
 import React from "react";
 
 export default function Dashboard({ children }: { children: React.ReactNode }) {
