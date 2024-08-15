@@ -84,7 +84,7 @@ export default function SideNav() {
                                     x: sidenavOpen ? 0 : 20,
                                 }}
                             >
-                                <Text>WHEEEE</Text>
+                                <Text>Naavis</Text>
                             </motion.div>
                         </Link>
 
