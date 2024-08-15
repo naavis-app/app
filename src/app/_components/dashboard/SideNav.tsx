@@ -24,6 +24,7 @@ import ThemeToggle from "../ThemeToggle";
 import { motion, AnimatePresence } from "framer-motion";
 import useWindowSize from "~/app/hooks/useWindowSize";
 import Link from "next/link";
+import GroupSelector from "./groups/GroupSelector/GroupSelector";
 
 export default function SideNav() {
     const [user] = useAtom(userAtom);
@@ -176,6 +177,8 @@ export default function SideNav() {
                                 </motion.div>
                             )}
                         </AnimatePresence>
+
+                        <GroupSelector />
 
                         <SideNavItem
                             icon={<FaHome />}
