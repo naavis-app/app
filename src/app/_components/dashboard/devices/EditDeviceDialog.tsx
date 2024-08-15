@@ -182,15 +182,13 @@ export default function EditDeviceDialog({
                                         focus:border-transparent
                                         focus:outline-none
                                         focus:ring-2 focus:ring-blue-500
-                                        ${
-                                            !nameToggle
-                                                ? `${
-                                                      theme === "light"
-                                                          ? "text-light-disabled-text"
-                                                          : "text-dark-disabled-text"
-                                                  }`
-                                                : `${theme === "light" ? "text-black" : "text-white"}`
-                                        }`}
+                                        ${!nameToggle
+            ? `${theme === "light"
+                ? "text-light-disabled-text"
+                : "text-dark-disabled-text"
+            }`
+            : `${theme === "light" ? "text-black" : "text-white"}`
+        }`}
                                     />
                                     <button
                                         className="absolute right-4"

@@ -4,13 +4,13 @@ import { CaretSortIcon } from "@radix-ui/react-icons";
 import { Box, Button, Card, DropdownMenu, Flex, Text } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { selectedGroupId, userAtom } from "~/server/lib/stores";
-import AddDeviceDialog from "~/app/_components/dashboard/devices/AddDeviceDialog";
 import { api } from "~/trpc/react";
 import React from "react";
 import PlaceRow from "~/app/_components/dashboard/places/PlaceRow";
 import { Place } from "@prisma/client";
 import UhohImage from "~/app/_components/uhoh/UhohImage";
 import UhohWrapper from "~/app/_components/uhoh/UhohWrapper";
+import AddPlaceDialog from "~/app/_components/dashboard/places/AddPlaceDialog";
 
 // TODO: ADD PAGINATION TO AVOID TERRIBLE LOAD TIMES!
 
@@ -72,7 +72,7 @@ export default function DashboardDevices() {
                 </Flex>
 
                 <Box className="mb-4 mt-4">
-                    <AddDeviceDialog
+                    <AddPlaceDialog
                         refetch={() => {
                             placeQuery.refetch();
                         }}
