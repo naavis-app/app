@@ -1,4 +1,4 @@
-import { Box, Flex } from "@radix-ui/themes";
+import { Flex } from "@radix-ui/themes";
 import React from "react";
 
 interface UhohWrapperProps {

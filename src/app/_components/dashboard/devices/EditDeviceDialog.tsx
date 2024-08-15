@@ -56,18 +56,22 @@ export default function EditDeviceDialog({
     useEffect(() => {
         if (theme === "light") {
             setDialogStyle(
-                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text",
             );
             setDialogTextStyle(
-                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text",
             );
-            setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
+            setDialogButtonStyle(
+                "text-light-txt-only-button hover:bg-light-txt-button-hover",
+            );
         } else if (theme === "dark") {
             setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
             setDialogTextStyle(
-                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white",
             );
-            setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
+            setDialogButtonStyle(
+                "text-dark-txt-only-button hover:bg-dark-txt-button-hover",
+            );
         }
     }, [theme]);
 
@@ -179,11 +183,14 @@ export default function EditDeviceDialog({
                                         focus:outline-none
                                         focus:ring-2 focus:ring-blue-500
                                         ${
-        !nameToggle
-            ? `${theme === "light" ? "text-light-disabled-text" 
-                : "text-dark-disabled-text"}`
-            : `${theme === "light" ? "text-black" : "text-white"}`
-        }`}
+                                            !nameToggle
+                                                ? `${
+                                                      theme === "light"
+                                                          ? "text-light-disabled-text"
+                                                          : "text-dark-disabled-text"
+                                                  }`
+                                                : `${theme === "light" ? "text-black" : "text-white"}`
+                                        }`}
                                     />
                                     <button
                                         className="absolute right-4"

@@ -1,7 +1,5 @@
 import React from "react";
-import {
-    Select,
-} from "@radix-ui/themes";
+import { Select } from "@radix-ui/themes";
 
 import { Group } from "@prisma/client";
 interface GroupNameProps {

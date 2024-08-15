@@ -8,14 +8,7 @@ import { MdDevices } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
 
-import {
-    Avatar,
-    Button,
-    Card,
-    Flex,
-    Skeleton,
-    Text,
-} from "@radix-ui/themes";
+import { Avatar, Button, Card, Flex, Skeleton, Text } from "@radix-ui/themes";
 
 import { useAtom } from "jotai";
 import { sidenavOpenAtom, userAtom } from "~/server/lib/stores";
@@ -77,7 +70,10 @@ export default function SideNav() {
                         className="relative p-4 pb-0 "
                         justify={"center"}
                     >
-                        <Link className="flex flex-row gap-2 !z-50 w-fit" href="/">
+                        <Link
+                            className="!z-50 flex w-fit flex-row gap-2"
+                            href="/"
+                        >
                             <Text>⛵️</Text>
                             <motion.div
                                 animate={{
@@ -96,7 +92,7 @@ export default function SideNav() {
                             justify={"end"}
                         >
                             <motion.div
-                                className="!-mr-4 !z-[100]"
+                                className="!z-[100] !-mr-4"
                                 animate={{
                                     rotate: sidenavOpen ? 0 : 180,
                                 }}
@@ -207,7 +203,11 @@ export default function SideNav() {
                         />
                     </Flex>
 
-                    <Flex direction={"column"} gap={"2"} className="p-4 mt-auto">
+                    <Flex
+                        direction={"column"}
+                        gap={"2"}
+                        className="mt-auto p-4"
+                    >
                         <SideNavItem
                             icon={<IoSettingsSharp />}
                             url={"/dashboard/settings"}

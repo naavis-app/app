@@ -40,7 +40,7 @@ export async function GET(request: Request): Promise<Response> {
         const existingUser = await db.user.findUnique({
             where: {
                 email: googleUser.email,
-            }
+            },
         });
 
         if (existingUser) {

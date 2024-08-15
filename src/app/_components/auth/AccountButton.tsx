@@ -2,19 +2,13 @@
 
 "use client";
 
-import {
-    Avatar,
-    Flex,
-    Text,
-    Popover,
-    Button,
-} from "@radix-ui/themes";
+import { Avatar, Flex, Text, Popover, Button } from "@radix-ui/themes";
 import Link from "next/link";
 import { DatabaseUserAttributes } from "~/server/lib/auth";
 import React from "react";
 
 interface AccountButtonProps {
-    user: DatabaseUserAttributes
+    user: DatabaseUserAttributes;
 }
 
 export default function AccountButton({ user }: AccountButtonProps) {
@@ -33,7 +27,9 @@ export default function AccountButton({ user }: AccountButtonProps) {
                             } // when the user has yet to upload a profile picture
                             radius="full"
                             fallback={"A"}
-                            className={"border-2 p-[2px] shadow-md hover:cursor-pointer border-blue-500"}
+                            className={
+                                "border-2 border-blue-500 p-[2px] shadow-md hover:cursor-pointer"
+                            }
                         />
                     </div>
                 </Popover.Trigger>

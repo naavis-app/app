@@ -1,10 +1,6 @@
 "use client";
 
-import {
-    Card,
-    Flex,
-    Popover,
-} from "@radix-ui/themes";
+import { Card, Flex, Popover } from "@radix-ui/themes";
 import ThemeToggle from "../ThemeToggle";
 
 import AccountButton from "../auth/AccountButton";

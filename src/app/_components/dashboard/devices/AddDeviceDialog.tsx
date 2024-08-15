@@ -1,8 +1,6 @@
 "use client";
 
-import {
-    Button,
-} from "@radix-ui/themes";
+import { Button } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -83,18 +81,22 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
     useEffect(() => {
         if (theme === "light") {
             setDialogStyle(
-                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text",
             );
             setDialogTextStyle(
-                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text",
             );
-            setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
+            setDialogButtonStyle(
+                "text-light-txt-only-button hover:bg-light-txt-button-hover",
+            );
         } else if (theme === "dark") {
             setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
             setDialogTextStyle(
-                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white",
             );
-            setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
+            setDialogButtonStyle(
+                "text-dark-txt-only-button hover:bg-dark-txt-button-hover",
+            );
         }
     }, [theme]);
 
@@ -143,7 +145,9 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
                                     focus:ring-blue-500`}
                             >
                                 {deviceTypes.map((type, index) => (
-                                    <option key={index} value={type.id}>{type.name}</option>
+                                    <option key={index} value={type.id}>
+                                        {type.name}
+                                    </option>
                                 ))}
                             </select>
                         </div>

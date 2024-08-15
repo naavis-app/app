@@ -1,12 +1,7 @@
 "use client";
 
 // import { CaretSortIcon } from "@radix-ui/react-icons";
-import {
-    Button,
-    Card,
-    Flex,
-    Text,
-} from "@radix-ui/themes";
+import { Button, Card, Flex, Text } from "@radix-ui/themes";
 import EditAccount from "~/app/_components/dashboard/EditAccount";
 import EditPassword from "~/app/_components/dashboard/EditPassword";
 import React from "react";

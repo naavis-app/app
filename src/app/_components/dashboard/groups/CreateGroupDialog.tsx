@@ -66,18 +66,22 @@ export default function CreateGroupDialog({
     useEffect(() => {
         if (theme === "light") {
             setDialogStyle(
-                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text",
             );
             setDialogTextStyle(
-                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text",
             );
-            setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
+            setDialogButtonStyle(
+                "text-light-txt-only-button hover:bg-light-txt-button-hover",
+            );
         } else if (theme === "dark") {
             setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
             setDialogTextStyle(
-                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white",
             );
-            setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
+            setDialogButtonStyle(
+                "text-dark-txt-only-button hover:bg-dark-txt-button-hover",
+            );
         }
     }, [theme]);
 
@@ -90,7 +94,7 @@ export default function CreateGroupDialog({
             <Dialog.Content
                 className="fixed inset-0 z-50 flex items-center 
                 justify-center p-4"
-            > 
+            >
                 <div
                     className={`min-w-[24rem] rounded-lg
                     border ${dialogStyle} p-2 shadow`}
@@ -115,7 +119,9 @@ export default function CreateGroupDialog({
                         <input
                             type="text"
                             placeholder="Your group's description..."
-                            onChange={(e) => setGroupDescription(e.target.value)}
+                            onChange={(e) =>
+                                setGroupDescription(e.target.value)
+                            }
                             required
                             className={`rounded-lg border ${dialogTextStyle} p-2 
                                     focus:border-transparent

@@ -72,7 +72,7 @@ export default function DashboardDevices() {
                     </Text>
                 </Flex>
 
-                <Box className="mt-4 mb-4">
+                <Box className="mb-4 mt-4">
                     <AddDeviceDialog
                         refetch={() => {
                             deviceQuery.refetch();

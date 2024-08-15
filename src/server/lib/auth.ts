@@ -74,7 +74,11 @@ interface ActionResult {
 }
 
 export async function cacheSession(session: Session) {
-    await redis.setex(`session:${session.id}`, 3600, JSON.stringify({ userId: session.userId }));
+    await redis.setex(
+        `session:${session.id}`,
+        3600,
+        JSON.stringify({ userId: session.userId }),
+    );
 }
 
 export async function login(formData: FormData): Promise<ActionResult> {
@@ -102,7 +106,7 @@ export async function login(formData: FormData): Promise<ActionResult> {
                 username: username,
             },
         });
-    
+
         if (!existingUser) {
             return {
                 error: "Incorrect username!",
@@ -148,7 +152,7 @@ export async function login(formData: FormData): Promise<ActionResult> {
         sessionCookie.attributes,
     );
 
-    await cacheSession(session); 
+    await cacheSession(session);
 
     return redirect("/dashboard");
 }
@@ -397,7 +401,7 @@ export const validateRequest = cache(
         }
 
         const cachedSession = await redis.get(`session:${sessionId}`);
-        
+
         if (cachedSession) {
             const cachedData = JSON.parse(cachedSession);
             const user = await db.user.findUnique({
@@ -405,7 +409,10 @@ export const validateRequest = cache(
             });
             return {
                 user: filterUserAttributes(user!),
-                session: { id: sessionId, userId: cachedData.userId } as Session,
+                session: {
+                    id: sessionId,
+                    userId: cachedData.userId,
+                } as Session,
             };
         }
 

@@ -1,16 +1,7 @@
 "use client";
 
-import {
-    CaretSortIcon
-} from "@radix-ui/react-icons";
-import {
-    Box,
-    Button,
-    Card,
-    DropdownMenu,
-    Flex,
-    Text,
-} from "@radix-ui/themes";
+import { CaretSortIcon } from "@radix-ui/react-icons";
+import { Box, Button, Card, DropdownMenu, Flex, Text } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { selectedGroupId, userAtom } from "~/server/lib/stores";
 import AddDeviceDialog from "~/app/_components/dashboard/devices/AddDeviceDialog";
@@ -34,7 +25,8 @@ export default function DashboardDevices() {
 
     // TODO: Remove mock data use actual live data pls ‼️
     //const [places, setPlaces] = useAtom(placeListAtom);
-    const places = [/* 
+    const places = [
+        /* 
         {
             id: "1",
             name: "Living Room",
@@ -65,7 +57,8 @@ export default function DashboardDevices() {
             longitude: 0,
             address: "1234 Main St",
         }
-     */] as Place[];
+     */
+    ] as Place[];
     return (
         <>
             <Flex className="w-full flex-col md:flex-row md:!justify-between">
@@ -78,7 +71,7 @@ export default function DashboardDevices() {
                     </Text>
                 </Flex>
 
-                <Box className="mt-4 mb-4">
+                <Box className="mb-4 mt-4">
                     <AddDeviceDialog
                         refetch={() => {
                             placeQuery.refetch();
@@ -124,31 +117,27 @@ export default function DashboardDevices() {
                 </Flex>
             </Flex>
 
-            {
-                places.length == 0 ?
-                    <>
-                        <UhohWrapper>
-                            <UhohImage />
-                            <Text className="font-bold">
-                                Uh oh! No places found!
-                            </Text>
-                            <Text>
-                                Create a place to get started.
-                            </Text>
-                        </UhohWrapper>
-                    </> : <>
-                        <Card className="mt-4 overflow-scroll">
-                            {places.map((place, index) => (
-                                <PlaceRow
-                                    key={index}
-                                    place={place}
-                                />
-                            ))}
-                        </Card>
-                        {/* TODO: PAGINATION */}
-                        <Card className="mt-4"></Card>
-                    </>
-            }
+            {places.length == 0 ? (
+                <>
+                    <UhohWrapper>
+                        <UhohImage />
+                        <Text className="font-bold">
+                            Uh oh! No places found!
+                        </Text>
+                        <Text>Create a place to get started.</Text>
+                    </UhohWrapper>
+                </>
+            ) : (
+                <>
+                    <Card className="mt-4 overflow-scroll">
+                        {places.map((place, index) => (
+                            <PlaceRow key={index} place={place} />
+                        ))}
+                    </Card>
+                    {/* TODO: PAGINATION */}
+                    <Card className="mt-4"></Card>
+                </>
+            )}
         </>
     );
 }

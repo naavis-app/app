@@ -46,52 +46,56 @@ describe("unit tests", () => {
 
     test("render Tagline component and check button after log in", () => {
         const { result } = renderHook(() => useAtom(userAtom), {
-            wrapper: ({ children } : { children: any }) => <Provider>{children}</Provider>
+            wrapper: ({ children }: { children: any }) => (
+                <Provider>{children}</Provider>
+            ),
         });
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [user, setUser] = result.current;
-        setUser({ 
+        setUser({
             id: "123",
             username: "test",
             firstname: "test",
             lastname: "test",
             profile_pic: "https://i.imgur.com/NgKWNj3.jpg",
-            email: "test"
+            email: "test",
         });
 
         render(
             <Provider>
                 <Tagline />
-            </Provider>
+            </Provider>,
         );
-        
+
         const element = screen.getByText("Dashboard");
         expect(element);
-    }); 
+    });
 
     test("render Tagline component and check button without login", () => {
         const { result } = renderHook(() => useAtom(userAtom), {
-            wrapper: ({ children } : { children: any }) => <Provider>{children}</Provider>
+            wrapper: ({ children }: { children: any }) => (
+                <Provider>{children}</Provider>
+            ),
         });
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [user, setUser] = result.current;
-        setUser({ 
+        setUser({
             id: "", // null for testing
             username: "test",
             firstname: "test",
             lastname: "test",
             profile_pic: "https://i.imgur.com/NgKWNj3.jpg",
-            email: "test"
+            email: "test",
         });
 
         render(
             <Provider>
                 <Tagline />
-            </Provider>
+            </Provider>,
         );
-        
+
         const element = screen.getByText("Get Started");
         expect(element);
     });
@@ -100,7 +104,9 @@ describe("unit tests", () => {
 describe("integration tests", () => {
     test("render tagline, check button before login, and after login", () => {
         const { result } = renderHook(() => useAtom(userAtom), {
-            wrapper: ({ children } : { children: any }) => <Provider>{children}</Provider>
+            wrapper: ({ children }: { children: any }) => (
+                <Provider>{children}</Provider>
+            ),
         });
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -111,13 +117,13 @@ describe("integration tests", () => {
             firstname: "",
             lastname: "",
             profile_pic: "",
-            email: ""
+            email: "",
         });
 
         render(
             <Provider>
                 <Tagline />
-            </Provider>
+            </Provider>,
         );
 
         const beforeLoginElement = screen.getByText("Get Started");
@@ -129,13 +135,13 @@ describe("integration tests", () => {
             firstname: "test",
             lastname: "test",
             profile_pic: "https://i.imgur.com/NgKWNj3.jpg",
-            email: "test"
+            email: "test",
         });
 
         render(
             <Provider>
                 <Tagline />
-            </Provider>
+            </Provider>,
         );
 
         const loginElement = screen.getByText("Dashboard");

@@ -17,12 +17,16 @@ export default function NotFoundPage() {
         }
     }, [theme]);
 
-    return (<div className="w-full fixed h-[100vh] flex justify-center items-center">
-        <div className="flex justify-center items-center flex-col">
-            <Text className={`${textColor} text-4xl font-bold`}>404</Text>
-            <Text className={`${textColor} text-2xl`}>Page not found</Text>
+    return (
+        <div className="fixed flex h-[100vh] w-full items-center justify-center">
+            <div className="flex flex-col items-center justify-center">
+                <Text className={`${textColor} text-4xl font-bold`}>404</Text>
+                <Text className={`${textColor} text-2xl`}>Page not found</Text>
 
-            <Link href="/" className="text-blue-500">Head back to shore!</Link>
+                <Link href="/" className="text-blue-500">
+                    Head back to shore!
+                </Link>
+            </div>
         </div>
-    </div>);
+    );
 }

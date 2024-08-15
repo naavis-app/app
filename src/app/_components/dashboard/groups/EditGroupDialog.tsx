@@ -48,7 +48,7 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
 
             setGroupName(groupName);
             setGroupDescription(groupDescription);
-        }
+        },
     });
 
     const readGroup = () => {
@@ -103,7 +103,7 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
             id: groupId,
             name: groupName,
             description: groupDescription,
-            userId: user.id
+            userId: user.id,
         });
 
         setNameToggle(false);
@@ -113,18 +113,22 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
     useEffect(() => {
         if (theme === "light") {
             setDialogStyle(
-                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text"
+                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text",
             );
             setDialogTextStyle(
-                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text"
+                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text",
             );
-            setDialogButtonStyle("text-light-txt-only-button hover:bg-light-txt-button-hover");
+            setDialogButtonStyle(
+                "text-light-txt-only-button hover:bg-light-txt-button-hover",
+            );
         } else if (theme === "dark") {
             setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
             setDialogTextStyle(
-                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white"
+                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white",
             );
-            setDialogButtonStyle("text-dark-txt-only-button hover:bg-dark-txt-button-hover");
+            setDialogButtonStyle(
+                "text-dark-txt-only-button hover:bg-dark-txt-button-hover",
+            );
         }
     }, [theme]);
 
@@ -158,7 +162,8 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                                 <label className="text-md">Group Name</label>
                                 <div
                                     className="relative flex w-full
-                                flex-row items-center justify-end">
+                                flex-row items-center justify-end"
+                                >
                                     <input
                                         type="text"
                                         value={groupName}
@@ -174,11 +179,15 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                                         focus:outline-none
                                         focus:ring-2
                                         focus:ring-blue-500
-            ${ !nameToggle
-            ? `${theme === "light" ? "text-light-disabled-text"
-                : "text-dark-disabled-text"}`
-            : `${theme === "light" ? "text-black" : "text-white"}`
-        }`}
+            ${
+                !nameToggle
+                    ? `${
+                          theme === "light"
+                              ? "text-light-disabled-text"
+                              : "text-dark-disabled-text"
+                      }`
+                    : `${theme === "light" ? "text-black" : "text-white"}`
+            }`}
                                     />
                                     <button
                                         className="absolute right-4"
@@ -196,8 +205,9 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                                 </label>
                             </div>
                             <div
-                                className="relative flex w-full flex-row
-                            items-center justify-ends">
+                                className="justify-ends relative flex w-full
+                            flex-row items-center"
+                            >
                                 <input
                                     type="text"
                                     value={groupDescription}
@@ -215,18 +225,22 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                                         focus:ring-2
                                         focus:ring-blue-500
                                         ${
-        !descToggle
-            ? `${theme === "light" ? "text-light-disabled-text" 
-                : "text-dark-disabled-text"}`
-            : `${theme === "light" ? "text-black" : "text-white"}`
-        }`}
+                                            !descToggle
+                                                ? `${
+                                                      theme === "light"
+                                                          ? "text-light-disabled-text"
+                                                          : "text-dark-disabled-text"
+                                                  }`
+                                                : `${theme === "light" ? "text-black" : "text-white"}`
+                                        }`}
                                 />
                                 <button
                                     className="absolute right-4"
                                     onClick={(e) => {
                                         e.preventDefault();
                                         setDescToggle(!descToggle);
-                                    }}>
+                                    }}
+                                >
                                     {!descToggle && <RxPencil1 />}
                                     {descToggle && <FaCheck />}
                                 </button>

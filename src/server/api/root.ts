@@ -13,7 +13,7 @@ export const appRouter = createTRPCRouter({
     device: deviceRouter,
     user: userRouter,
     group: groupRouter,
-    place: placeRouter
+    place: placeRouter,
 });
 
 // export type definition of API

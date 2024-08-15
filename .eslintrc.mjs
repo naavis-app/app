@@ -16,7 +16,7 @@ const config = {
     settings: {
         react: {
             version: "detect",
-        }
+        },
     },
     rules: {
         "@typescript-eslint/array-type": "off",

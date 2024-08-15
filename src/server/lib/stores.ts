@@ -28,20 +28,14 @@ export const sidenavOpenAtom = atom<boolean>(true);
 
 export const selectedGroupId = atomWithStorage<string | null>(
     "naavis-selgroupid",
-    null
+    null,
 );
 
 export const deviceListAtom = atomWithStorage<Device[]>(
     "naavis-devicelist",
-    []
+    [],
 );
 
-export const groupListAtom = atomWithStorage<Group[]>(
-    "naavis-grouplist",
-    []
-);
+export const groupListAtom = atomWithStorage<Group[]>("naavis-grouplist", []);
 
-export const placeListAtom = atomWithStorage<Place[]>(
-    "naavis-placelist",
-    []
-);
+export const placeListAtom = atomWithStorage<Place[]>("naavis-placelist", []);

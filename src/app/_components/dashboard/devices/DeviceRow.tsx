@@ -1,12 +1,5 @@
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
-import {
-    AspectRatio,
-    Badge,
-    Box,
-    Card,
-    Flex,
-    Text,
-} from "@radix-ui/themes";
+import { AspectRatio, Badge, Box, Card, Flex, Text } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import MiniMapPreview from "../MiniMapPreview";
 import { Device } from "@prisma/client";

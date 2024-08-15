@@ -34,7 +34,7 @@ export async function emailSubmit(formData: FormData): Promise<EmailProps> {
         existingUser = await db.user.findUnique({
             where: {
                 email: email,
-            }
+            },
         });
     }
 

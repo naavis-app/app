@@ -22,20 +22,20 @@ export default function EditableInput({
 
     useEffect(() => {
         switch (currField) {
-        case "firstname":
-            setVal(user?.firstname!);
-            break;
-        case "lastname":
-            setVal(user?.lastname!);
-            break;
-        case "email":
-            setVal(user?.email!);
-            break;
-        case "username":
-            setVal(user?.username!);
-            break;
-        default:
-            setVal("");
+            case "firstname":
+                setVal(user?.firstname!);
+                break;
+            case "lastname":
+                setVal(user?.lastname!);
+                break;
+            case "email":
+                setVal(user?.email!);
+                break;
+            case "username":
+                setVal(user?.username!);
+                break;
+            default:
+                setVal("");
         }
     }, [user]);
 

@@ -1,12 +1,6 @@
 "use client";
 
-import {
-    Button,
-    Card,
-    Flex,
-    Table,
-    Text,
-} from "@radix-ui/themes";
+import { Button, Card, Flex, Table, Text } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import CreateGroupDialog from "~/app/_components/dashboard/groups/CreateGroupDialog";

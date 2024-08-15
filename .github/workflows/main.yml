@@ -1,64 +1,61 @@
 name: CI
 
 on:
-  pull_request:
-    branches: ["*"]
-  push:
-    branches: ["main"]
-  merge_group:
+    pull_request:
+        branches: ["*"]
+    push:
+        branches: ["main"]
+    merge_group:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
 
-      - name: Setup
-        uses: ./tooling/setup
+            - name: Setup
+              uses: ./tooling/setup
 
-      - name: copy env
-        shell: bash
-        run: cp .env.example .env
+            - name: copy env
+              shell: bash
+              run: cp .env.example .env
 
-      - name: Lint
-        run: npm run lint
-        
-  format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout/@v4
+            - name: Lint
+              run: npm run lint
 
-      - name: Setup
-        uses: ./tooling/setup
+    format:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout/@v4
 
-      - name: Format
-        run: npm run format
+            - name: Setup
+              uses: ./tooling/setup
 
-  typecheck:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+            - name: Format
+              run: npm run format
 
-      - name: Setup
-        uses: ./tooling/setup
+    typecheck:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
 
-      - name: Typecheck
-        run: npm run typecheck
+            - name: Setup
+              uses: ./tooling/setup
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+            - name: Typecheck
+              run: npm run typecheck
 
-      - name: Setup
-        uses: ./tooling/setup
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
 
-      - name: Test (Vitest)
-        run: npm run test
-    
+            - name: Setup
+              uses: ./tooling/setup
 
-      
+            - name: Test (Vitest)
+              run: npm run test

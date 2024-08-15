@@ -16,7 +16,7 @@ export const groupRouter = createTRPCRouter({
         )
         .mutation(async ({ ctx, input }) => {
             try {
-                const newGroup =  await ctx.db.group.create({
+                const newGroup = await ctx.db.group.create({
                     data: {
                         name: input.name,
                         description: input.description,
@@ -90,14 +90,14 @@ export const groupRouter = createTRPCRouter({
                 if (!group) {
                     throw new TRPCError({
                         code: "NOT_FOUND",
-                        message: "Group was not found!"
+                        message: "Group was not found!",
                     });
                 }
 
                 if (group.ownerId !== input.userId) {
                     throw new TRPCError({
                         code: "NOT_FOUND",
-                        message: "User is not in this group!"
+                        message: "User is not in this group!",
                     });
                 }
 
@@ -129,7 +129,7 @@ export const groupRouter = createTRPCRouter({
                     },
                     data: {
                         name: input.name,
-                        description: input.description
+                        description: input.description,
                     },
                 });
 
@@ -169,7 +169,9 @@ export const groupRouter = createTRPCRouter({
                     return group.inviteCode;
                 } else {
                     // TODO: This is not a good way to generate invite codes
-                    const inviteCode = Math.random().toString(36).substring(2, 8);
+                    const inviteCode = Math.random()
+                        .toString(36)
+                        .substring(2, 8);
                     await ctx.db.group.update({
                         where: {
                             id: input.groupId,
@@ -220,7 +222,7 @@ export const groupRouter = createTRPCRouter({
 
                 if (cachedGroups) {
                     return JSON.parse(cachedGroups);
-                } 
+                }
 
                 const groups = await ctx.db.group.findMany({
                     where: {

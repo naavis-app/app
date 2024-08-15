@@ -1,7 +1,6 @@
 {
-	"editor.tabSize": 4,
-	"editor.insertSpaces": true,
-	// indent with spaces
-	"editor.detectIndentation": false,
-    
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    // indent with spaces
+    "editor.detectIndentation": false
 }

@@ -4,12 +4,7 @@ it doesnt update immediately which is something that needs to be worked on later
 
 "use client";
 
-import {
-    Box,
-    Text,
-    Flex,
-    Button,
-} from "@radix-ui/themes";
+import { Box, Text, Flex, Button } from "@radix-ui/themes";
 import NextLink from "next/link";
 import toast from "react-hot-toast";
 import { useAtom } from "jotai";
@@ -75,7 +70,8 @@ export default function EditAccount() {
             onSubmit={(e: React.FormEvent) => {
                 e.preventDefault();
                 setCheck(false);
-                setTimeout(() => { // after the data is un-disabled, needs a moment
+                setTimeout(() => {
+                    // after the data is un-disabled, needs a moment
                     handleSubmit(new FormData(e.target as HTMLFormElement));
                 }, 1000);
             }}

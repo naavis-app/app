@@ -61,8 +61,8 @@ export const placeRouter = createTRPCRouter({
                 return JSON.parse(cachedPlaces);
             }
 
-            const places = await ctx.db.place.findMany({ 
-                where: { groupId: input.groupId } 
+            const places = await ctx.db.place.findMany({
+                where: { groupId: input.groupId },
             });
 
             await redis.setex(cacheKey, 3600, JSON.stringify(places));
