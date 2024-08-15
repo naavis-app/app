@@ -24,6 +24,8 @@ export const userAtom = atomWithStorage<null | DatabaseUserAttributes>(
 
 export const sidenavOpenAtom = atom<boolean>(true);
 
+// TODO: Store loading state
+
 export const selectedGroupId = atomWithStorage<string | null>(
     "naavis-selgroupid",
     null
