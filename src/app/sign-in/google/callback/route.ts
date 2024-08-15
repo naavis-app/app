@@ -83,7 +83,16 @@ export async function GET(request: Request): Promise<Response> {
                 lastname: lastName,
                 email: googleUser.email,
                 profile_pic: profilePic,
-            },
+                // Create initial group for user
+                groups: {
+                    create: {
+                        name: "My Group",
+                        description: "My first group",
+                        personalGroup: true,
+                        ownerId: userId,
+                    }
+                }
+            }
         });
 
         if (!createdUser) {

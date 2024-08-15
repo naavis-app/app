@@ -239,6 +239,15 @@ export async function signup(formData: FormData): Promise<ActionResult> {
             firstname: firstname,
             lastname: lastname,
             email: email,
+            // Create initial group for user
+            groups: {
+                create: {
+                    name: "My Group",
+                    description: "My first group",
+                    personalGroup: true,
+                    ownerId: userId,
+                }
+            }
         },
     });
 

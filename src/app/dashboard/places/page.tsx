@@ -23,6 +23,7 @@ export default function DashboardDevices() {
         groupId: selGroupId || "",
     });
 
+    // TODO: Transition from ohno to data smoothly
     // TODO: Remove mock data use actual live data pls ‼️
     //const [places, setPlaces] = useAtom(placeListAtom);
     const places = [

@@ -40,6 +40,7 @@ model Device {
   speed              Float    @default(0)
   lastLocationUpdate DateTime @default(now())
   connection         String   @default("Online")
+	
   userId             String
   user               User     @relation("UserDevices", fields: [userId], references: [id])
 }
@@ -50,11 +51,12 @@ model Group {
   description String?
   ownerId     String
 
-  inviteCode  String? @unique
+  personalGroup Boolean @default(false)
+  inviteCode    String? @unique
 
-  owner       User    @relation("GroupOwner", fields: [ownerId], references: [id])
-  places      Place[] @relation("GroupPlaces")
-  members     User[]  @relation("GroupMembers")
+  owner   User    @relation("GroupOwner", fields: [ownerId], references: [id])
+  places  Place[] @relation("GroupPlaces")
+  members User[]  @relation("GroupMembers")
 }
 
 model Place {
@@ -66,6 +68,7 @@ model Place {
   alertRadius Float   @default(5)
   onEntry     Boolean @default(false)
   onExit      Boolean @default(false)
+
   groupId     String
   parentGroup Group   @relation("GroupPlaces", fields: [groupId], references: [id])
 }
