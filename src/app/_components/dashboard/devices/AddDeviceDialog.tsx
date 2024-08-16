@@ -82,12 +82,12 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
             </Dialog.Trigger>
             <Dialog.Content maxWidth={"400px"}>
                 <Dialog.Title>
-                Add A New Device
+                    Add A New Device
                 </Dialog.Title>
 
                 <Flex direction={"column"} gap={"2"}>
                     <Text size={"3"}>
-                                Device Name
+                        Device Name
                     </Text>
                     <TextField.Root
                         value={deviceName}
@@ -140,7 +140,7 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
                             disabled={addingDevice}
                             variant="solid"
                         >
-                        Add Device
+                            Add Device
                         </Button>
                     </div>
                 </Flex>

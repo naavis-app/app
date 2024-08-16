@@ -123,7 +123,7 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
 
                 <Flex direction={"column"} gap={"2"}>
                     <Text size={"3"}>
-                                Group Name
+                        Group Name
                     </Text>
                     <div className="relative flex w-full 
                     flex-row items-center justify-end">
@@ -150,7 +150,7 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                     </div>
 
                     <Text size={"3"}>
-                                Group Description
+                        Group Description
                     </Text>
                     <div className="relative flex w-full 
                     flex-row items-center justify-end">

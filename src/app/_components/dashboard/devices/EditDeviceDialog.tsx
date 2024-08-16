@@ -122,12 +122,12 @@ export default function EditDeviceDialog({
             </Dialog.Trigger>
             <Dialog.Content maxWidth={"400px"}>
                 <Dialog.Title>
-                Edit Your Device
+                    Edit Your Device
                 </Dialog.Title>
 
                 <Flex direction={"column"} gap={"2"}>
                     <Text size={"3"}>
-                                Device Name
+                        Device Name
                     </Text>
                     <div className="relative flex w-full 
                     flex-row items-center justify-end">
@@ -154,7 +154,7 @@ export default function EditDeviceDialog({
                     </div>
 
                     <Text size={"3"}>
-                                Device Type
+                        Device Type
                     </Text>
                     <Select.Root
                         onValueChange={(e) => 
@@ -195,7 +195,7 @@ export default function EditDeviceDialog({
                             disabled={editingDevice}
                             variant="solid"
                         >
-                        Save
+                            Save
                         </Button>
                     </div>
                 </Flex>

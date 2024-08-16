@@ -67,12 +67,12 @@ export default function CreateGroupDialog({
             </Dialog.Trigger>
             <Dialog.Content maxWidth={"400px"}>
                 <Dialog.Title>
-                Add A New Group
+                    Add A New Group
                 </Dialog.Title>
 
                 <Flex direction={"column"} gap={"2"}>
                     <Text size={"3"}>
-                                Group Name
+                        Group Name
                     </Text>
                     <TextField.Root
                         value={groupName}
@@ -111,7 +111,7 @@ export default function CreateGroupDialog({
                             disabled={addingGroup}
                             variant="solid"
                         >
-                        Add Group
+                            Add Group
                         </Button>
                     </div>
                 </Flex>
