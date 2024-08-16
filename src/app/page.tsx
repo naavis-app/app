@@ -59,8 +59,8 @@ export default function Home() {
 
     return (
         <>
-            <Section className="bg-slate-100 flex flex-col">
-                <Container size="3" className="w-full">
+            <Section className="relative bg-slate-100 flex flex-col overflow-clip">
+                <Container size="3" className="w-full h-full mt-[30vh] p-8">
                     <Flex direction={"column"} align={"center"} justify={"center"} className="h-full py-8">
                         <Flex direction="row" justify="center" align="center" className="w-full border-2">
                             <Flex direction="column" className="">
@@ -71,19 +71,18 @@ export default function Home() {
                                     No Matter the Distance
                                 </Text>
                             </Flex>
-                            <Flex className="">
-                                <motion.div
-                                    animate={{ rotate: 360 }}
-                                    style={{ scale: 10, rotate: 0, opacity: 0.1 }}
-                                    transition={{ duration: 500, repeat: Infinity, ease: "linear" }}
-                                    className="absolute -z-10"
-                                >
-                                    <Image src="/lmap.svg" alt="map" width={500} height={500} />
-                                </motion.div>
-                            </Flex>
                         </Flex>
                     </Flex>
                 </Container>
+
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    style={{ scale: 10, rotate: 0, opacity: 0.1 }}
+                    transition={{ duration: 500, repeat: Infinity, ease: "linear" }}
+                    className="absolute -z-10"
+                >
+                    <Image src="/lmap.svg" alt="map" width={1000} height={1000} />
+                </motion.div>
             </Section>
 
             <SnapImage id={1} />
