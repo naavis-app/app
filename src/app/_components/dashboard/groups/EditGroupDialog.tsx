@@ -121,7 +121,7 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                     Edit Your Group
                 </Dialog.Title>
 
-                <Flex direction={"column"} gap={"3"}>
+                <Flex direction={"column"} gap={"2"}>
                     <Text size={"3"}>
                                 Group Name
                     </Text>
@@ -129,7 +129,7 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                     flex-row items-center justify-end">
                         <TextField.Root
                             value={groupName}
-                            placeholder="Name of Your Device"
+                            placeholder="Your device name..."
                             onChange={(e) => 
                                 setGroupName(e.target.value)
                             }
@@ -156,7 +156,7 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                     flex-row items-center justify-end">
                         <TextField.Root
                             value={groupDescription}
-                            placeholder="Description of Your Device"
+                            placeholder="Your device description..."
                             onChange={(e) => 
                                 setGroupDescription(e.target.value)
                             }

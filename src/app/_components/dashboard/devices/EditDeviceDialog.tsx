@@ -29,7 +29,7 @@ export default function EditDeviceDialog({
     const [startingEdit, setStartingEdit] = useState<boolean>(false);
 
     const [deviceName, setDeviceName] = useState("");
-    const [deviceType, setDeviceType] = useState("");
+    const [deviceType, setDeviceType] = useState("phone");
 
     const [nameToggle, setNameToggle] = useState<boolean>(false);
 
@@ -42,9 +42,6 @@ export default function EditDeviceDialog({
         },
         onError: () => {
             toast.error("Failed to get device!");
-
-            setDeviceName(deviceName);
-            setDeviceType(deviceType);
 
             setDialogOpen(false);
         },
@@ -125,10 +122,10 @@ export default function EditDeviceDialog({
             </Dialog.Trigger>
             <Dialog.Content maxWidth={"400px"}>
                 <Dialog.Title>
-                Edit Your Group
+                Edit Your Device
                 </Dialog.Title>
 
-                <Flex direction={"column"} gap={"3"}>
+                <Flex direction={"column"} gap={"2"}>
                     <Text size={"3"}>
                                 Device Name
                     </Text>
@@ -136,7 +133,7 @@ export default function EditDeviceDialog({
                     flex-row items-center justify-end">
                         <TextField.Root
                             value={deviceName}
-                            placeholder="Name of Your Device"
+                            placeholder="Your device name..."
                             onChange={(e) => 
                                 setDeviceName(e.target.value)
                             }
