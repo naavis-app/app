@@ -2,16 +2,15 @@
 
 // edit group dialog
 
-import { Button } from "@radix-ui/themes";
+import { Button, Flex, Text, TextField, Dialog } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
-import * as Dialog from "@radix-ui/react-dialog";
+// import * as Dialog from "@radix-ui/react-dialog";
 import { api } from "~/trpc/react";
 import { RxPencil1 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
-import { themeAtom } from "~/server/lib/stores";
 import React from "react";
 
 interface EditGroupProps {
@@ -28,11 +27,6 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
 
     const [groupName, setGroupName] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
-
-    const [dialogStyle, setDialogStyle] = useState("");
-    const [dialogTextStyle, setDialogTextStyle] = useState("");
-    const [dialogButtonStyle, setDialogButtonStyle] = useState("");
-    const [theme] = useAtom(themeAtom);
 
     const [nameToggle, setNameToggle] = useState<boolean>(false);
     const [descToggle, setDescToggle] = useState<boolean>(false);
@@ -110,31 +104,9 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
         setDescToggle(false);
     };
 
-    useEffect(() => {
-        if (theme === "light") {
-            setDialogStyle(
-                "border-light-dialog-border bg-light-dialog-bg text-light-dialog-text",
-            );
-            setDialogTextStyle(
-                "border-light-dialog-text-border bg-light-dialog-text-bg text-light-dialog-text",
-            );
-            setDialogButtonStyle(
-                "text-light-txt-only-button hover:bg-light-txt-button-hover",
-            );
-        } else if (theme === "dark") {
-            setDialogStyle("border-dark-dialog-border bg-dark-dialog-bg");
-            setDialogTextStyle(
-                "border-dark-dialog-text-border bg-dark-dialog-text-bg text-white",
-            );
-            setDialogButtonStyle(
-                "text-dark-txt-only-button hover:bg-dark-txt-button-hover",
-            );
-        }
-    }, [theme]);
-
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
-            <Dialog.Trigger asChild onClick={() => readGroup()}>
+            <Dialog.Trigger onClick={() => readGroup()}>
                 <Button
                     variant="ghost"
                     color="gray"
@@ -144,135 +116,86 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                     <RxPencil1 />
                 </Button>
             </Dialog.Trigger>
-            <Dialog.Portal>
-                <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60" />
-                <Dialog.Content
-                    className="fixed inset-0 z-50 flex items-center 
-                justify-center p-4"
-                >
-                    <div
-                        className={`min-w-[24rem] rounded-lg
-                    border ${dialogStyle} p-2 shadow`}
-                    >
-                        <div className="flex flex-col gap-2 p-2">
-                            <div className="text-xl font-bold">
-                                Edit Your Group
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <label className="text-md">Group Name</label>
-                                <div
-                                    className="relative flex w-full
-                                flex-row items-center justify-end"
-                                >
-                                    <input
-                                        type="text"
-                                        value={groupName}
-                                        placeholder="Name of Your Device"
-                                        onChange={(e) =>
-                                            setGroupName(e.target.value)
-                                        }
-                                        required
-                                        disabled={!nameToggle}
-                                        className={`w-full
-                                        rounded-lg border ${dialogTextStyle} p-2 
-                                        focus:border-transparent
-                                        focus:outline-none
-                                        focus:ring-2
-                                        focus:ring-blue-500
-            ${
-                !nameToggle
-                    ? `${
-                          theme === "light"
-                              ? "text-light-disabled-text"
-                              : "text-dark-disabled-text"
-                      }`
-                    : `${theme === "light" ? "text-black" : "text-white"}`
-            }`}
-                                    />
-                                    <button
-                                        className="absolute right-4"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setNameToggle(!nameToggle);
-                                        }}
-                                    >
-                                        {!nameToggle && <RxPencil1 />}
-                                        {nameToggle && <FaCheck />}
-                                    </button>
-                                </div>
-                                <label className="text-md">
-                                    Group Description
-                                </label>
-                            </div>
-                            <div
-                                className="justify-ends relative flex w-full
-                            flex-row items-center"
-                            >
-                                <input
-                                    type="text"
-                                    value={groupDescription}
-                                    placeholder="Your Group Description"
-                                    onChange={(e) =>
-                                        setGroupDescription(e.target.value)
-                                    }
-                                    required
-                                    disabled={!descToggle}
-                                    className={`w-full
-                                        rounded-lg 
-                                        border ${dialogTextStyle} p-2 
-                                        focus:border-transparent
-                                        focus:outline-none
-                                        focus:ring-2
-                                        focus:ring-blue-500
-                                        ${
-                                            !descToggle
-                                                ? `${
-                                                      theme === "light"
-                                                          ? "text-light-disabled-text"
-                                                          : "text-dark-disabled-text"
-                                                  }`
-                                                : `${theme === "light" ? "text-black" : "text-white"}`
-                                        }`}
-                                />
-                                <button
-                                    className="absolute right-4"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setDescToggle(!descToggle);
-                                    }}
-                                >
-                                    {!descToggle && <RxPencil1 />}
-                                    {descToggle && <FaCheck />}
-                                </button>
-                            </div>
-                            <div
-                                className="
-                            mt-2 flex items-center
-                            justify-between"
-                            >
-                                <button
-                                    onClick={() => setDialogOpen(false)}
-                                    className={`
-                                rounded
-                                bg-transparent px-4
-                                py-1 ${dialogButtonStyle}`}
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    onClick={editGroup}
-                                    disabled={editingGroup}
-                                    className="rounded bg-reg-button-bg
-                                px-4 py-1 text-white hover:bg-blue-700 
-                                disabled:bg-blue-300"
-                                >
-                                    Save
-                                </button>
-                            </div>
-                        </div>
+            <Dialog.Content maxWidth={"400px"}>
+                <Dialog.Title>
+                    Edit Your Group
+                </Dialog.Title>
+
+                <Flex direction={"column"} gap={"3"}>
+                    <Text size={"3"}>
+                                Group Name
+                    </Text>
+                    <div className="relative flex w-full 
+                    flex-row items-center justify-end">
+                        <TextField.Root
+                            value={groupName}
+                            placeholder="Name of Your Device"
+                            onChange={(e) => 
+                                setGroupName(e.target.value)
+                            }
+                            required
+                            disabled={!nameToggle}
+                            className="w-full"
+                        />
+                        <button
+                            className="absolute right-4"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setNameToggle(!nameToggle);
+                            }}
+                        >
+                            {!nameToggle && <RxPencil1/>}
+                            {nameToggle && <FaCheck/>}
+                        </button>
                     </div>
-                </Dialog.Content>
-            </Dialog.Portal>
+
+                    <Text size={"3"}>
+                                Group Description
+                    </Text>
+                    <div className="relative flex w-full 
+                    flex-row items-center justify-end">
+                        <TextField.Root
+                            value={groupDescription}
+                            placeholder="Description of Your Device"
+                            onChange={(e) => 
+                                setGroupDescription(e.target.value)
+                            }
+                            required
+                            disabled={!descToggle}
+                            className="w-full"
+                        />
+                        <button
+                            className="absolute right-4"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setDescToggle(!descToggle);
+                            }}
+                        >
+                            {!descToggle && <RxPencil1/>}
+                            {descToggle && <FaCheck/>}
+                        </button>
+                    </div>
+                    <div
+                        className="
+                    mt-2 flex items-center
+                    justify-between"
+                    >
+                        <Button
+                            onClick={() => setDialogOpen(false)}
+                            variant="ghost"
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            onClick={editGroup}
+                            disabled={editingGroup}
+                            variant="solid"
+                        >
+                            Save
+                        </Button>
+                    </div>
+                </Flex>
+            </Dialog.Content>
         </Dialog.Root>
     );
 }
