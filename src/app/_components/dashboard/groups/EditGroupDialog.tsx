@@ -7,7 +7,6 @@ import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { userAtom } from "~/server/lib/stores";
-// import * as Dialog from "@radix-ui/react-dialog";
 import { api } from "~/trpc/react";
 import { RxPencil1 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";

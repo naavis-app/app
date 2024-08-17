@@ -16,14 +16,15 @@ html {
     scroll-snap-type: y mandatory;
   }
   
-  h1 {
+  /* h1 {
     font-size: 56px;
     font-weight: 700;
     letter-spacing: -3px;
     line-height: 1.2;
     text-align: center;
     margin: 100px 0;
-  }
+  } */ 
+/* gonna make modals without the padding for now */
   
   h2 {
     margin: 0;

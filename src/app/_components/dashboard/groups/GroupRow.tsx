@@ -38,7 +38,7 @@ export default function GroupRow({
                             <LuCrown className="text text-amber-400" />
                         </Tooltip>
                     ) : // <LuCrown className="text text-transparent" />
-                    null}
+                        null}
                     {name}
                 </Table.RowHeaderCell>
                 <Table.Cell className="h-full">

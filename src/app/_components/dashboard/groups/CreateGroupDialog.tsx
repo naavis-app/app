@@ -90,7 +90,7 @@ export default function CreateGroupDialog({
                         value={groupDescription}
                         placeholder="Your group description..."
                         onChange={(e) => 
-                            setGroupName(e.target.value)
+                            setGroupDescription(e.target.value)
                         }
                         required
                         className="w-full"

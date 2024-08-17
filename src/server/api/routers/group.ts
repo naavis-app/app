@@ -247,13 +247,21 @@ export const groupRouter = createTRPCRouter({
         .input(
             z.object({
                 id: z.string(),
+                userId: z.string(),
                 // TODO: add ownerid security.
             }),
         )
         .mutation(async ({ ctx, input }) => {
             // TODO: AHHHH REMEMBER WE NEED TO PROTECT ALL THESE ENDPOINTS
             try {
+                await ctx.db.place.deleteMany({
+                    where: {
+                        groupId: input.id,
+                    },
+                });
+
                 await redis.del(`group:${input.id}`);
+                await redis.del(`user:${input.userId}:groups`);
 
                 return await ctx.db.group.delete({
                     where: {
