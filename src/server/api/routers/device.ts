@@ -238,7 +238,7 @@ export const deviceRouter = createTRPCRouter({
                 userId: z.string(),
             }),
         )
-        .query(async ({ ctx, input }) => {
+        .mutation(async ({ ctx, input }) => {
             const user = await ctx.db.user.findUnique({
                 where: { id: input.userId },
             });
@@ -252,6 +252,7 @@ export const deviceRouter = createTRPCRouter({
 
             try {
                 await redis.del(`device:${input.id}`);
+                await redis.del(`user:${input.userId}:devices`);
 
                 return await ctx.db.device.delete({
                     where: {

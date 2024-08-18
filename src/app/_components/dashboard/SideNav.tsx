@@ -7,6 +7,7 @@ import { FaUserGroup, FaCaretLeft } from "react-icons/fa6";
 import { MdDevices } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
+import { FaLocationDot } from "react-icons/fa6";
 
 import { Avatar, Button, Card, Flex, Skeleton, Text } from "@radix-ui/themes";
 
@@ -197,7 +198,7 @@ export default function SideNav() {
                             label={"Devices"}
                         />
                         <SideNavItem
-                            icon={<MdDevices />}
+                            icon={<FaLocationDot />}
                             url="/dashboard/places"
                             label="Places"
                         />

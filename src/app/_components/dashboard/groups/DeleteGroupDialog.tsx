@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { Button, Flex, Text, Dialog, TextField } from "@radix-ui/themes";
+import { Button, Dialog } from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -45,7 +45,7 @@ export default function DeleteGroupDialog({ refetch, groupId }: DeleteGroupProps
             refetch();
         },
         onError: () => {
-            toast.error(`Failed to update ${groupName}`);
+            toast.error(`Failed to update ${groupName}!`);
 
             setDeletingGroup(false);
             setDialogOpen(false);
@@ -53,16 +53,16 @@ export default function DeleteGroupDialog({ refetch, groupId }: DeleteGroupProps
     });
 
     useEffect(() => {
-        if (dialogOpen) {
+        if (deletingGroup) {
             readGroup();
         }
-    }, [dialogOpen]);
+    }, [deletingGroup]);
 
     const deleteGroup = () => {
         if (deletingGroup) return;
         if (!user) {
             setDialogOpen(false);
-            return toast.error("You must be logged in to delete a device!");
+            return toast.error("You must be logged in to delete a group!");
         }
 
         setDeletingGroup(true);
@@ -99,14 +99,15 @@ export default function DeleteGroupDialog({ refetch, groupId }: DeleteGroupProps
 
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col text-center">
-                        <span className="text-red-400">
+                        <p className="text-red-400">
                             This is a destructive action.
-                        </span>{" "}
-                        <span>
-                            All group data, including places and 
+                        </p>{" "}
+                        <p>
+                            All group data for this group, including places and 
                             connected members, &#40;not member data&#41; 
-                            will be deleted. Are you sure you want to delete this group?
-                        </span>
+                            will be deleted. Are you sure you want to delete 
+                            this group?
+                        </p>
                     </div>
                     <div className="mt-2 flex items-center justify-between">
                         <Button
