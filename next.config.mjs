@@ -9,6 +9,7 @@ const config = {
     experimental: {
         serverComponentsExternalPackages: ["@node-rs/argon2"],
     },
+    transpilePackages: ["geist"],
 };
 
 export default config;

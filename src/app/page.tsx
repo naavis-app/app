@@ -6,7 +6,7 @@ import { useAtom } from "jotai";
 import { themeAtom } from "~/server/lib/stores";
 // import { ThemeProvider } from "next-themes";
 import React, { useRef } from "react";
-import { Container, Flex, Strong, Text } from "@radix-ui/themes";
+import { Box, Button, Container, Flex, Strong, Text } from "@radix-ui/themes";
 import Image from "next/image";
 import clsx from "clsx";
 
@@ -59,20 +59,29 @@ export default function Home() {
 
     return (
         <>
-            <Section className="relative bg-slate-100 flex flex-col overflow-clip">
-                <Container size="3" className="w-full h-full mt-[30vh] p-8">
-                    <Flex direction={"column"} align={"center"} justify={"center"} className="h-full py-8">
-                        <Flex direction="row" justify="center" align="center" className="w-full border-2">
-                            <Flex direction="column" className="">
-                                <Text size="9">
-                                    Always <Strong className="relative">Connected,<div className="absolute right-0 top-0 rounded-full w-5 h-5 bg-blue-500 animate-ping"></div></Strong>
-                                </Text>
-                                <Text size="9">
-                                    No Matter the Distance
-                                </Text>
-                            </Flex>
-                        </Flex>
+            <Section className="relative bg-slate-100 flex flex-col overflow-clip vignette font-sans">
+                <Container size="2" className="w-full h-full mt-[30vh] p-8 text-center">
+                    <Flex direction="column" className="">
+                        <Text size="9">
+                            Always <Strong className="relative">Connected,<div className="absolute right-0 top-0 rounded-full w-5 h-5 bg-blue-500 animate-ping"></div></Strong>
+                        </Text>
+                        <Text size="9">
+                            No Matter the Distance
+                        </Text>
                     </Flex>
+
+                    <Box className="my-4">
+                        <Text color="gray">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </Text>
+                    </Box>
+
+                    <Box className="">
+                        <Flex direction={"row"} gap={"2"} justify={"center"}>
+                            <Button color="green">Get Started</Button>
+                            <Button variant="outline">Learn More</Button>
+                        </Flex>
+                    </Box>
                 </Container>
 
                 <motion.div

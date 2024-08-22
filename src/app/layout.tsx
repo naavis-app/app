@@ -8,11 +8,11 @@ import "@radix-ui/themes/styles.css";
 import Navbar from "./_components/navbar/Navbar";
 import { Providers } from "./providers";
 import React from "react";
-/* export const metadata = {
+export const metadata = {
     title: "Naavis ⛵️",
     description: "Location sharing, reimagined.",
     icons: [{ rel: "icon", url: "/favicon.ico" }],
-}; */
+};
 
 export default function RootLayout({
     children,
@@ -24,7 +24,7 @@ export default function RootLayout({
             <html lang="en" className={`${GeistSans.variable}`}>
                 <body
                     className="relative flex min-h-[100vh] w-full 
-                flex-col"
+                flex-col font-sans"
                 >
                     <Providers>
                         <TRPCReactProvider>
