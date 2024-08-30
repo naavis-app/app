@@ -59,39 +59,25 @@ export default function CreateGroupDialog({
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger onClick={() => setDialogOpen(!dialogOpen)}>
-                <Button
-                    variant="solid"
-                >
-                    New Group
-                </Button>
+                <Button variant="solid">New Group</Button>
             </Dialog.Trigger>
             <Dialog.Content maxWidth={"400px"}>
-                <Dialog.Title>
-                    Add A New Group
-                </Dialog.Title>
+                <Dialog.Title>Add A New Group</Dialog.Title>
 
                 <Flex direction={"column"} gap={"2"}>
-                    <Text size={"3"}>
-                        Group Name
-                    </Text>
+                    <Text size={"3"}>Group Name</Text>
                     <TextField.Root
                         value={groupName}
                         placeholder="Your group name..."
-                        onChange={(e) => 
-                            setGroupName(e.target.value)
-                        }
+                        onChange={(e) => setGroupName(e.target.value)}
                         required
                         className="w-full"
                     />
-                    <Text size={"3"}>
-                        Group Description
-                    </Text>
+                    <Text size={"3"}>Group Description</Text>
                     <TextField.Root
                         value={groupDescription}
                         placeholder="Your group description..."
-                        onChange={(e) => 
-                            setGroupDescription(e.target.value)
-                        }
+                        onChange={(e) => setGroupDescription(e.target.value)}
                         required
                         className="w-full"
                     />

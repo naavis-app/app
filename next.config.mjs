@@ -10,6 +10,13 @@ const config = {
         serverComponentsExternalPackages: ["@node-rs/argon2"],
     },
     transpilePackages: ["geist"],
+    images: {
+        remotePatterns: [
+            {
+                hostname: "upload.wikimedia.org",
+            }
+        ]
+    }
 };
 
 export default config;

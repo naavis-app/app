@@ -3,7 +3,14 @@
 // edit device dialog
 // TODO: update select so it shows current device type on open
 
-import { Button, Flex, Dialog, Text, TextField, Select } from "@radix-ui/themes";
+import {
+    Button,
+    Flex,
+    Dialog,
+    Text,
+    TextField,
+    Select,
+} from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -121,22 +128,18 @@ export default function EditDeviceDialog({
                 </Button>
             </Dialog.Trigger>
             <Dialog.Content maxWidth={"400px"}>
-                <Dialog.Title>
-                    Edit Your Device
-                </Dialog.Title>
+                <Dialog.Title>Edit Your Device</Dialog.Title>
 
                 <Flex direction={"column"} gap={"2"}>
-                    <Text size={"3"}>
-                        Device Name
-                    </Text>
-                    <div className="relative flex w-full 
-                    flex-row items-center justify-end">
+                    <Text size={"3"}>Device Name</Text>
+                    <div
+                        className="relative flex w-full 
+                    flex-row items-center justify-end"
+                    >
                         <TextField.Root
                             value={deviceName}
                             placeholder="Your device name..."
-                            onChange={(e) => 
-                                setDeviceName(e.target.value)
-                            }
+                            onChange={(e) => setDeviceName(e.target.value)}
                             required
                             disabled={!nameToggle}
                             className="w-full"
@@ -148,31 +151,22 @@ export default function EditDeviceDialog({
                                 setNameToggle(!nameToggle);
                             }}
                         >
-                            {!nameToggle && <RxPencil1/>}
-                            {nameToggle && <FaCheck/>}
+                            {!nameToggle && <RxPencil1 />}
+                            {nameToggle && <FaCheck />}
                         </button>
                     </div>
 
-                    <Text size={"3"}>
-                        Device Type
-                    </Text>
-                    <Select.Root
-                        onValueChange={(e) => 
-                            setDeviceType(e)
-                        }
-                    >
+                    <Text size={"3"}>Device Type</Text>
+                    <Select.Root onValueChange={(e) => setDeviceType(e)}>
                         <Select.Trigger
                             variant="surface"
                             className="z-10"
                             value={deviceType || "Phone"}
-                        >
-                        </Select.Trigger>
+                        ></Select.Trigger>
                         <Select.Content>
                             <Select.Group>
-
                                 {deviceTypes.map((type, i) => (
-                                    <Select.Item value={type.id} 
-                                        key={i}>
+                                    <Select.Item value={type.id} key={i}>
                                         {type.name}
                                     </Select.Item>
                                 ))}

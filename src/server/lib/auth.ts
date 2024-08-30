@@ -246,8 +246,8 @@ export async function signup(formData: FormData): Promise<ActionResult> {
                     description: "My first group",
                     personalGroup: true,
                     ownerId: userId,
-                }
-            }
+                },
+            },
         },
     });
 

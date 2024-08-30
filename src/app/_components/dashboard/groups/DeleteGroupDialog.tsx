@@ -15,7 +15,10 @@ interface DeleteGroupProps {
     groupId: string;
 }
 
-export default function DeleteGroupDialog({ refetch, groupId }: DeleteGroupProps) {
+export default function DeleteGroupDialog({
+    refetch,
+    groupId,
+}: DeleteGroupProps) {
     const [user, setUser] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -49,7 +52,7 @@ export default function DeleteGroupDialog({ refetch, groupId }: DeleteGroupProps
 
             setDeletingGroup(false);
             setDialogOpen(false);
-        }
+        },
     });
 
     useEffect(() => {
@@ -93,9 +96,7 @@ export default function DeleteGroupDialog({ refetch, groupId }: DeleteGroupProps
                 </Button>
             </Dialog.Trigger>
             <Dialog.Content maxWidth={"400px"}>
-                <Dialog.Title align={"center"}>
-                    Delete Your Group
-                </Dialog.Title>
+                <Dialog.Title align={"center"}>Delete Your Group</Dialog.Title>
 
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col text-center">
@@ -103,10 +104,9 @@ export default function DeleteGroupDialog({ refetch, groupId }: DeleteGroupProps
                             This is a destructive action.
                         </p>{" "}
                         <p>
-                            All group data for this group, including places and 
-                            connected members, &#40;not member data&#41; 
-                            will be deleted. Are you sure you want to delete 
-                            this group?
+                            All group data for this group, including places and
+                            connected members, &#40;not member data&#41; will be
+                            deleted. Are you sure you want to delete this group?
                         </p>
                     </div>
                     <div className="mt-2 flex items-center justify-between">

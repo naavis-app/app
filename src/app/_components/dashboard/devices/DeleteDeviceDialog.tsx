@@ -18,7 +18,10 @@ interface DeleteDeviceProps {
     deviceId: string;
 }
 
-export default function DeleteDeviceDialog({ refetch, deviceId }: DeleteDeviceProps) {
+export default function DeleteDeviceDialog({
+    refetch,
+    deviceId,
+}: DeleteDeviceProps) {
     const [user] = useAtom(userAtom);
 
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
@@ -52,7 +55,7 @@ export default function DeleteDeviceDialog({ refetch, deviceId }: DeleteDevicePr
 
             setDeletingDevice(false);
             setDialogOpen(false);
-        }
+        },
     });
 
     useEffect(() => {
@@ -96,9 +99,7 @@ export default function DeleteDeviceDialog({ refetch, deviceId }: DeleteDevicePr
                 </Button>
             </Dialog.Trigger>
             <Dialog.Content maxWidth={"400px"}>
-                <Dialog.Title align={"center"}>
-                    Delete Your Device
-                </Dialog.Title>
+                <Dialog.Title align={"center"}>Delete Your Device</Dialog.Title>
 
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col text-center">
@@ -106,9 +107,8 @@ export default function DeleteDeviceDialog({ refetch, deviceId }: DeleteDevicePr
                             This is a destructive action.
                         </p>{" "}
                         <p>
-                            All device data for this device 
-                            will be deleted. Are you
-                            sure you want to delete this device?
+                            All device data for this device will be deleted. Are
+                            you sure you want to delete this device?
                         </p>
                     </div>
                     <div className="mt-2 flex items-center justify-between">

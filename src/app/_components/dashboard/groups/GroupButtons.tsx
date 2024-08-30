@@ -19,9 +19,10 @@ export default function GroupButtons({ groupId }: { groupId: string }) {
                     refetch={() => groupQuery.refetch()}
                     groupId={groupId}
                 />
-                <DeleteGroupDialog 
+                <DeleteGroupDialog
                     refetch={() => groupQuery.refetch()}
-                    groupId={groupId} />
+                    groupId={groupId}
+                />
             </div>
         </>
     );

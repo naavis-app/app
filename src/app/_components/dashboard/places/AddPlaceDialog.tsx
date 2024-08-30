@@ -1,6 +1,16 @@
 "use client";
 
-import { Button, Flex, Text, Dialog, TextField, SegmentedControl, Separator, Slider, CheckboxGroup } from "@radix-ui/themes";
+import {
+    Button,
+    Flex,
+    Text,
+    Dialog,
+    TextField,
+    SegmentedControl,
+    Separator,
+    Slider,
+    CheckboxGroup,
+} from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -40,7 +50,8 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
 
     const newPlace = () => {
         if (addingPlace) return;
-        if (!user) return toast.error("You must be logged in to create a place!");
+        if (!user)
+            return toast.error("You must be logged in to create a place!");
         if (!placeName.length) return toast.error("You must enter a name!");
         if (!selGroupId) return toast.error("You must select a group!");
 
@@ -59,23 +70,30 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
             </Dialog.Trigger>
 
             <Dialog.Content maxWidth={"500px"}>
-                <Dialog.Title>
-                    Add A New Place
-                </Dialog.Title>
+                <Dialog.Title>Add A New Place</Dialog.Title>
 
                 <Flex direction={"column"} gap={"2"}>
                     <label>
                         <Text as="div" size="2" mb="1" weight="bold">
                             Name
                         </Text>
-                        <TextField.Root value={placeName} onChange={event => setPlaceName(event.target.value)} />
+                        <TextField.Root
+                            value={placeName}
+                            onChange={(event) =>
+                                setPlaceName(event.target.value)
+                            }
+                        />
                     </label>
                     <label>
                         <Flex justify="between" className="pb-2" align="center">
                             <Text as="div" size="2" weight="bold">
                                 Location
                             </Text>
-                            <SegmentedControl.Root size="1" defaultValue="address" onValueChange={(e) => setLocationInputMode(e)}>
+                            <SegmentedControl.Root
+                                size="1"
+                                defaultValue="address"
+                                onValueChange={(e) => setLocationInputMode(e)}
+                            >
                                 <SegmentedControl.Item value="address">
                                     Address
                                 </SegmentedControl.Item>
@@ -86,13 +104,22 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
                         </Flex>
 
                         {/* TODO: Need address based location selector and exact map pinpoint input */}
-                        {
-                            locationInputMode === "address" ? (
-                                <TextField.Root value={placeName} onChange={event => setPlaceName(event.target.value)} />
-                            ) : (
-                                <TextField.Root value={placeName} disabled onChange={event => setPlaceName(event.target.value)} />
-                            )
-                        }
+                        {locationInputMode === "address" ? (
+                            <TextField.Root
+                                value={placeName}
+                                onChange={(event) =>
+                                    setPlaceName(event.target.value)
+                                }
+                            />
+                        ) : (
+                            <TextField.Root
+                                value={placeName}
+                                disabled
+                                onChange={(event) =>
+                                    setPlaceName(event.target.value)
+                                }
+                            />
+                        )}
                     </label>
                 </Flex>
                 <Separator my="3" size="4" />
@@ -104,24 +131,50 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
                         <Text as="div" size="2" weight="bold">
                             Radius (ft)
                         </Text>
-                        <Slider my="2" defaultValue={[500]} min={10} max={5000} step={1} />
+                        <Slider
+                            my="2"
+                            defaultValue={[500]}
+                            min={10}
+                            max={5000}
+                            step={1}
+                        />
                     </label>
                     <label className="flex-1">
                         <Text as="div" size="2" weight="bold">
                             Alert Types
                         </Text>
-                        <CheckboxGroup.Root defaultValue={["arrive", "leave"]} name="example">
-                            <CheckboxGroup.Item value="arrive">Arrive</CheckboxGroup.Item>
-                            <CheckboxGroup.Item value="leave">Leave</CheckboxGroup.Item>
-                            <CheckboxGroup.Item disabled value="hover">Hover</CheckboxGroup.Item>
+                        <CheckboxGroup.Root
+                            defaultValue={["arrive", "leave"]}
+                            name="example"
+                        >
+                            <CheckboxGroup.Item value="arrive">
+                                Arrive
+                            </CheckboxGroup.Item>
+                            <CheckboxGroup.Item value="leave">
+                                Leave
+                            </CheckboxGroup.Item>
+                            <CheckboxGroup.Item disabled value="hover">
+                                Hover
+                            </CheckboxGroup.Item>
                         </CheckboxGroup.Root>
                     </label>
                 </Flex>
-                <Flex gap="2" mt="4" justify="end" >
+                <Flex gap="2" mt="4" justify="end">
                     <Dialog.Close>
-                        <Button variant={"surface"} onClick={() => setDialogOpen(false)}>Cancel</Button>
+                        <Button
+                            variant={"surface"}
+                            onClick={() => setDialogOpen(false)}
+                        >
+                            Cancel
+                        </Button>
                     </Dialog.Close>
-                    <Button variant={"solid"} onClick={newPlace} disabled={addingPlace}>Add Place</Button>
+                    <Button
+                        variant={"solid"}
+                        onClick={newPlace}
+                        disabled={addingPlace}
+                    >
+                        Add Place
+                    </Button>
                 </Flex>
             </Dialog.Content>
         </Dialog.Root>

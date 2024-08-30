@@ -83,8 +83,8 @@ export async function GET(request: Request): Promise<Response> {
                         description: "My first group",
                         personalGroup: true,
                         ownerId: userId,
-                    }
-                }
+                    },
+                },
             },
         });
 

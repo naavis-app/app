@@ -19,8 +19,8 @@ export default function DeviceButtons({ deviceId }: { deviceId: string }) {
                     refetch={() => deviceQuery.refetch()}
                     deviceId={deviceId}
                 />
-                <DeleteDeviceDialog 
-                    refetch={()=> deviceQuery.refetch()}
+                <DeleteDeviceDialog
+                    refetch={() => deviceQuery.refetch()}
                     deviceId={deviceId}
                 />
             </div>

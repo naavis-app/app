@@ -116,22 +116,18 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                 </Button>
             </Dialog.Trigger>
             <Dialog.Content maxWidth={"400px"}>
-                <Dialog.Title>
-                    Edit Your Group
-                </Dialog.Title>
+                <Dialog.Title>Edit Your Group</Dialog.Title>
 
                 <Flex direction={"column"} gap={"2"}>
-                    <Text size={"3"}>
-                        Group Name
-                    </Text>
-                    <div className="relative flex w-full 
-                    flex-row items-center justify-end">
+                    <Text size={"3"}>Group Name</Text>
+                    <div
+                        className="relative flex w-full 
+                    flex-row items-center justify-end"
+                    >
                         <TextField.Root
                             value={groupName}
                             placeholder="Your device name..."
-                            onChange={(e) => 
-                                setGroupName(e.target.value)
-                            }
+                            onChange={(e) => setGroupName(e.target.value)}
                             required
                             disabled={!nameToggle}
                             className="w-full"
@@ -143,20 +139,20 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                                 setNameToggle(!nameToggle);
                             }}
                         >
-                            {!nameToggle && <RxPencil1/>}
-                            {nameToggle && <FaCheck/>}
+                            {!nameToggle && <RxPencil1 />}
+                            {nameToggle && <FaCheck />}
                         </button>
                     </div>
 
-                    <Text size={"3"}>
-                        Group Description
-                    </Text>
-                    <div className="relative flex w-full 
-                    flex-row items-center justify-end">
+                    <Text size={"3"}>Group Description</Text>
+                    <div
+                        className="relative flex w-full 
+                    flex-row items-center justify-end"
+                    >
                         <TextField.Root
                             value={groupDescription}
                             placeholder="Your device description..."
-                            onChange={(e) => 
+                            onChange={(e) =>
                                 setGroupDescription(e.target.value)
                             }
                             required
@@ -170,8 +166,8 @@ export default function EditGroupDialog({ refetch, groupId }: EditGroupProps) {
                                 setDescToggle(!descToggle);
                             }}
                         >
-                            {!descToggle && <RxPencil1/>}
-                            {descToggle && <FaCheck/>}
+                            {!descToggle && <RxPencil1 />}
+                            {descToggle && <FaCheck />}
                         </button>
                     </div>
                     <div

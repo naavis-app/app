@@ -1,6 +1,13 @@
 "use client";
 
-import { Button, Flex, Text, Dialog, TextField, Select } from "@radix-ui/themes";
+import {
+    Button,
+    Flex,
+    Text,
+    Dialog,
+    TextField,
+    Select,
+} from "@radix-ui/themes";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -74,50 +81,31 @@ export default function AddDeviceDialog({ refetch }: { refetch: () => void }) {
     return (
         <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger onClick={() => setDialogOpen(!dialogOpen)}>
-                <Button
-                    variant="solid"
-                >
-                    New Device
-                </Button>
+                <Button variant="solid">New Device</Button>
             </Dialog.Trigger>
             <Dialog.Content maxWidth={"400px"}>
-                <Dialog.Title>
-                    Add A New Device
-                </Dialog.Title>
+                <Dialog.Title>Add A New Device</Dialog.Title>
 
                 <Flex direction={"column"} gap={"2"}>
-                    <Text size={"3"}>
-                        Device Name
-                    </Text>
+                    <Text size={"3"}>Device Name</Text>
                     <TextField.Root
                         value={deviceName}
                         placeholder="Your device name..."
-                        onChange={(e) => 
-                            setDeviceName(e.target.value)
-                        }
+                        onChange={(e) => setDeviceName(e.target.value)}
                         required
                         className="w-full"
                     />
-                    <Text size={"3"}>
-                        Device Type
-                    </Text>
-                    <Select.Root
-                        onValueChange={(e) => 
-                            setDeviceType(e)
-                        }
-                    >
+                    <Text size={"3"}>Device Type</Text>
+                    <Select.Root onValueChange={(e) => setDeviceType(e)}>
                         <Select.Trigger
                             variant="surface"
                             className="z-10"
                             value={deviceType || "Phone"}
-                        >
-                        </Select.Trigger>
+                        ></Select.Trigger>
                         <Select.Content>
                             <Select.Group>
-
                                 {deviceTypes.map((type, i) => (
-                                    <Select.Item value={type.id} 
-                                        key={i}>
+                                    <Select.Item value={type.id} key={i}>
                                         {type.name}
                                     </Select.Item>
                                 ))}
