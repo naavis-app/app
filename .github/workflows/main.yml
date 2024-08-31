@@ -1,61 +1,47 @@
 name: CI
 
 on:
-    pull_request:
-        branches: ["*"]
-    push:
-        branches: ["main"]
-    merge_group:
+  pull_request:
+    branches: ["*"]
+  push:
+    branches: ["main"]
+  merge_group:
 
 concurrency:
-    group: ${{ github.workflow }}-${{ github.ref }}
-    cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-    lint:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
+  quality:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Biome
+      uses: biomejs/setup-biome@v2
+      with:
+        version: latest
+    - name: Run Biome
+      run: biome ci .
 
-            - name: Setup
-              uses: ./tooling/setup
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: copy env
-              shell: bash
-              run: cp .env.example .env
+      - name: Setup
+        uses: ./tooling/setup
 
-            - name: Lint
-              run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
 
-    format:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout/@v4
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Setup
-              uses: ./tooling/setup
+      - name: Setup
+        uses: ./tooling/setup
 
-            - name: Format
-              run: npm run format
-
-    typecheck:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-
-            - name: Setup
-              uses: ./tooling/setup
-
-            - name: Typecheck
-              run: npm run typecheck
-
-    test:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-
-            - name: Setup
-              uses: ./tooling/setup
-
-            - name: Test (Vitest)
-              run: npm run test
+      - name: Test (Vitest)
+        run: npm run test
