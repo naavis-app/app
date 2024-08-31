@@ -52,7 +52,7 @@ export default function Page() {
 			} else {
 				toast.error("Image file upload failed!");
 			}
-		} catch (error: unknown) {
+		} catch (error: any) {
 			toast.error(error.message);
 		}
 	};
