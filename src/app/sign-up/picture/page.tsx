@@ -12,7 +12,7 @@ import { userAtom } from "~/server/lib/stores";
 export default function Page() {
 	const router = useRouter();
 	const [user, setUser] = useAtom(userAtom);
-	const [file, setFile] = useState(null);
+	const [file, setFile] = useState<Blob | null>(null);
 
 	async function fetchUser() {
 		const data = await validateRequest();
@@ -33,7 +33,9 @@ export default function Page() {
 		}
 
 		const imageFormData = new FormData();
-		imageFormData.append("file", file);
+		if (file) {
+			imageFormData.append("file", file);
+		}
 		imageFormData.append("userId", user?.id ?? "");
 
 		try {
