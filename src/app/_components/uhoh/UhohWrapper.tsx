@@ -1,17 +1,17 @@
 import { Flex } from "@radix-ui/themes";
-import React from "react";
+import type React from "react";
 
 interface UhohWrapperProps {
-    children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 export default function UhohWrapper({ children }: UhohWrapperProps) {
-    // TODO: Center this thing :D
-    return (
-        <div className="">
-            <Flex direction="column" align="center" gap="10">
-                {children}
-            </Flex>
-        </div>
-    );
+	// TODO: Center this thing :D
+	return (
+		<div className="">
+			<Flex direction="column" align="center" gap="10">
+				{children}
+			</Flex>
+		</div>
+	);
 }

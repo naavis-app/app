@@ -5,35 +5,35 @@ import { GeistSans } from "geist/font/sans";
 import { TRPCReactProvider } from "~/trpc/react";
 
 import "@radix-ui/themes/styles.css";
+import type React from "react";
 import Navbar from "./_components/navbar/Navbar";
 import { Providers } from "./providers";
-import React from "react";
 export const metadata = {
-    title: "Naavis ⛵️",
-    description: "Location sharing, reimagined.",
-    icons: [{ rel: "icon", url: "/favicon.ico" }],
+	title: "Naavis ⛵️",
+	description: "Location sharing, reimagined.",
+	icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 export default function RootLayout({
-    children,
+	children,
 }: {
-    children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-    return (
-        <>
-            <html lang="en" className={`${GeistSans.variable}`}>
-                <body
-                    className="relative flex min-h-[100vh] w-full 
+	return (
+		<>
+			<html lang="en" className={`${GeistSans.variable}`}>
+				<body
+					className="relative flex min-h-[100vh] w-full 
                 flex-col font-sans"
-                >
-                    <Providers>
-                        <TRPCReactProvider>
-                            {<Navbar />}
-                            {children}
-                        </TRPCReactProvider>
-                    </Providers>
-                </body>
-            </html>
-        </>
-    );
+				>
+					<Providers>
+						<TRPCReactProvider>
+							{<Navbar />}
+							{children}
+						</TRPCReactProvider>
+					</Providers>
+				</body>
+			</html>
+		</>
+	);
 }

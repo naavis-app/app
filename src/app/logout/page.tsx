@@ -7,19 +7,19 @@ import { signOut } from "~/server/lib/auth";
 import { userAtom } from "~/server/lib/stores";
 
 export default async function Logout() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [user, setUser] = useAtom(userAtom);
-    const router = useRouter();
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [user, setUser] = useAtom(userAtom);
+	const router = useRouter();
 
-    useEffect(() => {
-        async function handleLogout() {
-            setUser(null);
-            await signOut();
-            router.push("/");
-        }
+	useEffect(() => {
+		async function handleLogout() {
+			setUser(null);
+			await signOut();
+			router.push("/");
+		}
 
-        handleLogout();
-    }, [setUser, router]);
+		handleLogout();
+	}, [setUser, router]);
 
-    return null;
+	return null;
 }

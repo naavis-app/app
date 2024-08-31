@@ -7,19 +7,19 @@ check https://jotai.org/docs/introduction for more information. */
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
+import type { Device, Group, Place } from "@prisma/client";
 // import { DatabaseUser, User } from "lucia";
-import { DatabaseUserAttributes } from "./auth";
-import { Device, Group, Place } from "@prisma/client";
+import type { DatabaseUserAttributes } from "./auth";
 
 // i removed inherit. its causing too many problems with the background svg
 // and flashing onload
 export const themeAtom = atomWithStorage<"light" | "dark">(
-    "naavis-darkmode",
-    "dark",
+	"naavis-darkmode",
+	"dark",
 );
 export const userAtom = atomWithStorage<null | DatabaseUserAttributes>(
-    "naavis-usersession",
-    null,
+	"naavis-usersession",
+	null,
 );
 
 export const sidenavOpenAtom = atom<boolean>(true);
@@ -27,13 +27,13 @@ export const sidenavOpenAtom = atom<boolean>(true);
 // TODO: Store loading state
 
 export const selectedGroupId = atomWithStorage<string | null>(
-    "naavis-selgroupid",
-    null,
+	"naavis-selgroupid",
+	null,
 );
 
 export const deviceListAtom = atomWithStorage<Device[]>(
-    "naavis-devicelist",
-    [],
+	"naavis-devicelist",
+	[],
 );
 
 export const groupListAtom = atomWithStorage<Group[]>("naavis-grouplist", []);
