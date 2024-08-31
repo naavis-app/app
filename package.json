@@ -68,6 +68,7 @@
         "zod": "^3.23.3"
     },
     "devDependencies": {
+        "@biomejs/biome": "1.8.3",
         "@iconify-icon/react": "^2.1.0",
         "@radix-ui/react-dialog": "^1.1.1",
         "@radix-ui/themes": "^3.1.1",
