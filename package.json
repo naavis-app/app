@@ -9,8 +9,6 @@
         "db:studio": "prisma studio",
         "dev": "next dev",
         "postinstall": "prisma generate",
-        "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-        "format": "prettier --write .",
         "start": "next start",
         "typecheck": "tsc --noEmit",
         "test": "vitest"
