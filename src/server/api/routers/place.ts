@@ -1,7 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { validateSession } from "~/server/lib/auth";
 import { validateSessionPlugin } from "~/server/lib/plugins";
 import { redis } from "~/server/redis";
 

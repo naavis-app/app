@@ -3,7 +3,7 @@
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { signOut } from "~/server/lib/auth";
+import { signOut } from "~/server/lib/authActions";
 import { userAtom } from "~/server/lib/stores";
 
 export default async function Logout() {

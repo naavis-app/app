@@ -9,7 +9,7 @@ import type { User } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { db } from "../db";
 import { redis } from "../redis";
-import { validateRequest } from "./auth";
+import { validateRequest } from "./authActions";
 
 export async function emailSubmit(formData: FormData): Promise<EmailProps> {
 	const email = formData.get("email");

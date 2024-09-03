@@ -11,7 +11,7 @@ import { useState } from "react";
 import type React from "react";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
-import { edit } from "~/server/lib/auth";
+import { edit } from "~/server/lib/authActions";
 import { userAtom } from "~/server/lib/stores";
 import EditableInput from "../edit-account/EditInput";
 

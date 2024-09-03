@@ -1,10 +1,10 @@
 import { TRPCError } from "@trpc/server";
 import { publicProcedure } from "../api/trpc";
-import { validateSession } from "./auth";
+import { lucia } from "./lucia";
 
 export const validateSessionPlugin = publicProcedure.use(async (opts) => {
-	const { session, user } = await validateSession(
-		opts.ctx.headers.get("cookie") ?? "",
+	const { session, user } = await lucia.validateSession(
+		lucia.readSessionCookie(opts.ctx.headers.get("cookie") ?? "") ?? "",
 	);
 
 	if (!session || !user) {

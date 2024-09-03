@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
 import React from "react";
-import { validateRequest } from "~/server/lib/auth";
+import { validateRequest } from "~/server/lib/authActions";
 import { userAtom } from "~/server/lib/stores";
 import useWindowSize from "../../hooks/useWindowSize";
 import AccountButton from "../auth/AccountButton";

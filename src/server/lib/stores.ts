@@ -9,7 +9,7 @@ import { atomWithStorage } from "jotai/utils";
 
 import type { Device, Group, Place } from "@prisma/client";
 // import { DatabaseUser, User } from "lucia";
-import type { DatabaseUserAttributes } from "./auth";
+import type { DatabaseUserAttributes } from "./lucia";
 
 // i removed inherit. its causing too many problems with the background svg
 // and flashing onload

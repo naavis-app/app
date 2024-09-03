@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import React from "react";
 import toast from "react-hot-toast";
-import { validateRequest } from "~/server/lib/auth";
+import { validateRequest } from "~/server/lib/authActions";
 import { userAtom } from "~/server/lib/stores";
 
 export default function Page() {

@@ -7,8 +7,9 @@ import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
 import { cookies } from "next/headers";
 import { db } from "~/server/db";
-import { cacheSession } from "~/server/lib/auth";
-import { github, lucia } from "~/server/lib/githubauth";
+import { cacheSession } from "~/server/lib/authActions";
+import { github } from "~/server/lib/githubauth";
+import { lucia } from "~/server/lib/lucia";
 import { redis } from "~/server/redis";
 
 export async function GET(request: Request): Promise<Response> {

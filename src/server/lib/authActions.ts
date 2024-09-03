@@ -1,6 +1,7 @@
 /* this file handles regular authentication with user entered
 username/password. please check https://lucia-auth.com/
 for more information. */
+"use server";
 
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { verify } from "@node-rs/argon2";
@@ -17,47 +18,7 @@ import toast from "react-hot-toast";
 import { db } from "~/server/db";
 import { redis } from "../redis";
 
-const adapter = new PrismaAdapter(db.session, db.user);
-
-const lucia = new Lucia(adapter, {
-	sessionCookie: {
-		expires: false,
-		attributes: {
-			secure: process.env.NODE_ENV === "production",
-		},
-	},
-	getUserAttributes: (attributes: DatabaseUserAttributes) => {
-		return {
-			username: attributes.username,
-			firstname: attributes.firstname,
-			lastname: attributes.lastname,
-			profile_pic: attributes.profile_pic,
-			email: attributes.email,
-		};
-	},
-});
-
-export const validateSession = cache(async (cookie: string) => {
-	return lucia.validateSession(lucia.readSessionCookie(cookie) ?? "");
-});
-
-export interface DatabaseUserAttributes {
-	id: string;
-	github_id?: number | null;
-	username: string;
-	firstname: string;
-	lastname: string;
-	profile_pic: string | null; // if there are pfp errors, make this optional
-	// i made it mandatory for the cache
-	email: string | null;
-}
-
-declare module "lucia" {
-	interface Register {
-		Lucia: typeof lucia;
-		DatabaseUserAttributes: DatabaseUserAttributes;
-	}
-}
+import { lucia, type DatabaseUserAttributes } from "./lucia";
 
 function filterUserAttributes(user: prismaTypes.User): DatabaseUserAttributes {
 	return {

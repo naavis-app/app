@@ -5,7 +5,7 @@
 import { Avatar, Button, Flex, Popover, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
-import type { DatabaseUserAttributes } from "~/server/lib/auth";
+import type { DatabaseUserAttributes } from "~/server/lib/lucia";
 
 interface AccountButtonProps {
 	user: DatabaseUserAttributes;

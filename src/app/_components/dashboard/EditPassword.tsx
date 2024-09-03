@@ -7,7 +7,7 @@ import { FaCheck } from "react-icons/fa";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { RxPencil1 } from "react-icons/rx";
 import useWindowSize from "~/app/hooks/useWindowSize";
-import { editPassword } from "~/server/lib/auth";
+import { editPassword } from "~/server/lib/authActions";
 import { userAtom } from "~/server/lib/stores";
 
 export default function EditPassword() {

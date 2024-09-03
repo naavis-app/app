@@ -21,7 +21,7 @@ import { BsGithub, BsGoogle } from "react-icons/bs";
 
 import NextLink from "next/link";
 import { useState } from "react";
-import { login } from "~/server/lib/auth";
+import { login } from "~/server/lib/authActions";
 
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 
