@@ -38,7 +38,7 @@ const lucia = new Lucia(adapter, {
 });
 
 export const validateSession = cache(async (cookie: string) => {
-    return lucia.validateSession(lucia.readSessionCookie(cookie) ?? "");
+	return lucia.validateSession(lucia.readSessionCookie(cookie) ?? "");
 });
 
 export interface DatabaseUserAttributes {
