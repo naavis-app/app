@@ -18,7 +18,7 @@ import toast from "react-hot-toast";
 import { db } from "~/server/db";
 import { redis } from "../redis";
 
-import { lucia, type DatabaseUserAttributes } from "./lucia";
+import { type DatabaseUserAttributes, lucia } from "./lucia";
 
 function filterUserAttributes(user: prismaTypes.User): DatabaseUserAttributes {
 	return {

@@ -9,8 +9,8 @@ import { cookies } from "next/headers";
 import { db } from "~/server/db";
 import { cacheSession } from "~/server/lib/authActions";
 import { google } from "~/server/lib/googleauth";
-import { lucia } from "~/server/lib/lucia";
 import { randInt } from "~/server/lib/googleauth";
+import { lucia } from "~/server/lib/lucia";
 import { redis } from "~/server/redis";
 
 export async function GET(request: Request): Promise<Response> {
