@@ -2,8 +2,6 @@
 username/password. please check https://lucia-auth.com/
 for more information. */
 
-"use server";
-
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { verify } from "@node-rs/argon2";
 import { hash } from "@node-rs/argon2";
