@@ -18,8 +18,11 @@ export default function PlaceRow({ place }: PlaceRowProps) {
 				>
 					{place.name}
 				</Table.RowHeaderCell>
+                <Table.Cell className="h-full">
+                    {place.address}
+                </Table.Cell>
 				<Table.Cell className="">
-					<PlaceButtons groupId={place.id} />
+					<PlaceButtons name={place.name} groupId={place.id} />
 				</Table.Cell>
 			</Table.Row>
 		</>

@@ -27,7 +27,8 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
 	const [addingPlace, setAddingPlace] = useState<boolean>(false);
 
 	const [placeName, setPlaceName] = useState("");
-
+    const [address, setAddress] = useState("");
+ 
 	const [locationInputMode, setLocationInputMode] = useState("address");
 
 	const createPlace = api.place.create.useMutation({
@@ -62,6 +63,10 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
 		});
 	};
 
+    const locatePlace = () => {
+
+    }
+
 	return (
 		<Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
 			<Dialog.Trigger onClick={() => setDialogOpen(!dialogOpen)}>
@@ -95,22 +100,21 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
 									Address
 								</SegmentedControl.Item>
 								<SegmentedControl.Item value="pin">Exact</SegmentedControl.Item>
+                                <SegmentedControl.Item 
+                                value="locate" 
+                                onClick={locatePlace}
+                                >
+                                    Locate
+                                </SegmentedControl.Item>
 							</SegmentedControl.Root>
 						</Flex>
 
 						{/* TODO: Need address based location selector and exact map pinpoint input */}
-						{locationInputMode === "address" ? (
-							<TextField.Root
-								value={placeName}
-								onChange={(event) => setPlaceName(event.target.value)}
-							/>
-						) : (
-							<TextField.Root
-								value={placeName}
-								disabled
-								onChange={(event) => setPlaceName(event.target.value)}
-							/>
-						)}
+                        <TextField.Root
+							value={address}
+							disabled={locationInputMode === "address" ? false : true}
+							onChange={(event) => setAddress(event.target.value)}
+						/>
 					</label>
 				</Flex>
 				<Separator my="3" size="4" />
