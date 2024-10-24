@@ -1,8 +1,10 @@
 import { Button } from "@radix-ui/themes";
 import React from "react";
 
-export default function PlaceButtons({ name, groupId }: 
-    { name: string, groupId: string }) {
+export default function PlaceButtons({
+	name,
+	groupId,
+}: { name: string; groupId: string }) {
 	return (
 		<>
 			<div className="mt-1 flex flex-row gap-5">

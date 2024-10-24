@@ -10,8 +10,8 @@ import PlaceRow from "~/app/_components/dashboard/places/PlaceRow";
 import UhohImage from "~/app/_components/uhoh/UhohImage";
 import UhohWrapper from "~/app/_components/uhoh/UhohWrapper";
 import { selectedGroupId, userAtom } from "~/server/lib/stores";
-import { api } from "~/trpc/react";
 import { placeListAtom } from "~/server/lib/stores";
+import { api } from "~/trpc/react";
 
 // TODO: ADD PAGINATION TO AVOID TERRIBLE LOAD TIMES!
 
@@ -28,44 +28,45 @@ export default function DashboardDevices() {
 	// TODO: Remove mock data use actual live data pls ‼️
 	const [places, setPlaces] = useAtom(placeListAtom);
 
-    useEffect(() => {
-        if (placeQuery.data) {
-            setPlaces(placeQuery.data);
-        }
-    }, [placeQuery.data, setPlaces]);
+	useEffect(() => {
+		if (placeQuery.data) {
+			setPlaces(placeQuery.data);
+		}
+	}, [placeQuery.data, setPlaces]);
+
 	// const places = [
-	// 	/* 
-    //     {
-    //         id: "1",
-    //         name: "Living Room",
-    //         groupId: "1",
-    //         latitude: 0,
-    //         longitude: 0,
-    //         address: "1234 Main St",
-    //     }, {
-    //         id: "2",
-    //         name: "Kitchen",
-    //         groupId: "1",
-    //         latitude: 0,
-    //         longitude: 0,
-    //         address: "1234 Main St",
-    //     }, {
-    //         id: "3",
-    //         name: "Bedroom",
-    //         groupId: "1",
-    //         latitude: 0,
-    //         longitude: 0,
-    //         address: "1234 Main St",
-    //     },
-    //     {
-    //         id: "4",
-    //         name: "CHINA",
-    //         groupId: "1",
-    //         latitude: 0,
-    //         longitude: 0,
-    //         address: "1234 Main St",
-    //     }
-    //  */
+	// 	/*
+	//     {
+	//         id: "1",
+	//         name: "Living Room",
+	//         groupId: "1",
+	//         latitude: 0,
+	//         longitude: 0,
+	//         address: "1234 Main St",
+	//     }, {
+	//         id: "2",
+	//         name: "Kitchen",
+	//         groupId: "1",
+	//         latitude: 0,
+	//         longitude: 0,
+	//         address: "1234 Main St",
+	//     }, {
+	//         id: "3",
+	//         name: "Bedroom",
+	//         groupId: "1",
+	//         latitude: 0,
+	//         longitude: 0,
+	//         address: "1234 Main St",
+	//     },
+	//     {
+	//         id: "4",
+	//         name: "CHINA",
+	//         groupId: "1",
+	//         latitude: 0,
+	//         longitude: 0,
+	//         address: "1234 Main St",
+	//     }
+	//  */
 	// ] as Place[];
 	return (
 		<>
@@ -126,7 +127,7 @@ export default function DashboardDevices() {
 					</UhohWrapper>
 				</>
 			) : (
-				<>  
+				<>
 					<Card className="mt-4 overflow-scroll">
 						{places.map((place, _) => (
 							<PlaceRow key={place.id} place={place} />

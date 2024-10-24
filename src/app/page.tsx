@@ -8,7 +8,7 @@ import {
 	Container,
 	Flex,
 	Grid,
-    Link,
+	Link,
 	Strong,
 	Text,
 } from "@radix-ui/themes";
@@ -18,8 +18,8 @@ import Image from "next/image";
 // import { ThemeProvider } from "next-themes";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+import { BsGithub } from "react-icons/bs";
 import { themeAtom } from "~/server/lib/stores";
-import{ BsGithub } from "react-icons/bs";
 
 import {
 	type MotionValue,
@@ -55,7 +55,7 @@ function useParallax(value: MotionValue<number>, distance: number) {
 interface SectionProps {
 	children: React.ReactNode;
 	className?: string;
-    id?: string;
+	id?: string;
 }
 
 function Section({ children, className, id }: SectionProps) {
@@ -66,7 +66,7 @@ function Section({ children, className, id }: SectionProps) {
 				className,
 			)}
 			style={{ perspective: 500 }}
-            id={id}
+			id={id}
 		>
 			{children}
 		</section>
@@ -128,20 +128,20 @@ export default function Home() {
 
 					<Box className="my-4">
 						<Text color="gray">
-							The places you frequent are special. With our platform, you can 
-                            take control of your locations and devices like never before, for 
-                            absolutely zero cost.
+							The places you frequent are special. With our platform, you can
+							take control of your locations and devices like never before, for
+							absolutely zero cost.
 						</Text>
 					</Box>
 
 					<Box className="">
 						<Flex direction={"row"} gap={"2"} justify={"center"}>
 							<Link href="/sign-up">
-                                <Button color="green" >Get Started</Button>
-                            </Link>
-                            <Link href="#about">
-                                <Button variant="outline">Learn More</Button>
-                            </Link>
+								<Button color="green">Get Started</Button>
+							</Link>
+							<Link href="#about">
+								<Button variant="outline">Learn More</Button>
+							</Link>
 						</Flex>
 					</Box>
 				</Container>
@@ -160,16 +160,18 @@ export default function Home() {
 					}}
 					className={clsx(`absolute -z-10 !rotate-[${Math.round(p * 360)}deg]`)}
 				>
-                    {
-                        theme === "dark" ? 
-                        <Image src="/lmapdark.svg" alt="map" width={1000} height={1000} />
-                        :
-                        <Image src="/lmap.svg" alt="map" width={1000} height={1000} />
-                    }
+					{theme === "dark" ? (
+						<Image src="/lmapdark.svg" alt="map" width={1000} height={1000} />
+					) : (
+						<Image src="/lmap.svg" alt="map" width={1000} height={1000} />
+					)}
 				</motion.div>
 			</Section>
 
-			<Section className="relative flex w-full flex-col items-center justify-center bg-[--accent-3] p-8 sm:p-0" id="about">
+			<Section
+				className="relative flex w-full flex-col items-center justify-center bg-[--accent-3] p-8 sm:p-0"
+				id="about"
+			>
 				<Flex
 					className="flex h-fit w-full p-4 text-center"
 					direction={"column"}
@@ -198,18 +200,20 @@ export default function Home() {
 				</Flex>
 			</Section>
 
-            <footer className="flex w-full px-6 py-6 bg-[--accent-2] flex-col sm:flex-row items-center gap-2 justify-between">
-                    <p className="text-xs">
-                        @2024 Naavis. All rights reserved.
-                    </p>
-                    <a href="https://github.com/naavis-app" target="_blank">
-                        <BsGithub width={30} height={30} className="mr-6"/>
-                    </a>
-            </footer>
-{/* 
+			<footer className="flex w-full px-6 py-6 bg-[--accent-2] flex-col sm:flex-row items-center gap-2 justify-between">
+				<p className="text-xs">@2024 Naavis. All rights reserved.</p>
+				<a
+					href="https://github.com/naavis-app"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<BsGithub width={30} height={30} className="mr-6" />
+				</a>
+			</footer>
+			{/* 
 			<SnapImage id={2} />
 			<SnapImage id={3} />
-			<SnapImage id={4} /> */} 
+			<SnapImage id={4} /> */}
 		</>
 	);
 }
