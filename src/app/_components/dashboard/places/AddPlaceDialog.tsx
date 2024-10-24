@@ -75,7 +75,7 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
 				<Dialog.Title>Add A New Place</Dialog.Title>
 
 				<Flex direction={"column"} gap={"2"}>
-					<label>
+					<div>
 						<Text as="div" size="2" mb="1" weight="bold">
 							Name
 						</Text>
@@ -83,8 +83,8 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
 							value={placeName}
 							onChange={(event) => setPlaceName(event.target.value)}
 						/>
-					</label>
-					<label>
+					</div>
+					<div>
 						<Flex justify="between" className="pb-2" align="center">
 							<Text as="div" size="2" weight="bold">
 								Location
@@ -110,20 +110,20 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
 							disabled={locationInputMode !== "address"}
 							onChange={(event) => setAddress(event.target.value)}
 						/>
-					</label>
+					</div>
 				</Flex>
 				<Separator my="3" size="4" />
 				<Text className="font-bold" size="2">
 					Alert Options
 				</Text>
 				<Flex className="flex-col gap-2 sm:flex-row sm:gap-4">
-					<label className="flex-1">
+					<div className="flex-1">
 						<Text as="div" size="2" weight="bold">
 							Radius (ft)
 						</Text>
 						<Slider my="2" defaultValue={[500]} min={10} max={5000} step={1} />
-					</label>
-					<label className="flex-1">
+					</div>
+					<div className="flex-1">
 						<Text as="div" size="2" weight="bold">
 							Alert Types
 						</Text>
@@ -137,7 +137,7 @@ export default function AddPlaceDialog({ refetch }: { refetch: () => void }) {
 								Hover
 							</CheckboxGroup.Item>
 						</CheckboxGroup.Root>
-					</label>
+					</div>
 				</Flex>
 				<Flex gap="2" mt="4" justify="end">
 					<Dialog.Close>
