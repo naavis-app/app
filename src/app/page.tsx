@@ -8,6 +8,7 @@ import {
 	Container,
 	Flex,
 	Grid,
+    Link,
 	Strong,
 	Text,
 } from "@radix-ui/themes";
@@ -18,6 +19,7 @@ import Image from "next/image";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { themeAtom } from "~/server/lib/stores";
+import{ BsGithub } from "react-icons/bs";
 
 import {
 	type MotionValue,
@@ -53,9 +55,10 @@ function useParallax(value: MotionValue<number>, distance: number) {
 interface SectionProps {
 	children: React.ReactNode;
 	className?: string;
+    id?: string;
 }
 
-function Section({ children, className }: SectionProps) {
+function Section({ children, className, id }: SectionProps) {
 	return (
 		<section
 			className={clsx(
@@ -63,6 +66,7 @@ function Section({ children, className }: SectionProps) {
 				className,
 			)}
 			style={{ perspective: 500 }}
+            id={id}
 		>
 			{children}
 		</section>
@@ -109,7 +113,7 @@ export default function Home() {
 
 	return (
 		<>
-			<Section className="vignette relative flex flex-col overflow-clip bg-slate-100 font-sans">
+			<Section className="vignette relative flex flex-col overflow-clip font-sans">
 				<Container size="2" className="mt-[30vh] h-full w-full p-8 text-center">
 					<Flex direction="column" className="">
 						<Text size="9">
@@ -124,17 +128,20 @@ export default function Home() {
 
 					<Box className="my-4">
 						<Text color="gray">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do
-							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-							enim ad minim veniam, quis nostrud exercitation ullamco laboris
-							nisi ut aliquip ex ea commodo consequat.
+							The places you frequent are special. With our platform, you can 
+                            take control of your locations and devices like never before, for 
+                            absolutely zero cost.
 						</Text>
 					</Box>
 
 					<Box className="">
 						<Flex direction={"row"} gap={"2"} justify={"center"}>
-							<Button color="green">Get Started</Button>
-							<Button variant="outline">Learn More</Button>
+							<Link href="/sign-up">
+                                <Button color="green" >Get Started</Button>
+                            </Link>
+                            <Link href="#about">
+                                <Button variant="outline">Learn More</Button>
+                            </Link>
 						</Flex>
 					</Box>
 				</Container>
@@ -153,11 +160,16 @@ export default function Home() {
 					}}
 					className={clsx(`absolute -z-10 !rotate-[${Math.round(p * 360)}deg]`)}
 				>
-					<Image src="/lmap.svg" alt="map" width={1000} height={1000} />
+                    {
+                        theme === "dark" ? 
+                        <Image src="/lmapdark.svg" alt="map" width={1000} height={1000} />
+                        :
+                        <Image src="/lmap.svg" alt="map" width={1000} height={1000} />
+                    }
 				</motion.div>
 			</Section>
 
-			<Section className="relative flex w-full flex-col items-center justify-center bg-[--accent-3] p-8 sm:p-0">
+			<Section className="relative flex w-full flex-col items-center justify-center bg-[--accent-3] p-8 sm:p-0" id="about">
 				<Flex
 					className="flex h-fit w-full p-4 text-center"
 					direction={"column"}
@@ -186,9 +198,18 @@ export default function Home() {
 				</Flex>
 			</Section>
 
+            <footer className="flex w-full px-6 py-6 bg-[--accent-2] flex-col sm:flex-row items-center gap-2 justify-between">
+                    <p className="text-xs">
+                        @2024 Naavis. All rights reserved.
+                    </p>
+                    <a href="https://github.com/naavis-app" target="_blank">
+                        <BsGithub width={30} height={30} className="mr-6"/>
+                    </a>
+            </footer>
+{/* 
 			<SnapImage id={2} />
 			<SnapImage id={3} />
-			<SnapImage id={4} />
+			<SnapImage id={4} /> */} 
 		</>
 	);
 }
